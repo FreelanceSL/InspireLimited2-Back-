@@ -40,26 +40,30 @@ class UserManager(BaseUserManager):
 
 
 
+
+
 class User(AbstractUser):
-    username=None
-    first_name=models.CharField(max_length=20)
-    last_name=models.CharField(max_length=30)
-    email=models.EmailField(unique=True)
-    password=models.CharField(max_length=100)
+    username = None
+    first_name = models.CharField(max_length=20, blank=False)
+    last_name = models.CharField(max_length=30, blank=False)
+    email = models.EmailField(unique=True, blank=False)
+    password = models.CharField(max_length=100, blank=False)
     role = models.CharField(max_length=20, blank=True, default='user') 
-    otp=models.CharField(max_length=4)
-    is_verified=models.BooleanField(default=False)
+    country = models.CharField(max_length=40, blank=False)  # Set to blank=False
+    phone = models.CharField(max_length=30, blank=True)
+    otp = models.CharField(max_length=4)
+    is_verified = models.BooleanField(default=False)
     
-    USERNAME_FIELD= 'email'
-    REQUIRED_FIELDS=[]
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
     objects = UserManager()
-        
-        
+
     def name(self):
-        return self.first_name+ ' ' + self.last_name
+        return f"{self.first_name} {self.last_name}"
     
     def __str__(self):
         return self.email
+
 
 
 class FileUpload(models.Model):

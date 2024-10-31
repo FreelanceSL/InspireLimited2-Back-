@@ -1,0 +1,30 @@
+body {
+    background-color: #f8f9fa;
+    padding: 40px 0;
+}
+.registration-form {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+.form-title {
+    color: #2c3e50;
+    margin-bottom: 50px;
+    text-align: center ;
+}
+.form-check-label {
+    font-size: 0.9rem;
+}
+.btn-register {
+    background-color: #2c3e50;
+    border: none;
+    padding: 10px 30px;
+}
+.btn-register:hover {
+    background-color: #34495e;
+}
+
+
+
+
