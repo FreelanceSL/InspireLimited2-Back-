@@ -56,6 +56,7 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK={
     'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
@@ -88,9 +89,9 @@ WSGI_APPLICATION = "PFE.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'inspirelimited',
+        'NAME': 'Aymen',
         'USER': 'postgres',
-        'PASSWORD': '',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',  # Or the IP address of your PostgreSQL server
         'PORT': '5432',       # Default PostgreSQL port
     }
@@ -142,6 +143,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+LOGIN_URL = 'login'  
 
 
 

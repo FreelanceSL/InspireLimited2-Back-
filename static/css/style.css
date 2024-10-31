@@ -98,6 +98,8 @@
     color: var(--bs-primary);
 }
 
+
+
 .topbar .dropdown .dropdown-menu a:hover {
     background: var(--bs-primary);
     color: var(--bs-white);
@@ -115,6 +117,9 @@
 
 /*** Topbar End ***/
 
+.content{
+    margin-top: 200px !important;
+}
 
 
 /*** Navbar ***/

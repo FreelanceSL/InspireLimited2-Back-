@@ -1,7 +1,6 @@
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.http import JsonResponse
-from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
 from rest_framework.views import APIView
 from .serializers import UserSerializer,VerificationSerializer
 from rest_framework.response import Response
@@ -14,7 +13,10 @@ from rest_framework.permissions import IsAuthenticated
 from .models import FileUpload
 import base64
 import json
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from rest_framework_simplejwt.tokens import AccessToken
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -84,16 +86,29 @@ class Verification(APIView):
        
         
 class Login(APIView):
-    def post(self,request):
-        email=request.data['email']
-        password=request.data['password']
-        user=User.objects.filter(email=email).first()
-        if user is None:
-            raise AuthenticationFailed('User not found')
-        if not user.check_password(password):
-            raise AuthenticationFailed('Incorrect password')
-        return Response(UserSerializer(user).data) 
+    def get(self,request):
+        return render(request, 'login.html')
     
+    def post(self, request):
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            token = AccessToken.for_user(user)
+            request.session['access_token'] = str(token)
+
+            # Redirect to `next` if it exists; otherwise, go to dashboard
+            next_url = request.GET.get('next', 'dashboard')
+            return redirect(next_url)
+        else:
+            return render(request, 'login.html', {'error': 'Invalid credentials'})
+
+    
+def logout(request):
+    request.session.flush() 
+    return redirect('index')
 
 class FileUploadView(APIView):
     permission_classes = [IsAuthenticated] 
@@ -191,3 +206,12 @@ def page_404(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+    
+
+@api_view(['GET'])
+@login_required(login_url='/api/login/')
+def dashboard(request):
+    token = request.session.get('access_token', None)
+    return render(request, 'dashboard.html', {'token': token})
