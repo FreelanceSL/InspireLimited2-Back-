@@ -10,7 +10,7 @@ from .emails import send_otp_via_email, send_reset_password
 from rest_framework import status
 from django.contrib.auth.tokens import default_token_generator
 from rest_framework.permissions import IsAuthenticated
-from .models import FileUpload
+from .models import ImageUpload
 import base64
 from django.urls import reverse 
 import json
@@ -41,10 +41,16 @@ class Register(APIView):
             if serializer.is_valid():
                 user = serializer.save()
                 user.set_password(data.get("password"))  # Set hashed password
-                user.save()
 
-                send_otp_via_email(request, user)
-                
+                # Save the image to the user if provided
+                image = request.FILES.get('imagePassport')  # Get the uploaded image from request.FILES
+                print(image)
+                if image:
+                    user.image = image
+                    user.save()
+
+                # send_otp_via_email(request, user)
+
                 # Redirect to the login page
                 return redirect(reverse('login'))  # Adjust 'login' to your URL name for the login view
 
@@ -111,32 +117,32 @@ def logout(request):
     request.session.flush() 
     return redirect('index')
 
-class FileUploadView(APIView):
-    permission_classes = [IsAuthenticated] 
+# class FileUploadView(APIView):
+#     permission_classes = [IsAuthenticated] 
 
-    def post(self, request):
+#     def post(self, request):
     
-        file_data = request.FILES.get('file_data')  
-        file_name = request.data.get('file_name')  
+#         file_data = request.FILES.get('file_data')  
+#         file_name = request.data.get('file_name')  
         
-        if file_data is None or file_name is None:
-            return Response({"error": "File data and file name are required."}, status=status.HTTP_400_BAD_REQUEST)
+#         if file_data is None or file_name is None:
+#             return Response({"error": "File data and file name are required."}, status=status.HTTP_400_BAD_REQUEST)
 
-        try:
-            file_data_read = file_data.read()  
+#         try:
+#             file_data_read = file_data.read()  
             
 
-            file_instance = FileUpload(
-                user=request.user,  
-                file_name=file_name,
-                file_data=file_data_read
-            )
-            file_instance.save()  
+#             file_instance = FileUpload(
+#                 user=request.user,  
+#                 file_name=file_name,
+#                 file_data=file_data_read
+#             )
+#             file_instance.save()  
             
-            return Response({"message": "File uploaded successfully."}, status=status.HTTP_201_CREATED)
+#             return Response({"message": "File uploaded successfully."}, status=status.HTTP_201_CREATED)
         
-        except Exception as e:
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+#         except Exception as e:
+#             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 def send_password_reset_email(request,user):
     send_reset_password(request,user)

@@ -1,4 +1,6 @@
 from django.urls import path,include
+from django.conf.urls.static import static
+from django.conf import settings
 from . import views
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -14,7 +16,7 @@ urlpatterns = [
     path("reset/<uidb64>/<token>/",views.reset_password),
     path("forget_password/",views.forget_password),
     path('reset_email/',views.send_password_reset_email),
-    path('upload/', views.FileUploadView.as_view(), name='upload_file'),
+    # path('upload/', views.FileUploadView.as_view(), name='upload_file'),
     
     
     path('home/',views.index, name='index'),
@@ -32,4 +34,4 @@ urlpatterns = [
     path('signup/',views.signup,name="signup"),
     path('admin/',views.admin,name="admin"),
     
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -48,29 +48,29 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=30, blank=False)
     email = models.EmailField(unique=True, blank=False)
     password = models.CharField(max_length=100, blank=False)
-    role = models.CharField(max_length=20, blank=True, default='user') 
-    country = models.CharField(max_length=40, blank=False)  # Set to blank=False
+    role = models.CharField(max_length=20, blank=True, default='user')
+    country = models.CharField(max_length=40, blank=False)
     phone = models.CharField(max_length=30, blank=True)
     otp = models.CharField(max_length=4)
     is_verified = models.BooleanField(default=False)
-    
+    image = models.ImageField(upload_to='profile_images/', blank=True, null=True)  # New image field
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = UserManager()
 
     def name(self):
         return f"{self.first_name} {self.last_name}"
-    
+
     def __str__(self):
         return self.email
 
 
 
-class FileUpload(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Relate to the User model
-    file_name = models.CharField(max_length=255)
-    file_data = models.BinaryField()
+class ImageUpload(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  
+    image = models.ImageField(upload_to='images/')  
+    uploaded_at = models.DateTimeField(auto_now_add=True)  
 
     def __str__(self):
-        return self.file_name
-        
+        return f"{self.user.username} - {self.image.name}"
