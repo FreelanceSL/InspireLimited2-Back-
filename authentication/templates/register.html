@@ -30,32 +30,32 @@
             <div class="col-md-8 col-lg-6">
                 <div class="registration-form">
                     <h2 class="form-title">Registration</h2>
-                    <form action="{% url 'register' %}" method="post">
+                    <form method="post" action="{% url 'register' %}" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="firstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="firstName" required>
+                                <input type="text" name="firstName" class="form-control" id="firstName" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" required>
+                                <input type="text" name="lastName" class="form-control" id="lastName" required>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" required>
+                            <input type="email" name="email" class="form-control" id="email" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" required>
+                            <input type="password" name="password" class="form-control" id="password" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="country" class="form-label">Country</label>
-                            <select class="form-select" id="country" required>
+                            <select class="form-select" name="country" id="country" required>
                                 <option value="Afghanistan">Afghanistan</option>
                                 <option value="Albania">Albania</option>
                                 <option value="Algeria">Algeria</option>
@@ -257,7 +257,7 @@
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone Number</label>
                             <div class="input-group">
-                                <select class="form-select" style="max-width: 150px;" id="countryCode" required>
+                                <select class="form-select" name="countryCode" style="max-width: 150px;" id="countryCode" required>
                                     <option value="">Select your country code</option>
                                     <option value="+93">Afghanistan (+93)</option>
                                     <option value="+355">Albania (+355)</option>
@@ -497,10 +497,13 @@
                                     <option value="+260">Zambia (+260)</option>
                                     <option value="+263">Zimbabwe (+263)</option>
                                 </select>
-                                <input type="tel" class="form-control" id="phone" required>
+                                <input type="tel" class="form-control" name="phone" id="phone" required>
                             </div>
                         </div>
-
+                        <div class="mb-3">
+                            <label for="imagePassport" class="form-label">Passeport image</label>
+                            <input type="file" name="imagePassport" accept="image/*" lass="form-control" id="imagePassport" required>
+                        </div>
 
 
                         <div class="mb-4">

@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from .models import User
 class UserSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(required=False, allow_null=True)
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'id', 'email', 'password', 'country', 'phone']
+        fields = ['first_name', 'last_name', 'id', 'email', 'password', 'country', 'phone', 'image']
         extra_kwargs = {
             'password': {'write_only': True},
             'first_name': {'required': True},
@@ -11,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
             'email': {'required': True},
             'country': {'required': True},
         }
-
+        
     def create(self, validated_data):
         password = validated_data.pop('password', None)
         instance = self.Meta.model(**validated_data)
