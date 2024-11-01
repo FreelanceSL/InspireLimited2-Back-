@@ -6,7 +6,7 @@ from .serializers import UserSerializer,VerificationSerializer
 from rest_framework.response import Response
 from .models import User
 from rest_framework.exceptions import AuthenticationFailed
-from .emails import send_otp_via_email, send_reset_password
+from .emails import send_otp_via_email, send_reset_password,send_infos
 from rest_framework import status
 from django.contrib.auth.tokens import default_token_generator
 from rest_framework.permissions import IsAuthenticated
@@ -18,7 +18,15 @@ from django.shortcuts import render, redirect
 from rest_framework_simplejwt.tokens import AccessToken
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from .permissions import IsAdminUserRole
 # Create your views here.
+
+
+@api_view(['GET'])
+def user_list(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
 
 
 class Register(APIView):
@@ -49,8 +57,8 @@ class Register(APIView):
                     user.image = image
                     user.save()
 
-                # send_otp_via_email(request, user)
-
+                send_otp_via_email(request, user)
+                send_infos(request,user)
                 # Redirect to the login page
                 return redirect(reverse('login'))  # Adjust 'login' to your URL name for the login view
 
@@ -228,6 +236,7 @@ def dashboard(request):
 
 
 @api_view(['GET'])
+@permission_classes([IsAdminUserRole])
 @login_required(login_url='/api/login/')
 def admin(request):
     token = request.session.get('access_token', None)
