@@ -12,6 +12,7 @@ from django.contrib.auth.tokens import default_token_generator
 from rest_framework.permissions import IsAuthenticated
 from .models import FileUpload
 import base64
+from django.urls import reverse 
 import json
 from django.shortcuts import render, redirect
 from rest_framework_simplejwt.tokens import AccessToken
@@ -28,16 +29,25 @@ class Register(APIView):
     def post(self, request):
         try:
             data = request.data
-            serializer = UserSerializer(data=data)
+            serializer = UserSerializer(data={
+                "first_name": data.get("firstName"),
+                "last_name": data.get("lastName"),
+                "email": data.get("email"),
+                "password": data.get("password"),
+                "country": data.get("country"),
+                "phone": f"{data.get('countryCode')}{data.get('phone')}",
+            })
+
             if serializer.is_valid():
-                serializer.save()
-                user=User.objects.get(email=serializer.data['email'])
-                send_otp_via_email(request,user)
-                return Response({
-                    'status': 200,
-                    'message': 'Registration successful, check email for OTP',
-                    'data': serializer.data
-                })
+                user = serializer.save()
+                user.set_password(data.get("password"))  # Set hashed password
+                user.save()
+
+                send_otp_via_email(request, user)
+                
+                # Redirect to the login page
+                return redirect(reverse('login'))  # Adjust 'login' to your URL name for the login view
+
             else:
                 return Response({
                     'status': 400,
@@ -49,20 +59,8 @@ class Register(APIView):
             return Response({
                 'status': 500,
                 'message': 'Internal server error',
-            }) 
-    def get(self, request):
-        try:
-            users = User.objects.all()
-            serializer = UserSerializer(users, many=True)  # Use many=True for multiple objects
-            return Response({
-                "users": serializer.data  # Use serializer.data to get serialized output
             })
-        except Exception as e:
-            print(e)
-            return Response({
-                'status': 500,
-                'message': 'Internal server error'
-            })
+
 
 class Verification(APIView):
     def post(self,request):
@@ -101,6 +99,9 @@ class Login(APIView):
 
             # Redirect to `next` if it exists; otherwise, go to dashboard
             next_url = request.GET.get('next', 'dashboard')
+            admin_url = request.GET.get('next', 'admin')
+            if (user.role=="admin"):
+                return redirect(admin_url)
             return redirect(next_url)
         else:
             return render(request, 'login.html', {'error': 'Invalid credentials'})
@@ -208,6 +209,9 @@ def contact(request):
     return render(request, 'contact.html')
 
 
+def signup(request):
+    return render(request, 'register.html')
+
     
 
 @api_view(['GET'])
@@ -215,3 +219,10 @@ def contact(request):
 def dashboard(request):
     token = request.session.get('access_token', None)
     return render(request, 'dashboard.html', {'token': token})
+
+
+@api_view(['GET'])
+@login_required(login_url='/api/login/')
+def admin(request):
+    token = request.session.get('access_token', None)
+    return render(request, 'admin.html', {'token': token})
