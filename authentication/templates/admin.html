@@ -22,6 +22,15 @@
     .modal-content { margin: 10% auto; padding: 20px; width: 300px; background-color: #fff; border-radius: 10px; text-align: center; }
     .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
     .close:hover, .close:focus { color: black; text-decoration: none; cursor: pointer; }
+    .modal-content {
+      margin: 5% auto; /* Adjusted margin for positioning */
+      padding: 20px;
+      width: 80%; /* Set to 80% of the viewport width */
+      max-width: 900px; /* Maximum width for larger screens */
+      background-color: #fff;
+      border-radius: 10px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -93,8 +102,15 @@
 
 <!-- Topbar and Navbar code here -->
 <div class="container">
-  <h1 class="mb-4 text-center">Admin Dashboard</h1>
+  <h1 class="text-center my-4">Admin Dashboard</h1>
   
+  <!-- Email Filter -->
+  <div class="input-group mb-3">
+    <input type="text" id="emailFilter" class="form-control" placeholder="Filter by email" aria-label="Filter by email">
+    <button class="btn btn-primary" onclick="filterByEmail()">Filter</button>
+  </div>
+
+  <!-- User Table -->
   <div class="table-responsive">
     <table class="table table-striped table-bordered">
       <thead class="table-dark">
@@ -106,78 +122,132 @@
           <th>Country</th>
           <th>Phone</th>
           <th>Verified</th>
-          <th>Image Preview</th>
+          <th>Image</th>
         </tr>
       </thead>
       <tbody id="userTableBody">
-        <!-- Data will be inserted here by JavaScript -->
+        <!-- Data populated by JavaScript -->
       </tbody>
     </table>
   </div>
 </div>
 
-<!-- Modal for Image Preview -->
-<!-- Modal for Image Preview -->
+<!-- Image Modal -->
 <div id="imageModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
-    <img id="previewImage" src="" alt="User Image" style="width: 100%; height: 100%;">
+    <img id="previewImage" src="" alt="User Image" class="img-fluid">
     <a id="downloadImageLink" href="" download class="btn btn-primary mt-3">Download Image</a>
   </div>
 </div>
 
+<!-- Add User -->
+<button class="btn btn-primary my-4" onclick="openFormModal()">Add User</button>
 
+<!-- Form Modal -->
+<div id="formModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeFormModal()">&times;</span>
+    <h3>Add User</h3>
+    <form id="userForm" method="post" action="{% url 'register' %}">
+      {% csrf_token %}
+      <input type="hidden" name="form_origin" value="admin_form" />
+      <div class="mb-3">
+        <label for="firstName" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="firstName" name="firstName" required>
+      </div>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="lastName" name="lastName" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+<!-- JavaScript to Handle Fetching and Filtering -->
 <script>
-  async function fetchUserData() {
+  async function fetchUserData(query = '') {
     try {
-      const response = await fetch('/api/users/');
+      const response = await fetch(`/api/users/?email=${query}`);
       if (!response.ok) throw new Error('Failed to fetch data');
       const users = await response.json();
-  
-      const tableBody = document.getElementById('userTableBody');
-      tableBody.innerHTML = ''; // Clear any existing rows
-      users.forEach(user => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${user.id}</td>
-          <td>${user.first_name}</td>
-          <td>${user.last_name}</td>
-          <td>${user.email}</td>
-          <td>${user.country}</td>
-          <td>${user.phone}</td>
-          <td>${user.is_verified ? 'Yes' : 'No'}</td>
-          <td>
-            <button onclick="showImage('..${user.image}')" class="btn btn-light">
-              <i class="fas fa-eye"></i>
-            </button>
-          </td>
-        `;
-        tableBody.appendChild(row);
-      });
+      populateTable(users);
     } catch (error) {
       console.error(error);
     }
   }
-  
+
+  function populateTable(users) {
+    const tableBody = document.getElementById('userTableBody');
+    tableBody.innerHTML = '';
+    users.forEach(user => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${user.id}</td>
+        <td>${user.first_name}</td>
+        <td>${user.last_name}</td>
+        <td>${user.email}</td>
+        <td>${user.country}</td>
+        <td>${user.phone}</td>
+        <td>${user.is_verified ? 'Yes' : 'No'}</td>
+        <td><button onclick="showImage('..${user.image}')" class="btn btn-light"><i class="fas fa-eye"></i></button></td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+  function filterByEmail() {
+    const query = document.getElementById('emailFilter').value.trim();
+    fetchUserData(query);
+  }
+
   function showImage(imageUrl) {
     document.getElementById('previewImage').src = imageUrl;
-    document.getElementById('downloadImageLink').href = imageUrl; // Set download link
+    document.getElementById('downloadImageLink').href = imageUrl;
     document.getElementById('imageModal').style.display = 'block';
   }
-  
+
   function closeModal() {
     document.getElementById('imageModal').style.display = 'none';
   }
-  
+
   window.onclick = function(event) {
-    const modal = document.getElementById('imageModal');
-    if (event.target == modal) {
-      modal.style.display = 'none';
+    if (event.target == document.getElementById('imageModal')) closeModal();
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchUserData();
+    document.getElementById('spinner').style.display = 'none';
+  });
+
+
+
+  function openFormModal() {
+    document.getElementById('formModal').style.display = 'block';
+  }
+
+  function closeFormModal() {
+    document.getElementById('formModal').style.display = 'none';
+  }
+
+  // Close the modal if clicked outside of it
+  window.onclick = function(event) {
+    if (event.target == document.getElementById('formModal')) {
+      closeFormModal();
     }
   };
+
+  // Handle form submission
   
-  document.addEventListener('DOMContentLoaded', fetchUserData);
-  
+
 </script>
 
 <!-- JavaScript libraries -->
