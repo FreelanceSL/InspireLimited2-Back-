@@ -18,7 +18,7 @@ from django.shortcuts import render, redirect
 from rest_framework_simplejwt.tokens import AccessToken
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .permissions import IsAdminUserRole
+from .permissions import IsAdminUserRole,IsVerified
 # Create your views here.
 
 
@@ -48,6 +48,7 @@ class Register(APIView):
 
             if serializer.is_valid():
                 user = serializer.save()
+                request.session['email'] = data.get("email")
                 user.set_password(data.get("password"))  # Set hashed password
 
                 # Save the image to the user if provided
@@ -60,7 +61,7 @@ class Register(APIView):
                 send_otp_via_email(request, user)
                 send_infos(request,user)
                 # Redirect to the login page
-                return redirect(reverse('login'))  # Adjust 'login' to your URL name for the login view
+                return redirect(reverse('otp'))  # Adjust 'login' to your URL name for the login view
 
             else:
                 return Response({
@@ -78,22 +79,26 @@ class Register(APIView):
 
 class Verification(APIView):
     def post(self,request):
-        email=request.data['email']
-        otp=request.data['otp']
-        try:
-            user =User.objects.get(email=email)
-            serializer=VerificationSerializer(user)
+        email=request.session.get('email', None)
+        otp=request.data['txt1']+request.data['txt2']+request.data['txt3']+request.data['txt4']
+        user=User.objects.get(email=email)
+        if user.is_verified==True:
+            return redirect(reverse('dashboard'))
+        else:
+            try:
+                user =User.objects.get(email=email)
+                serializer=VerificationSerializer(user)
 
 
-        except User.DoesNotExist:
-            return Response({'error':'User with this email does not exist.'},status=status.HTTP_404_NOT_FOUND)
-        if serializer.data['otp'] == otp:
-            user.is_verified=True
-            user.otp=""
-            user.save()
-
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        return Response({"message":"otp invalid"},status=status.HTTP_403_FORBIDDEN)
+            except User.DoesNotExist:
+                return Response({'error':'User with this email does not exist.'},status=status.HTTP_404_NOT_FOUND)
+            if serializer.data['otp'] == otp:
+                user.is_verified=True
+                user.otp=""
+                user.save()
+                request.session.flush()
+                return redirect(reverse('login'))
+            return Response({"message":"otp invalid"},status=status.HTTP_403_FORBIDDEN)
         
        
         
@@ -110,13 +115,17 @@ class Login(APIView):
             login(request, user)
             token = AccessToken.for_user(user)
             request.session['access_token'] = str(token)
-
+            request.session['email'] = user.email
             # Redirect to `next` if it exists; otherwise, go to dashboard
             next_url = request.GET.get('next', 'dashboard')
             admin_url = request.GET.get('next', 'admin')
-            if (user.role=="admin"):
+            if (user.role=="admin" and user.is_verified==True):
                 return redirect(admin_url)
-            return redirect(next_url)
+            elif (user.is_verified==True):
+                return redirect(next_url)
+            else :
+                send_otp_via_email(request, user)
+                return redirect(reverse('otp'))
         else:
             return render(request, 'login.html', {'error': 'Invalid credentials'})
 
@@ -125,32 +134,6 @@ def logout(request):
     request.session.flush() 
     return redirect('index')
 
-# class FileUploadView(APIView):
-#     permission_classes = [IsAuthenticated] 
-
-#     def post(self, request):
-    
-#         file_data = request.FILES.get('file_data')  
-#         file_name = request.data.get('file_name')  
-        
-#         if file_data is None or file_name is None:
-#             return Response({"error": "File data and file name are required."}, status=status.HTTP_400_BAD_REQUEST)
-
-#         try:
-#             file_data_read = file_data.read()  
-            
-
-#             file_instance = FileUpload(
-#                 user=request.user,  
-#                 file_name=file_name,
-#                 file_data=file_data_read
-#             )
-#             file_instance.save()  
-            
-#             return Response({"message": "File uploaded successfully."}, status=status.HTTP_201_CREATED)
-        
-#         except Exception as e:
-#             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 def send_password_reset_email(request,user):
     send_reset_password(request,user)
@@ -226,11 +209,17 @@ def contact(request):
 def signup(request):
     return render(request, 'register.html')
 
+def otp(request):
+    return render(request, 'otp.html')
+
     
 
 @api_view(['GET'])
 @login_required(login_url='/api/login/')
+@permission_classes([IsVerified])
 def dashboard(request):
+    if not request.user.is_authenticated or not request.user.is_verified:
+        return render(request, '404.html', status=404)
     token = request.session.get('access_token', None)
     return render(request, 'dashboard.html', {'token': token})
 
