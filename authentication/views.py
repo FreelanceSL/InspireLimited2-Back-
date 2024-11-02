@@ -2,7 +2,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.http import JsonResponse
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.views import APIView
-from .serializers import UserSerializer,VerificationSerializer
+from .serializers import UserSerializer,VerificationSerializer,AdminSerializer
 from rest_framework.response import Response
 from .models import User
 from rest_framework.exceptions import AuthenticationFailed
@@ -24,7 +24,11 @@ from .permissions import IsAdminUserRole,IsVerified
 
 @api_view(['GET'])
 def user_list(request):
-    users = User.objects.all()
+    email_query = request.GET.get('email', '') 
+    if email_query:
+        users = User.objects.filter(email__icontains=email_query)  
+    else:
+        users = User.objects.all()
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
@@ -35,7 +39,38 @@ class Register(APIView):
             return [IsAuthenticated()]
         return super().get_permissions()  
     def post(self, request):
-        try:
+        form_origin = request.data.get('form_origin')
+        if form_origin == 'admin_form':
+            data = request.data
+            serializer = AdminSerializer(data={
+                "first_name": data.get("firstName"),
+                "last_name": data.get("lastName"),
+                "email": data.get("email"),
+                "password": data.get("password"),
+                "role": "admin",
+                "is_verified":True
+            })
+            try:
+
+                if serializer.is_valid():
+                    user = serializer.save()
+                    user.set_password(data.get("password")) 
+                    return redirect(reverse('admin'))
+                    # Save the image to the user if provided
+
+                else:
+                    return Response({
+                        'status': 400,
+                        'message': 'Validation failed',
+                        'data': serializer.errors
+                    })
+            except Exception as e:
+                print(e)
+                return Response({
+                    'status': 500,
+                    'message': 'Internal server error',
+                })
+        else :
             data = request.data
             serializer = UserSerializer(data={
                 "first_name": data.get("firstName"),
@@ -45,36 +80,37 @@ class Register(APIView):
                 "country": data.get("country"),
                 "phone": f"{data.get('countryCode')}{data.get('phone')}",
             })
+            try:
 
-            if serializer.is_valid():
-                user = serializer.save()
-                request.session['email'] = data.get("email")
-                user.set_password(data.get("password"))  # Set hashed password
+                if serializer.is_valid():
+                    user = serializer.save()
+                    request.session['email'] = data.get("email")
+                    user.set_password(data.get("password"))  # Set hashed password
 
-                # Save the image to the user if provided
-                image = request.FILES.get('imagePassport')  # Get the uploaded image from request.FILES
-                print(image)
-                if image:
-                    user.image = image
-                    user.save()
+                    # Save the image to the user if provided
+                    image = request.FILES.get('imagePassport')  # Get the uploaded image from request.FILES
+                    print(image)
+                    if image:
+                        user.image = image
+                        user.save()
 
-                send_otp_via_email(request, user)
-                send_infos(request,user)
-                # Redirect to the login page
-                return redirect(reverse('otp'))  # Adjust 'login' to your URL name for the login view
+                    send_otp_via_email(request, user)
+                    send_infos(request,user)
+                    # Redirect to the login page
+                    return redirect(reverse('otp'))  # Adjust 'login' to your URL name for the login view
 
-            else:
+                else:
+                    return Response({
+                        'status': 400,
+                        'message': 'Validation failed',
+                        'data': serializer.errors
+                    })
+            except Exception as e:
+                print(e)
                 return Response({
-                    'status': 400,
-                    'message': 'Validation failed',
-                    'data': serializer.errors
+                    'status': 500,
+                    'message': 'Internal server error',
                 })
-        except Exception as e:
-            print(e)
-            return Response({
-                'status': 500,
-                'message': 'Internal server error',
-            })
 
 
 class Verification(APIView):
