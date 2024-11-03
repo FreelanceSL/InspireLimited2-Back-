@@ -34,7 +34,7 @@ body{
     background: linear-gradient(
         to right,
         #cf6a83,
-        #BF6D82
+        #0f2a44
     );
     right: -30px;
     bottom: -80px;
@@ -90,7 +90,7 @@ input{
 button{
     margin-top: 50px;
     width: 100%;
-    background-color: #BF6D82;
+    background-color: #0f2a44;
     color: black;
     padding: 15px 0;
     font-size: 18px;
