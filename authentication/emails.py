@@ -23,7 +23,7 @@ def send_otp_via_email(request,user):
 def send_reset_password(request,user):
     subject ='Hello {user.last_name} !'
     id=urlsafe_base64_encode(force_bytes(user.pk))
-    domain="localhost:4200"
+    domain="localhost:8000"
     token= default_token_generator.make_token(user)
     print(token)
     message=f'Your reset password link : http://{domain}/api/reset/{id}/{token}/'

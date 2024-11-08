@@ -1,0 +1,73 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title>Reset Password </title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link href="{% static 'css/update.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+
+    <form method="POST" id="password-reset-form">
+        {% csrf_token %}
+        <label for="password">New Password</label>
+        <input type="password" id="password" name="password" required placeholder="Enter your new password">
+        
+        <button type="submit">Reset Password</button>
+    </form>
+
+    <!-- Show the response message -->
+    <div id="response-message"></div>
+
+    <script>
+        const form = document.getElementById('password-reset-form');
+        form.onsubmit = async (e) => {
+            e.preventDefault();  // Empêche la soumission classique du formulaire
+    
+            const password = document.getElementById('password').value;
+    
+            // Obtient les valeurs uidb64 et token depuis Django
+            const uidb64 = "{{ uidb64 }}"; // Remplacez par la valeur dynamique de Django
+            const token = "{{ token }}"; // Remplacez par la valeur dynamique de Django
+    
+            // Effectue l'appel API
+            const response = await fetch(`http://localhost:8000/api/modify/${uidb64}/${token}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password })
+            });
+    
+            const result = await response.json();
+    
+            // Créer une nouvelle toast avec la réponse du message
+            const toast = document.createElement('div');
+            toast.className = 'toast show'; // Ajouter la classe 'show' pour l'afficher
+            toast.innerText = result.message;
+    
+            // Détermine la couleur de la toast en fonction de la réponse
+            toast.style.backgroundColor = response.ok ? "green" : "red"; // Vert pour succès, rouge pour erreur
+    
+            // Afficher la toast
+            document.body.appendChild(toast);
+    
+            // Masquer la toast après 3 secondes
+            setTimeout(() => {
+                toast.classList.remove('show');  // Cacher la toast après 3 secondes
+                document.body.removeChild(toast);  // Retirer la toast du DOM
+            }, 3000);
+    
+            // Réinitialiser le formulaire après soumission
+            form.reset();  // Cela réinitialise tous les champs du formulaire à leur état initial
+        }
+    </script>
+    
+</body>
+
+</html>

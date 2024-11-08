@@ -12,8 +12,6 @@
 
 </head>
 <body>
-    
-    
     <div class="background">
         <div class="shape"></div>
         <div class="shape"></div>
@@ -21,15 +19,43 @@
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <h3>Login Here</h3>
-    
+
         <label for="email">Email</label>
         <input type="email" name="email" placeholder="Email" id="email" required>
-    
+
         <label for="password">Password</label>
         <input type="password" name="password" placeholder="Password" id="password" required>
-    
+
         <button type="submit">Log In</button>
+
+        <!-- Reset Password Link -->
+        <div class="reset-password-link">
+            <a href="{% url 'reset' %}">Forgot your password?</a>
+        </div>
     </form>
-    
+
+    <!-- Toast for error message -->
+    <div id="toast" class="toast">
+        Invalid email or password
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <script>
+        {% if messages %}
+            const toast = document.getElementById('toast');
+            const progressBar = document.getElementById('progress-bar');
+
+            toast.classList.add('show');
+
+            setTimeout(function() {
+                progressBar.style.width = '0%'; 
+            }, 100);
+
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 5000);
+        {% endif %}
+    </script>
 </body>
+
 </html>
