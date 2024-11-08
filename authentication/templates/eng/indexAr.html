@@ -1,0 +1,597 @@
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Inspire Trade</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="{% static 'lib\animate\animate.min.css' %}" />
+    <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+      <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Topbar Start -->
+    <div class="container-fluid topbar bg-light px-5 d-none d-lg-block">
+      <div class="row gx-0 align-items-center">
+        <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+          <div class="d-flex flex-wrap">
+            <a href="tel: +852 8171 3179" class="text-muted small me-4">
+              <i class="fas fa-phone-alt text-primary me-2"></i>
+              +852 8171 3179
+            </a>
+            <a href="mailto:contact@inspire-Trade.com" class="text-muted small me-0"><i class="fas fa-envelope text-primary me-2"></i>contact@inspire-Trade.com</a>
+          </div>
+        </div>
+        <div class="col-lg-4 text-center text-lg-end">
+          <div class="d-inline-flex align-items-center" style="height: 45px;">
+            {% if not user.is_authenticated %}
+              <a href="{% url 'signup' %}"><small class="me-3 text-dark"><i class="fa fa-user text-primary me-2"></i>تسجيل</small></a>
+              <a href="{% url 'login' %}"><small class="me-3 text-dark"><i class="fa fa-sign-in-alt text-primary me-2"></i>تسجيل الدخول</small></a>
+            {% endif %}
+
+            <div class="dropdown">
+              <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown"><small><i class="fa fa-home text-primary me-2"></i>لوحة التحكم الخاصة بي</small></a>
+              <div class="dropdown-menu rounded">
+                <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> ملفي الشخصي</a>
+                <a href="#" class="dropdown-item"><i class="fas fa-comment-alt me-2"></i> الرسائل</a>
+                <a href="#" class="dropdown-item"><i class="fas fa-bell me-2"></i> الإشعارات</a>
+                <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> إعدادات الحساب</a>
+                {% if user.is_authenticated %}
+                  <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid position-relative p-0">
+      <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+        <a href="" class="navbar-brand p-0">
+          <img src="{% static 'img/logo.png' %}" alt="" srcset="" />
+          <!-- <img src="img/logo.png" alt="Logo"> -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="fa fa-bars"></span></button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav ms-auto py-0">
+            <a href="{% url 'index' %}" class="nav-item nav-link active">الرئيسية</a>
+            <a href="{% url 'about' %}" class="nav-item nav-link">من نحن</a>
+            <a href="{% url 'services' %}" class="nav-item nav-link">الخدمات</a>
+            <a href="{% url 'blogs' %}" class="nav-item nav-link">المدونة</a>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link" data-bs-toggle="dropdown"><span class="dropdown-toggle">الصفحات</span></a>
+              <div class="dropdown-menu m-0">
+                <a href="{% url 'features' %}" class="dropdown-item">مميزاتنا</a>
+                <a href="{% url 'team' %}" class="dropdown-item">فريقنا</a>
+                <a href="{% url 'testimonials' %}" class="dropdown-item">آراء العملاء</a>
+                <a href="{% url 'offers' %}" class="dropdown-item">عروضنا</a>
+                <a href="{% url 'faqs' %}" class="dropdown-item">الأسئلة الشائعة</a>
+                <a href="{% url 'page_404' %}" class="dropdown-item">صفحة 404</a>
+              </div>
+            </div>
+            <a href="{% url 'contact' %}" class="nav-item nav-link">اتصل بنا</a>
+          </div>
+          <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">ابدأ الآن</a>
+        </div>
+      </nav>
+    </div>
+    <!-- بداية شريط التمرير -->
+    <div class="header-carousel owl-carousel">
+      <div class="header-carousel-item">
+        <img src="{% static 'img/carousel-1.jpg' %}" class="img-fluid w-100" alt="Image" />
+        <div class="carousel-caption">
+          <div class="container">
+            <div class="row gy-0 gx-5">
+              <div class="col-lg-0 col-xl-5"></div>
+              <div class="col-12 animated fadeInUp" dir="rtl">
+                <div class="text-center">
+                  <h4 class="text-primary text-uppercase fw-bold mb-4">مرحبا بكم في Inspire Trade</h4>
+                  <h1 class="display-4 text-uppercase text-white mb-4">تداول العملات الرقمية والمعادن بأعلى مستويات الاحترافية</h1>
+                  <p class="mb-5 fs-5">حقق أقصى استفادة من أموالك عبر الاستثمار معنا لتحقيق عوائد أعلى! فريقنا الخبير ملتزم بمساعدتك على تنمية أصولك بأمان وكفاءة. انضم إلينا واتخذ الخطوة التالية نحو مستقبل مالي أكثر إشراقًا.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header-carousel-item">
+        <img src="{% static 'img/carousel-2.jpg' %}" class="img-fluid w-100" alt="Image" />
+        <div class="carousel-caption">
+          <div class="container">
+            <div class="row g-5">
+              <div class="col-12 animated fadeInUp" dir="rtl">
+                <div class="text-center">
+                  <h4 class="text-primary text-uppercase fw-bold mb-4">مرحبا بكم في Inspire Trade</h4>
+                  <h1 class="display-4 text-uppercase text-white mb-4">استثمر أموالك لعائد أعلى</h1>
+                  <p class="mb-5 fs-5">افتح إمكانيات أموالك بخيارات استثمارية تحقق عوائد أعلى. استراتيجياتنا المصممة خصيصًا تهدف إلى تعزيز نموك المالي، مما يمنحك المزيد من القيمة والأمان في كل خطوة على طول رحلتك معنا.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- نهاية شريط التمرير -->
+
+    <!-- Carousel End -->
+    <!-- Abvout Start -->
+    <div class="container-fluid about py-5">
+      <div class="container py-5">
+        <div class="row g-5 align-items-center">
+          <div class="col-xl-7 wow fadeInLeft" data-wow-delay="0.2s">
+            <div dir="rtl">
+              <h4 class="text-primary">من نحن</h4>
+              <h1 class="display-5 mb-4">تداول بثقة ودقة</h1>
+              <p class="mb-4">سواء كنت متداولاً مبتدئاً أو محترفاً، Inspire Trade توفر لك تجربة تداول استثنائية في سوق العملات، العملات الرقمية، والمعادن. انضم إلينا لتبدأ رحلتك في عالم التداول مع خدمات مميزة وحماية عالية لبياناتك</p>
+              <div class="row g-4">
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                  <div class="d-flex">
+                    <div>
+                      <i class="fas fa-dollar-sign fa-3x text-primary"></i>
+                    </div>
+                    <div class="ms-4">
+                      <h4 style="margin-right: 10px;">أسعار تنافسية</h4>
+                      <p>استمتع برسوم منخفضة وأسعار شفافة مصممة لزيادة إمكانياتك في التداول.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                  <div class="d-flex">
+                    <div>
+                      <i class="fas fa-clock fa-3x text-primary"></i>
+                    </div>
+                    <div class="ms-4">
+                      <h4 style="margin-right: 10px;">تنفيذ فوري للتداول</h4>
+                      <p>استمتع بتنفيذ سريع وموثوق للصفقات، مما يضمن عدم تفويت أي فرصة.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <a href="{% url 'about' %}" class="btn btn-primary rounded-pill py-3 px-5 flex-shrink-0">اكتشف الآن</a>
+                </div>
+                <div class="col-sm-6">
+                  <div class="d-flex">
+                    <i class="fas fa-phone-alt fa-2x text-primary me-4"></i>
+                    <div>
+                      <h4 style="margin-right: 10px;">اتصل بنا</h4>
+                      <p class="mb-0 fs-5" style="letter-spacing: 1px;">+852 8171 3179</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-5 wow fadeInRight" data-wow-delay="0.2s">
+            <div class="bg-primary rounded position-relative overflow-hidden">
+              <img src="/static/img/happy_man.png" class="img-fluid rounded w-100" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- About End -->
+
+    <!-- Services Start -->
+    <div class="container-fluid service pb-5">
+      <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;" dir="rtl">
+          <h4 class="text-primary">لماذا Inspire Trade ؟</h4>
+          <h1 class="display-5 mb-4">نحن نقدم أفضل الخدمات</h1>
+          <p class="mb-0"></p>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="service-item d-flex flex-column h-100">
+              <div class="service-img">
+                <img src="img/taktak.jpg" class="img-fluid rounded-top w-100" alt="صورة" />
+              </div>
+              <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
+                <a href="#" class="h4 d-inline-block mb-4">سرعات تنفيذ سريعة</a>
+                <p class="mb-4">استمتع بتنفيذ سريع للصفقات للحصول على أفضل الأسعار وتقليل المخاطر في الأسواق المتقلبة. منصتنا محسّنة للسرعة لتعزيز أدائك في التداول.</p>
+                <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="#">تعرف على المزيد</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
+            <div class="service-item d-flex flex-column h-100">
+              <div class="service-img">
+                <img src="img/dollarbils.jpeg" class="img-fluid rounded-top w-100" alt="صورة" />
+              </div>
+              <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
+                <a href="#" class="h4 d-inline-block mb-4">أسعار تنافسية ورسوم منخفضة</a>
+                <p class="mb-4">تداول بثقة مع العلم أنك تحصل على أسعار تنافسية ورسوم منخفضة. هيكل تسعيرنا الشفاف يساعدك على زيادة الأرباح بدون رسوم خفية.</p>
+                <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="#">تعرف على المزيد</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
+            <div class="service-item d-flex flex-column h-100">
+              <div class="service-img">
+                <img src="img/techtrade.jpg" class="img-fluid rounded-top w-100" alt="صورة" />
+              </div>
+              <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
+                <a href="#" class="h4 d-inline-block mb-4">تكنولوجيا تداول متطورة</a>
+                <p class="mb-4">تستفيد منصتنا من التكنولوجيا المتقدمة لتوفير تجربة تداول سلسة وفعالة. استمتع بأدوات قوية وبنية تحتية قوية مصممة للأداء والموثوقية.</p>
+                <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="#">تعرف على المزيد</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Services End -->
+
+    <!-- Features Start -->
+    <div class="container-fluid feature pb-5">
+      <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+          <h4 class="text-primary">ميزاتنا</h4>
+          <h1 class="display-5 mb-4">ربط الأعمال والأفكار والأشخاص لتحقيق تأثير أكبر.</h1>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="feature-item p-4 equal-height">
+              <div class="feature-icon p-4 mb-4">
+                <i class="fas fa-dollar-sign fa-4x text-primary"></i>
+              </div>
+              <h4>تكاليف منخفضة وشفافة</h4>
+              <p class="mb-4">اختر ظروف أفضل من السوق لتقليل تكاليف التداول الخاصة بك.</p>
+              <br />
+              <a class="btn btn-primary rounded-pill py-2 px-4" href="#">تعرف على المزيد</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
+            <div class="feature-item p-4 equal-height">
+              <div class="feature-icon p-4 mb-4">
+                <i class="fas fa-chart-line fa-4x text-primary"></i>
+              </div>
+              <h4>تسعير ضيق وثابت</h4>
+              <p class="mb-4">استفد من التسعير الضيق، حتى في الأوقات المتقلبة.</p>
+              <br />
+              <a class="btn btn-primary rounded-pill py-2 px-4" href="#">تعرف على المزيد</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
+            <div class="feature-item p-4 equal-height">
+              <div class="feature-icon p-4 mb-4">
+                <i class="fas fa-clock fa-4x text-primary"></i>
+              </div>
+              <h4>تنفيذ سريع</h4>
+              <p class="mb-4">تداول بسرعة نقرة واحدة، حيث يتم تنفيذ الطلبات في أجزاء من الثانية.</p>
+              <br />
+              <a class="btn btn-primary rounded-pill py-2 px-4" href="#">تعرف على المزيد</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
+            <div class="feature-item p-4 equal-height">
+              <div class="feature-icon p-4 mb-4">
+                <i class="fas fa-shield-alt fa-4x text-primary"></i>
+              </div>
+              <h4>معاملات آمنة وموثوقة</h4>
+              <p class="mb-4">كن مطمئنًا بأن أموالك آمنة مع شراكات بنكية من الدرجة الأولى وحسابات منفصلة.</p>
+              <a class="btn btn-primary rounded-pill py-2 px-4" href="#">تعرف على المزيد</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Features End -->
+    <div class="container-fluid blog pb-5">
+      <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+          <h4 class="text-primary" dir="rtl">مدونتنا و الأخبار</h4>
+          <h1 class="display-5 mb-4" dir="rtl">مقالات للمحترفين في التداول</h1>
+        </div>
+        <div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay="0.2s">
+          <!-- Blog Item 1: شراء سلسلة I Bonds -->
+          <div class="blog-item p-4" dir="rtl">
+            <div class="blog-img mb-4">
+              <img src="/static/img/Buying-Series-I-Bonds.png" class="img-fluid w-100 rounded" alt="Buying Series I Bonds" />
+              <div class="blog-title">
+                <a href="https://www.investing.com/academy/trading/buying-series-i-bonds/" class="btn" target="_blank">شراء سلسلة I Bonds: الدليل الشامل</a>
+              </div>
+            </div>
+            <div class="blog-content">
+              <a href="https://www.investing.com/academy/trading/buying-series-i-bonds/" class="h4 d-inline-block mb-3" target="_blank">شراء سلسلة I Bonds</a>
+              <p class="mb-4">تعرف على كل ما تحتاجه حول سلسلة I Bonds، بما في ذلك كيفية شرائها وفوائدها.</p>
+              <div class="d-flex align-items-center">
+                <img src="/static/img/Matthew-Stokes.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="المؤلف" />
+                <div class="ms-3">
+                  <h5>المؤلف: ماثيو ستوكس</h5>
+                  <p class="mb-0">تاريخ النشر: 1 نوفمبر 2024</p>
+                  <p class="mb-0">الوظيفة الحالية: أخصائي عمليات محتوى SEO في Webify.io و MadCrypto.com</p>
+                  <p class="mb-0">التعليم: بكالوريوس في العلوم البيئية</p>
+                  <a href="https://www.linkedin.com/in/matthew-stokes" target="_blank">
+                    <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo" />
+                    عرض السيرة الذاتية
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Blog Item 2: الخيارات البيع و الشراء -->
+          <div class="blog-item p-4" dir="rtl">
+            <div class="blog-img mb-4">
+              <img src="{% static 'img/call-put-options.jpg' %}" class="img-fluid w-100 rounded" alt="Call And Put Options" />
+              <div class="blog-title">
+                <a href="https://www.investing.com/academy/trading/call-put-options/" class="btn" target="_blank">خيارات الشراء والبيع – دليل البيع والشراء</a>
+              </div>
+            </div>
+            <div class="blog-content">
+              <a href="https://www.investing.com/academy/trading/call-put-options/" class="h4 d-inline-block mb-3" target="_blank">خيارات الشراء والبيع</a>
+              <p class="mb-4">اكتشف أساسيات خيارات الشراء والبيع وتعلم كيفية تداولها بفعالية.</p>
+              <div class="d-flex align-items-center">
+                <img src="{% static 'img/Harris-Anwar-Author.jpg' %}" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="حارث أنور" />
+                <div class="ms-3">
+                  <h5>المؤلف: حارث أنور</h5>
+                  <p class="mb-0">تاريخ النشر: 1 نوفمبر 2024</p>
+                  <p class="mb-0">الخبرة: كاتب مالي، يركز على أسواق الأسهم لمساعدة القراء في العثور على فرص استثمارية طويلة الأمد</p>
+                  <p class="mb-0">الوظيفة الحالية: كاتب في Investing.com، يقدم تحليلات حول الأسهم الكبيرة وأرباح الأسهم</p>
+                  <a href="https://www.linkedin.com/in/harisanwar" target="_blank">
+                    <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo" />
+                    عرض السيرة الذاتية
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Blog Item 3: قائمة Dividend Aristocrats -->
+          <div class="blog-item p-4" dir="rtl">
+            <div class="blog-img mb-4">
+              <img src="/static/img/Dividend-Aristocrat-List.png" class="img-fluid w-100 rounded" alt="Dividend Aristocrats List and Definition" />
+              <div class="blog-title">
+                <a href="https://www.investing.com/academy/trading/dividend-aristocrats/" class="btn" target="_blank">قائمة Dividend Aristocrats والتعريف</a>
+              </div>
+            </div>
+            <div class="blog-content">
+              <a href="https://www.investing.com/academy/trading/dividend-aristocrats/" class="h4 d-inline-block mb-3" target="_blank">Dividend Aristocrats: نظرة شاملة</a>
+              <p class="mb-4">اكتشف قائمة Dividend Aristocrats وتعرف على ما يجعلها خيارًا استثماريًا قيمًا.</p>
+              <div class="d-flex align-items-center">
+                <img src="/static/img/Hannah-Wilson-.png" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="المؤلف" />
+                <div class="ms-3">
+                  <h5>المؤلفة: هانا ويلسون</h5>
+                  <p class="mb-0">تاريخ النشر: 1 نوفمبر 2024</p>
+                  <p class="mb-0">الوظيفة الحالية: أخصائية الأسواق الإنجليزية في Investing.com (SEO)</p>
+                  <p class="mb-0">التعليم: بكالوريوس مع مرتبة الشرف في الأعمال من جامعة كوفنتري، إنجلترا</p>
+                  <a href="https://www.linkedin.com/in/hannah-wilson" target="_blank">
+                    <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo" />
+                    عرض السيرة الذاتية
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Blog Item 4: التداول بالذكاء الاصطناعي -->
+          <div class="blog-item p-4" dir="rtl">
+            <div class="blog-img mb-4">
+              <img src="{% static 'img\AI-Stock-Trading-Definition.png' %}" class="img-fluid w-100 rounded" alt="تحليل سوق الأسهم" />
+              <div class="blog-title">
+                <a href="https://www.investing.com/academy/trading/ai-stock-trading-guide/" class="btn" target="_blank">التداول بالذكاء الاصطناعي: كيف يمكن للذكاء الاصطناعي تغيير اختيار الأسهم</a>
+              </div>
+            </div>
+            <div class="blog-content">
+              <a href="https://seekingalpha.com/article/stock-market-analysis" class="h4 d-inline-block mb-3" target="_blank">التداول بالذكاء الاصطناعي</a>
+              <p class="mb-4">تحليل متعمق للاتجاهات الحالية في سوق الأسهم وما تعنيه للمستثمرين.</p>
+              <div class="d-flex align-items-center">
+                <img src="{% static 'img/Sara-Jayne.png' %}" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="المؤلف" />
+                <div class="ms-3">
+                  <h5>المؤلفة: سارة جاين سلاك</h5>
+                  <p class="mb-0">تاريخ النشر: 1 أكتوبر 2024</p>
+                  <p class="mb-0">الخبرة: إدارة الثروات، المالية الشخصية</p>
+                  <p class="mb-0">الوظيفة الحالية: أخصائية SEO (السوق البريطانية) في Investing.com</p>
+                  <p class="mb-0">التعليم: تحليل الأسواق المالية والاستثمار، جامعة كامبريدج</p>
+                  <a href="https://www.linkedin.com/in/sara-jayne-slack" target="_blank"><img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo" />عرض السيرة الذاتية</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQs Start -->
+    <div class="container-fluid faq-section pb-5">
+      <div class="container pb-5 overflow-hidden">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+          <h4 class="text-primary">FAQs</h4>
+          <h1 class="display-5 mb-4">Frequently Asked Questions</h1>
+        </div>
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+            <div class="accordion accordion-flush bg-light rounded p-5" id="accordionFlushSection">
+              <div class="accordion-item rounded-top">
+                <h2 class="accordion-header" id="flush-headingOne"><button class="accordion-button collapsed rounded-top" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">كيف يمكنني إنشاء حساب على منصتكم؟</button></h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushSection">
+                  <div class="accordion-body">لإنشاء حساب، اضغط على زر "التسجيل" في أعلى الصفحة الرئيسية. املأ البيانات المطلوبة، تحقق من بريدك الإلكتروني، وقم بإعداد التحقق الثنائي لتعزيز الأمان.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">ما هي الرسوم المفروضة على التداول في هذه المنصة؟</button></h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushSection">
+                  <div class="accordion-body">تفرض منصتنا نسبة صغيرة على كل عملية تداول، وتختلف حسب حجم التداول. يمكنك الاطلاع على هيكل الرسوم الكامل في قسم "الرسوم" على موقعنا.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">هل أموالي وبياناتي آمنة على هذه المنصة؟</button></h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushSection">
+                  <div class="accordion-body">نعم، نستخدم تشفيرًا متقدمًا وخوادم آمنة وتحقق متعدد العوامل لحماية أموالك وبياناتك الشخصية. الأمن هو أولويتنا القصوى، ونحن نقوم بتحديث البروتوكولات باستمرار لضمان أقصى درجات الحماية.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFour"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">ما هي طرق الدفع المتاحة للإيداع والسحب؟</button></h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushSection">
+                  <div class="accordion-body">نقبل عدة طرق للدفع، بما في ذلك التحويلات البنكية وبطاقات الائتمان/الخصم وبعض المحافظ الإلكترونية. يُرجى مراجعة قسم "الإيداع والسحب" لمعرفة الخيارات المتاحة في بلدك.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFive"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">هل يمكنني التدرب على التداول قبل استخدام أموال حقيقية؟</button></h2>
+                <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushSection">
+                  <div class="accordion-body">
+                    نعم، نوفر حسابًا تجريبيًا يمكنك من خلاله التدرب على التداول بأموال افتراضية. يوفر الحساب التجريبي بيانات السوق في الوقت الفعلي، مما يتيح لك تعلم وتطوير استراتيجيات التداول الخاصة بك دون مخاطرة فعلية..
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item rounded-bottom">
+                <h2 class="accordion-header" id="flush-headingSix"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">كيف يمكنني التواصل مع دعم العملاء إذا كنت بحاجة إلى مساعدة؟</button></h2>
+                <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushSection">
+                  <div class="accordion-body">
+                    فريق دعم العملاء لدينا متاح على مدار الساعة. يمكنك التواصل معنا عبر الدردشة الحية، البريد الإلكتروني، أو الهاتف. قم بزيارة صفحة "اتصل بنا" للاطلاع على مزيد من التفاصيل وأوقات الاستجابة.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+            <div class="bg-primary rounded">
+              <img src="/static/img/happy_man.png" class="img-fluid w-100" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FAQs End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+      <div class="container py-5 border-start-0 border-end-0" style="border: 1px solid; border-color: rgb(255, 255, 255, 0.08);">
+        <div class="row g-5">
+          <div class="col-md-6 col-lg-6 col-xl-4" dir="rtl">
+            <div class="footer-item">
+              <a href="index.html" class="p-0">
+                <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
+                <p>شريكك في التداول الآمن.</p>
+                <!-- <img src="img/logo.png" alt="Logo"> -->
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-2">
+            <div class="footer-item" dir="rtl">
+              <h4 class="text-white mb-4">روابط سريعة</h4>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> من نحن</a>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> المميزات</a>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> المعالم السياحية</a>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> التذاكر</a>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> المدونة</a>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> تواصل معنا</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-3">
+            <div class="footer-item" dir="rtl">
+              <h4 class="text-white mb-4">الدعم</h4>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> سياسة الخصوصية</a>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> الشروط والأحكام</a>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> إخلاء المسؤولية</a>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> الدعم</a>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> الأسئلة الشائعة</a>
+              <a href="#"><i class="fas fa-angle-right me-2"></i> مساعدة</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-3">
+            <div class="footer-item">
+              <h4 class="text-white mb-4">معلومات الاتصال</h4>
+              <div class="d-flex align-items-center" dir="rtl">
+                <i class="fas fa-map-marker-alt me-3" style="color: #7c9b57;"></i>
+                <p class="text-white mb-0">الوحدة 2A، الطابق 17، برج Glenealy، رقم 1، Glenealy، هونغ كونغ</p>
+              </div>
+              <div class="d-flex align-items-center" dir="rtl">
+                <i class="fas fa-envelope me-3" style="color: #7c9b57;"></i>
+                <p class="text-white mb-0">contact@inspire-Trade.com</p>
+              </div>
+              <div class="d-flex align-items-center" dir="rtl">
+                <i class="fa fa-phone-alt me-3" style="color: #7c9b57;"></i>
+                <p class="text-white mb-0">+852 8171 3179</p>
+              </div>
+              <div class="d-flex align-items-center mb-4" dir="rtl">
+                <i class="fab fa-firefox-browser me-3" style="color: #7c9b57;"></i>
+                <p class="text-white mb-0">inspire-Trade.com</p>
+              </div>
+              <div class="d-flex" dir="rtl">
+                <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i class="fab fa-facebook-f text-white"></i></a>
+                <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i class="fab fa-twitter text-white"></i></a>
+                <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i class="fab fa-instagram text-white"></i></a>
+                <a class="btn btn-primary btn-sm-square rounded-circle me-0" href="#"><i class="fab fa-linkedin-in text-white"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- نهاية التذييل -->
+
+    <!-- بداية حقوق الطبع والنشر -->
+    <div class="container-fluid copyright py-4">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-md-6 text-center text-md-start mb-md-0">
+            <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Inspire Trade</a>، جميع الحقوق محفوظة.</span>
+          </div>
+          <div class="col-md-6 text-center text-md-end text-body">
+            <!-- /*** هذا القالب مجاني طالما احتفظت برابط المؤلف أدناه. ***/ -->
+            <!-- /*** إذا كنت ترغب في استخدام القالب بدون رابط المؤلف أدناه، ***/ -->
+            <!-- /*** يمكنك شراء رخصة إزالة الائتمان من "https://htmlcodex.com/credit-removal". ***/ -->
+            تم التصميم بواسطة <a class="border-bottom text-white" href="#">فريلانسرز</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const staticPrefix = "{% static '' %}"
+        document.querySelectorAll('img').forEach((img) => {
+          // Ensure that src is a relative path and not already prefixed
+          if (img.getAttribute('src').startsWith('img/')) {
+            img.src = staticPrefix + img.getAttribute('src')
+          }
+        })
+      })
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

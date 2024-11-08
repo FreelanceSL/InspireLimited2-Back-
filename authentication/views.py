@@ -14,6 +14,7 @@ from .models import ImageUpload
 import base64
 from django.urls import reverse 
 import json
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from rest_framework_simplejwt.tokens import AccessToken
 from django.contrib.auth import authenticate, login
@@ -139,7 +140,7 @@ class Verification(APIView):
        
         
 class Login(APIView):
-    def get(self,request):
+    def get(self, request):
         return render(request, 'login.html')
     
     def post(self, request):
@@ -152,18 +153,21 @@ class Login(APIView):
             token = AccessToken.for_user(user)
             request.session['access_token'] = str(token)
             request.session['email'] = user.email
-            # Redirect to `next` if it exists; otherwise, go to dashboard
+            request.session['username'] = user.last_name
+
             next_url = request.GET.get('next', 'dashboard')
             admin_url = request.GET.get('next', 'admin')
-            if (user.role=="admin" and user.is_verified==True):
+            if (user.role == "admin" and user.is_verified == True):
                 return redirect(admin_url)
-            elif (user.is_verified==True):
+            elif (user.is_verified == True):
                 return redirect(next_url)
-            else :
+            else:
                 send_otp_via_email(request, user)
                 return redirect(reverse('otp'))
         else:
-            return render(request, 'login.html', {'error': 'Invalid credentials'})
+
+            messages.error(request, "Invalid email or password")
+            return render(request, 'login.html')
 
     
 def logout(request):
@@ -177,16 +181,20 @@ def send_password_reset_email(request,user):
 @api_view(['POST'])  
 def forget_password(request):
     if request.method == 'POST':
-        email= request.data['email']
+        email = request.POST.get('email')
+        
         if User.objects.filter(email=email).exists():
-            user=User.objects.get(email__exact=email)
-            print("haha")
-            send_password_reset_email(request,user)
-            data={"message":'Password reset link has been sent to you email adress.'}
-            return JsonResponse(data,status=200)
-        else :
-            data={"message":'Account does not exist'}
-            return JsonResponse(data,status=404)
+            user = User.objects.get(email=email)
+            send_password_reset_email(request, user) 
+
+            # Add a success message
+            messages.success(request, 'Password reset link has been sent to your email address.')
+
+        else:
+            messages.error(request, 'Account does not exist.')
+           
+
+    return render(request, 'reset-password.html')
     
 @api_view(['POST'])
 def reset_password(request,uidb64,token):
@@ -248,8 +256,26 @@ def signup(request):
 def otp(request):
     return render(request, 'otp.html')
 
-    
+def reset(request):
+    return render(request, 'reset-password.html')    
 
+def update(request, uidb64, token):
+    try:
+        # Decode the uidb64 to get the user ID
+        uid =urlsafe_base64_decode(uidb64).decode()
+        user=User._default_manager.get(pk=uid)
+
+        # Render the password reset page and pass the uidb64 and token to the template
+        return render(request, 'update.html', {'uidb64': uidb64, 'token': token})
+
+
+    except Exception as e:
+        # If something goes wrong (e.g., user not found), show an error message
+        return render(request, 'update.html', {
+            'error': 'Invalid or expired reset link.'
+        })
+        
+        
 @api_view(['GET'])
 @login_required(login_url='/api/login/')
 @permission_classes([IsVerified])
@@ -257,7 +283,8 @@ def dashboard(request):
     if not request.user.is_authenticated or not request.user.is_verified:
         return render(request, '404.html', status=404)
     token = request.session.get('access_token', None)
-    return render(request, 'dashboard.html', {'token': token})
+    last_name=request.session.get('username', None)
+    return render(request, 'dashboard.html', {'token': token, 'username':last_name})
 
 
 @api_view(['GET'])
@@ -265,4 +292,5 @@ def dashboard(request):
 @login_required(login_url='/api/login/')
 def admin(request):
     token = request.session.get('access_token', None)
+
     return render(request, 'admin.html', {'token': token})

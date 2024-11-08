@@ -42,7 +42,7 @@
       <div class="row gx-0 align-items-center">
         <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
           <div class="d-flex flex-wrap">
-            <a href="#" class="text-muted small me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Glenealy, Central, Hong Kong</a>
+
             <a href="tel: +852 8171 3179" class="text-muted small me-4"><i class="fas fa-phone-alt text-primary me-2"></i> +852 8171 3179</a>
             <a href="mailto:contact@inspire-limited.com" class="text-muted small me-0"><i class="fas fa-envelope text-primary me-2"></i>contact@inspire-limited.com</a>
           </div>
@@ -82,20 +82,10 @@
             <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
             <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
             <a href="{% url 'blogs' %}" class="nav-item nav-link active">Blogs</a>
-            <div class="nav-item dropdown">
-              <a href="#" class="nav-link" data-bs-toggle="dropdown"><span class="dropdown-toggle">Pages</span></a>
-              <div class="dropdown-menu m-0">
-                <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
-                <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
-                <a href="{% url 'testimonials' %}" class="dropdown-item">Testimonial</a>
-                <a href="{% url 'offers' %}" class="dropdown-item">Our Offer</a>
-                <a href="{% url 'faqs' %}" class="dropdown-item">FAQs</a>
-                <a href="{% url 'page_404' %}" class="dropdown-item">404 Page</a>
-              </div>
-            </div>
+
             <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
           </div>
-          <a href="#" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Get Started</a>
+          <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Get Started</a>
         </div>
       </nav>
 
@@ -119,85 +109,127 @@
     <!-- Navbar & Hero End -->
 
     <!-- Blog Start -->
-    <div class="container-fluid blog py-5">
-      <div class="container py-5">
-        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-          <h4 class="text-primary">Our Blog & News</h4>
-          <h1 class="display-5 mb-4">Articles For Pro Traders</h1>
-          <p class="mb-0">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur adipisci facilis cupiditate recusandae aperiam temporibus corporis itaque quis facere, numquam, ad culpa deserunt sint dolorem autem obcaecati, ipsam mollitia hic.</p>
-        </div>
-        <div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay="0.2s">
-          <div class="blog-item p-4">
-            <div class="blog-img mb-4">
-              <img src="img/service-1.jpg" class="img-fluid w-100 rounded" alt="" />
-              <div class="blog-title">
-                <a href="#" class="btn">Dividend Stocks</a>
-              </div>
-            </div>
-            <a href="#" class="h4 d-inline-block mb-3">Options Trading Business?</a>
-            <p class="mb-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore aut aliquam suscipit error corporis accusamus labore....</p>
-            <div class="d-flex align-items-center">
-              <img src="img/testimonial-1.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="" />
-              <div class="ms-3">
-                <h5>Admin</h5>
-                <p class="mb-0">October 9, 2025</p>
-              </div>
-            </div>
+    <div class="container-fluid blog pb-5">
+      <div class="container pb-5">
+          <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+              <h4 class="text-primary">Our Blog & News</h4>
+              <h1 class="display-5 mb-4">Articles For Pro Traders</h1>
           </div>
-          <div class="blog-item p-4">
-            <div class="blog-img mb-4">
-              <img src="img/service-2.jpg" class="img-fluid w-100 rounded" alt="" />
-              <div class="blog-title">
-                <a href="#" class="btn">Non-Dividend Stocks</a>
+          <div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay="0.2s">
+              <!-- Blog Item 1: Buying Series I Bonds -->
+              <div class="blog-item p-4">
+                  <div class="blog-img mb-4">
+                      <img src="img/Buying-Series-I-Bonds.png" class="img-fluid w-100 rounded" alt="Buying Series I Bonds">
+                      <div class="blog-title">
+                          <a href="https://www.investing.com/academy/trading/buying-series-i-bonds/" class="btn" target="_blank">
+                              Buying Series I Bonds: The Ultimate Guide
+                          </a>
+                      </div>
+                  </div>
+                  <div class="blog-content">
+                      <a href="https://www.investing.com/academy/trading/buying-series-i-bonds/" class="h4 d-inline-block mb-3" target="_blank">Buying Series I Bonds</a>
+                      <p class="mb-4">Learn everything you need to know about Series I bonds, including how to buy them and their benefits.</p>
+                      <div class="d-flex align-items-center">
+                          <img src="/static/img/Matthew-Stokes.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Author">
+                          <div class="ms-3">
+                              <h5>Author: Matthew Stokes</h5>
+                              <p class="mb-0">Published: November 1, 2024</p>
+                              <p class="mb-0">Currently: SEO Content Operations Specialist at Webify.io & MadCrypto.com</p>
+                              <p class="mb-0">Education: BSc in Environmental Science</p>
+                              <a href="https://www.linkedin.com/in/matthew-stokes" target="_blank">
+                                  <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo">
+                                  See Full Bio
+                              </a>
+                          </div>
+                      </div>
+                  </div>
               </div>
-            </div>
-            <a href="#" class="h4 d-inline-block mb-3">Options Trading Business?</a>
-            <p class="mb-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore aut aliquam suscipit error corporis accusamus labore....</p>
-            <div class="d-flex align-items-center">
-              <img src="img/testimonial-2.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="" />
-              <div class="ms-3">
-                <h5>Admin</h5>
-                <p class="mb-0">October 9, 2025</p>
+              <!-- Blog Item 2 -->
+              <div class="blog-item p-4">
+                  <div class="blog-img mb-4">
+                      <img src="/static/img/call-put-options.jpg" class="img-fluid w-100 rounded" alt="Call And Put Options">
+                      <div class="blog-title">
+                          <a href="https://www.investing.com/academy/trading/call-put-options/" class="btn" target="_blank">
+                              Call And Put Options – A Buying And Selling Guide
+                          </a>
+                      </div>
+                  </div>
+                  <div class="blog-content">
+                      <a href="https://www.investing.com/academy/trading/call-put-options/" class="h4 d-inline-block mb-3" target="_blank">Call And Put Options</a>
+                      <p class="mb-4">Explore the basics of call and put options and learn how to buy and sell them effectively.</p>
+                      <div class="d-flex align-items-center">
+                          <img src="/static/img/Harris-Anwar-Author.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Haris Anwar">
+                          <div class="ms-3">
+                              <h5>Author: Haris Anwar</h5>
+                              <p class="mb-0">Published: November 1, 2024</p>
+                              <p class="mb-0">Expertise: Financial writer, focusing on equity markets to help readers find long-term investment opportunities</p>
+                              <p class="mb-0">Currently: Columnist at Investing.com, providing analysis on large-cap and dividend stocks</p>
+                              <a href="https://www.linkedin.com/in/harisanwar" target="_blank">
+                                  <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo">
+                                  See Full Bio
+                              </a>
+                          </div>
+                      </div>
+                  </div>
               </div>
-            </div>
+              <!-- Blog Item 3 -->
+              <div class="blog-item p-4">
+                  <div class="blog-img mb-4">
+                      <img src="/static/img/Dividend-Aristocrat-List.png" class="img-fluid w-100 rounded" alt="Dividend Aristocrats List and Definition">
+                      <div class="blog-title">
+                          <a href="https://www.investing.com/academy/trading/dividend-aristocrats/" class="btn" target="_blank">
+                              Dividend Aristocrats List and Definition
+                          </a>
+                      </div>
+                  </div>
+                  <div class="blog-content">
+                      <a href="https://www.investing.com/academy/trading/dividend-aristocrats/" class="h4 d-inline-block mb-3" target="_blank">Dividend Aristocrats: A Comprehensive Overview</a>
+                      <p class="mb-4">Explore the list of Dividend Aristocrats and understand what makes them a valuable investment choice.</p>
+                      <div class="d-flex align-items-center">
+                          <img src="/static/img/Hannah-Wilson-.png" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Author">
+                          <div class="ms-3">
+                              <h5>Author: Hannah Wilson</h5>
+                              <p class="mb-0">Published: November 1, 2024</p>
+                              <p class="mb-0">Currently: English Markets Specialist at Investing.com (SEO)</p>
+                              <p class="mb-0">Education: BA (Hons) Business (1st) from University of Coventry, England</p>
+                              <a href="https://www.linkedin.com/in/hannah-wilson" target="_blank">
+                                  <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo">
+                                  See Full Bio
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- Blog Item 4 -->
+              <div class="blog-item p-4">
+                  <div class="blog-img mb-4">
+                      <img src="img/AI-Stock-Trading-Definition.png" class="img-fluid w-100 rounded" alt="Stock Market Analysis">
+                      <div class="blog-title">
+                          <a href="https://www.investing.com/academy/trading/ai-stock-trading-guide/" class="btn" target="_blank">
+                              AI Stock Trading: How Artificial Intelligence Can Revolutionize Your Stock Picking
+                          </a>
+                      </div>
+                  </div>
+                  <div class="blog-content">
+                      <a href="https://seekingalpha.com/article/stock-market-analysis" class="h4 d-inline-block mb-3" target="_blank">AI Stock Trading</a>
+                      <p class="mb-4">An in-depth analysis of the current stock market trends and what they mean for investors.</p>
+                      <div class="d-flex align-items-center">
+                          <img src="/static/img/Sara-Jayne.png" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Author">
+                          <div class="ms-3">
+                              <h5>Author: Sara-Jayne Slack</h5>
+                              <p class="mb-0">Published: October 1, 2024</p>
+                              <p class="mb-0">Expertise: Wealth Management, Personal Finance</p>
+                              <p class="mb-0">Currently: SEO Specialist (UK Market) at Investing.com</p>
+                              <p class="mb-0">Education: Financial Markets and Investment Analysis, Cambridge University</p>
+                              <a href="https://www.linkedin.com/in/sara-jayne-slack" target="_blank">
+                                  <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo">See Full Bio</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
-          <div class="blog-item p-4">
-            <div class="blog-img mb-4">
-              <img src="img/service-3.jpg" class="img-fluid w-100 rounded" alt="" />
-              <div class="blog-title">
-                <a href="#" class="btn">Dividend Stocks</a>
-              </div>
-            </div>
-            <a href="#" class="h4 d-inline-block mb-3">Options Trading Business?</a>
-            <p class="mb-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore aut aliquam suscipit error corporis accusamus labore....</p>
-            <div class="d-flex align-items-center">
-              <img src="img/testimonial-3.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="" />
-              <div class="ms-3">
-                <h5>Admin</h5>
-                <p class="mb-0">October 9, 2025</p>
-              </div>
-            </div>
-          </div>
-          <div class="blog-item p-4">
-            <div class="blog-img mb-4">
-              <img src="img/service-4.jpg" class="img-fluid w-100 rounded" alt="" />
-              <div class="blog-title">
-                <a href="#" class="btn">Non-Dividend Stocks</a>
-              </div>
-            </div>
-            <a href="#" class="h4 d-inline-block mb-3">Options Trading Business?</a>
-            <p class="mb-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore aut aliquam suscipit error corporis accusamus labore....</p>
-            <div class="d-flex align-items-center">
-              <img src="img/testimonial-1.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="" />
-              <div class="ms-3">
-                <h5>Admin</h5>
-                <p class="mb-0">October 9, 2025</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
+  </div>
     <!-- Blog End -->
 
     <!-- Footer Start -->
@@ -238,10 +270,7 @@
           <div class="col-md-6 col-lg-6 col-xl-3">
             <div class="footer-item">
               <h4 class="text-white mb-4">Contact Info</h4>
-              <div class="d-flex align-items-center">
-                <i class="fas fa-map-marker-alt text-primary me-3"></i>
-                <p class="text-white mb-0">Unit 2A, 17/F, Glenealy Tower, No1,Glenealy, Hong Kong</p>
-              </div>
+
               <div class="d-flex align-items-center">
                 <i class="fas fa-envelope text-primary me-3"></i>
                 <p class="text-white mb-0">contact@inspire-limited.com</p>

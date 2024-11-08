@@ -36,6 +36,61 @@
 
     <!-- Template Stylesheet -->
     <link href="{% static 'css/style.css'%}" rel="stylesheet" />
+    <style>
+      /* Custom styling for the dashboard */
+      body {
+        background-color: #f4f7fa;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        height: 100vh; /* Full height of the viewport */
+    }
+
+    .dashboard-container {
+        padding: 40px 20px;
+        flex-grow: 1; /* Makes the container take up remaining space */
+    }
+
+    .welcome-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+        background-color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .message-box {
+        background-color: #f9f9f9;
+        border-left: 4px solid #F2A900;
+        padding: 20px;
+        font-size: 16px;
+        margin-top: 20px;
+        border-radius: 5px;
+    }
+
+    .message-box h5 {
+        color: #333;
+    }
+
+    .message-box p {
+        color: #555;
+    }
+
+
+
+    /* Media queries for responsiveness */
+    @media (max-width: 767px) {
+        .dashboard-container {
+            padding: 20px;
+        }
+    }
+  </style>
   </head>
   <body>
     <!-- Spinner Start -->
@@ -58,10 +113,7 @@
       <div class="row gx-0 align-items-center">
         <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
           <div class="d-flex flex-wrap">
-            <a href="#" class="text-muted small me-4"
-              ><i class="fas fa-map-marker-alt text-primary me-2"></i>Glenealy,
-              Central, Hong Kong</a
-            >
+
             <a href="tel: +852 8171 3179" class="text-muted small me-4"
               ><i class="fas fa-phone-alt text-primary me-2"></i> +852 8171
               3179</a
@@ -118,8 +170,28 @@
 
     <div >
       {% if token %}
-      <h1>Welcome back!</h1>
-      <p>Your token: {{ token }}</p>
+      <div class="container dashboard-container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Welcome Image -->
+
+
+                <!-- Message Box -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <div class="message-box">
+                            <h5>Welcome to Your Trading Account {{username}}!</h5>
+                            <p>We are currently processing your request to create a trading account. Our team is reviewing the details, and we will get back to you within the next 2-3 business days.</p>
+                            <p>Thank you for your patience!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+
+    </div>
       {% endif %}
     </div>
 
