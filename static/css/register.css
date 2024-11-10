@@ -1,3 +1,46 @@
+
+.topbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    vertical-align: middle;
+    margin-left: 8px;
+    color: var(--bs-primary);
+  }
+  
+  .topbar .dropdown .dropdown-menu a:hover {
+    background: var(--bs-primary);
+    color: var(--bs-white);
+  }
+  
+  .topbar .dropdown .dropdown-menu {
+    transform: rotateX(0deg);
+    visibility: visible;
+    background: var(--bs-light);
+    padding-top: 11px;
+    border: 0;
+    transition: .5s;
+    opacity: 1;
+  }
+  
+  .topbar a {
+    position: relative; /* Ensures it is positioned above any potential overlaps */
+    z-index: 9999; /* Makes sure it stays above other elements */
+  }
+  
+  /* Ensure proper alignment for smaller devices */
+  @media (max-width: 992px) {
+    .topbar .d-flex {
+      text-align: center; /* Center the content on smaller devices */
+    }
+  
+    .topbar a {
+      display: block; /* Ensures each link takes the full width on smaller screens */
+      margin-bottom: 10px;
+    }
+  }
+
 body {
     background-color: #f8f9fa;
     padding: 40px 0;
@@ -26,5 +69,16 @@ body {
 }
 
 
+
+.is-valid {
+    border-color: green;
+}
+.is-invalid {
+    border-color: red;
+}
+
+.toast-body {
+    padding: 1.5rem; /* Increase or decrease padding as needed */
+}
 
 
