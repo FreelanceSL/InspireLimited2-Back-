@@ -561,49 +561,10 @@
         </div>
       </div>
     </div>
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
-        <div id="errorToast" class="toast align-items-center text-bg-danger border-0 custom-toast-height" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    Account already exists.
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
-    
+
     <!-- JavaScript for Form Validation -->
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Function to handle form submission
-            async function submitForm(event) {
-                event.preventDefault();
-                const form = event.target;
-    
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: new FormData(form),
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                    }
-                });
-    
-                if (response.status === 400) {
-                    const result = await response.json();
-                    if (result.message === 'Account already exists') {
-                        const errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
-                        errorToast.show();
-                    }
-                } else {
-                    // Handle success case or other responses here
-                }
-            }
-    
-            // Attach submit event to the form
-            document.getElementById('registrationForm').addEventListener('submit', submitForm);
-        });
-    </script>
+
     <script>
         // Validation functions
         function validateEmail() {
