@@ -52,8 +52,8 @@
                     <a href="tel: +852 8171 3179" class="text-muted small me-4"><i
                             class="fas fa-phone-alt text-primary me-2"></i>
                         +852 8171 3179</a>
-                    <a href="mailto:contact@inspire-Trade.com" class="text-muted small me-0"><i
-                            class="fas fa-envelope text-primary me-2"></i>contact@inspire-Trade.com</a>
+                    <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0"><i
+                            class="fas fa-envelope text-primary me-2"></i>contact@inspire-trade.com</a>
                 </div>
             </div>
             <div class="col-lg-4 text-center text-lg-end">
@@ -561,12 +561,11 @@
                 <div class="col-md-6 col-lg-6 col-xl-2">
                     <div class="footer-item">
                         <h4 class="text-white mb-4">Quick Links</h4>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> About Us</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Feature</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Attractions</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Tickets</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Blog</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Contact us</a>
+                        <a href="{% url 'about' %}"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                        <a href="{% url 'services' %}"><i class="fas fa-angle-right me-2"></i> Services</a>
+                        <a href="{% url 'blogs' %}"><i class="fas fa-angle-right me-2"></i> Blogs</a>
+
+                        <a href="{% url 'contact' %}"><i class="fas fa-angle-right me-2"></i> Contact us</a>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-3">
@@ -586,7 +585,7 @@
 
                         <div class="d-flex align-items-center">
                             <i class="fas fa-envelope text-primary me-3"></i>
-                            <p class="text-white mb-0">contact@inspire-Trade.com</p>
+                            <p class="text-white mb-0">contact@inspire-trade.com</p>
                         </div>
                         <div class="d-flex align-items-center">
                             <i class="fa fa-phone-alt text-primary me-3"></i>
@@ -614,21 +613,24 @@
     <!-- Footer End -->
 
     <!-- Copyright Start -->
-            <div class="container-fluid copyright py-4">
-            <div class="container">
-                <div class="row g-4 align-items-center">
-                    <div class="col-md-6 text-center text-md-start mb-md-0">
-                        <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Inspire Trade</a>, All right reserved.</span>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end text-body">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom text-white" href="#">Freelacers</a>
-                    </div>
-                </div>
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+          <div class="row g-4 align-items-center">
+            <div class="col-md-6 text-center text-md-start mb-md-0">
+              <span class="text-body"
+                ><a href="#" class="border-bottom text-white"
+                  ><i class="fas fa-copyright text-light me-2"></i
+                  >InspireLimited</a
+                >, All right reserved.</span
+              >
             </div>
+            <div class="col-md-6 text-center text-md-end text-body">  
+              Designed By
+              <a class="border-bottom text-white" href="#">Leamon</a>
+            </div>
+          </div>
         </div>
+      </div>
     <!-- Copyright End -->
 
 
