@@ -1,0 +1,484 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspire Trade - MT4 Trading Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #F2A900;
+            --secondary: #FFC451;
+            --light: #FFF9E6;
+            --dark: #1D1D27;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light);
+        }
+
+        /* Topbar Styles */
+        .topbar {
+            background: white;
+            padding: 0 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .topbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 45px;
+        }
+
+        .topbar-contact {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .topbar-contact a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .topbar-contact a:hover {
+            color: var(--primary);
+        }
+
+        .topbar-contact i {
+            color: var(--primary);
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .navbar-brand img {
+            height: 45px;
+        }
+
+        .navbar-toggler {
+            display: none;
+            background: none;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .navbar-menu a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .login{
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .login:hover{
+            color: var(--primary);
+        }
+
+        .navbar-menu a:hover,
+        .navbar-menu a.active {
+            color: var(--primary);
+        }
+
+        .navbar-menu a:hover::after,
+        .navbar-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        /* Guide Content Styles */
+        .guide-container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .guide-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .guide-title {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .guide-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .guide-step {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .guide-step:hover {
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .guide-step h2 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .guide-step h2::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .guide-step ul {
+            list-style: none;
+        }
+
+        .guide-step li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .guide-step li:before {
+            content: "•";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 991.98px) {
+            .topbar {
+                display: none;
+            }
+
+            .navbar-toggler {
+                display: block;
+            }
+
+            .navbar-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+                border-top: 1px solid #ddd;
+            }
+
+            .navbar-menu.active {
+                display: flex;
+            }
+
+            .navbar-menu a {
+                padding: 0.5rem 0;
+                display: block;
+                text-align: center;
+            }
+
+            .navbar-menu a::after {
+                display: none;
+            }
+
+            .btn-primary {
+                text-align: center;
+            }
+
+            .guide-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Topbar Start -->
+    <div class="topbar">
+        <div class="topbar-content">
+            <div class="topbar-contact">
+                <a href="tel:+85281713179">
+                    <i class="fas fa-phone-alt"></i>
+                    +852 8171 3179
+                </a>
+                <a href="mailto:contact@inspire-Trade.com">
+                    <i class="fas fa-envelope"></i>
+                    contact@inspire-Trade.com
+                </a>
+            </div>
+            <div class="topbar-actions">
+                {% if not user.is_authenticated %}
+                <a href="{% url 'signup' %}" class="login">
+                    <i class="fa fa-user text-primary" style="color: #F2A900"></i>
+                    Register
+                </a>
+                <a href="{% url 'login' %}" class="login">
+                    <i class="fa fa-sign-in-alt text-primary" style="color: #F2A900"></i>
+                    Login
+                </a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fa fa-home text-primary"></i>
+                        My Dashboard
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="{% url 'dashboard' %}">
+                            <i class="fas fa-user-alt"></i>
+                            My Profile
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-comment-alt"></i>
+                            Inbox
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-bell"></i>
+                            Notifications
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            Account Settings
+                        </a>
+                        
+                        <a href="{% url 'logout' %}">
+                            <i class="fas fa-power-off"></i>
+                            Log Out
+                        </a>
+                       
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="{% url 'index' %}" class="navbar-brand">
+                <img src="{% static 'img/logo.png' %}" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" onclick="toggleMenu()">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="{% url 'index' %}" class="active">Home</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'services' %}">Services</a>
+                <a href="{% url 'blogs' %}">Blogs</a>
+                <a href="{% url 'contact' %}">Contact Us</a>
+                <a href="{% url 'signup' %}" class="btn-primary">Get Started</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Guide Content Start -->
+    <div class="guide-container">
+        <div class="guide-card">
+            <h1 class="guide-title">MT4 Account Guide</h1>
+            
+            <div class="guide-step">
+                <h2>1. Opening an Inspire Trade Account:</h2>
+                <ul>
+                    <li>Visit our website and click on "Open New Account" option</li>
+                    <li>Fill in the registration form with your personal information including name, email, and phone number</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>2. Download MT4 Platform:</h2>
+                <ul>
+                    <li>After registration, you'll receive a download link for the MT4 platform for your computer or phone</li>
+                    <li>Install the program easily following the simple setup process</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>3. Account Activation:</h2>
+                <ul>
+                    <li>We may require verification documents such as ID or utility bill to confirm your identity</li>
+                    <li>We ensure quick account activation once your documents are verified</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>4. Deposit Funds:</h2>
+                <ul>
+                    <li>Choose your preferred deposit method from our range of secure payment options</li>
+                    <li>Follow the simple steps to fund your trading account</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>5. Start Trading:</h2>
+                <ul>
+                    <li>Log in to the MT4 platform using your provided account credentials</li>
+                    <li>Begin your trading journey with our exceptional support team at your service</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Guide Content End -->
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navbarMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Sticky navbar
+        window.onscroll = function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.pageYOffset > 0) {
+                navbar.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

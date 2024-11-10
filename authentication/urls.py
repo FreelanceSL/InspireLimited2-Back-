@@ -16,6 +16,7 @@ urlpatterns = [
     path("modify/<uidb64>/<token>/",views.reset_password, name='modify'),
     path("forget_password/",views.forget_password, name='forget_password'),
     path('reset_email/',views.send_password_reset_email),
+
     # path('upload/', views.FileUploadView.as_view(), name='upload_file'),
     
     
@@ -36,6 +37,7 @@ urlpatterns = [
     path('otp/',views.otp,name="otp"),
     path('users/', views.user_list, name='user_list'),
     path('reset/',views.reset,name='reset'),
+    path('qstart/',views.qstart,name='qstart'),
     path('reset/<uidb64>/<token>/',views.update,name='update')
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

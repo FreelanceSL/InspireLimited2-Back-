@@ -14,6 +14,7 @@ from .models import ImageUpload
 import base64
 from django.urls import reverse 
 import json
+import requests
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from rest_framework_simplejwt.tokens import AccessToken
@@ -86,10 +87,9 @@ class Register(APIView):
                 if serializer.is_valid():
                     user = serializer.save()
                     request.session['email'] = data.get("email")
-                    user.set_password(data.get("password"))  # Set hashed password
+                    user.set_password(data.get("password"))  
 
-                    # Save the image to the user if provided
-                    image = request.FILES.get('imagePassport')  # Get the uploaded image from request.FILES
+                    image = request.FILES.get('imagePassport') 
                     print(image)
                     if image:
                         user.image = image
@@ -97,15 +97,17 @@ class Register(APIView):
 
                     send_otp_via_email(request, user)
                     send_infos(request,user)
-                    # Redirect to the login page
-                    return redirect(reverse('otp'))  # Adjust 'login' to your URL name for the login view
+
+                    return redirect(reverse('otp'))  
 
                 else:
-                    return Response({
+                    messages.error(request, 'Account already exists.')
+                    return JsonResponse({
                         'status': 400,
-                        'message': 'Validation failed',
-                        'data': serializer.errors
-                    })
+                        'message': 'Account already exists',
+                        'errors': serializer.errors
+                    }, status=400)
+                    
             except Exception as e:
                 print(e)
                 return Response({
@@ -249,6 +251,8 @@ def page_404(request):
 def contact(request):
     return render(request, 'contact.html')
 
+def qstart(request):
+    return render(request, 'qstart.html')
 
 def signup(request):
     return render(request, 'register.html')
@@ -276,6 +280,44 @@ def update(request, uidb64, token):
         })
         
         
+
+def get_crypto_data():
+    try:
+        # CoinGecko API endpoint for top 5 cryptocurrencies
+        url = "https://api.coingecko.com/api/v3/coins/markets"
+        params = {
+            "vs_currency": "usd",
+            "order": "market_cap_desc",
+            "per_page": "5",
+            "page": "1",
+            "sparkline": "true",
+            "price_change_percentage": "1h,24h,7d"
+        }
+        
+        response = requests.get(url, params=params)
+        data = response.json()
+        
+        formatted_data = []
+        for coin in data:
+            formatted_data.append({
+                'rank': coin['market_cap_rank'],
+                'name': coin['name'],
+                'symbol': coin['symbol'].upper(),
+                'price': coin['current_price'],
+                'image': coin['image'],
+                'price_1h': coin['price_change_percentage_1h_in_currency'],
+                'price_24h': coin['price_change_percentage_24h_in_currency'],
+                'price_7d': coin['price_change_percentage_7d_in_currency'],
+                'volume_24h': coin['total_volume'],
+                'market_cap': coin['market_cap'],
+                'sparkline': coin['sparkline_in_7d']['price']
+            })
+        return formatted_data
+    except Exception as e:
+        print(f"Error fetching data: {e}")
+        return []
+        
+        
 @api_view(['GET'])
 @login_required(login_url='/api/login/')
 @permission_classes([IsVerified])
@@ -284,7 +326,8 @@ def dashboard(request):
         return render(request, '404.html', status=404)
     token = request.session.get('access_token', None)
     last_name=request.session.get('username', None)
-    return render(request, 'dashboard.html', {'token': token, 'username':last_name})
+    crypto_data = get_crypto_data()
+    return render(request, 'dashboard.html', {'token': token, 'username':last_name,'crypto_data': crypto_data})
 
 
 @api_view(['GET'])
@@ -294,3 +337,27 @@ def admin(request):
     token = request.session.get('access_token', None)
 
     return render(request, 'admin.html', {'token': token})
+
+
+
+
+# def get_bitcoin_price():
+#     # Fetching Bitcoin price from CoinGecko
+#     url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
+#     response = requests.get(url)
+#     data = response.json()
+#     print(data)
+#     return data.get('bitcoin', {}).get('usd', 'N/A')
+
+
+# def real_time_prices(request):
+#     bitcoin_price = get_bitcoin_price()
+
+    
+#     return JsonResponse({
+#         'bitcoin_price': bitcoin_price,
+       
+#     })
+
+
+
