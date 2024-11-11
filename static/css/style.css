@@ -88,6 +88,15 @@
 
 
 /*** Topbar Start ***/
+/* General styling for topbar */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: var(--bs-light);
+}
+
 .topbar .dropdown-toggle::after {
     border: none;
     content: "\f107";
@@ -98,13 +107,7 @@
     color: var(--bs-primary);
 }
 
-
-
-.topbar .dropdown .dropdown-menu a:hover {
-    background: var(--bs-primary);
-    color: var(--bs-white);
-}
-
+/* Dropdown menu styling */
 .topbar .dropdown .dropdown-menu {
     transform: rotateX(0deg);
     visibility: visible;
@@ -114,6 +117,44 @@
     transition: .5s;
     opacity: 1;
 }
+
+.topbar .dropdown .dropdown-menu a:hover {
+    background: var(--bs-primary);
+    color: var(--bs-white);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .topbar {
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    /* Collapsible menu for mobile */
+    .topbar .dropdown .dropdown-menu {
+        display: none; /* Hide menu by default on mobile */
+        position: absolute;
+        top: 100%; /* Position menu below the topbar */
+        left: 0;
+        width: 100%;
+        background: var(--bs-light);
+    }
+
+    .topbar .dropdown:hover .dropdown-menu,
+    .topbar .dropdown .dropdown-menu.show {
+        display: block; /* Show menu on hover or when toggled */
+    }
+}
+
+/* Optional: Add button to toggle dropdown on mobile */
+.topbar .dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+}
+
+
+ /* Ensure proper alignment for smaller devices */
+
 
 /*** Topbar End ***/
 
@@ -751,6 +792,10 @@
     position: relative;
     margin-bottom: 30px;
     padding: 0 25px 25px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 350px; /* Ensure all testimonial items are at least 350px tall */
 }
 
 .testimonial .testimonial-item::before {
@@ -780,6 +825,7 @@
 }
 
 .testimonial .testimonial-item .testimonial-text {
+    flex-grow: 1; /* Allow text to grow and fill available space */
     padding: 25px 0;
     text-align: center;
 }
@@ -789,7 +835,7 @@
     justify-content: space-between;
 }
 
-.testimonial .testimonial-item  .testimonial-quote-left {
+.testimonial .testimonial-item .testimonial-quote-left {
     position: absolute;
     width: 60px; 
     height: 60px;
@@ -803,7 +849,7 @@
     justify-content: center;
 }
 
-.testimonial .testimonial-item  .testimonial-quote-right {
+.testimonial .testimonial-item .testimonial-quote-right {
     position: absolute;
     width: 60px; 
     height: 60px;
@@ -909,6 +955,7 @@
     transition: 0.5s;
 }
 
+
 /*** Testimonial End ***/
 
 /*** Footer Start ***/
@@ -956,3 +1003,50 @@
 /*** copyright end ***/
 
 
+.hehe{
+    padding-top: 40px !important;
+}
+
+
+
+
+
+
+
+.price-ticker-container {
+    width: 100%; /* Full width of the container */
+    overflow: hidden; /* Hides content that overflows the container */
+    background: black; /* Dark background for contrast */
+  }
+  
+  .price-ticker {
+    display: flex;
+    white-space: nowrap; /* Prevent text from wrapping to the next line */
+    animation: scroll-left 15s linear infinite; /* Scroll animation */
+  }
+  
+  .price-item {
+    padding: 20px;
+    color: #F2A900;
+    font-size: 18px;
+    margin-right: 50px; /* Space between price items */
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+  }
+  
+  .price-item .price-icon {
+    width: 30px; /* Set icon size */
+    height: 30px; /* Set icon size */
+    margin-right: 10px; /* Space between the icon and price text */
+  }
+  
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(100%); /* Start from the right */
+    }
+    100% {
+      transform: translateX(-100%); /* End at the left */
+    }
+  }
+  
+  
