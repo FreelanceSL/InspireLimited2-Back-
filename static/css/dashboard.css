@@ -1,45 +1,67 @@
- 
+/* General styling for topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--bs-light);
+}
+
 .topbar .dropdown-toggle::after {
-    border: none;
-    content: "\f107";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 600;
-    vertical-align: middle;
-    margin-left: 8px;
-    color: var(--bs-primary);
+  border: none;
+  content: "\f107";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  vertical-align: middle;
+  margin-left: 8px;
+  color: var(--bs-primary);
+}
+
+/* Dropdown menu styling */
+.topbar .dropdown .dropdown-menu {
+  transform: rotateX(0deg);
+  visibility: visible;
+  background: var(--bs-light);
+  padding-top: 11px;
+  border: 0;
+  transition: .5s;
+  opacity: 1;
+}
+
+.topbar .dropdown .dropdown-menu a:hover {
+  background: var(--bs-primary);
+  color: var(--bs-white);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .topbar {
+      flex-direction: column;
+      padding: 5px;
   }
-  
-  .topbar .dropdown .dropdown-menu a:hover {
-    background: var(--bs-primary);
-    color: var(--bs-white);
-  }
-  
+
+  /* Collapsible menu for mobile */
   .topbar .dropdown .dropdown-menu {
-    transform: rotateX(0deg);
-    visibility: visible;
-    background: var(--bs-light);
-    padding-top: 11px;
-    border: 0;
-    transition: .5s;
-    opacity: 1;
+      display: none; /* Hide menu by default on mobile */
+      position: absolute;
+      top: 100%; /* Position menu below the topbar */
+      left: 0;
+      width: 100%;
+      background: var(--bs-light);
   }
-  
-  .topbar a {
-    position: relative; /* Ensures it is positioned above any potential overlaps */
-    z-index: 9999; /* Makes sure it stays above other elements */
+
+  .topbar .dropdown:hover .dropdown-menu,
+  .topbar .dropdown .dropdown-menu.show {
+      display: block; /* Show menu on hover or when toggled */
   }
- 
- /* Ensure proper alignment for smaller devices */
- @media (max-width: 992px) {
-    .topbar .d-flex {
-      text-align: center; /* Center the content on smaller devices */
-    }
-  
-    .topbar a {
-      display: block; /* Ensures each link takes the full width on smaller screens */
-      margin-bottom: 10px;
-    }
-  }
+}
+
+/* Optional: Add button to toggle dropdown on mobile */
+.topbar .dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+}
+
 
 
 

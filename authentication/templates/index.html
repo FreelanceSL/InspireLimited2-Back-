@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
+    <link rel="icon" href="{% static 'img/logo.png' %}" type="image/x-icon">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +30,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{% static 'css/style.css'%}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -153,60 +154,67 @@
 
     <!-- Carousel End -->
    <!-- Abvout Start -->
-    <div class="container-fluid about py-5">
-        <div class="container py-5">
-            <div class="row g-5 align-items-center">
-                <div class="col-xl-7 wow fadeInLeft" data-wow-delay="0.2s">
-                    <div>
-                        <h4 class="text-primary">About Us</h4>
-                        <h1 class="display-5 mb-4">With Inspire Trade, you trade with Confidence and Precision</h1>
-                        <p class="mb-4">Inspire Trade: Enabling confident trading with advanced tools, and seamless user experience.
-                        </p>
-                        <div class="row g-4">
-                            <div class="col-md-6 col-lg-6 col-xl-6">
-                                <div class="d-flex">
-                                    <div><i class="fas fa-dollar-sign fa-3x text-primary"></i></div>
-                                    <div class="ms-4">
-                                        <h4>Competitive Pricing</h4>
-                                        <p>Enjoy low fees and transparent pricing designed to maximize your trading potential.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-6">
-                                <div class="d-flex">
-                                    <div><i class="fas fa-clock fa-3x text-primary"></i></div>
-                                    <div class="ms-4">
-                                        <h4>Instant Trade Execution</h4>
-                                        <p>Experience fast and reliable trade execution, ensuring you never miss an opportunity.</p>
-                                    </div>
-                                </div>
-                            </div>
-                                                        <div class="col-sm-6">
-                                <a  href="{% url 'register' %}"
-                                    class="btn btn-primary rounded-pill py-3 px-5 flex-shrink-0">Discover
-                                    Now</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="d-flex">
-                                    <i class="fas fa-phone-alt fa-2x text-primary me-4"></i>
-                                    <div>
-                                        <h4>Call Us</h4>
-                                        <p class="mb-0 fs-5" style="letter-spacing: 1px;">
-                                            +852 8171 3179</p>
-                                    </div>
+<div class="container-fluid about py-5">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-xl-7 wow fadeInLeft" data-wow-delay="0.2s">
+                <div>
+                    <h4 class="text-primary">About Us</h4>
+                    <h1 class="display-5 mb-4">With Inspire Trade, you trade with Confidence and Precision</h1>
+                    <p class="mb-4">Inspire Trade: Enabling confident trading with advanced tools, and seamless user experience.</p>
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <div class="d-flex">
+                                <div><i class="fas fa-dollar-sign fa-3x text-primary"></i></div>
+                                <div class="ms-4">
+                                    <h4>Competitive Pricing</h4>
+                                    <p>Enjoy low fees and transparent pricing designed to maximize your trading potential.</p>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <div class="d-flex">
+                                <div><i class="fas fa-clock fa-3x text-primary"></i></div>
+                                <div class="ms-4">
+                                    <h4>Instant Trade Execution</h4>
+                                    <p>Experience fast and reliable trade execution, ensuring you never miss an opportunity.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <div class="d-flex">
+                                <div><i class="fas fa-headset fa-3x text-primary"></i></div>
+                                <div class="ms-4">
+                                    <h4>Available 24/7</h4>
+                                    <p>Our support team is here around the clock to help you at any time.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="d-flex">
+                                <i class="fas fa-phone-alt fa-2x text-primary me-4"></i>
+                                <div>
+                                    <h4>Call Us</h4>
+                                    <p class="mb-0 fs-5" style="letter-spacing: 1px;">+852 8171 3179</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="{% url 'register' %}" class="btn btn-primary rounded-pill py-3 px-5 flex-shrink-0">Discover Now</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xl-5 wow fadeInRight" data-wow-delay="0.2s">
-                    <div class="bg-primary rounded position-relative overflow-hidden">
-                        <img src="/static/img/happy_man.png" class="img-fluid rounded w-100" alt="">
-                    </div>
+            </div>
+            <div class="col-xl-5 wow fadeInRight" data-wow-delay="0.2s">
+                <div class="bg-primary rounded position-relative overflow-hidden">
+                    <img src="/static/img/happy_man.png" class="img-fluid rounded w-100" alt="">
                 </div>
             </div>
         </div>
     </div>
+</div>
+
     <!-- About End -->
 
     <!-- Services Start -->
@@ -435,8 +443,132 @@
             </div>
         </div>
     </div>
-            
-    
+
+    <!--Testimonial -->
+    <div class="container-fluid testimonial py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">Testimonial</h4>
+                <h1 class="display-5 mb-4">Our Clients Riviews</h1>
+                
+            </div>
+            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.2s">
+                <div class="testimonial-item">
+                    <div class="testimonial-quote-left">
+                        <i class="fas fa-quote-left fa-2x"></i>
+                    </div>
+                    <div class="testimonial-img">
+                        <img src="img/testimonial-1.jpg" class="img-fluid" alt="Image">
+                    </div>
+                    <div class="testimonial-text">
+                        <p class="mb-0">I've tried a few trading platforms, but Inspire Trade is definitely one of the best. The interface is user-friendly, and trade execution is super fast—perfect for staying on top of a volatile market.
+                        </p>
+                    </div>
+                    <div class="testimonial-title">
+                        <div>
+                            <h4 class="mb-0">Emma Johnson</h4>
+                            <p class="mb-0">Financial Analyst</p>
+                        </div>
+                        <div class="d-flex text-primary">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-quote-right">
+                        <i class="fas fa-quote-right fa-2x"></i>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-quote-left">
+                        <i class="fas fa-quote-left fa-2x"></i>
+                    </div>
+                    <div class="testimonial-img">
+                        <img src="img/team-1.jpg" class="img-fluid" alt="Image">
+                    </div>
+                    <div class="testimonial-text">
+                        <p class="mb-0">Inspire Trade has really helped me level up my trading game. I appreciate their transparency with fees, and their support team is fantastic. They were quick to help when I had account setup questions.
+                        </p>
+                    </div>
+                    <div class="testimonial-title">
+                        <div>
+                            <h4 class="mb-0">Michael Brown</h4>
+                            <p class="mb-0">Software Engineer</p>
+                        </div>
+                        <div class="d-flex text-primary">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-quote-right">
+                        <i class="fas fa-quote-right fa-2x"></i>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-quote-left">
+                        <i class="fas fa-quote-left fa-2x"></i>
+                    </div>
+                    <div class="testimonial-img">
+                        <img src="img/team-4.jpg" class="img-fluid" alt="Image">
+                    </div>
+                    <div class="testimonial-text">
+                        <p class="mb-0">I've been trading for years, and Inspire Trade offers some of the best tools and analytics I've come across. The competitive pricing is a big plus, especially for someone who trades regularly.
+                        </p>
+                    </div>
+                    <div class="testimonial-title">
+                        <div>
+                            <h4 class="mb-0">Sophia Lee</h4>
+                            <p class="mb-0">Investment Banker</p>
+                        </div>
+                        <div class="d-flex text-primary">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-quote-right">
+                        <i class="fas fa-quote-right fa-2x"></i>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-quote-left">
+                        <i class="fas fa-quote-left fa-2x"></i>
+                    </div>
+                    <div class="testimonial-img">
+                        <img src="img/testimonial-2.jpg" class="img-fluid" alt="Image">
+                    </div>
+                    <div class="testimonial-text">
+                        <p class="mb-0">As a beginner, I was nervous about getting into trading, but Inspire Trade’s guides and tutorials made it easy. The platform is intuitive, and I feel supported every step of the way.
+                        </p>
+                    </div>
+                    <div class="testimonial-title">
+                        <div>
+                            <h4 class="mb-0">David Miller</h4>
+                            <p class="mb-0">Marketing Manager</p>
+                        </div>
+                        <div class="d-flex text-primary">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-quote-right">
+                        <i class="fas fa-quote-right fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- FAQs Start -->
     <div class="container-fluid faq-section pb-5">
@@ -467,12 +599,12 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                     aria-controls="flush-collapseTwo">
-                                    What are the fees for trading on this platform?
+                                    What are the dangerous impacts of trade?
                                 </button>
                             </h2>
                             <div id="flush-collapseTwo" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushSection">
-                                <div class="accordion-body">Our platform charges a small percentage for each trade, which varies depending on the trading volume. You can view our complete fee structure in the "Fees" section of our website.</div>
+                                <div class="accordion-body">Trade can drive growth but also risks environmental harm, job losses, and economic inequality. Sustainable practices and fair regulations are crucial to managing these impacts.</div>
                             </div>
                         </div>
                         <div class="accordion-item">
@@ -531,7 +663,7 @@
                 </div>
                 <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
                     <div class="bg-primary rounded">
-                        <img src="/static/img/happy_man.png" class="img-fluid w-100" alt="">
+                        <img src="/static/img/faq.jpg" class="img-fluid w-100" alt="">
                     </div>
                 </div>
             </div>
@@ -539,7 +671,22 @@
     </div>
     <!-- FAQs End -->
 
-
+    <!-- NEWS-->
+    <div class="price-ticker-container">
+        <div class="price-ticker">
+          <div class="price-item">
+            <img src="{% static 'img/btc.png' %}" alt="Bitcoin" class="price-icon"> Bitcoin: $28,000
+          </div>
+          <div class="price-item">
+            <img src="{% static 'img/gld.png' %}" alt="Gold" class="price-icon"> Gold: $1,850
+          </div>
+          <div class="price-item">
+            <img src="{% static 'img/silver.png' %}" alt="Silver" class="price-icon"> Silver: $24.50
+          </div>
+        </div>
+      </div>
+      
+    <!--News end-->
   
 
     <!-- Footer Start -->
@@ -554,10 +701,13 @@
                             <p>Your partner for secure trading.</p>
                             <!-- <img src="img/logo.png" alt="Logo"> -->
                         </a>
-
-
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="https://www.metatrader4.com/fr" class="btn btn-primary  px-4 py-2">MT4</a>
+                            <a href="https://www.metatrader5.com/fr" class="btn btn-secondary  px-4 py-2">MT5</a>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="col-md-6 col-lg-6 col-xl-2">
                     <div class="footer-item">
                         <h4 class="text-white mb-4">Quick Links</h4>
@@ -570,13 +720,13 @@
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-3">
                     <div class="footer-item">
-                        <h4 class="text-white mb-4">Support</h4>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Privacy Policy</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Disclaimer</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Support</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> FAQ</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Help</a>
+                        <h4 class="text-white mb-4">Markets</h4>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> ForexCFD</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Commodities CFD</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Stocks CFD</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Indices CFD</a>
+                        <a href="#"><i class="fas fa-angle-right me-2"></i> Crypto CFD</a>
+
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-3">
