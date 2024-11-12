@@ -129,31 +129,7 @@
         flex-direction: column;
         padding: 5px;
     }
-
-    /* Collapsible menu for mobile */
-    .topbar .dropdown .dropdown-menu {
-        display: none; /* Hide menu by default on mobile */
-        position: absolute;
-        top: 100%; /* Position menu below the topbar */
-        left: 0;
-        width: 100%;
-        background: var(--bs-light);
-    }
-
-    .topbar .dropdown:hover .dropdown-menu,
-    .topbar .dropdown .dropdown-menu.show {
-        display: block; /* Show menu on hover or when toggled */
-    }
 }
-
-/* Optional: Add button to toggle dropdown on mobile */
-.topbar .dropdown-toggle {
-    display: inline-flex;
-    align-items: center;
-}
-
-
- /* Ensure proper alignment for smaller devices */
 
 
 /*** Topbar End ***/

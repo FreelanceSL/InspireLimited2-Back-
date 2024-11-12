@@ -101,12 +101,10 @@ class Register(APIView):
                     return redirect(reverse('otp'))  
 
                 else:
-                    messages.error(request, 'Account already exists.')
-                    return JsonResponse({
-                        'status': 400,
-                        'message': 'Account already exists',
-                        'errors': serializer.errors
-                    }, status=400)
+                    
+                    messages.error(request, 'An account with this email already exists.')
+                    return render(request,'register.html')
+                    
                     
             except Exception as e:
                 print(e)
@@ -316,7 +314,40 @@ def get_crypto_data():
     except Exception as e:
         print(f"Error fetching data: {e}")
         return []
-        
+   
+   
+   
+import requests
+
+def get_precious_metals_data():
+    try:
+        # Metals API endpoint from World Gold Council
+        url = "https://data.gold.org/api/v1/prices"
+        params = {
+            "metal": "gold,silver",
+            "period": "1w"
+        }
+
+        response = requests.get(url, params=params)
+        data = response.json()
+
+        formatted_data = []
+        for metal in data['data']:
+            formatted_data.append({
+                'name': metal['name'],
+                'symbol': metal['symbol'],
+                'price': metal['latest']['price'],
+                'price_change_1h': metal['latest']['priceChange']['hour'],
+                'price_change_24h': metal['latest']['priceChange']['day'],
+                'price_change_7d': metal['latest']['priceChange']['week']
+            })
+        return formatted_data
+    except Exception as e:
+        print(f"Error fetching data: {e}")
+        return []     
+    
+    
+    
         
 @api_view(['GET'])
 @login_required(login_url='/api/login/')
@@ -327,6 +358,8 @@ def dashboard(request):
     token = request.session.get('access_token', None)
     last_name=request.session.get('username', None)
     crypto_data = get_crypto_data()
+    # metal_data= get_precious_metals_data()
+
     return render(request, 'dashboard.html', {'token': token, 'username':last_name,'crypto_data': crypto_data})
 
 

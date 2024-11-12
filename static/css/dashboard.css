@@ -158,19 +158,19 @@
 }
 
 .windows-btn.active {
-  color: #0078D4;
+  color: #F2A900;
 }
 
 .windows-btn.active::after {
-  background: #0078D4;
+  background: #F2A900;
 }
 
 .android-btn.active {
-  color: #3DDC84;
+  color: #F2A900;
 }
 
 .android-btn.active::after {
-  background: #3DDC84;
+  background: #F2A900;
 }
 
 .ios-btn.active {
@@ -216,7 +216,7 @@
   content: '•';
   position: absolute;
   left: 0;
-  color: #0056b3;
+  color: #F2A900;
 }
 
 .platform-image {
@@ -240,8 +240,8 @@
   display: inline-block;
   padding: 0.8rem 2rem;
   background: #fff;
-  color: #0056b3;
-  border: 2px solid #0056b3;
+  color: black;
+  border: 2px solid #F2A900;
   border-radius: 5px;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -249,7 +249,7 @@
 }
 
 .download-btn:hover {
-  background: #0056b3;
+  background: #F2A900;
   color: #fff;
   transform: translateY(-2px);
 }

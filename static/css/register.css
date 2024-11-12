@@ -82,3 +82,30 @@ body {
 }
 
 
+.toast {
+  position: fixed;
+  top: 90px !important;
+  right: 20px;
+  width: 200px;
+  height: 50px; /* Increased width for the toast */
+  padding: 10px;
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.toast.show {
+  display: block;
+  opacity: 1;
+}
+
+/* Progress bar inside the toast */
+.progress-bar {
+  height: 5px;
+  background-color: white;
+  width: 100%;
+  transition: width 5s linear; /* Makes the bar shrink over 5 seconds */
+}

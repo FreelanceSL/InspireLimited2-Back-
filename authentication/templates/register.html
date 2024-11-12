@@ -562,6 +562,31 @@
       </div>
     </div>
 
+
+
+    <div id="toast" class="toast">
+      User already exists !
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+
+    <script>
+      {% if messages %}
+          const toast = document.getElementById('toast');
+          const progressBar = document.getElementById('progress-bar');
+
+          toast.classList.add('show');
+
+          setTimeout(function() {
+              progressBar.style.width = '0%'; 
+          }, 100);
+
+          setTimeout(function() {
+              toast.classList.remove('show');
+          }, 5000);
+      {% endif %}
+  </script>
+
     <!-- JavaScript for Form Validation -->
 
 
