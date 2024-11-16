@@ -113,6 +113,13 @@ class Register(APIView):
                     'message': 'Internal server error',
                 })
 
+@api_view(['POST'])  
+def resend_otp(request):
+    email=request.session.get('email', None)
+    user=User.objects.get(email=email)
+    send_otp_via_email(request, user)
+    return render(request,'otp.html')
+
 
 class Verification(APIView):
     def post(self,request):
@@ -217,40 +224,26 @@ def reset_password(request,uidb64,token):
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html' ,{'langue':'AR','url_lang': reverse('index_ar')})
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'about.html',{'langue':'AR','url_lang': reverse('index_ar')})
 
 def services(request):
-    return render(request, 'service.html')
+    return render(request, 'service.html',{'langue':'AR','url_lang': reverse('index_ar')})
 
 def blogs(request):
-    return render(request, 'blog.html')
+    return render(request, 'blog.html',{'langue':'AR','url_lang': reverse('index_ar')})
 
-def features(request):
-    return render(request, 'feature.html')
-
-def team(request):
-    return render(request, 'team.html')
-
-def testimonials(request):
-    return render(request, 'testimonial.html')
-
-def offers(request):
-    return render(request, 'offer.html')
-
-def faqs(request):
-    return render(request, 'FAQ.html')
 
 def page_404(request):
     return render(request, '404.html')
 
 def contact(request):
-    return render(request, 'contact.html')
+    return render(request, 'contact.html',{'langue':'AR','url_lang': reverse('index_ar')})
 
 def qstart(request):
-    return render(request, 'qstart.html')
+    return render(request, 'qstart.html',{'langue':'AR','url_lang': reverse('index_ar')})
 
 def signup(request):
     return render(request, 'register.html')
@@ -259,7 +252,22 @@ def otp(request):
     return render(request, 'otp.html')
 
 def reset(request):
-    return render(request, 'reset-password.html')    
+    return render(request, 'reset-password.html')  
+
+def index_ar(request):
+    return render(request, 'index_ar.html',{'langue':'ENG','url_lang': reverse('index')})
+
+def about_ar(request):
+    return render(request, 'about_ar.html',{'langue':'ENG','url_lang': reverse('index')})
+
+def services_ar(request):
+    return render(request, 'service_ar.html',{'langue':'ENG','url_lang': reverse('index')})
+
+def contact_ar(request):
+    return render(request, 'contact_ar.html',{'langue':'ENG','url_lang': reverse('index')})
+
+def blogs_ar(request):
+    return render(request, 'blog_ar.html',{'langue':'ENG','url_lang': reverse('index')})
 
 def update(request, uidb64, token):
     try:

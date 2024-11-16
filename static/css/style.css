@@ -1,5 +1,7 @@
 
 /*** Spinner Start ***/
+
+
 /*** Spinner ***/
 #spinner {
     opacity: 0;
@@ -89,6 +91,14 @@
 
 /*** Topbar Start ***/
 /* General styling for topbar */
+.profile-img {
+    width: 25px;          /* Adjust size as needed */
+    height: 25px;
+    border-radius: 50%;   /* Makes the image circular */
+    object-fit: cover;    /* Ensures image fits within circle */
+    cursor: pointer;      /* Adds a pointer cursor on hover */
+  }
+  
 .topbar {
     display: flex;
     align-items: center;
@@ -178,6 +188,16 @@
     max-height: 45px;
 }
 
+.dropdown-menu[data-bs-popper] {
+    top: 100%;
+    left: -110px !important;
+    margin-top: .125rem;
+}
+
+#lng{
+    margin-left: 10px;
+}
+
 .navbar .dropdown-toggle::after {
     border: none;
     content: "\f107";
@@ -201,6 +221,12 @@
 }
 
 @media (max-width: 991.98px) {
+
+    .dropdown-menu[data-bs-popper] {
+        top: 100%;
+        left: 0px !important;
+        margin-top: .125rem;
+    }
     .sticky-top.navbar-light {
         position: relative;
         background: var(--bs-white);
@@ -245,6 +271,7 @@
         transition: .5s;
         opacity: 0;
     }
+
 
     .navbar-light {
         position: absolute;
@@ -740,7 +767,7 @@
 
 .team .team-item:hover .team-title h4,
 .team .team-item:hover .team-title p {
-    color: var(--bs-white);
+    color: #F2A900;
 }
 
 .team .team-item .team-icon {
@@ -984,45 +1011,80 @@
 }
 
 
+/** Warning **/
+
+.full-width-alert {
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+  .warning-icon {
+    font-size: 1.5rem;
+    color: #ffc107;
+    margin-right: 10px;
+  }
 
 
 
 
 
-.price-ticker-container {
-    width: 100%; /* Full width of the container */
-    overflow: hidden; /* Hides content that overflows the container */
-    background: black; /* Dark background for contrast */
+
+
+
+
+  .ticker-wrapper {
+    background-color: #1a1a1a;
+    padding: 1rem 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
   }
   
-  .price-ticker {
+  .ticker {
     display: flex;
-    white-space: nowrap; /* Prevent text from wrapping to the next line */
-    animation: scroll-left 15s linear infinite; /* Scroll animation */
+    position: relative;
+    width: max-content;
+    animation: ticker 30s linear infinite;
   }
   
-  .price-item {
-    padding: 20px;
-    color: #F2A900;
-    font-size: 18px;
-    margin-right: 50px; /* Space between price items */
-    display: flex;
-    align-items: center; /* Align icon and text vertically */
+  .ticker:hover {
+    animation-play-state: paused;
   }
   
-  .price-item .price-icon {
-    width: 30px; /* Set icon size */
-    height: 30px; /* Set icon size */
-    margin-right: 10px; /* Space between the icon and price text */
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 2rem;
+    color: white;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .ticker-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
   
-  @keyframes scroll-left {
+  .price-up {
+    color: #28a745;
+  }
+  
+  .price-down {
+    color: #dc3545;
+  }
+
+  @keyframes ticker {
     0% {
-      transform: translateX(100%); /* Start from the right */
+      transform: translate3d(0, 0, 0);
     }
     100% {
-      transform: translateX(-100%); /* End at the left */
+      transform: translate3d(-50%, 0, 0);
     }
   }
   
-  
+  @media (max-width: 768px) {
+    .ticker-item {
+      padding: 0 1rem;
+      font-size: 0.9rem;
+    }
+  }
