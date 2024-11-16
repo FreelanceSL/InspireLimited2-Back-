@@ -10,7 +10,7 @@ from .models import User
 
 
 def send_otp_via_email(request,user):
-    subject =f'Welcome to InspireLimited {user.first_name} !'
+    subject =f'Welcome to InspireTrade {user.first_name} !'
     otp=str(random.randint(1000, 9999))
     user.otp=otp
     user.save()
@@ -36,7 +36,7 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 
 def send_infos(request, user):
-    subject = 'Hello InspireLimited team, there is a new user who requested an account!'
+    subject = 'Hello InspireTrade team, there is a new user who requested an account!'
     message = f"""
     User Infos:
     First Name: {user.first_name}

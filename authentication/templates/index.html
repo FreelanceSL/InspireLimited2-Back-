@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-    <link rel="icon" href="{% static 'img/logo.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,34 +50,9 @@
             <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-flex flex-wrap">
 
-                    <a href="tel: +852 8171 3179" class="text-muted small me-4"><i
-                            class="fas fa-phone-alt text-primary me-2"></i>
-                        +852 8171 3179</a>
+
                     <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0"><i
                             class="fas fa-envelope text-primary me-2"></i>contact@inspire-trade.com</a>
-                </div>
-            </div>
-            <div class="col-lg-4 text-center text-lg-end">
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
-                    {% if not user.is_authenticated %}
-                    <a href="{% url 'signup' %}"><small class="me-3 text-dark"><i class="fa fa-user text-primary me-2"></i>Register</small></a>
-                    <a href="{% url 'login' %}"><small class="me-3 text-dark"><i class="fa fa-sign-in-alt text-primary me-2"></i>Login</small></a>
-                {% endif %}
-                {% if  user.is_authenticated %}
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown"><small><i
-                                    class="fa fa-home text-primary me-2"></i> My Dashboard</small></a>
-                        <div class="dropdown-menu rounded">
-                            <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-                            <a href="#" class="dropdown-item"><i class="fas fa-comment-alt me-2"></i> Inbox</a>
-                            <a href="#" class="dropdown-item"><i class="fas fa-bell me-2"></i> Notifications</a>
-                            <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
-                            
-                            <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
-                          
-                        </div>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -103,8 +78,25 @@
                     
                     <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
                 </div>
-                <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Get Started</a>
-                <a href="{% url 'qstart' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0 " style="margin-left: 20px; !impotant">Quick Start</a>
+                {% if not user.is_authenticated %}
+                <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Signup</a>
+                <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0 " style="margin-left: 20px; !important">Signin</a>
+                {% else %}
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
+                        <img src="{% static 'img/profile.png' %}" alt="Profile" class="profile-img">
+                    </a>
+
+                    <div class="dropdown-menu rounded">
+                        <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
+                        <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
+                        
+                        <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
+                      
+                    </div>
+                </div>
+                {% endif%}
+                <a id="lng" href={{url_lang}}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-world"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M11.5 3a17 17 0 0 0 0 18"></path><path d="M12.5 3a17 17 0 0 1 0 18"></path></svg>{{langue}}</a>
                 
             </div>
         </nav>
@@ -125,6 +117,7 @@
                                         team is dedicated to helping you grow your assets safely and efficiently. Join us and
                                         take the next step toward a brighter financial future.
                                     </p>
+                                    <a href="{% url 'qstart' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Quick Start</a>
                                 </div>
                             </div>
                         </div>
@@ -144,6 +137,7 @@
                                         higher returns. Our tailored strategies are designed to boost your financial growth,
                                         giving you more value and security in every step of your journey with us.
                                     </p>
+                                    <a href="{% url 'qstart' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Quick Start</a>
                                 </div>
                             </div>
                         </div>
@@ -153,6 +147,74 @@
         </div>
 
     <!-- Carousel End -->
+    <div class="ticker-wrapper">
+        <div class="ticker">
+          <!-- First set -->
+          <div class="ticker-item">
+            <i class="bi bi-currency-bitcoin me-2"></i>
+            BTC: <span class="ms-2 price-data" data-symbol="BTC">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            ETH: <span class="ms-2 price-data" data-symbol="ETH">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            EUR: <span class="ms-2 price-data" data-symbol="EUR">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-warning"></i>
+            GOLD: <span class="ms-2 price-data" data-symbol="GOLD">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-secondary"></i>
+            SILVER: <span class="ms-2 price-data" data-symbol="SILVER">$0</span>
+          </div>
+          <!-- Second set -->
+          <div class="ticker-item">
+            <i class="bi bi-currency-bitcoin me-2"></i>
+            BTC: <span class="ms-2 price-data" data-symbol="BTC">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            ETH: <span class="ms-2 price-data" data-symbol="ETH">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            EUR: <span class="ms-2 price-data" data-symbol="EUR">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-warning"></i>
+            GOLD: <span class="ms-2 price-data" data-symbol="GOLD">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-secondary"></i>
+            SILVER: <span class="ms-2 price-data" data-symbol="SILVER">$0</span>
+          </div>
+          <!-- Third set for extra safety -->
+          <div class="ticker-item">
+            <i class="bi bi-currency-bitcoin me-2"></i>
+            BTC: <span class="ms-2 price-data" data-symbol="BTC">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            ETH: <span class="ms-2 price-data" data-symbol="ETH">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            EUR: <span class="ms-2 price-data" data-symbol="EUR">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-warning"></i>
+            GOLD: <span class="ms-2 price-data" data-symbol="GOLD">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-secondary"></i>
+            SILVER: <span class="ms-2 price-data" data-symbol="SILVER">$0</span>
+          </div>
+        </div>
+      </div>
+    
    <!-- Abvout Start -->
 <div class="container-fluid about py-5">
     <div class="container py-5">
@@ -229,10 +291,10 @@
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="service-item d-flex flex-column h-100">
                         <div class="service-img">
-                            <img src="img/taktak.jpg" class="img-fluid rounded-top w-100" alt="Image">
+                            <img src="{% static 'img/taktak.jpg' %}" class="img-fluid rounded-top w-100" alt="Image">
                         </div>
                         <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
-                            <a href="#" class="h4 d-inline-block mb-4">Fast Execution Speeds</a>
+                            <a href="#" class="h4 d-inline-block mb-4" id="ex">Fast Execution Speeds</a>
                             <p class="mb-4">Experience lightning-fast trade execution to capture the best prices and reduce risks in volatile markets. Our platform is optimized for speed to enhance your trading performance.</p>
                             <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'signup' %}">Learn More</a>
                         </div>
@@ -241,7 +303,7 @@
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
                     <div class="service-item d-flex flex-column h-100">
                         <div class="service-img">
-                            <img src="img/carditem2.jpeg" class="img-fluid rounded-top w-100" alt="Image">
+                            <img src="{% static 'img/carditem2.jpeg' %}" class="img-fluid rounded-top w-100" alt="Image">
                         </div>
                         <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
                             <a href="#" class="h4 d-inline-block mb-4">Competitive Pricing & Low Fees</a>
@@ -253,7 +315,7 @@
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
                     <div class="service-item d-flex flex-column h-100">
                         <div class="service-img">
-                            <img src="img/techtrade.jpg" class="img-fluid rounded-top w-100" alt="Image">
+                            <img src="{% static 'img/techtrade.jpg' %}" class="img-fluid rounded-top w-100" alt="Image">
                         </div>
                         <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
                             <a href="#" class="h4 d-inline-block mb-4">Cutting-Edge Trading Technology</a>
@@ -332,7 +394,7 @@
                 <!-- Blog Item 1: Buying Series I Bonds -->
                 <div class="blog-item p-4">
                     <div class="blog-img mb-4">
-                        <img src="img/Buying-Series-I-Bonds.png" class="img-fluid w-100 rounded" alt="Buying Series I Bonds">
+                        <img src="{% static 'img/Buying-Series-I-Bonds.png' %}" class="img-fluid w-100 rounded" alt="Buying Series I Bonds">
                         <div class="blog-title">
                             <a href="https://www.investing.com/academy/trading/buying-series-i-bonds/" class="btn" target="_blank">
                                 Buying Series I Bonds: The Ultimate Guide
@@ -416,7 +478,7 @@
                 <!-- Blog Item 4 -->
                 <div class="blog-item p-4">
                     <div class="blog-img mb-4">
-                        <img src="img/AI-Stock-Trading-Definition.png" class="img-fluid w-100 rounded" alt="Stock Market Analysis">
+                        <img src="/static/img/AI-Stock-Trading-Definition.png" class="img-fluid w-100 rounded" alt="Stock Market Analysis">
                         <div class="blog-title">
                             <a href="https://www.investing.com/academy/trading/ai-stock-trading-guide/" class="btn" target="_blank">
                                 AI Stock Trading: How Artificial Intelligence Can Revolutionize Your Stock Picking
@@ -458,7 +520,7 @@
                         <i class="fas fa-quote-left fa-2x"></i>
                     </div>
                     <div class="testimonial-img">
-                        <img src="img/testimonial-1.jpg" class="img-fluid" alt="Image">
+                        <img src="/static/img/testimonial-1.jpg" class="img-fluid" alt="Image">
                     </div>
                     <div class="testimonial-text">
                         <p class="mb-0">I've tried a few trading platforms, but Inspire Trade is definitely one of the best. The interface is user-friendly, and trade execution is super fast—perfect for staying on top of a volatile market.
@@ -486,7 +548,7 @@
                         <i class="fas fa-quote-left fa-2x"></i>
                     </div>
                     <div class="testimonial-img">
-                        <img src="img/team-1.jpg" class="img-fluid" alt="Image">
+                        <img src="/static/img/team-1.jpg" class="img-fluid" alt="Image">
                     </div>
                     <div class="testimonial-text">
                         <p class="mb-0">Inspire Trade has really helped me level up my trading game. I appreciate their transparency with fees, and their support team is fantastic. They were quick to help when I had account setup questions.
@@ -514,7 +576,7 @@
                         <i class="fas fa-quote-left fa-2x"></i>
                     </div>
                     <div class="testimonial-img">
-                        <img src="img/team-4.jpg" class="img-fluid" alt="Image">
+                        <img src="/static/img/team-4.jpg" class="img-fluid" alt="Image">
                     </div>
                     <div class="testimonial-text">
                         <p class="mb-0">I've been trading for years, and Inspire Trade offers some of the best tools and analytics I've come across. The competitive pricing is a big plus, especially for someone who trades regularly.
@@ -542,7 +604,7 @@
                         <i class="fas fa-quote-left fa-2x"></i>
                     </div>
                     <div class="testimonial-img">
-                        <img src="img/testimonial-2.jpg" class="img-fluid" alt="Image">
+                        <img src="/static/img/testimonial-2.jpg" class="img-fluid" alt="Image">
                     </div>
                     <div class="testimonial-text">
                         <p class="mb-0">As a beginner, I was nervous about getting into trading, but Inspire Trade’s guides and tutorials made it easy. The platform is intuitive, and I feel supported every step of the way.
@@ -672,20 +734,10 @@
     <!-- FAQs End -->
 
     <!-- NEWS-->
-    <div class="price-ticker-container">
-        <div class="price-ticker">
-          <div class="price-item">
-            <img src="{% static 'img/btc.png' %}" alt="Bitcoin" class="price-icon"> Bitcoin: $28,000
-          </div>
-          <div class="price-item">
-            <img src="{% static 'img/gld.png' %}" alt="Gold" class="price-icon"> Gold: $1,850
-          </div>
-          <div class="price-item">
-            <img src="{% static 'img/silver.png' %}" alt="Silver" class="price-icon"> Silver: $24.50
-          </div>
-        </div>
-      </div>
-      
+    <div class="alert alert-warning d-flex align-items-center w-100 full-width-alert" role="alert">
+        <span class="warning-icon">&#9888;</span> <!-- Unicode for warning icon -->
+        Trading in the financial markets involves high risks and may result in loss of capital. It is recommended to trade with caution and with full knowledge of the potential risks.
+    </div>
     <!--News end-->
   
 
@@ -722,7 +774,7 @@
                     <div class="footer-item">
                         <h4 class="text-white mb-4">Markets</h4>
                         <a href="#"><i class="fas fa-angle-right me-2"></i> ForexCFD</a>
-                        <a href="#"><i class="fas fa-angle-right me-2"></i> Commodities CFD</a>
+                        
                         <a href="#"><i class="fas fa-angle-right me-2"></i> Stocks CFD</a>
                         <a href="#"><i class="fas fa-angle-right me-2"></i> Indices CFD</a>
                         <a href="#"><i class="fas fa-angle-right me-2"></i> Crypto CFD</a>
@@ -770,7 +822,7 @@
               <span class="text-body"
                 ><a href="#" class="border-bottom text-white"
                   ><i class="fas fa-copyright text-light me-2"></i
-                  >InspireLimited</a
+                  >InspireTrade</a
                 >, All right reserved.</span
               >
             </div>
@@ -790,15 +842,43 @@
 
     <!-- JavaScript Libraries -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-          const staticPrefix = "{% static '' %}";
-          document.querySelectorAll('img').forEach(img => {
-            // Ensure that src is a relative path and not already prefixed
-            if (img.getAttribute('src').startsWith('img/')) {
-              img.src = staticPrefix + img.getAttribute('src');
-            }
+        const prices = {
+            BTC: 65000,
+            ETH: 3500,
+            EUR: 1.08,
+            GOLD: 2100,
+            SILVER: 25
+          };
+      
+          function updatePrices() {
+            document.querySelectorAll('.price-data').forEach(element => {
+              const symbol = element.dataset.symbol;
+              const currentPrice = prices[symbol];
+              const change = (Math.random() - 0.5) * 0.01;
+              prices[symbol] = currentPrice * (1 + change);
+              
+              element.textContent = formatPrice(prices[symbol]);
+              element.classList.remove('price-up', 'price-down');
+              element.classList.add(change > 0 ? 'price-up' : 'price-down');
+            });
+          }
+      
+          function formatPrice(price) {
+            return price < 100 
+              ? `$${price.toFixed(2)}` 
+              : `$${price.toFixed(0)}`;
+          }
+      
+          setInterval(updatePrices, 2000);
+          updatePrices();
+      
+          // Reset animation when it completes
+          const ticker = document.querySelector('.ticker');
+          ticker.addEventListener('animationend', () => {
+            ticker.style.animation = 'none';
+            ticker.offsetHeight; // Trigger reflow
+            ticker.style.animation = 'ticker 30s linear infinite';
           });
-        });
       </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,332 @@
+{% load static %}
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Contact us</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+        <link rel="icon" href="{% static 'img/logo.png' %}" type="image/x-icon">
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+        <link
+          href="{% static 'lib/lightbox/css/lightbox.min.css' %}"
+          rel="stylesheet"
+        />
+        <link
+          href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}"
+          rel="stylesheet"
+        />
+    
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    
+        <!-- Template Stylesheet -->
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+
+        <style>
+
+            .container-fluid {
+
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .contact-section {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                padding: 40px 20px;
+            }
+            .contact-info, .contact-form {
+                background: #f8f9fa;
+                border-radius: 8px;
+                padding: 30px;
+                flex: 1;
+                min-width: 280px;
+            }
+            .contact-info h4, .contact-form h4 {
+                color: #F2A900;
+                margin-bottom: 20px;
+            }
+            .contact-add-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .contact-icon {
+                font-size: 24px;
+                color: #F2A900;
+                margin-right: 15px;
+            }
+            .contact-form .form-group {
+                margin-bottom: 20px;
+            }
+            .form-control {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            .btn-primary {
+                background-color: #F2A900;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .btn-primary:hover {
+                background-color: #d59100;
+            }
+            .py-5 {
+                padding-top: 10rem !important;
+                padding-bottom: 10rem !important;
+            }
+        </style>
+    </head>
+    <body>
+
+        <body>
+            <!-- Spinner Start -->
+            <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+              <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <!-- Spinner End -->
+        
+            <!-- Topbar Start -->
+            <div class="container-fluid topbar bg-light px-5 d-none d-lg-block">
+              <div class="row gx-0 align-items-center">
+                <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+                  <div class="d-flex flex-wrap">
+        
+                    <a href="tel: +852 8171 3179" class="text-muted small me-4"><i class="fas fa-phone-alt text-primary me-2"></i> +852 8171 3179</a>
+                    <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0"><i class="fas fa-envelope text-primary me-2"></i>contact@inspire-trade.com</a>
+                  </div>
+                </div>
+                
+            </div>
+            </div>
+            <!-- Topbar End -->
+        
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="" class="navbar-brand p-0">
+                <img src="{% static 'img/logo.png'%}" alt="" srcset="" />
+                <!-- <img src="img/logo.png" alt="Logo"> -->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="fa fa-bars"></span></button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="{% url 'index_ar' %}" class="nav-item nav-link">الرئيسية</a>
+                    <a href="{% url 'about_ar' %}" class="nav-item nav-link">من نحن</a>
+                    <a href="{% url 'services_ar' %}" class="nav-item nav-link">الخدمات</a>
+                    <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدونات</a>
+                    <a href="{% url 'contact' %}" class="nav-item nav-link active">اتصل بنا</a>
+                </div>
+                <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">ابدأ الآن</a>
+                <a href="{% url 'qstart' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px !important;">البدء السريع</a>
+            </div>
+        </nav>
+    
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">المدوّنات</h4>
+                <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'index_ar' %}">الرئيسية</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">الصفحات</a>
+                    </li>
+                    <li class="breadcrumb-item active text-primary">التواصل معنا</li>
+                </ol>
+            </div>
+        </div>
+        <!-- Header End -->
+    </div>
+    <!-- Navbar & Hero End -->
+
+    <!-- Contact Start -->
+    <div class="container-fluid" dir="rtl" >
+        <div class="contact-section">
+            <!-- Contact Info (Left) -->
+            <div class="contact-info " >
+                <h4>معلومات التواصل</h4>
+                <div class="contact-add-item"  >
+                    <i class="fas fa-envelope contact-icon " style="margin-left: 20px;"></i>
+                    <div>
+                        <h5>راسلنا</h5>
+                        <p>contact@inspire-trade.com</p>
+                    </div>
+                </div>
+                <div class="contact-add-item">
+                    <i class="fas fa-phone-alt contact-icon" style="margin-left: 20px;"></i>
+                    <div>
+                        <h5>هاتف</h5>
+                        <p>+852 8171 3179</p>
+                    </div>
+                </div>
+                <div class="contact-add-item">
+                    <i class="fab fa-firefox-browser contact-icon" style="margin-left: 20px;"></i>
+                    <div>
+                        <h5>الموقع الإلكتروني</h5>
+                        <p>inspire-limited.com</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Contact Form (Right) -->
+            <div class="contact-form">
+                <h4>أرسل رسالتك</h4>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="اسمك" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control" placeholder="هاتفك">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="4" placeholder="رسالتك" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- الفوتر بداية -->
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+    <div class="container py-5 border-start-0 border-end-0"
+        style="border: 1px solid; border-color: rgb(255, 255, 255, 0.08);">
+        <div class="row g-5">
+            <div class="col-md-6 col-lg-6 col-xl-4">
+                <div class="footer-item" dir="ltr">
+                    <a href="index.html" class="p-0">
+                        <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
+                        <p>شريكك للتداول الآمن.</p>
+                        <!-- <img src="img/logo.png" alt="الشعار"> -->
+                    </a>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="https://www.metatrader4.com/fr" class="btn btn-primary  px-4 py-2">MT4</a>
+                        <a href="https://www.metatrader5.com/fr" class="btn btn-secondary  px-4 py-2">MT5</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4">الأسواق</h4>
+                    <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'services_ar' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
+                    <a href="{% url 'blogs_ar' %}"> المدونات <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'contact' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-6 col-xl-2">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4"> روابط سريعة </h4>
+                    <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'services_ar' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
+                    <a href="{% url 'blogs_ar' %}"> المدونات <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'contact' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 text-start" >
+                <div class="footer-item" >
+                    <h4 class="text-white mb-4" >معلومات الاتصال</h4>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-envelope text-primary me-3"></i>
+                        <p class="text-white mb-0">contact@inspire-trade.com</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-phone-alt text-primary me-3"></i>
+                        <p class="text-white mb-0"> +852 8171 3179</p>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fab fa-firefox-browser text-primary me-3"></i>
+                        <p class="text-white mb-0">inspire-Trade.com</p>
+                    </div>
+                    <div class="d-flex">
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                class="fab fa-facebook-f text-white"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                class="fab fa-twitter text-white"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                class="fab fa-instagram text-white"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-0" href="#"><i
+                                class="fab fa-linkedin-in text-white"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- الفوتر نهاية -->
+
+<!-- حقوق الطبع والنشر بداية -->
+<div class="container-fluid copyright py-4">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-md-0" dir="rtl">
+          <span class="text-body"
+            ><a href="#" class="border-bottom text-white"
+              ><i class="fas fa-copyright text-light me-2"></i
+              >Inspire Trade</a
+            >، جميع الحقوق محفوظة.</span
+          >
+        </div>
+        <div class="col-md-6 text-center text-md-end text-body" dir="rtl">
+          تم التصميم بواسطة
+          <a class="border-bottom text-white" href="#">Leamon</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- حقوق الطبع والنشر نهاية -->
+
+
+<!-- العودة للأعلى -->
+<a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+<!-- مكتبات JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const staticPrefix = "{% static '' %}";
+      document.querySelectorAll('img').forEach(img => {
+        // التأكد من أن src هو مسار نسبي ولم يتم تهيئته مسبقًا
+        if (img.getAttribute('src').startsWith('img/')) {
+          img.src = staticPrefix + img.getAttribute('src');
+        }
+      });
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'lib/wow/wow.min.js'%}"></script>
+<script src="{% static 'lib/easing/easing.min.js'%}"></script>
+<script src="{% static 'lib/waypoints/waypoints.min.js'%}"></script>
+<script src="{% static 'lib/counterup/counterup.min.js'%}"></script>
+<script src="{% static 'lib/lightbox/js/lightbox.min.js'%}"></script>
+<script src="{% static 'lib/owlcarousel/owl.carousel.min.js'%}"></script>
+
+<!-- جافا سكربت القالب -->
+<script src="{% static 'js/main.js'%}"></script>
+</body>
+
+</html>

@@ -15,6 +15,7 @@ urlpatterns = [
     path('verify/',views.Verification.as_view(),name='verify'),
     path("modify/<uidb64>/<token>/",views.reset_password, name='modify'),
     path("forget_password/",views.forget_password, name='forget_password'),
+    path("resend_otp/",views.resend_otp, name='resend_otp'),
     path('reset_email/',views.send_password_reset_email),
 
     # path('upload/', views.FileUploadView.as_view(), name='upload_file'),
@@ -24,11 +25,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('services/', views.services, name='services'),
     path('blogs/', views.blogs, name='blogs'),
-    path('features/', views.features, name='features'),
-    path('team/', views.team, name='team'),
-    path('testimonials/', views.testimonials, name='testimonials'),
-    path('offers/', views.offers, name='offers'),
-    path('faqs/', views.faqs, name='faqs'),
     path('404/', views.page_404, name='page_404'),
     path('contact/', views.contact, name='contact'),
     path('dashboard/',views.dashboard,name="dashboard"),
@@ -38,6 +34,11 @@ urlpatterns = [
     path('users/', views.user_list, name='user_list'),
     path('reset/',views.reset,name='reset'),
     path('qstart/',views.qstart,name='qstart'),
-    path('reset/<uidb64>/<token>/',views.update,name='update')
+    path('reset/<uidb64>/<token>/',views.update,name='update'),
+    path('home_ar/',views.index_ar, name='index_ar'),
+    path('about_ar/', views.about_ar, name='about_ar'),
+    path('services_ar/', views.services_ar, name='services_ar'),
+    path('blogs_ar/', views.blogs_ar, name='blogs_ar'),
+    path('contact_ar/', views.contact_ar, name='contact_ar'),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
