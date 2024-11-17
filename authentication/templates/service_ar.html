@@ -67,7 +67,7 @@
                 </div>
                 {% if not user.is_authenticated %}
                 <a href="{% url 'signup_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">التسجيل</a>
-                <a href="{% url 'login_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px important;">تسجيل الدخول</a>
+                <a href="{% url 'login_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px !important;">تسجيل الدخول</a>
                 {% else %}
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">

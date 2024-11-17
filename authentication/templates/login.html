@@ -61,11 +61,8 @@
           </div>
         </div>
       </div>
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    <form method="post" action="{% url 'login' %}">
+
+    <form method="post" action="{% url 'login' %}" style="margin-top: 30px;">
         {% csrf_token %}
         <h3>Login Here</h3>
 

@@ -77,7 +77,7 @@
             </div>
             {% if not user.is_authenticated %}
             <a href="{% url 'signup_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">التسجيل</a>
-            <a href="{% url 'login_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px important;">تسجيل الدخول</a>
+            <a href="{% url 'login_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px !important;">تسجيل الدخول</a>
             {% else %}
             <div class="dropdown">
                 <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
@@ -128,7 +128,7 @@
                                 <p class="mb-5 fs-5" dir="ltr">
                                     اكتشف إمكانات أموالك مع خيارات استثمار توفر عوائد أعلى. استراتيجياتنا المخصصة مصممة لتعزيز نموك المالي، مما يمنحك المزيد من القيمة والأمان في كل خطوة من رحلتك معنا.
                                 </p>
-                                <a href="{% url 'qstart' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Quick Start</a>
+                                <a href="{% url 'qstart' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">ابدأ الآن</a>
 
                             </div>
                         </div>
