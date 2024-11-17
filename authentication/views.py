@@ -6,7 +6,7 @@ from .serializers import UserSerializer,VerificationSerializer,AdminSerializer
 from rest_framework.response import Response
 from .models import User
 from rest_framework.exceptions import AuthenticationFailed
-from .emails import send_otp_via_email, send_reset_password,send_infos
+from .emails import send_otp_via_email, send_reset_password,send_infos,send_infos_trade
 from rest_framework import status
 from django.contrib.auth.tokens import default_token_generator
 from rest_framework.permissions import IsAuthenticated
@@ -21,18 +21,40 @@ from rest_framework_simplejwt.tokens import AccessToken
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .permissions import IsAdminUserRole,IsVerified
+from rest_framework import pagination
+from django.core.paginator import Paginator
 # Create your views here.
 
 
+class CustomPagination(pagination.PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'per_page'
+    max_page_size = 100
+
+    def get_paginated_response(self, data):
+        return Response({
+            'count': self.page.paginator.count,
+            'total_pages': self.page.paginator.num_pages,
+            'current_page': self.page.number,
+            'results': data
+        })
+
 @api_view(['GET'])
 def user_list(request):
-    email_query = request.GET.get('email', '') 
+    email_query = request.GET.get('email', '')
+    per_page = int(request.GET.get('per_page', 10))
+    
     if email_query:
-        users = User.objects.filter(email__icontains=email_query)  
+        users = User.objects.filter(email__icontains=email_query)
     else:
         users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
+        
+    paginator = CustomPagination()
+    paginator.page_size = per_page
+    result_page = paginator.paginate_queryset(users, request)
+    serializer = UserSerializer(result_page, many=True)
+    
+    return paginator.get_paginated_response(serializer.data)
 
 
 class Register(APIView):
@@ -160,7 +182,8 @@ class Login(APIView):
             token = AccessToken.for_user(user)
             request.session['access_token'] = str(token)
             request.session['email'] = user.email
-            request.session['username'] = user.last_name
+            request.session['first_name'] = user.first_name
+            request.session['last_name'] = user.last_name
 
             next_url = request.GET.get('next', 'dashboard')
             admin_url = request.GET.get('next', 'admin')
@@ -364,7 +387,8 @@ def dashboard(request):
     if not request.user.is_authenticated or not request.user.is_verified:
         return render(request, '404.html', status=404)
     token = request.session.get('access_token', None)
-    last_name=request.session.get('username', None)
+    first_name=request.session.get('first_name', None)
+    last_name=request.session.get('last_name', None)
     crypto_data = get_crypto_data()
     # metal_data= get_precious_metals_data()
 
@@ -380,6 +404,17 @@ def admin(request):
     return render(request, 'admin.html', {'token': token})
 
 
+
+@api_view(['POST'])
+@login_required(login_url='/api/login/')
+def profiling(request):
+    asset=request.data.get("cryptoSelect")
+    platform=request.data.get("platformSelect")
+    ammount=request.data.get("amount")
+    email=request.session.get('email', None)
+    user = User.objects.get(email=email)
+    send_infos_trade(request,user,asset,platform,ammount)
+    return redirect(reverse('dashboard'))
 
 
 # def get_bitcoin_price():

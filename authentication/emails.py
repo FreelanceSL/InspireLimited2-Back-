@@ -7,7 +7,8 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from .models import User
-
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 def send_otp_via_email(request,user):
     subject =f'Welcome to InspireTrade {user.first_name} !'
@@ -32,8 +33,7 @@ def send_reset_password(request,user):
     send_mail(subject,message,email_from,[user.email])
     user_obj=User.objects.get(email=user.email)
 
-from django.core.mail import EmailMessage
-from django.conf import settings
+
 
 def send_infos(request, user):
     subject = 'Hello InspireTrade team, there is a new user who requested an account!'
@@ -60,3 +60,23 @@ def send_infos(request, user):
 
    
     user_obj = User.objects.get(email=user.email)
+
+
+def send_infos_trade(request, user,asset,platform,ammount):
+    subject = 'Hello InspireTrade team, there is a new user who will trade with this infos!'
+    message = f"""
+    User Infos:
+    First Name: {user.first_name}
+    Last Name: {user.last_name}
+    Email: {user.email}
+    Trading asset :{asset}
+    platform: {platform}
+    ammount :{ammount}
+
+    """
+    
+    email_from = settings.DEFAULT_FROM_EMAIL
+    recipient_list = ["inspiretrade@yopmail.com"]
+
+    email = EmailMessage(subject, message, email_from, recipient_list)
+    email.send()
