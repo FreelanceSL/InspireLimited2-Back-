@@ -404,7 +404,7 @@ def dashboard(request):
     crypto_data = get_crypto_data()
     # metal_data= get_precious_metals_data()
 
-    return render(request, 'dashboard.html', {'token': token, 'username':last_name,'crypto_data': crypto_data})
+    return render(request, 'dashboard.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data})
 
 
 @api_view(['GET'])
