@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-    <link rel="icon" href="{% static 'img/logo.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,56 +43,26 @@
         </div>
     </div>
     <!-- Spinner End -->
-     <!-- Topbar Start -->
-<div class="container-fluid topbar bg-light px-5 d-none d-lg-block" dir="rtl">
+<!-- Topbar Start -->
+<div class="container-fluid topbar bg-light px-5 d-none d-lg-block">
     <div class="row gx-0 align-items-center">
         <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
             <div class="d-flex flex-wrap">
 
-                <a href="tel: +852 8171 3179" class="text-muted small me-4">
-                    <i class="fas fa-phone-alt text-primary me-2"></i> +852 8171 3179
-                </a>
-                <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0">
-                    <i class="fas fa-envelope text-primary me-2"></i>contact@inspire-trade.com
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 text-center text-lg-end">
-            <div class="d-inline-flex align-items-center" style="height: 45px;">
-                {% if not user.is_authenticated %}
-                <a href="{% url 'signup' %}">
-                    <small class="me-3 text-dark"><i class="fa fa-user text-primary me-2"></i>التسجيل</small>
-                </a>
-                <a href="{% url 'login' %}">
-                    <small class="me-3 text-dark"><i class="fa fa-sign-in-alt text-primary me-2"></i>تسجيل الدخول</small>
-                </a>
-                {% endif %}
-                {% if user.is_authenticated %}
-                <div class="dropdown">
-                    <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
-                        <small><i class="fa fa-home text-primary me-2"></i>لوحة التحكم الخاصة بي</small>
-                    </a>
-                    <div class="dropdown-menu rounded">
-                        <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> ملفي الشخصي</a>
-                        <a href="#" class="dropdown-item"><i class="fas fa-comment-alt me-2"></i> البريد الوارد</a>
-                        <a href="#" class="dropdown-item"><i class="fas fa-bell me-2"></i> الإشعارات</a>
-                        <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> إعدادات الحساب</a>
-                        <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
-                    </div>
-                </div>
-                {% endif %}
+
+                <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0"><i
+                        class="fas fa-envelope text-primary me-2"></i>contact@inspire-trade.com</a>
             </div>
         </div>
     </div>
 </div>
 <!-- Topbar End -->
-
-<!-- Navbar & Hero Start -->
-<div class="container-fluid position-relative p-0" dir="rtl">
+<!-- بداية الشريط العلوي والقسم الرئيسي -->
+<div class="container-fluid position-relative p-0">
     <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
         <a href="" class="navbar-brand p-0">
             <img src="{% static 'img/logo.png'%}" alt="" srcset="">
-            <!-- <img src="img/logo.png" alt="Logo"> -->
+            <!-- <img src="/static/img/logo.png" alt="الشعار"> -->
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
@@ -100,60 +70,142 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="{% url 'index_ar' %}" class="nav-item nav-link active">الرئيسية</a>
-                <a href="{% url 'about_ar' %}" class="nav-item nav-link">يخصّنا</a>
-                <a href="{% url 'services_ar' %}" class="nav-item nav-link">الخدمات</a>
+                <a href="{% url 'about_ar' %}" class="nav-item nav-link">من نحن</a>
+                <a href="{% url 'services_ar' %}" class="nav-item nav-link">خدماتنا</a>
                 <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدونة</a>
                 <a href="{% url 'contact_ar' %}" class="nav-item nav-link">تواصل معنا</a>
             </div>
-            <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">ابدأ الآن</a>
-            <a href="{% url 'qstart' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20pximportant;">بدء سريع</a>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'signup_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">التسجيل</a>
+            <a href="{% url 'login_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px important;">تسجيل الدخول</a>
+            {% else %}
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
+                    <img src="{% static 'img/profile.png' %}" alt="الملف الشخصي" class="profile-img">
+                </a>
+                <div class="dropdown-menu rounded">
+                    <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> ملفي الشخصي</a>
+                    <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> إعدادات الحساب</a>
+                    <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+                </div>
+            </div>
+            {% endif %}
+            <a id="lng" href={{url_lang}}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-world"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M11.5 3a17 17 0 0 0 0 18"></path><path d="M12.5 3a17 17 0 0 1 0 18"></path></svg>{{langue}}</a>
         </div>
     </nav>
-</div>
-<!-- Navbar & Hero End -->
-<!-- Carousel Start -->
-<div class="header-carousel owl-carousel">
-    <div class="header-carousel-item">
-        <img src="{% static 'img/carousel-1.jpg' %}" class="img-fluid w-100" alt="Image">
-        <div class="carousel-caption">
-            <div class="container">
-                <div class="row gy-0 gx-5">
-                    <div class="col-lg-0 col-xl-5"></div>
-                    <div class="col-xl-7 animated fadeInLeft">
-                        <div class="text-center"  dir="rtl">
-                            <h4 class="text-primary text-uppercase fw-bold mb-4">مرحبًا بكم في Inspire Trade</h4>
-                            <h1 class="display-4 text-uppercase text-white mb-4">استثمر أموالك مع عائد أعلى</h1>
-                            <p class="mb-5 fs-5">قم بتعظيم ثروتك عن طريق الاستثمار معنا للحصول على عوائد أعلى! فريقنا
-                                الخبير مكرس لمساعدتك في تنمية أصولك بأمان وكفاءة. انضم إلينا واتخذ الخطوة التالية نحو
-                                مستقبل مالي أكثر إشراقًا.
-                            </p>
+
+    <!-- بداية السلايدر -->
+    <div class="header-carousel owl-carousel">
+        <div class="header-carousel-item">
+            <img src="{% static 'img/carousel-1.jpg' %}" class="img-fluid w-100" alt="صورة">
+            <div class="carousel-caption">
+                <div class="container">
+                    <div class="row gy-0 gx-5">
+                        <div class="col-lg-0 col-xl-5"></div>
+                        <div class="col-xl-7 animated fadeInLeft">
+                            <div class="text-sm-center text-md-end" dir="rtl">
+                                <h4 class="text-primary text-uppercase fw-bold mb-4" dir="rtl">مرحباً بكم في Inspire Trade</h4>
+                                <h1 class="display-4 text-uppercase text-white mb-4">استثمر أموالك بأعلى عائد</h1>
+                                <p class="mb-5 fs-5" dir="rtl">
+                                    قم بتعظيم ثروتك بالاستثمار معنا للحصول على عوائد أعلى! فريقنا الخبير مكرس لمساعدتك على تنمية أصولك بأمان وكفاءة. انضم إلينا وخذ الخطوة التالية نحو مستقبل مالي أكثر إشراقًا.
+                                </p>
+                                <a href="{% url 'qstart_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">ابدأ الآن</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-carousel-item">
+            <img src="{% static 'img/carousel-2.jpg' %}" class="img-fluid w-100" alt="صورة">
+            <div class="carousel-caption">
+                <div class="container">
+                    <div class="row g-5">
+                        <div class="col-12 animated fadeInUp">
+                            <div class="text-center">
+                                <h4 class="text-primary text-uppercase fw-bold mb-4" dir="rtl">مرحباً بكم في Inspire Trade</h4>
+                                <h1 class="display-4 text-uppercase text-white mb-4" dir="rtl">استثمر أموالك بأعلى عائد</h1>
+                                <p class="mb-5 fs-5" dir="ltr">
+                                    اكتشف إمكانات أموالك مع خيارات استثمار توفر عوائد أعلى. استراتيجياتنا المخصصة مصممة لتعزيز نموك المالي، مما يمنحك المزيد من القيمة والأمان في كل خطوة من رحلتك معنا.
+                                </p>
+                                <a href="{% url 'qstart' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Quick Start</a>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="header-carousel-item">
-        <img src="{% static 'img/carousel-2.jpg' %}" class="img-fluid w-100" alt="Image">
-        <div class="carousel-caption">
-            <div class="container">
-                <div class="row g-5">
-                    <div class="col-12 animated fadeInUp">
-                        <div class="text-center"  dir="rtl">
-                            <h4 class="text-primary text-uppercase fw-bold mb-4">مرحبًا بكم في Inspire Trade</h4>
-                            <h1 class="display-4 text-uppercase text-white mb-4">استثمر أموالك مع عائد أعلى</h1>
-                            <p class="mb-5 fs-5">افتح إمكانيات أموالك من خلال خيارات الاستثمار التي توفر عوائد أعلى. تم
-                                تصميم استراتيجياتنا المخصصة لتعزيز نموك المالي، مما يمنحك المزيد من القيمة والأمان في
-                                كل خطوة من خطوات رحلتك معنا.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- نهاية السلايدر -->
+</div>
+<div class="ticker-wrapper">
+    <div class="ticker">
+        <!-- المجموعة الأولى -->
+        <div class="ticker-item">
+            <i class="bi bi-currency-bitcoin me-2"></i>
+            بتكوين: <span class="ms-2 price-data" data-symbol="BTC">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            إيثريوم: <span class="ms-2 price-data" data-symbol="ETH">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            يورو: <span class="ms-2 price-data" data-symbol="EUR">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-warning"></i>
+            ذهب: <span class="ms-2 price-data" data-symbol="GOLD">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-secondary"></i>
+            فضة: <span class="ms-2 price-data" data-symbol="SILVER">$0</span>
+        </div>
+        <!-- المجموعة الثانية -->
+        <div class="ticker-item">
+            <i class="bi bi-currency-bitcoin me-2"></i>
+            بتكوين: <span class="ms-2 price-data" data-symbol="BTC">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            إيثريوم: <span class="ms-2 price-data" data-symbol="ETH">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            يورو: <span class="ms-2 price-data" data-symbol="EUR">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-warning"></i>
+            ذهب: <span class="ms-2 price-data" data-symbol="GOLD">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-secondary"></i>
+            فضة: <span class="ms-2 price-data" data-symbol="SILVER">$0</span>
+        </div>
+        <!-- المجموعة الثالثة لمزيد من الأمان -->
+        <div class="ticker-item">
+            <i class="bi bi-currency-bitcoin me-2"></i>
+            بتكوين: <span class="ms-2 price-data" data-symbol="BTC">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            إيثريوم: <span class="ms-2 price-data" data-symbol="ETH">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            يورو: <span class="ms-2 price-data" data-symbol="EUR">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-warning"></i>
+            ذهب: <span class="ms-2 price-data" data-symbol="GOLD">$0</span>
+        </div>
+        <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-secondary"></i>
+            فضة: <span class="ms-2 price-data" data-symbol="SILVER">$0</span>
         </div>
     </div>
 </div>
-<!-- Carousel End -->
 
     
 <!-- عن الشركة بداية -->
@@ -189,8 +241,14 @@
                                 <div ><i class="fas fa-clock fa-3x text-primary" dir ="rtl"></i></div>
                             </div>
                         </div>
-                        <div class="col-sm-6" dir ="rtl">
-                            <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-3 px-5 flex-shrink-0">اكتشف الآن</a>
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <div class="d-flex" dir="rtl">
+                                <div><i class="fas fa-headset fa-3x text-primary"></i></div>
+                                <div class="ms-4">
+                                    <h4 class=" me-2">متوفر 24/7</h4>
+                                    <p>فريق الدعم لدينا متاح على مدار الساعة لمساعدتك في أي وقت.</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="d-flex" dir ="rtl">
@@ -201,6 +259,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6" dir ="rtl">
+                            <a href="{% url 'signup_ar' %}" class="btn btn-primary rounded-pill py-3 px-5 flex-shrink-0">اكتشف الآن</a>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -220,36 +282,36 @@
             <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
                 <div class="service-item d-flex flex-column h-100">
                     <div class="service-img">
-                        <img src="img/taktak.jpg" class="img-fluid rounded-top w-100" alt="Image">
+                        <img src="/static/img/taktak.jpg" class="img-fluid rounded-top w-100" alt="Image">
                     </div>
                     <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
                         <a href="#" class="h4 d-inline-block mb-4">سرعة تنفيذ فائقة</a>
                         <p class="mb-4">استمتع بتنفيذ الصفقات بسرعة البرق لاقتناص أفضل الأسعار وتقليل المخاطر في الأسواق المتقلبة. منصتنا مصممة لتحسين الأداء وزيادة فعالية التداول.</p>
-                        <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'signup' %}">اعرف المزيد</a>
+                        <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'signup_ar' %}">اعرف المزيد</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
                 <div class="service-item d-flex flex-column h-100">
                     <div class="service-img">
-                        <img src="img/carditem2.jpeg" class="img-fluid rounded-top w-100" alt="Image">
+                        <img src="/static/img/carditem2.jpeg" class="img-fluid rounded-top w-100" alt="Image">
                     </div>
                     <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
                         <a href="#" class="h4 d-inline-block mb-4">أسعار تنافسية ورسوم منخفضة</a>
                         <p class="mb-4">تداول بثقة مع ضمان حصولك على أفضل الأسعار والرسوم المنخفضة. هيكل الأسعار الشفاف لدينا يساعدك على زيادة الأرباح بدون أي رسوم مخفية.</p>
-                        <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'signup' %}">اعرف المزيد</a>
+                        <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'signup_ar' %}">اعرف المزيد</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
                 <div class="service-item d-flex flex-column h-100">
                     <div class="service-img">
-                        <img src="img/techtrade.jpg" class="img-fluid rounded-top w-100" alt="Image">
+                        <img src="/static/img/techtrade.jpg" class="img-fluid rounded-top w-100" alt="Image">
                     </div>
                     <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
                         <a href="#" class="h4 d-inline-block mb-4">تكنولوجيا تداول متطورة</a>
                         <p class="mb-4">منصتنا تستفيد من التكنولوجيا المتقدمة لتوفير تجربة تداول سلسة وفعالة. استمتع بأدوات قوية وبنية تحتية موثوقة مصممة للأداء والاعتمادية.</p>
-                        <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'signup' %}">اعرف المزيد</a>
+                        <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'signup_ar' %}">اعرف المزيد</a>
                     </div>
                 </div>
             </div>
@@ -273,7 +335,7 @@
                     </div>
                     <h4>تكاليف منخفضة وشفافة</h4>
                     <p class="mb-4">اختر ظروفاً أفضل من السوق لتقليل تكاليف التداول الخاصة بك.</p>
-                    <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup' %}">اعرف المزيد</a>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup_ar' %}">اعرف المزيد</a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
@@ -283,7 +345,7 @@
                     </div>
                     <h4>أسعار ضيقة ومستقرة</h4>
                     <p class="mb-4">استفد من الأسعار الضيقة حتى في الأوقات المتقلبة.</p>
-                    <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup' %}">اعرف المزيد</a>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup_ar' %}">اعرف المزيد</a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
@@ -293,7 +355,7 @@
                     </div>
                     <h4>تنفيذ سريع</h4>
                     <p class="mb-4">تداول بسرعة عند النقر، حيث يتم تنفيذ الطلبات في أجزاء من الثانية.</p>
-                    <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup' %}">اعرف المزيد</a>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup_ar' %}">اعرف المزيد</a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
@@ -303,7 +365,7 @@
                     </div>
                     <h4>معاملات آمنة ومضمونة</h4>
                     <p class="mb-4">اطمئن على أموالك من خلال شراكاتنا مع بنوك من الدرجة الأولى وحسابات منفصلة.</p>
-                    <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup' %}">اعرف المزيد</a>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup_ar' %}">اعرف المزيد</a>
                 </div>
             </div>
         </div>
@@ -318,9 +380,9 @@
         </div>
         <div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay="0.2s">
             <!-- عنصر المدونة 1: شراء السندات من السلسلة I -->
-            <div class="blog-item p-4">
+            <div class="blog-item p-4" dir="rtl">
                 <div class="blog-img mb-4">
-                    <img src="img/Buying-Series-I-Bonds.png" class="img-fluid w-100 rounded" alt="شراء السندات من السلسلة I">
+                    <img src="/static/img/Buying-Series-I-Bonds.png" class="img-fluid w-100 rounded" alt="شراء السندات من السلسلة I">
                     <div class="blog-title">
                         <a href="https://www.investing.com/academy/trading/buying-series-i-bonds/" class="btn" target="_blank">
                             شراء السندات من السلسلة I: الدليل النهائي
@@ -346,7 +408,7 @@
                 </div>
             </div>
             <!-- عنصر المدونة 2 -->
-            <div class="blog-item p-4">
+            <div class="blog-item p-4" dir="rtl">
                 <div class="blog-img mb-4">
                     <img src="/static/img/call-put-options.jpg" class="img-fluid w-100 rounded" alt="خيارات الشراء والبيع">
                     <div class="blog-title">
@@ -374,7 +436,7 @@
                 </div>
             </div>
             <!-- عنصر المدونة 3 -->
-            <div class="blog-item p-4">
+            <div class="blog-item p-4" dir="rtl">
                 <div class="blog-img mb-4">
                     <img src="/static/img/Dividend-Aristocrat-List.png" class="img-fluid w-100 rounded" alt="قائمة توزيعات الأرباح الأرستقراطية">
                     <div class="blog-title">
@@ -402,9 +464,9 @@
                 </div>
             </div>
             <!-- عنصر المدونة 4 -->
-            <div class="blog-item p-4">
+            <div class="blog-item p-4" dir="rtl">
                 <div class="blog-img mb-4">
-                    <img src="img/AI-Stock-Trading-Definition.png" class="img-fluid w-100 rounded" alt="تحليل سوق الأسهم">
+                    <img src="/static/img/AI-Stock-Trading-Definition.png" class="img-fluid w-100 rounded" alt="تحليل سوق الأسهم">
                     <div class="blog-title">
                         <a href="https://www.investing.com/academy/trading/ai-stock-trading-guide/" class="btn" target="_blank">
                             تداول الأسهم باستخدام الذكاء الاصطناعي: كيف يمكن للذكاء الاصطناعي أن يغير اختيار الأسهم الخاص بك
@@ -433,30 +495,29 @@
         </div>
     </div>
 </div>
-<!-- قسم الشهادات -->
+<!-- الشهادات -->
 <div class="container-fluid testimonial py-5">
     <div class="container py-5">
         <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-            <h4 class="text-primary">شهادات العملاء</h4>
+            <h4 class="text-primary">الشهادات</h4>
             <h1 class="display-5 mb-4">آراء عملائنا</h1>
         </div>
-        
         <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.2s">
-            <!-- الشهادة 1 -->
-            <div class="testimonial-item">
+            <div class="testimonial-item"  dir="rtl">
                 <div class="testimonial-quote-left">
                     <i class="fas fa-quote-left fa-2x"></i>
                 </div>
                 <div class="testimonial-img">
-                    <img src="img/testimonial-1.jpg" class="img-fluid" alt="صورة">
+                    <img src="/static/img/Flag_UAE.webp" class="img-fluid" alt="صورة">
                 </div>
                 <div class="testimonial-text">
-                    <p class="mb-0">لقد جربت بعض منصات التداول، لكن Inspire Trade هي بالتأكيد من الأفضل. الواجهة سهلة الاستخدام، وتنفيذ التداول سريع للغاية - مثالي للتعامل مع سوق متقلب.</p>
+                    <p class="mb-0">لقد جربت العديد من منصات التداول، ولكن Inspire Trade بالتأكيد واحدة من الأفضل. الواجهة سهلة الاستخدام وتنفيذ الصفقات سريع جدًا، مما يجعلها مثالية للتعامل مع الأسواق المتقلبة.
+                    </p>
                 </div>
                 <div class="testimonial-title">
                     <div>
-                        <h4 class="mb-0">إيما جونسون</h4>
-                        <p class="mb-0">محللة مالية</p>
+                        <h4 class="mb-0">سالم المهيري</h4>
+                        <p class="mb-0">محلل مالي</p>
                     </div>
                     <div class="d-flex text-primary">
                         <i class="fas fa-star"></i>
@@ -470,22 +531,21 @@
                     <i class="fas fa-quote-right fa-2x"></i>
                 </div>
             </div>
-
-            <!-- الشهادة 2 -->
-            <div class="testimonial-item">
+            <div class="testimonial-item"  dir="rtl">
                 <div class="testimonial-quote-left">
                     <i class="fas fa-quote-left fa-2x"></i>
                 </div>
                 <div class="testimonial-img">
-                    <img src="img/team-1.jpg" class="img-fluid" alt="صورة">
+                    <img src="/static/img/Flag-Saudi-Arabia.webp" class="img-fluid" alt="صورة">
                 </div>
                 <div class="testimonial-text">
-                    <p class="mb-0">لقد ساعدتني Inspire Trade حقًا على تحسين مستواي في التداول. أنا أقدر شفافية الرسوم، وفريق الدعم رائع. كانوا سريعين في مساعدتي عندما كانت لدي أسئلة حول إعداد الحساب.</p>
+                    <p class="mb-0">ساعدتني Inspire Trade كثيرًا في تحسين مستواي في التداول. أقدر شفافيتهم بشأن الرسوم، وفريق الدعم لديهم رائع. كانوا سريعين في المساعدة عندما كانت لدي أسئلة حول إعداد الحساب.
+                    </p>
                 </div>
                 <div class="testimonial-title">
                     <div>
-                        <h4 class="mb-0">مايكل براون</h4>
-                        <p class="mb-0">مهندس برمجيات</p>
+                        <h4 class="mb-0">نورة الشمري</h4>
+                        <p class="mb-0">مهندسة برمجيات</p>
                     </div>
                     <div class="d-flex text-primary">
                         <i class="fas fa-star"></i>
@@ -499,21 +559,20 @@
                     <i class="fas fa-quote-right fa-2x"></i>
                 </div>
             </div>
-
-            <!-- الشهادة 3 -->
-            <div class="testimonial-item">
+            <div class="testimonial-item"  dir="rtl">
                 <div class="testimonial-quote-left">
                     <i class="fas fa-quote-left fa-2x"></i>
                 </div>
                 <div class="testimonial-img">
-                    <img src="img/team-4.jpg" class="img-fluid" alt="صورة">
+                    <img src="/static/img/flag_qatar.png" class="img-fluid" alt="صورة">
                 </div>
                 <div class="testimonial-text">
-                    <p class="mb-0">لقد كنت أتداول لسنوات، وتقدم Inspire Trade بعض أفضل الأدوات والتحليلات التي واجهتها. التسعير التنافسي يعد ميزة كبيرة، خاصة لشخص يتداول بانتظام.</p>
+                    <p class="mb-0">كنت مترددة أدخل السوق، بس مع Inspire Trade حسيت بالأمان. المنصة واضحة وكل شي عندهم مرتب وسهل. خطوة ممتازة
+                    </p>
                 </div>
                 <div class="testimonial-title">
                     <div>
-                        <h4 class="mb-0">صوفيا لي</h4>
+                        <h4 class="mb-0">مريم السويدي</h4>
                         <p class="mb-0">مصرفية استثمارية</p>
                     </div>
                     <div class="d-flex text-primary">
@@ -528,21 +587,20 @@
                     <i class="fas fa-quote-right fa-2x"></i>
                 </div>
             </div>
-
-            <!-- الشهادة 4 -->
-            <div class="testimonial-item">
+            <div class="testimonial-item"  dir="rtl">
                 <div class="testimonial-quote-left">
                     <i class="fas fa-quote-left fa-2x"></i>
                 </div>
                 <div class="testimonial-img">
-                    <img src="img/testimonial-2.jpg" class="img-fluid" alt="صورة">
+                    <img src="/static/img/Flag_Kuwait.png" class="img-fluid" alt="صورة">
                 </div>
                 <div class="testimonial-text">
-                    <p class="mb-0">كمبتدئ، كنت متوترًا بشأن دخول عالم التداول، لكن أدلة Inspire Trade ودروسها التعليمية جعلت الأمر سهلًا. المنصة بديهية وأشعر بالدعم في كل خطوة.</p>
+                    <p class="mb-0">كمبتدئ، كنت متوترًا بشأن دخول عالم التداول، ولكن أدلة Inspire Trade والبرامج التعليمية الخاصة بهم جعلت الأمر سهلاً. المنصة بديهية وأشعر بالدعم في كل خطوة.
+                    </p>
                 </div>
                 <div class="testimonial-title">
                     <div>
-                        <h4 class="mb-0">ديفيد ميلر</h4>
+                        <h4 class="mb-0">محمد بن صبيح</h4>
                         <p class="mb-0">مدير تسويق</p>
                     </div>
                     <div class="d-flex text-primary">
@@ -573,7 +631,7 @@
                     <img src="/static/img/faq.jpg" class="img-fluid w-100" alt="">
                 </div>
             </div>
-            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s" dir="rtl">
                 <div class="accordion accordion-flush bg-light rounded p-5" id="accordionFlushSection">
                     <div class="accordion-item rounded-top">
                         <h2 class="accordion-header" id="flush-headingOne">
@@ -660,21 +718,10 @@
 </div>
 <!-- الأسئلة الشائعة نهاية -->
 
-<!-- الأخبار -->
-<div class="price-ticker-container">
-    <div class="price-ticker">
-        <div class="price-item">
-            <img src="{% static 'img/btc.png' %}" alt="بيتكوين" class="price-icon"> بيتكوين: 28,000 دولار
-        </div>
-        <div class="price-item">
-            <img src="{% static 'img/gld.png' %}" alt="ذهب" class="price-icon"> ذهب: 1,850 دولار
-        </div>
-        <div class="price-item">
-            <img src="{% static 'img/silver.png' %}" alt="فضة" class="price-icon"> فضة: 24.50 دولار
-        </div>
-    </div>
+<div class="alert alert-warning d-flex align-items-center w-100 full-width-alert" role="alert" dir="rtl">
+    <span class="warning-icon">&#9888;</span> <!-- رمز تحذير يونيكود -->
+    التداول في الأسواق المالية ينطوي على مخاطر عالية وقد يؤدي إلى خسارة رأس المال. يُنصح بالتداول بحذر وبمعرفة كاملة بالمخاطر المحتملة.
 </div>
-<!-- الأخبار نهاية -->
 
 <!-- الفوتر بداية -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
@@ -686,7 +733,7 @@
                     <a href="index.html" class="p-0">
                         <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
                         <p>شريكك للتداول الآمن.</p>
-                        <!-- <img src="img/logo.png" alt="الشعار"> -->
+                        <!-- <img src="/static/img/logo.png" alt="الشعار"> -->
                     </a>
                     <div class="d-flex gap-2 mt-3">
                         <a href="https://www.metatrader4.com/fr" class="btn btn-primary  px-4 py-2">MT4</a>
@@ -709,7 +756,7 @@
                     <h4 class="text-white mb-4"> روابط سريعة </h4>
                     <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'services' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
-                    <a href="{% url 'blogs' %}"> المدونات <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'blogs' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'contact' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
                 </div>
             </div>
@@ -772,16 +819,44 @@
 
 <!-- مكتبات JavaScript -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const staticPrefix = "{% static '' %}";
-      document.querySelectorAll('img').forEach(img => {
-        // التأكد من أن src هو مسار نسبي ولم يتم تهيئته مسبقًا
-        if (img.getAttribute('src').startsWith('img/')) {
-          img.src = staticPrefix + img.getAttribute('src');
-        }
+    const prices = {
+        BTC: 65000,
+        ETH: 3500,
+        EUR: 1.08,
+        GOLD: 2100,
+        SILVER: 25
+      };
+  
+      function updatePrices() {
+        document.querySelectorAll('.price-data').forEach(element => {
+          const symbol = element.dataset.symbol;
+          const currentPrice = prices[symbol];
+          const change = (Math.random() - 0.5) * 0.01;
+          prices[symbol] = currentPrice * (1 + change);
+          
+          element.textContent = formatPrice(prices[symbol]);
+          element.classList.remove('price-up', 'price-down');
+          element.classList.add(change > 0 ? 'price-up' : 'price-down');
+        });
+      }
+  
+      function formatPrice(price) {
+        return price < 100 
+          ? `$${price.toFixed(2)}` 
+          : `$${price.toFixed(0)}`;
+      }
+  
+      setInterval(updatePrices, 2000);
+      updatePrices();
+  
+      // Reset animation when it completes
+      const ticker = document.querySelector('.ticker');
+      ticker.addEventListener('animationend', () => {
+        ticker.style.animation = 'none';
+        ticker.offsetHeight; // Trigger reflow
+        ticker.style.animation = 'ticker 30s linear infinite';
       });
-    });
-</script>
+  </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{% static 'lib/wow/wow.min.js'%}"></script>
@@ -791,7 +866,8 @@
 <script src="{% static 'lib/lightbox/js/lightbox.min.js'%}"></script>
 <script src="{% static 'lib/owlcarousel/owl.carousel.min.js'%}"></script>
 
-<!-- جافا سكربت القالب -->
+
+<!-- Template Javascript -->
 <script src="{% static 'js/main.js'%}"></script>
 </body>
 

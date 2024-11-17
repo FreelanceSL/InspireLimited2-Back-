@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/qstart.css' %}">
+</head>
+<body>
+    <!-- بداية الشريط العلوي -->
+    
+    <!-- نهاية الشريط العلوي -->
+
+    <!-- بداية شريط التنقل -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="{% url 'index_ar' %}" class="navbar-brand">
+                <img src="{% static 'img/logo.png' %}" alt="الشعار">
+            </a>
+            <button class="navbar-toggler" type="button" onclick="toggleMenu()">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="{% url 'index_ar' %}">الرئيسية</a>
+                <a href="{% url 'about_ar' %}">من نحن</a>
+                <a href="{% url 'services_ar' %}">الخدمات</a>
+                <a href="{% url 'blogs_ar' %}">المدونة</a>
+                <a href="{% url 'contact_ar' %}">اتصل بنا</a>
+            </div>
+        </div>
+    </nav>
+    <!-- نهاية شريط التنقل -->
+
+    <!-- بداية محتوى الدليل -->
+    <div class="guide-container" dir="rtl">
+        <div class="guide-card">
+            <h1 class="guide-title">دليل الحساب</h1>
+            
+            <div class="guide-step">
+                <h2>1. فتح حساب في Inspire Trade:</h2>
+                <ul>
+                    <li>قم بزيارة موقعنا وانقر على خيار "فتح حساب جديد"</li>
+                    <li>املأ نموذج التسجيل بمعلوماتك الشخصية بما في ذلك الاسم والبريد الإلكتروني ورقم الهاتف</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>2. تنزيل منصة MT4/MT5:</h2>
+                <ul>
+                    <li>بعد التسجيل، ستتلقى رابط تنزيل لمنصة MT4/MT5 لجهاز الكمبيوتر أو الهاتف الخاص بك</li>
+                    <li>قم بتثبيت البرنامج بسهولة باتباع خطوات الإعداد البسيطة</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>3. تفعيل الحساب:</h2>
+                <ul>
+                    <li>قد نطلب وثائق تحقق مثل الهوية أو فاتورة خدمات لتأكيد هويتك</li>
+                    <li>نضمن تفعيل الحساب بسرعة بمجرد التحقق من وثائقك</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>4. إيداع الأموال:</h2>
+                <ul>
+                    <li>اختر طريقة الإيداع المفضلة لديك من بين خيارات الدفع الآمنة لدينا</li>
+                    <li>اتبع الخطوات البسيطة لتمويل حساب التداول الخاص بك</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>5. بدء التداول:</h2>
+                <ul>
+                    <li>قم بتسجيل الدخول إلى منصة MT4/MT5 باستخدام بيانات الاعتماد الممنوحة لك</li>
+                    <li>ابدأ رحلتك في التداول مع فريق الدعم المميز الخاص بنا في خدمتك</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- نهاية محتوى الدليل -->
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navbarMenu');
+            menu.classList.toggle('active');
+        }
+
+        // شريط التنقل اللاصق
+        window.onscroll = function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.pageYOffset > 0) {
+                navbar.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+{% load static %}
+<html lang="ar">
+<head>
+  <!-- تصميم بواسطة foolishdeveloper.com -->
+    <title>تسجيل الدخول</title>
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+    <!-- أيقونات -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- مكتبات التنسيقات -->
+    <link rel="stylesheet" href="{% static 'lib/animate/animate.min.css'%}" />
+    <link
+      href="{% static 'lib/lightbox/css/lightbox.min.css'%}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css'%}"
+      rel="stylesheet"
+    />
+
+    <!-- تنسيقات Bootstrap المعدّلة -->
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet" />
+
+    <!-- تنسيقات CSS -->
+    <link href="{% static 'css/login.css'%}" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container-fluid topbar bg-light px-5">
+        <div class="row gx-0 align-items-center">
+          <!-- الجانب الأيسر: الهاتف والبريد الإلكتروني -->
+          <div class="col-12 col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start">
+              <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0">
+                <i class="fas fa-envelope text-primary me-2"></i> contact@inspire-trade.com
+              </a>
+            </div>
+          </div>
+          
+          <!-- الجانب الأيمن: رابط الصفحة الرئيسية -->
+          <div class="col-12 col-lg-4 text-center text-lg-end">
+            <div class="d-inline-flex align-items-center" style="height: 45px">
+              <a href="{% url 'index_ar' %}" class="small me-3 text-dark">
+                <i class="fa fa-home text-primary me-2"></i>الرئيسية
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form method="post" action="{% url 'login_ar' %}" dir="rtl">
+        {% csrf_token %}
+        <h3>تسجيل الدخول هنا</h3>
+
+        <label for="email">البريد الإلكتروني</label>
+        <input type="email" name="email" placeholder="البريد الإلكتروني" id="email" required>
+
+        <label for="password">كلمة المرور</label>
+        <input type="password" name="password" placeholder="كلمة المرور" id="password" required>
+
+        <button type="submit">تسجيل الدخول</button>
+
+        <!-- رابط استعادة كلمة المرور -->
+        <div class="reset-password-link">
+            <a href="{% url 'reset' %}">هل نسيت كلمة المرور؟</a>
+        </div>
+        <div class="reset-password-link">
+          <a href="{% url 'signup_ar' %}">ليس لديك حساب؟</a>
+      </div>
+    </form>
+
+    <!-- إشعار الخطأ -->
+    <div id="toast" class="toast">
+        البريد الإلكتروني أو كلمة المرور غير صحيحة
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <script>
+        {% if messages %}
+            const toast = document.getElementById('toast');
+            const progressBar = document.getElementById('progress-bar');
+
+            toast.classList.add('show');
+
+            setTimeout(function() {
+                progressBar.style.width = '0%'; 
+            }, 100);
+
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 5000);
+        {% endif %}
+    </script>
+</body>
+
+</html>
