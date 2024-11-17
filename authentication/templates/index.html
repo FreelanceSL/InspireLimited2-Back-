@@ -79,8 +79,8 @@
                     <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
                 </div>
                 {% if not user.is_authenticated %}
-                <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Signup</a>
-                <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0 " style="margin-left: 20px; !important">Signin</a>
+                <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Sign up</a>
+                <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0 " style="margin-left: 20px; !important">Sign in</a>
                 {% else %}
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">

@@ -40,5 +40,7 @@ urlpatterns = [
     path('services_ar/', views.services_ar, name='services_ar'),
     path('blogs_ar/', views.blogs_ar, name='blogs_ar'),
     path('contact_ar/', views.contact_ar, name='contact_ar'),
+    path('profiling/', views.profiling, name='profiling'),
+    
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
