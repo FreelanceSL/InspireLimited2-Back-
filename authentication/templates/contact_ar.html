@@ -7,7 +7,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-        <link rel="icon" href="{% static 'img/logo.png' %}" type="image/x-icon">
+        <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,62 +36,65 @@
 
         <style>
 
-            .container-fluid {
+            <style>
 
-                margin: 0 auto;
-                padding: 20px;
-            }
-            .contact-section {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 20px;
-                padding: 40px 20px;
-            }
-            .contact-info, .contact-form {
-                background: #f8f9fa;
-                border-radius: 8px;
-                padding: 30px;
-                flex: 1;
-                min-width: 280px;
-            }
-            .contact-info h4, .contact-form h4 {
-                color: #F2A900;
-                margin-bottom: 20px;
-            }
-            .contact-add-item {
-                display: flex;
-                align-items: center;
-                margin-bottom: 20px;
-            }
-            .contact-icon {
-                font-size: 24px;
-                color: #F2A900;
-                margin-right: 15px;
-            }
-            .contact-form .form-group {
-                margin-bottom: 20px;
-            }
-            .form-control {
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-            }
-            .btn-primary {
-                background-color: #F2A900;
-                color: #fff;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            .btn-primary:hover {
-                background-color: #d59100;
-            }
-            .py-5 {
-                padding-top: 10rem !important;
-                padding-bottom: 10rem !important;
-            }
+                .container-fluid {
+    
+                    margin: 0 auto;
+                    padding: 0px;
+                }
+                .contact-section {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 20px;
+                    padding: 40px 20px;
+                }
+                .contact-info, .contact-form {
+                    background: #f8f9fa;
+                    border-radius: 8px;
+                    padding: 30px;
+                    flex: 1;
+                    min-width: 280px;
+                }
+                .contact-info h4, .contact-form h4 {
+                    color: #F2A900;
+                    margin-bottom: 20px;
+                }
+                .contact-add-item {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 20px;
+                }
+                .contact-icon {
+                    font-size: 24px;
+                    color: #F2A900;
+                    margin-right: 15px;
+                }
+                .contact-form .form-group {
+                    margin-bottom: 20px;
+                }
+                .form-control {
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                }
+                .btn-primary {
+                    background-color: #F2A900;
+                    color: #fff;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+                .btn-primary:hover {
+                    background-color: #d59100;
+                }
+                .py-6 {
+                    padding-top: 9rem !important;
+                    padding-bottom: 6rem !important;
+                }
+            </style>
         </style>
     </head>
     <body>
@@ -106,45 +109,59 @@
             <!-- Spinner End -->
         
             <!-- Topbar Start -->
-            <div class="container-fluid topbar bg-light px-5 d-none d-lg-block">
-              <div class="row gx-0 align-items-center">
-                <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
-                  <div class="d-flex flex-wrap">
-        
-                    <a href="tel: +852 8171 3179" class="text-muted small me-4"><i class="fas fa-phone-alt text-primary me-2"></i> +852 8171 3179</a>
-                    <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0"><i class="fas fa-envelope text-primary me-2"></i>contact@inspire-trade.com</a>
-                  </div>
-                </div>
-                
+    <!-- Topbar Start -->
+    <div class="container-fluid topbar bg-light px-5 d-none d-lg-block">
+        <div class="row gx-0 align-items-center">
+          <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-flex flex-wrap">
+  
+              <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0"><i class="fas fa-envelope text-primary me-2"></i>contact@inspire-trade.com</a>
             </div>
-            </div>
-            <!-- Topbar End -->
-        
+          </div>
+      </div>
+      </div>
+      <!-- Topbar End -->
+  
+          
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
             <a href="" class="navbar-brand p-0">
                 <img src="{% static 'img/logo.png'%}" alt="" srcset="" />
-                <!-- <img src="img/logo.png" alt="Logo"> -->
+                <!-- <img src="/static/img/logo.png" alt="Logo"> -->
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="fa fa-bars"></span></button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="{% url 'index_ar' %}" class="nav-item nav-link">الرئيسية</a>
                     <a href="{% url 'about_ar' %}" class="nav-item nav-link">من نحن</a>
-                    <a href="{% url 'services_ar' %}" class="nav-item nav-link">الخدمات</a>
-                    <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدونات</a>
-                    <a href="{% url 'contact' %}" class="nav-item nav-link active">اتصل بنا</a>
+                    <a href="{% url 'services_ar' %}" class="nav-item nav-link">خدماتنا</a>
+                    <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدونة</a>
+                    <a href="{% url 'contact_ar' %}" class="nav-item nav-link active">تواصل معنا</a>
                 </div>
-                <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">ابدأ الآن</a>
-                <a href="{% url 'qstart' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px !important;">البدء السريع</a>
+                {% if not user.is_authenticated %}
+                <a href="{% url 'signup_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">التسجيل</a>
+                <a href="{% url 'login_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px important;">تسجيل الدخول</a>
+                {% else %}
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
+                        <img src="{% static 'img/profile.png' %}" alt="الملف الشخصي" class="profile-img">
+                    </a>
+                    <div class="dropdown-menu rounded">
+                        <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> ملفي الشخصي</a>
+                        <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> إعدادات الحساب</a>
+                        <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+                    </div>
+                </div>
+                {% endif %}
+                <a id="lng" href={{url_lang}}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-world"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M11.5 3a17 17 0 0 0 0 18"></path><path d="M12.5 3a17 17 0 0 1 0 18"></path></svg>{{langue}}</a>
             </div>
         </nav>
     
         <!-- Header Start -->
         <div class="container-fluid bg-breadcrumb">
             <div class="container text-center py-5" style="max-width: 900px;">
-                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">المدوّنات</h4>
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">تواصل معنا</h4>
                 <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
                     <li class="breadcrumb-item">
                         <a href="{% url 'index_ar' %}">الرئيسية</a>
@@ -152,7 +169,7 @@
                     <li class="breadcrumb-item">
                         <a href="#">الصفحات</a>
                     </li>
-                    <li class="breadcrumb-item active text-primary">التواصل معنا</li>
+                    <li class="breadcrumb-item active text-primary">تواصل معنا</li>
                 </ol>
             </div>
         </div>
@@ -184,13 +201,13 @@
                     <i class="fab fa-firefox-browser contact-icon" style="margin-left: 20px;"></i>
                     <div>
                         <h5>الموقع الإلكتروني</h5>
-                        <p>inspire-limited.com</p>
+                        <p>inspire-trade.com</p>
                     </div>
                 </div>
             </div>
     
             <!-- Contact Form (Right) -->
-            <div class="contact-form">
+            <div class="contact-form" dir="rtl">
                 <h4>أرسل رسالتك</h4>
                 <form>
                     <div class="form-group">
@@ -220,7 +237,7 @@
                     <a href="index.html" class="p-0">
                         <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
                         <p>شريكك للتداول الآمن.</p>
-                        <!-- <img src="img/logo.png" alt="الشعار"> -->
+                        <!-- <img src="/static/img/logo.png" alt="الشعار"> -->
                     </a>
                     <div class="d-flex gap-2 mt-3">
                         <a href="https://www.metatrader4.com/fr" class="btn btn-primary  px-4 py-2">MT4</a>
@@ -233,7 +250,7 @@
                     <h4 class="text-white mb-4">الأسواق</h4>
                     <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'services_ar' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
-                    <a href="{% url 'blogs_ar' %}"> المدونات <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'blogs_ar' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'contact' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
                 </div>
             </div>
@@ -243,7 +260,7 @@
                     <h4 class="text-white mb-4"> روابط سريعة </h4>
                     <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'services_ar' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
-                    <a href="{% url 'blogs_ar' %}"> المدونات <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'blogs_ar' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'contact' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
                 </div>
             </div>

@@ -291,6 +291,14 @@ def contact_ar(request):
 
 def blogs_ar(request):
     return render(request, 'blog_ar.html',{'langue':'ENG','url_lang': reverse('index')})
+def login_ar(request):
+    return render(request, 'login_ar.html')
+def signup_ar(request):
+    return render(request, 'register_ar.html')
+def qstart_ar(request):
+    return render(request, 'qstart_ar.html')
+def dashboard_ar(request):
+    return render(request, 'dashboard_ar.html')
 
 def update(request, uidb64, token):
     try:

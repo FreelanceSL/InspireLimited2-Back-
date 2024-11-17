@@ -1,0 +1,699 @@
+{% load static %}
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تسجيل</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+    <!-- أيقونات الخطوط -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- مكتبات التنسيق -->
+    <link rel="stylesheet" href="{% static 'lib/animate/animate.min.css'%}" />
+    <link
+      href="{% static 'lib/lightbox/css/lightbox.min.css'%}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css'%}"
+      rel="stylesheet"
+    />
+
+    <!-- تنسيق بوتستراب مخصص -->
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" />
+  </head>
+  <body >
+    <div class="container-fluid topbar bg-light px-5" >
+        <div class="row gx-0 align-items-center">
+            <!-- الجانب الأيسر: الهاتف والبريد الإلكتروني -->
+            <div class="col-12 col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+                <div class="d-flex flex-wrap justify-content-center justify-content-lg-start" dir="rtl">
+                    <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0">
+                        <i class="fas fa-envelope text-primary me-2"></i> contact@inspire-trade.com
+                    </a>
+                </div>
+            </div>
+    
+            <!-- الجانب الأيمن: رابط الصفحة الرئيسية -->
+            <div class="col-12 col-lg-4 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center" style="height: 45px">
+                    <a href="{% url 'index_ar' %}" class="small me-3 text-dark">
+                        <i class="fa fa-home text-primary me-2"></i> الرئيسية
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    
+    <div class="container mt-4" dir="rtl">
+        <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="registration-form">
+            <h2 class="form-title">التسجيل</h2>
+            <form method="post" action="{% url 'register' %}" enctype="multipart/form-data" id="registrationForm">
+                {% csrf_token %}
+                <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">الاسم الأول</label>
+                    <input type="text" name="firstName" class="form-control" id="firstName" required>
+                    <div id="firstNameFeedback" class="invalid-feedback"></div>
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">الاسم الأخير</label>
+                    <input type="text" name="lastName" class="form-control" id="lastName" required>
+                    <div id="lastNameFeedback" class="invalid-feedback"></div>
+                </div>
+                </div>
+                <div class="mb-3">
+                <label for="email" class="form-label">البريد الإلكتروني</label>
+                <input type="email" name="email" class="form-control" id="email" required />
+                <small id="emailFeedback" class="text-danger"></small>
+                </div>
+    
+                <div class="mb-3">
+                <label for="password" class="form-label">كلمة المرور</label>
+                <input type="password" name="password" class="form-control" id="password" required />
+                <small id="passwordFeedback" class="text-danger"></small>
+                </div>
+    
+                <div class="mb-3">
+                <label for="country" class="form-label">الدولة</label>
+                <select class="form-select" name="country" id="country" required>
+                    <option value="Saudi Arabia">السعودية</option>
+                    <option value="United Arab Emirates">الإمارات العربية المتحدة</option>
+                    <option value="Qatar">قطر</option>
+                    <option value="Afghanistan">أفغانستان</option>
+                    <option value="Albania">ألبانيا</option>
+                    <option value="Algeria">الجزائر</option>
+                    <option value="Andorra">أندورا</option>
+                    <option value="Angola">أنغولا</option>
+                    <option value="Antigua and Barbuda">أنتيغوا وبربودا</option>
+                    <option value="Argentina">الأرجنتين</option>
+                    <option value="Armenia">أرمينيا</option>
+                    <option value="Australia">أستراليا</option>
+                    <option value="Austria">النمسا</option>
+                    <option value="Azerbaijan">أذربيجان</option>
+                    <option value="Bahamas">الباهاماس</option>
+                    <option value="Bahrain">البحرين</option>
+                    <option value="Bangladesh">بنغلاديش</option>
+                    <option value="Barbados">بربادوس</option>
+                    <option value="Belarus">بيلاروسيا</option>
+                    <option value="Belgium">بلجيكا</option>
+                    <option value="Belize">بليز</option>
+                    <option value="Benin">بنين</option>
+                    <option value="Bhutan">بوتان</option>
+                    <option value="Bolivia">بوليفيا</option>
+                    <option value="Bosnia and Herzegovina">البوسنة والهرسك</option>
+                    <option value="Botswana">بوتسوانا</option>
+                    <option value="Brazil">البرازيل</option>
+                    <option value="Brunei">بروناي</option>
+                    <option value="Bulgaria">بلغاريا</option>
+                    <option value="Burkina Faso">بوركينا فاسو</option>
+                    <option value="Burundi">بوروندي</option>
+                    <option value="Cabo Verde">كابو فيردي</option>
+                    <option value="Cambodia">كمبوديا</option>
+                    <option value="Cameroon">الكاميرون</option>
+                    <option value="Canada">كندا</option>
+                    <option value="Central African Republic">جمهورية أفريقيا الوسطى</option>
+                    <option value="Chad">تشاد</option>
+                    <option value="Chile">تشيلي</option>
+                    <option value="China">الصين</option>
+                    <option value="Colombia">كولومبيا</option>
+                    <option value="Comoros">جزر القمر</option>
+                    <option value="Congo (Congo-Brazzaville)">الكونغو (برازافيل)</option>
+                    <option value="Congo">الكونغو</option>
+                    <option value="Costa Rica">كوستاريكا</option>
+                    <option value="Croatia">كرواتيا</option>
+                    <option value="Cuba">كوبا</option>
+                    <option value="Cyprus">قبرص</option>
+                    <option value="Czechia">التشيك</option>
+                    <option value="Denmark">الدنمارك</option>
+                    <option value="Djibouti">جيبوتي</option>
+                    <option value="Dominica">دومينيكا</option>
+                    <option value="Dominican Republic">جمهورية الدومينيكان</option>
+                    <option value="Ecuador">الإكوادور</option>
+                    <option value="Egypt">مصر</option>
+                    <option value="El Salvador">السلفادور</option>
+                    <option value="Equatorial Guinea">غينيا الاستوائية</option>
+                    <option value="Eritrea">إريتريا</option>
+                    <option value="Estonia">إستونيا</option>
+                    <option value="Eswatini">إيسواتيني</option>
+                    <option value="Ethiopia">إثيوبيا</option>
+                    <option value="Fiji">فيجي</option>
+                    <option value="Finland">فنلندا</option>
+                    <option value="France">فرنسا</option>
+                    <option value="Gabon">الغابون</option>
+                    <option value="Gambia">غامبيا</option>
+                    <option value="Georgia">جورجيا</option>
+                    <option value="Germany">ألمانيا</option>
+                    <option value="Ghana">غانا</option>
+                    <option value="Greece">اليونان</option>
+                    <option value="Grenada">غرينادا</option>
+                    <option value="Guatemala">غواتيمالا</option>
+                    <option value="Guinea">غينيا</option>
+                    <option value="Guinea-Bissau">غينيا بيساو</option>
+                    <option value="Guyana">غيانا</option>
+                    <option value="Haiti">هايتي</option>
+                    <option value="Honduras">هندوراس</option>
+                    <option value="Hungary">هنغاريا</option>
+                    <option value="Iceland">آيسلندا</option>
+                    <option value="India">الهند</option>
+                    <option value="Indonesia">إندونيسيا</option>
+                    <option value="Iran">إيران</option>
+                    <option value="Iraq">العراق</option>
+                    <option value="Ireland">أيرلندا</option>
+                    <option value="Israel">إسرائيل</option>
+                    <option value="Italy">إيطاليا</option>
+                    <option value="Jamaica">جامايكا</option>
+                    <option value="Japan">اليابان</option>
+                    <option value="Jordan">الأردن</option>
+                    <option value="Kazakhstan">كازاخستان</option>
+                    <option value="Kenya">كينيا</option>
+                    <option value="Kiribati">كيريباس</option>
+                    <option value="Korea (North)">كوريا الشمالية</option>
+                    <option value="Korea (South)">كوريا الجنوبية</option>
+                    <option value="Kuwait">الكويت</option>
+                    <option value="Kyrgyzstan">قيرغيزستان</option>
+                    <option value="Laos">لاوس</option>
+                    <option value="Latvia">لاتفيا</option>
+                    <option value="Lebanon">لبنان</option>
+                    <option value="Lesotho">ليسوتو</option>
+                    <option value="Liberia">ليبيريا</option>
+                    <option value="Libya">ليبيا</option>
+                    <option value="Liechtenstein">ليختنشتاين</option>
+                    <option value="Lithuania">ليتوانيا</option>
+                    <option value="Luxembourg">لوكسمبورغ</option>
+                    <option value="Madagascar">مدغشقر</option>
+                    <option value="Malawi">مالاوي</option>
+                    <option value="Malaysia">ماليزيا</option>
+                    <option value="Maldives">المالديف</option>
+                    <option value="Mali">مالي</option>
+                    <option value="Malta">مالطا</option>
+                    <option value="Marshall Islands">جزر مارشال</option>
+                    <option value="Mauritania">موريتانيا</option>
+                    <option value="Mauritius">موريشيوس</option>
+                    <option value="Mexico">المكسيك</option>
+                    <option value="Micronesia">ميكرونيزيا</option>
+                    <option value="Moldova">مولدوفا</option>
+                    <option value="Monaco">موناكو</option>
+                    <option value="Mongolia">منغوليا</option>
+                    <option value="Montenegro">الجبل الأسود</option>
+                    <option value="Morocco">المغرب</option>
+                    <option value="Mozambique">موزمبيق</option>
+                    <option value="Myanmar">ميانمار</option>
+                    <option value="Namibia">ناميبيا</option>
+                    <option value="Nauru">ناورو</option>
+                    <option value="Nepal">نيبال</option>
+                    <option value="Netherlands">هولندا</option>
+                    <option value="New Zealand">نيوزيلندا</option>
+                    <option value="Nicaragua">نيكاراغوا</option>
+                    <option value="Niger">النيجر</option>
+                    <option value="Nigeria">نيجيريا</option>
+                    <option value="North Macedonia">مقدونيا الشمالية</option>
+                    <option value="Norway">النرويج</option>
+                    <option value="Oman">عمان</option>
+                    <option value="Pakistan">باكستان</option>
+                    <option value="Palau">بالاو</option>
+                    <option value="Palestine">فلسطين</option>
+                    <option value="Panama">بنما</option>
+                    <option value="Papua New Guinea">بابوا غينيا الجديدة</option>
+                    <option value="Paraguay">باراغواي</option>
+                    <option value="Peru">بيرو</option>
+                    <option value="Philippines">الفلبين</option>
+                    <option value="Poland">بولندا</option>
+                    <option value="Portugal">البرتغال</option>
+                    <option value="Romania">رومانيا</option>
+                    <option value="Russia">روسيا</option>
+                    <option value="Rwanda">رواندا</option>
+                    <option value="Saint Kitts and Nevis">سانت كيتس ونيفيس</option>
+                    <option value="Saint Lucia">سانت لوسيا</option>
+                    <option value="Saint Vincent and the Grenadines">سانت فنسنت والغرينادين</option>
+                    <option value="Samoa">ساموا</option>
+                    <option value="San Marino">سان مارينو</option>
+                    <option value="Sao Tome and Principe">ساو تومي وبرينسيبي</option>
+                    <option value="Senegal">السنغال</option>
+                    <option value="Serbia">صربيا</option>
+                    <option value="Seychelles">سيشل</option>
+                    <option value="Sierra Leone">سيراليون</option>
+                    <option value="Singapore">سنغافورة</option>
+                    <option value="Slovakia">سلوفاكيا</option>
+                    <option value="Slovenia">سلوفينيا</option>
+                    <option value="Solomon Islands">جزر سليمان</option>
+                    <option value="Somalia">الصومال</option>
+                    <option value="South Africa">جنوب أفريقيا</option>
+                    <option value="South Sudan">جنوب السودان</option>
+                    <option value="Spain">إسبانيا</option>
+                    <option value="Sri Lanka">سريلانكا</option>
+                    <option value="Sudan">السودان</option>
+                    <option value="Suriname">سورينام</option>
+                    <option value="Sweden">السويد</option>
+                    <option value="Switzerland">سويسرا</option>
+                    <option value="Syria">سوريا</option>
+                    <option value="Taiwan">تايوان</option>
+                    <option value="Tajikistan">طاجيكستان</option>
+                    <option value="Tanzania">تنزانيا</option>
+                    <option value="Thailand">تايلاند</option>
+                    <option value="Timor-Leste">تيمور الشرقية</option>
+                    <option value="Togo">توغو</option>
+                    <option value="Tonga">تونغا</option>
+                    <option value="Trinidad and Tobago">ترينيداد وتوباغو</option>
+                    <option value="Tunisia">تونس</option>
+                    <option value="Turkey">تركيا</option>
+                    <option value="Turkmenistan">تركمانستان</option>
+                    <option value="Tuvalu">توفالو</option>
+                    <option value="Uganda">أوغندا</option>
+                    <option value="Ukraine">أوكرانيا</option>
+                    <option value="United Kingdom">المملكة المتحدة</option>
+                    <option value="United States">الولايات المتحدة</option>
+                    <option value="Uruguay">أوروغواي</option>
+                    <option value="Uzbekistan">أوزبكستان</option>
+                    <option value="Vanuatu">فانواتو</option>
+                    <option value="Vatican City">الفاتيكان</option>
+                    <option value="Venezuela">فنزويلا</option>
+                    <option value="Vietnam">فيتنام</option>
+                    <option value="Yemen">اليمن</option>
+                    <option value="Zambia">زامبيا</option>
+                    <option value="Zimbabwe">زيمبابوي</option>
+                                        <!-- باقي البلدان... -->
+                </select>
+                </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">رقم الهاتف</label>
+        <div class="input-group">
+          <select class="form-select" name="countryCode" style="max-width: 150px;" id="countryCode" required>
+            <option value="+966">السعودية (+966)</option>
+            <option value="+971">الإمارات العربية المتحدة (+971)</option>
+            <option value="+974">قطر (+974)</option>
+            <option value="+93">أفغانستان (+93)</option>
+            <option value="+355">ألبانيا (+355)</option>
+            <option value="+213">الجزائر (+213)</option>
+            <option value="+1-684">ساموا الأمريكية (+1-684)</option>
+            <option value="+376">أندورا (+376)</option>
+            <option value="+244">أنغولا (+244)</option>
+            <option value="+1-264">أنغويلا (+1-264)</option>
+            <option value="+672">أنتاركتيكا (+672)</option>
+            <option value="+1-268">أنتيغوا وبربودا (+1-268)</option>
+            <option value="+54">الأرجنتين (+54)</option>
+            <option value="+374">أرمينيا (+374)</option>
+            <option value="+297">أروبا (+297)</option>
+            <option value="+61">أستراليا (+61)</option>
+            <option value="+43">النمسا (+43)</option>
+            <option value="+994">أذربيجان (+994)</option>
+            <option value="+1-242">الباهاما (+1-242)</option>
+            <option value="+973">البحرين (+973)</option>
+            <option value="+880">بنغلاديش (+880)</option>
+            <option value="+1-246">بربادوس (+1-246)</option>
+            <option value="+375">بيلاروسيا (+375)</option>
+            <option value="+32">بلجيكا (+32)</option>
+            <option value="+501">بليز (+501)</option>
+            <option value="+229">بنين (+229)</option>
+            <option value="+1-441">برمودا (+1-441)</option>
+            <option value="+975">بوتان (+975)</option>
+            <option value="+591">بوليفيا (+591)</option>
+            <option value="+387">البوسنة والهرسك (+387)</option>
+            <option value="+267">بوتسوانا (+267)</option>
+            <option value="+55">البرازيل (+55)</option>
+            <option value="+246">إقليم المحيط الهندي البريطاني (+246)</option>
+            <option value="+1-284">جزر فيرجن البريطانية (+1-284)</option>
+            <option value="+673">بروناي (+673)</option>
+            <option value="+359">بلغاريا (+359)</option>
+            <option value="+226">بوركينا فاسو (+226)</option>
+            <option value="+257">بوروندي (+257)</option>
+            <option value="+855">كمبوديا (+855)</option>
+            <option value="+237">الكاميرون (+237)</option>
+            <option value="+1">كندا (+1)</option>
+            <option value="+238">الرأس الأخضر (+238)</option>
+            <option value="+1-345">جزر كايمان (+1-345)</option>
+            <option value="+236">جمهورية إفريقيا الوسطى (+236)</option>
+            <option value="+235">تشاد (+235)</option>
+            <option value="+56">تشيلي (+56)</option>
+            <option value="+86">الصين (+86)</option>
+            <option value="+61">جزيرة كريسماس (+61)</option>
+            <option value="+61">جزر كوكوس (+61)</option>
+            <option value="+57">كولومبيا (+57)</option>
+            <option value="+269">جزر القمر (+269)</option>
+            <option value="+682">جزر كوك (+682)</option>
+            <option value="+506">كوستاريكا (+506)</option>
+            <option value="+385">كرواتيا (+385)</option>
+            <option value="+53">كوبا (+53)</option>
+            <option value="+599">كوراساو (+599)</option>
+            <option value="+357">قبرص (+357)</option>
+            <option value="+420">التشيك (+420)</option>
+            <option value="+243">جمهورية الكونغو الديمقراطية (+243)</option>
+            <option value="+45">الدنمارك (+45)</option>
+            <option value="+253">جيبوتي (+253)</option>
+            <option value="+1-767">دومينيكا (+1-767)</option>
+            <option value="+1-809">جمهورية الدومينيكان (+1-809)</option>
+            <option value="+593">الإكوادور (+593)</option>
+            <option value="+20">مصر (+20)</option>
+            <option value="+503">السلفادور (+503)</option>
+            <option value="+240">غينيا الاستوائية (+240)</option>
+            <option value="+291">إريتريا (+291)</option>
+            <option value="+372">إستونيا (+372)</option>
+            <option value="+251">إثيوبيا (+251)</option>
+            <option value="+500">جزر فوكلاند (+500)</option>
+            <option value="+298">جزر فارو (+298)</option>
+            <option value="+679">فيجي (+679)</option>
+            <option value="+358">فنلندا (+358)</option>
+            <option value="+33">فرنسا (+33)</option>
+            <option value="+689">بولينيزيا الفرنسية (+689)</option>
+            <option value="+241">الغابون (+241)</option>
+            <option value="+220">غامبيا (+220)</option>
+            <option value="+995">جورجيا (+995)</option>
+            <option value="+49">ألمانيا (+49)</option>
+            <option value="+233">غانا (+233)</option>
+            <option value="+350">جبل طارق (+350)</option>
+            <option value="+30">اليونان (+30)</option>
+            <option value="+299">غرينلاند (+299)</option>
+            <option value="+1-473">غرينادا (+1-473)</option>
+            <option value="+1-671">غوام (+1-671)</option>
+            <option value="+502">غواتيمالا (+502)</option>
+            <option value="+44-1481">غيرنسي (+44-1481)</option>
+            <option value="+224">غينيا (+224)</option>
+            <option value="+245">غينيا بيساو (+245)</option>
+            <option value="+592">غيانا (+592)</option>
+            <option value="+509">هايتي (+509)</option>
+            <option value="+504">هندوراس (+504)</option>
+            <option value="+852">هونغ كونغ (+852)</option>
+            <option value="+36">المجر (+36)</option>
+            <option value="+354">أيسلندا (+354)</option>
+            <option value="+91">الهند (+91)</option>
+            <option value="+62">إندونيسيا (+62)</option>
+            <option value="+98">إيران (+98)</option>
+            <option value="+964">العراق (+964)</option>
+            <option value="+353">أيرلندا (+353)</option>
+            <option value="+44-1624">جزيرة مان (+44-1624)</option>
+            <option value="+972">إسرائيل (+972)</option>
+            <option value="+39">إيطاليا (+39)</option>
+            <option value="+1-876">جامايكا (+1-876)</option>
+            <option value="+81">اليابان (+81)</option>
+            <option value="+44-1534">جيرزي (+44-1534)</option>
+            <option value="+962">الأردن (+962)</option>
+            <option value="+7">كازاخستان (+7)</option>
+            <option value="+254">كينيا (+254)</option>
+            <option value="+686">كيريباتي (+686)</option>
+            <option value="+965">الكويت (+965)</option>
+            <option value="+996">قرغيزستان (+996)</option>
+            <option value="+856">لاوس (+856)</option>
+            <option value="+371">لاتفيا (+371)</option>
+            <option value="+961">لبنان (+961)</option>
+            <option value="+266">ليسوتو (+266)</option>
+            <option value="+231">ليبيريا (+231)</option>
+            <option value="+218">ليبيا (+218)</option>
+            <option value="+423">ليختنشتاين (+423)</option>
+            <option value="+370">ليتوانيا (+370)</option>
+            <option value="+352">لوكسمبورغ (+352)</option>
+            <option value="+853">ماكاو (+853)</option>
+            <option value="+389">مقدونيا (+389)</option>
+            <option value="+261">مدغشقر (+261)</option>
+            <option value="+265">مالاوي (+265)</option>
+            <option value="+60">ماليزيا (+60)</option>
+            <option value="+960">المالديف (+960)</option>
+            <option value="+223">مالي (+223)</option>
+            <option value="+356">مالطا (+356)</option>
+            <option value="+692">جزر مارشال (+692)</option>
+            <option value="+222">موريتانيا (+222)</option>
+            <option value="+230">موريشيوس (+230)</option>
+            <option value="+262">مايوت (+262)</option>
+            <option value="+52">المكسيك (+52)</option>
+            <option value="+691">ميكرونيزيا (+691)</option>
+            <option value="+373">مولدوفا (+373)</option>
+            <option value="+377">موناكو (+377)</option>
+            <option value="+976">منغوليا (+976)</option>
+            <option value="+382">الجبل الأسود (+382)</option>
+            <option value="+1-664">مونتسرات (+1-664)</option>
+            <option value="+212">المغرب (+212)</option>
+            <option value="+258">موزمبيق (+258)</option>
+            <option value="+95">ميانمار (+95)</option>
+            <option value="+264">ناميبيا (+264)</option>
+            <option value="+674">ناورو (+674)</option>
+            <option value="+977">نيبال (+977)</option>
+            <option value="+31">هولندا (+31)</option>
+            <option value="+599">جزر الأنتيل الهولندية (+599)</option>
+            <option value="+687">كاليدونيا الجديدة (+687)</option>
+            <option value="+64">نيوزيلندا (+64)</option>
+            <option value="+505">نيكاراغوا (+505)</option>
+            <option value="+227">النيجر (+227)</option>
+            <option value="+234">نيجيريا (+234)</option>
+            <option value="+683">نييوي (+683)</option>
+            <option value="+672">جزيرة نورفولك (+672)</option>
+            <option value="+1-670">جزر ماريانا الشمالية (+1-670)</option>
+            <option value="+47">النرويج (+47)</option>
+            <option value="+968">عمان (+968)</option>
+            <option value="+92">باكستان (+92)</option>
+            <option value="+680">بالاو (+680)</option>
+            <option value="+970">فلسطين (+970)</option>
+            <option value="+507">بنما (+507)</option>
+            <option value="+675">بابوا غينيا الجديدة (+675)</option>
+            <option value="+595">باراغواي (+595)</option>
+            <option value="+51">بيرو (+51)</option>
+            <option value="+63">الفلبين (+63)</option>
+            <option value="+64">بيتكيرن (+64)</option>
+            <option value="+48">بولندا (+48)</option>
+            <option value="+351">البرتغال (+351)</option>
+            <option value="+1-787">بورتوريكو (+1-787)</option>
+            <option value="+242">الكونغو (+242)</option>
+            <option value="+262">ريونيون (+262)</option>
+            <option value="+40">رومانيا (+40)</option>
+            <option value="+7">روسيا (+7)</option>
+            <option value="+250">رواندا (+250)</option>
+            <option value="+590">سانت بارتليمي (+590)</option>
+            <option value="+290">سانت هيلينا (+290)</option>
+            <option value="+1-869">سانت كيتس ونيفيس (+1-869)</option>
+            <option value="+1-758">سانت لوسيا (+1-758)</option>
+            <option value="+590">سانت مارتن (+590)</option>
+            <option value="+508">سانت بيير وميكلون (+508)</option>
+            <option value="+1-784">سانت فنسنت والغرينادين (+1-784)</option>
+            <option value="+685">ساموا (+685)</option>
+            <option value="+378">سان مارينو (+378)</option>
+            <option value="+239">ساو تومي وبرينسيبي (+239)</option>
+            <option value="+221">السنغال (+221)</option>
+            <option value="+381">صربيا (+381)</option>
+            <option value="+248">سيشل (+248)</option>
+            <option value="+232">سيراليون (+232)</option>
+            <option value="+65">سنغافورة (+65)</option>
+            <option value="+1-721">سينت مارتن (+1-721)</option>
+            <option value="+421">سلوفاكيا (+421)</option>
+            <option value="+386">سلوفينيا (+386)</option>
+            <option value="+677">جزر سليمان (+677)</option>
+            <option value="+252">الصومال (+252)</option>
+            <option value="+27">جنوب إفريقيا (+27)</option>
+            <option value="+500">جزر جورجيا الجنوبية (+500)</option>
+            <option value="+82">كوريا الجنوبية (+82)</option>
+            <option value="+211">جنوب السودان (+211)</option>
+            <option value="+34">إسبانيا (+34)</option>
+            <option value="+94">سريلانكا (+94)</option>
+            <option value="+249">السودان (+249)</option>
+            <option value="+597">سورينام (+597)</option>
+            <option value="+268">إسواتيني (+268)</option>
+            <option value="+46">السويد (+46)</option>
+            <option value="+41">سويسرا (+41)</option>
+            <option value="+963">سوريا (+963)</option>
+            <option value="+886">تايوان (+886)</option>
+            <option value="+992">طاجيكستان (+992)</option>
+            <option value="+255">تنزانيا (+255)</option>
+            <option value="+66">تايلاند (+66)</option>
+            <option value="+670">تيمور الشرقية (+670)</option>
+            <option value="+228">توغو (+228)</option>
+            <option value="+690">توكيلو (+690)</option>
+            <option value="+676">تونغا (+676)</option>
+            <option value="+1-868">ترينيداد وتوباغو (+1-868)</option>
+            <option value="+216">تونس (+216)</option>
+            <option value="+90">تركيا (+90)</option>
+            <option value="+993">تركمانستان (+993)</option>
+            <option value="+1-649">جزر تركس وكايكوس (+1-649)</option>
+            <option value="+688">توفالو (+688)</option>
+            <option value="+256">أوغندا (+256)</option>
+            <option value="+380">أوكرانيا (+380)</option>
+            <option value="+44">المملكة المتحدة (+44)</option>
+            <option value="+1">الولايات المتحدة (+1)</option>
+            <option value="+598">أوروغواي (+598)</option>
+            <option value="+998">أوزبكستان (+998)</option>
+            <option value="+678">فانواتو (+678)</option>
+            <option value="+379">مدينة الفاتيكان (+379)</option>
+            <option value="+58">فنزويلا (+58)</option>
+            <option value="+84">فيتنام (+84)</option>
+            <option value="+681">واليس وفوتونا (+681)</option>
+            <option value="+967">اليمن (+967)</option>
+            <option value="+260">زامبيا (+260)</option>
+            <option value="+263">زيمبابوي (+263)</option>
+            </select>
+          <input type="tel" class="form-control" name="phone" id="phone" required />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="imagePassport" class="form-label">صورة جواز السفر</label>
+        <input type="file" name="imagePassport" accept="image/*" class="form-control" id="imagePassport" required />
+      </div>
+      
+      <div class="mb-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="termsCheck" required />
+          <label class="form-check-label" for="termsCheck">أوافق على الشروط والأحكام وسياسة الخصوصية</label>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-register" style="background-color: #F2A900;">سجل الآن</button>
+      </div>
+      <div style="text-align: center; align-items: center; margin-top: 20px;">
+        <a href="{% url 'login_ar' %}" >هل لديك حساب بالفعل؟</a>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+<script>
+    {% if messages %}
+        const toast = document.getElementById('toast');
+        const progressBar = document.getElementById('progress-bar');
+
+        toast.classList.add('show');
+
+        setTimeout(function () {
+            progressBar.style.width = '0%';
+        }, 100);
+
+        setTimeout(function () {
+            toast.classList.remove('show');
+        }, 5000);
+    {% endif %}
+</script>
+
+<!-- JavaScript for Form Validation -->
+<script>
+    // Validation functions
+    function validateEmail() {
+        const email = document.getElementById('email');
+        const emailFeedback = document.getElementById('emailFeedback');
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+        if (emailPattern.test(email.value)) {
+            email.classList.remove('is-invalid');
+            email.classList.add('is-valid');
+            emailFeedback.textContent = '';
+            return true;
+        } else {
+            email.classList.add('is-invalid');
+            email.classList.remove('is-valid');
+            emailFeedback.textContent = 'يرجو إدخال بريد إلكتروني صحيح';
+            return false;
+        }
+    }
+
+    function validatePassword() {
+        const password = document.getElementById('password');
+        const passwordFeedback = document.getElementById('passwordFeedback');
+        const passwordPattern = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+
+        if (passwordPattern.test(password.value)) {
+            password.classList.remove('is-invalid');
+            password.classList.add('is-valid');
+            passwordFeedback.textContent = '';
+            return true;
+        } else {
+            password.classList.add('is-invalid');
+            password.classList.remove('is-valid');
+            passwordFeedback.textContent = 'يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل، وتحتوي على رقم، حرف كبير، وحرف خاص.';
+            return false;
+        }
+    }
+
+    function validatePhone() {
+        const phone = document.getElementById('phone');
+        const countryCode = document.getElementById('countryCode');
+        const phoneFeedback = document.getElementById('phoneFeedback');
+
+        if (countryCode.value && phone.value) {
+            phone.classList.remove('is-invalid');
+            countryCode.classList.remove('is-invalid');
+            phone.classList.add('is-valid');
+            countryCode.classList.add('is-valid');
+            phoneFeedback.textContent = '';
+            return true;
+        } else {
+            phone.classList.add('is-invalid');
+            countryCode.classList.add('is-invalid');
+            phone.classList.remove('is-valid');
+            countryCode.classList.remove('is-valid');
+            phoneFeedback.textContent = 'يرجى اختيار رمز الدولة وإدخال رقم هاتفك.';
+            return false;
+        }
+    }
+
+    function validateFirstName() {
+        const firstName = document.getElementById('firstName');
+        const firstNameFeedback = document.getElementById('firstNameFeedback');
+
+        if (firstName.value.trim() !== "") {
+            firstName.classList.remove('is-invalid');
+            firstName.classList.add('is-valid');
+            firstNameFeedback.textContent = '';
+            return true;
+        } else {
+            firstName.classList.add('is-invalid');
+            firstName.classList.remove('is-valid');
+            firstNameFeedback.textContent = 'الاسم الأول مطلوب.';
+            return false;
+        }
+    }
+
+    function validateLastName() {
+        const lastName = document.getElementById('lastName');
+        const lastNameFeedback = document.getElementById('lastNameFeedback');
+
+        if (lastName.value.trim() !== "") {
+            lastName.classList.remove('is-invalid');
+            lastName.classList.add('is-valid');
+            lastNameFeedback.textContent = '';
+            return true;
+        } else {
+            lastName.classList.add('is-invalid');
+            lastName.classList.remove('is-valid');
+            lastNameFeedback.textContent = 'اللقب مطلوب.';
+            return false;
+        }
+    }
+
+    // Event listeners for real-time validation
+    document.getElementById('email').addEventListener('input', validateEmail);
+    document.getElementById('password').addEventListener('input', validatePassword);
+    document.getElementById('phone').addEventListener('input', validatePhone);
+    document.getElementById('countryCode').addEventListener('change', validatePhone);
+    document.getElementById('firstName').addEventListener('input', validateFirstName);
+    document.getElementById('lastName').addEventListener('input', validateLastName);
+
+    // Final form validation before submitting
+    document.getElementById('registrationForm').addEventListener('submit', function (event) {
+        const isEmailValid = validateEmail();
+        const isPasswordValid = validatePassword();
+        const isPhoneValid = validatePhone();
+        const isFirstNameValid = validateFirstName();
+        const isLastNameValid = validateLastName();
+
+        if (!isEmailValid || !isPasswordValid || !isPhoneValid || !isFirstNameValid || !isLastNameValid) {
+            event.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

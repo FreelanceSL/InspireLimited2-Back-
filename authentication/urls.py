@@ -40,6 +40,10 @@ urlpatterns = [
     path('services_ar/', views.services_ar, name='services_ar'),
     path('blogs_ar/', views.blogs_ar, name='blogs_ar'),
     path('contact_ar/', views.contact_ar, name='contact_ar'),
+    path('login_ar/', views.login_ar, name='login_ar'),
+    path('signup_ar/', views.signup_ar, name='signup_ar'),
+    path('qstart_ar/', views.qstart_ar, name='qstart_ar'),
+    path('dashboard_ar/', views.dashboard_ar, name='dashboard_ar'),
     path('profiling/', views.profiling, name='profiling'),
     
     

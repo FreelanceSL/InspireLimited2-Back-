@@ -1,0 +1,337 @@
+{% load static %}
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>الرئيسية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="{% static 'lib/animate/animate.min.css' %}" />
+    <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+    <!-- Template Stylesheet -->
+    <style>
+      .form-container {
+          max-width: 600px;
+          margin: 2rem auto;
+          padding: 2rem;
+          border-radius: 10px;
+          box-shadow: 0 0 15px rgba(0,0,0,0.1);
+          background-color: #fff;
+      }
+      
+      .form-label {
+          font-weight: 600;
+          color: #333;
+      }
+      
+      .form-select, .form-control {
+          border: 2px solid #e9ecef;
+          padding: 0.75rem;
+          margin-bottom: 1.5rem;
+      }
+      
+      .form-select:focus, .form-control:focus {
+          border-color: #80bdff;
+          box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+      }
+      
+      .btn-submit {
+          width: 100%;
+          padding: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+      }
+  </style>
+  </head>
+  <body>
+    <!-- Spinner Start -->
+
+    <!-- Spinner End -->
+    <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 ">
+      <a href="" class="navbar-brand p-0">
+          <img src="{% static 'img/logo.png'%}" alt="" srcset="">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav ms-auto py-0">
+              <a href="{% url 'index' %}" class="nav-item nav-link">الرئيسية</a>
+              <a href="{% url 'about' %}" class="nav-item nav-link">من نحن</a>
+              <a href="{% url 'services' %}" class="nav-item nav-link">الخدمات</a>
+              <a href="{% url 'blogs' %}" class="nav-item nav-link">المدونة</a>
+              <a href="{% url 'contact' %}" class="nav-item nav-link">تواصل معنا</a>
+          </div>
+          {% if not user.is_authenticated %}
+          <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">تسجيل</a>
+          <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0 " style="margin-left: 20px; !important">دخول</a>
+          {% else %}
+          <div class="dropdown">
+              <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
+                  <img src="{% static 'img/profile.png' %}" alt="الملف الشخصي" class="profile-img">
+              </a>
+
+              <div class="dropdown-menu rounded">
+                  <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> ملفي الشخصي</a>
+                  <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> إعدادات الحساب</a>
+                  <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+              </div>
+          </div>
+          {% endif %}
+          <a id="lng" href={{url_lang}}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-world"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M11.5 3a17 17 0 0 0 0 18"></path><path d="M12.5 3a17 17 0 0 1 0 18"></path></svg>{{langue}}</a>
+      </div>
+  </nav>
+  <div>
+    {% if token %}
+    <div class="container dashboard-container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <!-- صورة الترحيب -->
+  
+          <!-- صندوق الرسائل -->
+          <div class="card mt-4">
+            <div class="card-body">
+              <div class="message-box">
+                <h5>مرحبًا بك في حساب التداول الخاص بك {{ username }}!</h5>
+                <p>نحن حاليًا نقوم بمعالجة طلبك لإنشاء حساب تداول. يقوم فريقنا بمراجعة التفاصيل، وسنعود إليك خلال يومي عمل إلى ثلاثة أيام.</p>
+                <p>شكرًا على صبرك!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- التذييل -->
+    </div>
+    {% endif %}
+  </div>
+  <div class="container">
+    <!-- أزرار التنقل -->
+  
+    <!-- بيانات البتكوين المباشرة -->
+    <div class="container">
+      <div class="crypto-table">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>العملة</th>
+              <th>السعر</th>
+              <th>1 ساعة</th>
+              <th>24 ساعة</th>
+              <th>7 أيام</th>
+              <th>حجم التداول خلال 24 ساعة</th>
+              <th>القيمة السوقية</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for coin in crypto_data %}
+            <tr>
+              <td>{{ coin.rank }}</td>
+              <td>
+                <img src="{{ coin.image }}" alt="{{ coin.name }}" class="coin-icon" />
+                <span class="coin-name">{{ coin.name }}</span>
+                <span class="coin-symbol">{{ coin.symbol }}</span>
+                <button class="buy-button ms-2">شراء</button>
+              </td>
+              <td>${{ coin.price|floatformat:2 }}</td>
+              <td class="{% if coin.price_1h > 0 %}
+                    positive
+                  {% else %}
+                    negative
+                  {% endif %}">{{ coin.price_1h|floatformat:1 }}%</td>
+              <td class="{% if coin.price_24h > 0 %}
+                    positive
+                  {% else %}
+                    negative
+                  {% endif %}">{{ coin.price_24h|floatformat:1 }}%</td>
+              <td class="{% if coin.price_7d > 0 %}
+                    positive
+                  {% else %}
+                    negative
+                  {% endif %}">{{ coin.price_7d|floatformat:1 }}%</td>
+              <td>${{ coin.volume_24h|floatformat:0 }}</td>
+              <td>${{ coin.market_cap|floatformat:0 }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <p class="refresh-time">
+        آخر تحديث: {% now 'F j, Y, H:i:s' %}
+      </p>
+    </div>
+    <div class="platform-nav">
+      <button class="platform-btn windows-btn active" onclick="showPlatform('windows')">ويندوز</button>
+      <button class="platform-btn android-btn" onclick="showPlatform('android')">أندرويد</button>
+      <button class="platform-btn ios-btn" onclick="showPlatform('ios')">iOS</button>
+    </div>
+    <!-- محتوى المنصة -->
+    <div class="platforms-container">
+      <!-- محتوى ويندوز -->
+      <div id="windows" class="platform-content active">
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="feature-list">
+              <li>التداول باستخدام حساب افتراضي</li>
+              <li>الأسعار المباشرة للأدوات المالية</li>
+              <li>تنفيذ الطلبات في الوقت الفعلي</li>
+              <li>التداول باستخدام الرسوم البيانية المباشرة</li>
+              <li>دعم جميع أنواع تنفيذ الطلبات</li>
+              <li>السجل الكامل للطلبات</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <div class="platform-image">
+              <img src="{% static 'img/MT4.jpg' %}" alt="منصة MetaTrader للحاسوب" style="width: 300px; height: 200px;" />
+            </div>
+          </div>
+        </div>
+        <div class="download-section">
+          <a href="https://download.mql5.com/cdn/web/teletrade.d.j/mt4/teletrade4setup.exe" class="download-btn">تنزيل MT4</a>
+          <a href="https://download.mql5.com/cdn/web/teletrade.d.j/mt5/tt5setup.exe" class="download-btn">تنزيل MT5</a>
+        </div>
+      </div>
+  
+      <!-- محتوى أندرويد -->
+      <div id="android" class="platform-content">
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="feature-list">
+              <li>التداول باستخدام حساب افتراضي</li>
+              <li>الأسعار المباشرة للأدوات المالية</li>
+              <li>تنفيذ الطلبات في الوقت الفعلي</li>
+              <li>التداول باستخدام الرسوم البيانية المباشرة</li>
+              <li>دعم جميع أنواع تنفيذ الطلبات</li>
+              <li>السجل الكامل للطلبات</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <div class="platform-image">
+              <img src="{% static 'img/dash.png' %}" alt="منصة MetaTrader للجوال" />
+            </div>
+          </div>
+        </div>
+        <div class="download-section">
+          <a href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4&hl=fr&referrer=ref_id%3d20a366d5%26hl%3dfr%26utm_campaign%3dfrom_teletrade_site" class="download-btn">تنزيل MT4</a>
+        </div>
+      </div>
+  
+      <!-- محتوى iOS -->
+      <div id="ios" class="platform-content">
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="feature-list">
+              <li>التداول باستخدام حساب افتراضي</li>
+              <li>الأسعار المباشرة للأدوات المالية</li>
+              <li>تنفيذ الطلبات في الوقت الفعلي</li>
+              <li>التداول باستخدام الرسوم البيانية المباشرة</li>
+              <li>دعم جميع أنواع تنفيذ الطلبات</li>
+              <li>السجل الكامل للطلبات</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <div class="platform-image">
+              <img src="{% static 'img/dash.png' %}" alt="منصة MetaTrader iOS" />
+            </div>
+          </div>
+        </div>
+        <div class="download-section">
+          <a href="https://itunes.apple.com/fr/app/metatrader-4/id496212596?utm_campaign=from_teletrade_site" class="download-btn">تنزيل MT4</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="form-container">
+      <h2 class="text-center mb-4">نموذج التداول</h2>
+      <form method="post" action="{% url 'profiling' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="cryptoSelect" class="form-label">اختر الأصل</label>
+          <select class="form-select" id="cryptoSelect" name="cryptoSelect" required>
+            <option value="" selected disabled>اختر أصلًا</option>
+            <option value="bitcoin">بيتكوين</option>
+            <option value="ethereum">إيثريوم</option>
+            <option value="tether">تيثر</option>
+            <option value="solana">سولانا</option>
+            <option value="bnb">بي إن بي</option>
+            <option value="gold">الذهب</option>
+            <option value="silver">الفضة</option>
+          </select>
+        </div>
+  
+        <div class="mb-3">
+          <label for="platformSelect" class="form-label">منصة التداول</label>
+          <select class="form-select" id="platformSelect" name="platformSelect" required>
+            <option value="" selected disabled>اختر منصة</option>
+            <option value="mt4">MT4</option>
+            <option value="mt5">MT5</option>
+          </select>
+        </div>
+  
+        <div class="mb-3">
+          <label for="amount" class="form-label">مبلغ التداول</label>
+          <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input type="number" class="form-control" id="amount" placeholder="أدخل المبلغ" name="amount" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">تقديم</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Refresh the page every 60 seconds
+    setTimeout(function () {
+      location.reload()
+    }, 60000)
+  </script>
+
+  <script>
+    function showPlatform(platform) {
+      // Hide all platform contents
+      document.querySelectorAll('.platform-content').forEach((content) => {
+        content.classList.remove('active')
+      })
+    
+      // Remove active class from all buttons
+      document.querySelectorAll('.platform-btn').forEach((btn) => {
+        btn.classList.remove('active')
+      })
+    
+      // Show selected platform content
+      document.getElementById(platform).classList.add('active')
+    
+      // Add active class to clicked button
+      document.querySelector(`.${platform}-btn`).classList.add('active')
+    }
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+  <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+  <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+  <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+  <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+  <!-- Template Javascript -->
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+</body>
+</html>
