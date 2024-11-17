@@ -38,28 +38,27 @@
     <link rel="stylesheet" href="{% static 'css/register.css' %}" />
   </head>
   <body >
-    <div class="container-fluid topbar bg-light px-5" >
+    <div class="container-fluid topbar bg-light px-5">
         <div class="row gx-0 align-items-center">
-            <!-- الجانب الأيسر: الهاتف والبريد الإلكتروني -->
-            <div class="col-12 col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
-                <div class="d-flex flex-wrap justify-content-center justify-content-lg-start" dir="rtl">
-                    <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0">
-                        <i class="fas fa-envelope text-primary me-2"></i> contact@inspire-trade.com
-                    </a>
-                </div>
+          <!-- Left Side: Phone and Email -->
+          <div class="col-12 col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start">
+              <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0">
+                <i class="fas fa-envelope text-primary me-2"></i> contact@inspire-trade.com
+              </a>
             </div>
-    
-            <!-- الجانب الأيمن: رابط الصفحة الرئيسية -->
-            <div class="col-12 col-lg-4 text-center text-lg-end">
-                <div class="d-inline-flex align-items-center" style="height: 45px">
-                    <a href="{% url 'index_ar' %}" class="small me-3 text-dark">
-                        <i class="fa fa-home text-primary me-2"></i> الرئيسية
-                    </a>
-                </div>
+          </div>
+          
+          <!-- Right Side: Home link -->
+          <div class="col-12 col-lg-4 text-center text-lg-end">
+            <div class="d-inline-flex align-items-center" style="height: 45px">
+              <a href="{% url 'index' %}" class="small me-3 text-dark">
+                <i class="fa fa-home text-primary me-2"></i>Home
+              </a>
             </div>
+          </div>
         </div>
-    </div>
-        </div>
+      </div>
     
     <div class="container mt-4" dir="rtl">
         <div class="row justify-content-center">
@@ -68,6 +67,7 @@
             <h2 class="form-title">التسجيل</h2>
             <form method="post" action="{% url 'register' %}" enctype="multipart/form-data" id="registrationForm">
                 {% csrf_token %}
+                <input type="hidden" name="form_origin" value="register_arabe" />
                 <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="firstName" class="form-label">الاسم الأول</label>
@@ -560,23 +560,26 @@
 </div>
 </div>
 </div>
-<script>
+<div id="toast" class="toast">
+    المستخدم موجود بالفعل!
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+  <script>
     {% if messages %}
         const toast = document.getElementById('toast');
         const progressBar = document.getElementById('progress-bar');
 
         toast.classList.add('show');
 
-        setTimeout(function () {
-            progressBar.style.width = '0%';
+        setTimeout(function() {
+            progressBar.style.width = '0%'; 
         }, 100);
 
-        setTimeout(function () {
+        setTimeout(function() {
             toast.classList.remove('show');
         }, 5000);
     {% endif %}
 </script>
-
 <!-- JavaScript for Form Validation -->
 <script>
     // Validation functions

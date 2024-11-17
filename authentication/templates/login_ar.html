@@ -65,8 +65,9 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form method="post" action="{% url 'login_ar' %}" dir="rtl">
+    <form method="post" action="{% url 'login' %}" dir="rtl"  style="margin-top: 30px;">
         {% csrf_token %}
+        <input type="hidden" name="form_origin" value="arabic_login" />
         <h3>تسجيل الدخول هنا</h3>
 
         <label for="email">البريد الإلكتروني</label>
@@ -88,7 +89,7 @@
 
     <!-- إشعار الخطأ -->
     <div id="toast" class="toast">
-        البريد الإلكتروني أو كلمة المرور غير صحيحة
+      معلومات خاطئة !
         <div class="progress-bar" id="progress-bar"></div>
     </div>
 

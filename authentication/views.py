@@ -125,6 +125,8 @@ class Register(APIView):
                 else:
                     
                     messages.error(request, 'An account with this email already exists.')
+                    if(form_origin=="register_arabe"):
+                        return render(request,'register_ar.html')
                     return render(request,'register.html')
                     
                     
@@ -176,7 +178,7 @@ class Login(APIView):
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
-
+        form_origin = request.data.get('form_origin')
         if user is not None:
             login(request, user)
             token = AccessToken.for_user(user)
@@ -197,6 +199,8 @@ class Login(APIView):
         else:
 
             messages.error(request, "Invalid email or password")
+            if(form_origin=="arabic_login"):
+                return render(request,'login_ar.html')
             return render(request, 'login.html')
 
     
