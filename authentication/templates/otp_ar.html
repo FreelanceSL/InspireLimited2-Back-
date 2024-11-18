@@ -1,0 +1,132 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP Verification Form</title>
+    <link rel="stylesheet" href="{% static 'css/otp.css'%}" />
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <i class="bx bxs-check-shield"></i>
+      </header>
+      <h4>Enter OTP Code</h4>
+      <form method="post" action="{% url 'verify' %}">
+        {% csrf_token %}
+        <input type="hidden" name="form_origin" value="otp_arabe" />
+        <div class="input-field">
+          <input type="number" name="txt1" id="txt1" />
+          <input type="number" name="txt2" id="txt2" disabled />
+          <input type="number" name="txt3" id="txt3" disabled />
+          <input type="number" name="txt4" id="txt4" disabled />
+        </div>
+        <button type="submit">تحقق من الرمز </button>
+      </form>
+      <div class="resend-container">
+        <button id="resend-btn" onclick="handleResendClick(event)" disabled>إبعث الرمز من جديد(30s)</button>
+      </div>
+    </div>
+    
+    <script>
+      // Select input fields and buttons
+      const inputs = document.querySelectorAll("input");
+      const button = document.querySelector("button");
+      const resendButton = document.getElementById("resend-btn");
+      let isCountdownActive = true;
+      
+      // Enable/disable inputs and manage transitions
+      inputs.forEach((input, index1) => {
+        input.addEventListener("keyup", (e) => {
+          const currentInput = input,
+            nextInput = input.nextElementSibling,
+            prevInput = input.previousElementSibling;
+      
+          // Clear input if it contains more than one character
+          if (currentInput.value.length > 1) {
+            currentInput.value = "";
+            return;
+          }
+      
+          // Enable next input and focus if current input is filled
+          if (nextInput && nextInput.hasAttribute("disabled") && currentInput.value !== "") {
+            nextInput.removeAttribute("disabled");
+            nextInput.focus();
+          }
+      
+          // Handle Backspace key
+          if (e.key === "Backspace") {
+            inputs.forEach((inp, index2) => {
+              if (index1 <= index2 && prevInput) {
+                inp.setAttribute("disabled", true);
+                inp.value = "";
+                prevInput.focus();
+              }
+            });
+          }
+      
+          // Enable button if all inputs are filled
+          if (!inputs[3].disabled && inputs[3].value !== "") {
+            button.classList.add("active");
+            return;
+          }
+          button.classList.remove("active");
+        });
+      });
+      
+      // Focus the first input on page load
+      window.addEventListener("load", () => inputs[0].focus());
+      
+      // Handle resend button click
+      async function handleResendClick(event) {
+        event.preventDefault();
+        
+        if (!isCountdownActive) {
+          try {
+            const response = await fetch("{% url 'resend_otp_ar' %}", {
+              method: 'POST',
+              headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+              },
+            });
+            
+            if (response.ok) {
+              startCountdown();
+            } else {
+              console.error('Failed to resend OTP');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        }
+      }
+      
+      // Countdown logic for the Resend OTP button
+      function startCountdown() {
+        let countdown = 30;
+        isCountdownActive = true;
+        resendButton.disabled = true;
+      
+        const countdownInterval = setInterval(() => {
+          if (countdown > 0) {
+            resendButton.textContent = `إبعث الرمز من جديد (${countdown}s)`;
+            countdown--;
+          } else {
+            clearInterval(countdownInterval);
+            resendButton.textContent = "إبعث الرمز من جديد";
+            resendButton.disabled = false;
+            isCountdownActive = false;
+          }
+        }, 1000);
+      }
+      
+      // Start the countdown when the page loads
+      document.addEventListener("DOMContentLoaded", () => {
+        startCountdown();
+      });
+    </script>
+  </body>
+</html>

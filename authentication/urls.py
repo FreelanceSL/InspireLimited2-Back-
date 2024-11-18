@@ -14,9 +14,12 @@ urlpatterns = [
     path('token/refresh/',TokenRefreshView.as_view(),name='token_refresh'),
     path('verify/',views.Verification.as_view(),name='verify'),
     path("modify/<uidb64>/<token>/",views.reset_password, name='modify'),
+    path("modify/<uidb64>/<token>/<langue>/",views.reset_password_ar, name='modify_ar'),
     path("forget_password/",views.forget_password, name='forget_password'),
     path("resend_otp/",views.resend_otp, name='resend_otp'),
+    path("resend_otp_ar/",views.resend_otp_ar, name='resend_otp_ar'),
     path('reset_email/',views.send_password_reset_email),
+    path('logout_ar/',views.logout_ar,name='logout_ar'),
 
     # path('upload/', views.FileUploadView.as_view(), name='upload_file'),
     
@@ -33,8 +36,10 @@ urlpatterns = [
     path('otp/',views.otp,name="otp"),
     path('users/', views.user_list, name='user_list'),
     path('reset/',views.reset,name='reset'),
+    path('reset_ar/',views.reset_ar,name='reset_ar'),
     path('qstart/',views.qstart,name='qstart'),
     path('reset/<uidb64>/<token>/',views.update,name='update'),
+    path('reset/<uidb64>/<token>/<langue>/',views.update_ar,name='update_ar'),
     path('home_ar/',views.index_ar, name='index_ar'),
     path('about_ar/', views.about_ar, name='about_ar'),
     path('services_ar/', views.services_ar, name='services_ar'),
@@ -44,7 +49,9 @@ urlpatterns = [
     path('signup_ar/', views.signup_ar, name='signup_ar'),
     path('qstart_ar/', views.qstart_ar, name='qstart_ar'),
     path('dashboard_ar/', views.dashboard_ar, name='dashboard_ar'),
+    path('otp_ar/', views.otp_ar, name='otp_ar'),
     path('profiling/', views.profiling, name='profiling'),
+    
     
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -6,7 +6,7 @@ from .serializers import UserSerializer,VerificationSerializer,AdminSerializer
 from rest_framework.response import Response
 from .models import User
 from rest_framework.exceptions import AuthenticationFailed
-from .emails import send_otp_via_email, send_reset_password,send_infos,send_infos_trade
+from .emails import send_otp_via_email, send_reset_password,send_infos,send_infos_trade,send_reset_password_ar
 from rest_framework import status
 from django.contrib.auth.tokens import default_token_generator
 from rest_framework.permissions import IsAuthenticated
@@ -119,7 +119,8 @@ class Register(APIView):
 
                     send_otp_via_email(request, user)
                     send_infos(request,user)
-
+                    if(form_origin=="register_arabe"):
+                        return redirect(reverse('otp_ar'))
                     return redirect(reverse('otp'))  
 
                 else:
@@ -145,12 +146,23 @@ def resend_otp(request):
     return render(request,'otp.html')
 
 
+@api_view(['POST'])  
+def resend_otp_ar(request):
+    email=request.session.get('email', None)
+    user=User.objects.get(email=email)
+    send_otp_via_email(request, user)
+    return render(request,'otp_ar.html')
+
+
 class Verification(APIView):
     def post(self,request):
+        form_origin = request.data.get('form_origin')
         email=request.session.get('email', None)
         otp=request.data['txt1']+request.data['txt2']+request.data['txt3']+request.data['txt4']
         user=User.objects.get(email=email)
         if user.is_verified==True:
+            if form_origin=="otp_arabe" :
+                return redirect(reverse('dashboard_ar'))
             return redirect(reverse('dashboard'))
         else:
             try:
@@ -165,6 +177,8 @@ class Verification(APIView):
                 user.otp=""
                 user.save()
                 request.session.flush()
+                if form_origin=="otp_arabe" :
+                    return redirect(reverse('login_ar'))
                 return redirect(reverse('login'))
             return Response({"message":"otp invalid"},status=status.HTTP_403_FORBIDDEN)
         
@@ -188,13 +202,18 @@ class Login(APIView):
             request.session['last_name'] = user.last_name
 
             next_url = request.GET.get('next', 'dashboard')
+            next_url_ar = request.GET.get('next', 'dashboard_ar')
             admin_url = request.GET.get('next', 'admin')
             if (user.role == "admin" and user.is_verified == True):
                 return redirect(admin_url)
             elif (user.is_verified == True):
+                if form_origin=="arabic_login" :
+                    return redirect(next_url_ar)
                 return redirect(next_url)
             else:
                 send_otp_via_email(request, user)
+                if form_origin=="arabic_login" :
+                    return redirect(reverse('otp_ar'))
                 return redirect(reverse('otp'))
         else:
 
@@ -208,6 +227,10 @@ def logout(request):
     request.session.flush() 
     return redirect('index')
 
+def logout_ar(request):
+    request.session.flush() 
+    return redirect('index_ar')
+
 
 def send_password_reset_email(request,user):
     send_reset_password(request,user)
@@ -216,18 +239,28 @@ def send_password_reset_email(request,user):
 def forget_password(request):
     if request.method == 'POST':
         email = request.POST.get('email')
-        
+        form_origin = request.data.get('form_origin')
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email=email)
+            if form_origin=="reset_arabe":
+                print("yeeeeeeeeees")
+                send_reset_password_ar(request, user)
             send_password_reset_email(request, user) 
 
             # Add a success message
-            messages.success(request, 'Password reset link has been sent to your email address.')
+            if form_origin=="reset_arabe":
+                messages.success(request, 'تم إرسال رابط إلى عنوان بريدك الإلكتروني.')
+            else :
+                messages.success(request, 'Password reset link has been sent to your email address.')
 
         else:
-            messages.error(request, 'Account does not exist.')
+            if form_origin=="reset_arabe":
+                messages.error(request, 'الحساب غير موجود.')
+            else :
+                messages.error(request, 'Account does not exist.')
            
-
+    if form_origin=="reset_arabe":
+        return render(request, 'reset-password_ar.html')
     return render(request, 'reset-password.html')
     
 @api_view(['POST'])
@@ -247,6 +280,26 @@ def reset_password(request,uidb64,token):
         return JsonResponse(data,status=200)
     else :
         data={"message":'Invalid activation link'}
+        return JsonResponse(data,status=500) 
+    
+    
+@api_view(['POST'])
+def reset_password_ar(request,uidb64,token,langue):
+    try:
+        uid=urlsafe_base64_decode(uidb64).decode()
+        print(uid)
+        user=User._default_manager.get(pk=uid)
+    except (TypeError,ValueError,OverflowError,User.DoesNotExist):
+        user=None
+    if user is not None and default_token_generator.check_token(user,token):
+        serializer = UserSerializer(instance=user, data=request.data, partial=True)
+        if serializer.is_valid():
+            usern = serializer.update_password(user, serializer.validated_data)
+            usern.save()
+        data={"message":'تهانينا! تم تغيير كلمة المرور '}
+        return JsonResponse(data,status=200)
+    else :
+        data={"message":'رابط التفعيل غير صالح'}
         return JsonResponse(data,status=500) 
 
 
@@ -303,6 +356,12 @@ def qstart_ar(request):
     return render(request, 'qstart_ar.html')
 def dashboard_ar(request):
     return render(request, 'dashboard_ar.html')
+def otp_ar(request):
+    return render(request, 'otp_ar.html')
+
+def reset_ar(request):
+    return render(request, 'reset-password_ar.html')  
+
 
 def update(request, uidb64, token):
     try:
@@ -320,7 +379,22 @@ def update(request, uidb64, token):
             'error': 'Invalid or expired reset link.'
         })
         
-        
+def update_ar(request, uidb64, token, langue):
+    try:
+        # Decode the uidb64 to get the user ID
+        uid =urlsafe_base64_decode(uidb64).decode()
+        user=User._default_manager.get(pk=uid)
+
+        # Render the password reset page and pass the uidb64 and token to the template
+        return render(request, 'update_ar.html', {'uidb64': uidb64, 'token': token , 'langue':langue})
+
+
+    except Exception as e:
+        # If something goes wrong (e.g., user not found), show an error message
+        return render(request, 'update_ar.html', {
+            'error': 'Invalid or expired reset link.'
+        })
+                
 
 def get_crypto_data():
     try:
@@ -446,6 +520,7 @@ def profiling(request):
 #         'bitcoin_price': bitcoin_price,
        
 #     })
+
 
 
 

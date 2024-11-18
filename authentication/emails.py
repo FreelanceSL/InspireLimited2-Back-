@@ -22,17 +22,29 @@ def send_otp_via_email(request,user):
     user_obj=User.objects.get(email=user.email)
 
 def send_reset_password(request,user):
-    subject ='Hello {user.last_name} !'
+    subject =f'Hello {user.last_name} {user.first_name}  !'
     id=urlsafe_base64_encode(force_bytes(user.pk))
     domain="localhost:8000"
     token= default_token_generator.make_token(user)
-    print(token)
     message=f'Your reset password link : http://{domain}/api/reset/{id}/{token}/'
     email_from= settings.DEFAULT_FROM_EMAIL
     
     send_mail(subject,message,email_from,[user.email])
     user_obj=User.objects.get(email=user.email)
 
+
+def send_reset_password_ar(request,user):
+    subject =f'Hello {user.last_name} {user.first_name} !'
+    id=urlsafe_base64_encode(force_bytes(user.pk))
+    domain="localhost:8000"
+    langue="arabic"
+    token= default_token_generator.make_token(user)
+    message=f'Your reset password link : http://{domain}/api/reset/{id}/{token}/{langue}/'
+    print(message)
+    email_from= settings.DEFAULT_FROM_EMAIL
+    
+    send_mail(subject,message,email_from,[user.email])
+    user_obj=User.objects.get(email=user.email)
 
 
 def send_infos(request, user):
