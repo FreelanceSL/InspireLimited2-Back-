@@ -1,0 +1,520 @@
+/* General styling for topbar */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: var(--bs-light);
+  }
+  
+  .topbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    vertical-align: middle;
+    margin-left: 8px;
+    color: var(--bs-primary);
+  }
+  
+  /* Dropdown menu styling */
+  .topbar .dropdown .dropdown-menu {
+    transform: rotateX(0deg);
+    visibility: visible;
+    background: var(--bs-light);
+    padding-top: 11px;
+    border: 0;
+    transition: .5s;
+    opacity: 1;
+  }
+  
+  .topbar .dropdown .dropdown-menu a:hover {
+    background: var(--bs-primary);
+    color: var(--bs-white);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .topbar {
+        flex-direction: column;
+        padding: 5px;
+    }
+  
+    /* Collapsible menu for mobile */
+    .topbar .dropdown .dropdown-menu {
+        display: none; /* Hide menu by default on mobile */
+        position: absolute;
+        top: 100%; /* Position menu below the topbar */
+        left: 0;
+        width: 100%;
+        background: var(--bs-light);
+    }
+  
+    .topbar .dropdown:hover .dropdown-menu,
+    .topbar .dropdown .dropdown-menu.show {
+        display: block; /* Show menu on hover or when toggled */
+    }
+  }
+  
+  /* Optional: Add button to toggle dropdown on mobile */
+  .topbar .dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  
+  
+  
+    /* Custom styling for the dashboard */
+    body {
+      background-color: #f4f7fa;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh; /* Full height of the viewport */
+  }
+  
+  .dashboard-container {
+    margin-top: 60px;
+      padding: 40px 20px;
+      flex-grow: 1; /* Makes the container take up remaining space */
+  }
+  
+  .welcome-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card {
+      background-color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .message-box {
+      background-color: #f9f9f9;
+      border-left: 4px solid #F2A900;
+      padding: 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      border-radius: 5px;
+  }
+  
+  .message-box h5 {
+      color: #333;
+  }
+  
+  .message-box p {
+      color: #555;
+  }
+  
+  
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 767px) {
+      .dashboard-container {
+          padding: 20px;
+      }
+  }
+  
+  .platform-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  
+  .platform-btn {
+    padding: 1rem 3rem;
+    border: none;
+    background: #f8f9fa;
+    color: #666;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .platform-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease;
+  }
+  
+  .platform-btn.active {
+    background: #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  }
+  
+  .platform-btn.active::after {
+    width: 80%;
+  }
+  
+  .windows-btn.active {
+    color: #F2A900;
+  }
+  
+  .windows-btn.active::after {
+    background: #F2A900;
+  }
+  
+  .android-btn.active {
+    color: #F2A900;
+  }
+  
+  .android-btn.active::after {
+    background: #F2A900;
+  }
+  
+  .ios-btn.active {
+    color: #000000;
+  }
+  
+  .ios-btn.active::after {
+    background: #000000;
+  }
+  
+  .platform-content {
+    padding: 3rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    min-height: 600px;
+    display: none;
+  }
+  
+  .platform-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .feature-list li {
+    margin-bottom: 1rem;
+    color: #666;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  
+  .feature-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #F2A900;
+  }
+  
+  .platform-image {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  
+  .platform-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  }
+  
+  .download-section {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .download-btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: #fff;
+    color: black;
+    border: 2px solid #F2A900;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin: 0.5rem;
+  }
+  
+  .download-btn:hover {
+    background: #F2A900;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  
+  
+  
+  
+  
+  
+  
+  body {
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  
+  .crypto-table {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin: 20px auto;
+  }
+  
+  .table {
+      margin-bottom: 0;
+  }
+  
+  .coin-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      vertical-align: middle;
+  }
+  
+  .coin-name {
+      font-weight: 500;
+  }
+  
+  .coin-symbol {
+      color: #6c757d;
+      font-size: 0.85em;
+  }
+  
+  .price-change {
+      font-weight: 500;
+  }
+  
+  .positive {
+      color: #28a745;
+  }
+  
+  .negative {
+      color: #dc3545;
+  }
+  
+  .buy-button {
+      background-color: rgba(40, 167, 69, 0.1);
+      color: #28a745;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.85em;
+      font-weight: 500;
+  }
+  
+  .table th {
+      border-top: none;
+      color: #6c757d;
+      font-weight: 500;
+      padding: 16px;
+  }
+  
+  .table td {
+      padding: 16px;
+      vertical-align: middle;
+  }
+  
+  .refresh-time {
+      text-align: center;
+      color: #6c757d;
+      font-size: 0.85em;
+      margin-top: 10px;
+  }
+  
+  
+  
+  
+  /*** Navbar ***/
+  .navbar-light .navbar-nav .nav-link {
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin-right: 25px;
+    padding: 35px 0;
+    color: black;
+    font-size: 17px;
+    font-weight: 400;
+    outline: none;
+    transition: .5s;
+  }
+  
+  .sticky-top.navbar-light .navbar-nav .nav-link,
+  .sticky-top.navbar-light .navbar-nav .nav-item .nav-link {
+    padding: 20px 0;
+    color: var(--bs-dark);
+  }
+  
+  .navbar-light .navbar-nav .nav-item .nav-link {
+    color: var(--bs-white);
+  }
+  
+  .navbar-light .navbar-nav .nav-link:hover,
+  .navbar-light .navbar-nav .nav-link.active,
+  .navbar-light .navbar-nav .nav-item .nav-link:hover,
+  .navbar-light .navbar-nav .nav-item .nav-link.active  {
+    color: var(--bs-primary);
+  }
+  
+  .navbar-light .navbar-brand img {
+    max-height: 60px;
+    transition: .5s;
+  }
+  
+  .sticky-top.navbar-light .navbar-brand img {
+    max-height: 45px;
+  }
+  
+  .dropdown-menu[data-bs-popper] {
+    top: 100%;
+    left: -110px !important;
+    margin-top: .125rem;
+  }
+  
+  #lng{
+    margin-left: 10px;
+  }
+  
+  .navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    vertical-align: middle;
+    margin-left: 8px;
+  }
+  
+  .dropdown .dropdown-menu a:hover {
+    background: var(--bs-primary);
+    color: var(--bs-white);
+  }
+  
+  .navbar .nav-item:hover .dropdown-menu {
+    transform: rotateX(0deg);
+    visibility: visible;
+    background: var(--bs-light);
+    transition: .5s;
+    opacity: 1;
+  }
+  
+  @media (max-width: 991.98px) {
+  
+    .dropdown-menu[data-bs-popper] {
+        top: 100%;
+        left: 0px !important;
+        margin-top: .125rem;
+    }
+    .sticky-top.navbar-light {
+        position: relative;
+        background: var(--bs-white);
+    }
+  
+    .navbar.navbar-expand-lg .navbar-toggler {
+        padding: 10px 20px;
+        border: 1px solid var(--bs-primary);
+        color: var(--bs-primary);
+    }
+  
+    .navbar-light .navbar-collapse {
+        margin-top: 15px;
+        border-top: 1px solid #DDDDDD;
+    }
+  
+    .navbar-light .navbar-nav .nav-link,
+    .sticky-top.navbar-light .navbar-nav .nav-link {
+        padding: 10px 0;
+        margin-left: 0;
+        color: var(--bs-dark);
+    }
+  
+    .navbar-light .navbar-nav .nav-item .nav-link {
+        color: var(--bs-dark);
+    }
+  
+    .navbar-light .navbar-brand img {
+        max-height: 45px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: block;
+        visibility: hidden;
+        top: 100%;
+        transform: rotateX(-75deg);
+        transform-origin: 0% 0%;
+        border: 0;
+        border-radius: 10px;
+        transition: .5s;
+        opacity: 0;
+    }
+  
+  
+    .navbar-light {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        z-index: 999;
+    }
+    
+    .sticky-top.navbar-light {
+        position: fixed;
+        background: var(--bs-light);
+    }
+  
+    .navbar-light .navbar-nav .nav-link::before {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 2px;
+        bottom: -1px;
+        left: 50%;
+        background: var(--bs-primary);
+        transition: .5s;
+    }
+  
+    .navbar-light .navbar-nav .nav-link:hover::before,
+    .navbar-light .navbar-nav .nav-link.active::before {
+        width: calc(100% - 2px);
+        left: 1px;
+    }
+  
+    .navbar-light .navbar-nav .nav-link::after {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        bottom: -1px;
+        left: 50%;
+        background: var(--bs-primary);
+        transition: .5s;
+    }
+  
+    .navbar-light .navbar-nav .nav-link:hover::after,
+    .navbar-light .navbar-nav .nav-link.active::after {
+        width: 2px;
+        height: 12px;
+    }
+  }
+  
+  .profile-img {
+    width: 25px;          /* Adjust size as needed */
+    height: 25px;
+    border-radius: 50%;   /* Makes the image circular */
+    object-fit: cover;    /* Ensures image fits within circle */
+    cursor: pointer;      /* Adds a pointer cursor on hover */
+  }
+  /*** Navbar End ***/
