@@ -354,8 +354,7 @@ def signup_ar(request):
     return render(request, 'register_ar.html')
 def qstart_ar(request):
     return render(request, 'qstart_ar.html')
-def dashboard_ar(request):
-    return render(request, 'dashboard_ar.html')
+
 def otp_ar(request):
     return render(request, 'otp_ar.html')
 
@@ -479,6 +478,20 @@ def dashboard(request):
     # metal_data= get_precious_metals_data()
 
     return render(request, 'dashboard.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data})
+
+@api_view(['GET'])
+@login_required(login_url='/api/login/')
+@permission_classes([IsVerified])
+def dashboard_ar(request):
+    if not request.user.is_authenticated or not request.user.is_verified:
+        return render(request, '404.html', status=404)
+    token = request.session.get('access_token', None)
+    first_name=request.session.get('first_name', None)
+    last_name=request.session.get('last_name', None)
+    crypto_data = get_crypto_data()
+    # metal_data= get_precious_metals_data()
+
+    return render(request, 'dashboard_ar.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data})
 
 
 @api_view(['GET'])
