@@ -58,3 +58,4 @@ class AdminSerializer(serializers.ModelSerializer):
         if password:
             instance.set_password(password)
         return instance
+
