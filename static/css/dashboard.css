@@ -184,7 +184,6 @@
 
 .platform-content {
   padding: 3rem;
-  background: #f8f9fa;
   border-radius: 10px;
   min-height: 600px;
   display: none;
@@ -201,6 +200,7 @@
 }
 
 .feature-list {
+  margin-top: 70px;
   list-style: none;
   padding: 0;
   margin-bottom: 2rem;
@@ -208,7 +208,7 @@
 
 .feature-list li {
   margin-bottom: 1rem;
-  color: #666;
+  color: black;
   padding-left: 1.5rem;
   position: relative;
 }
@@ -217,7 +217,7 @@
   content: '•';
   position: absolute;
   left: 0;
-  color: #F2A900;
+  color: black;
 }
 
 .platform-image {
@@ -242,7 +242,7 @@
   padding: 0.8rem 2rem;
   background: #fff;
   color: black;
-  border: 2px solid #F2A900;
+  border: 2px solid black;
   border-radius: 5px;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -250,8 +250,8 @@
 }
 
 .download-btn:hover {
-  background: #F2A900;
-  color: #fff;
+  background: black;
+  color: #F2A900;
   transform: translateY(-2px);
 }
 
@@ -266,75 +266,142 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.crypto-table {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin: 20px auto;
+
+
+.trading-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-.table {
-    margin-bottom: 0;
+.trading-category {
+  flex: 1;
+  min-width: 200px;
+  padding: 15px;
+  text-align: center;
+  background-color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.coin-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-    vertical-align: middle;
+.trading-category:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-.coin-name {
-    font-weight: 500;
+.trading-category.active {
+  background-color: #F2A900;
+  color: black;
 }
 
-.coin-symbol {
-    color: #6c757d;
-    font-size: 0.85em;
+.trading-table-container {
+  display: none;
+  overflow-x: auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 20px auto;
 }
 
-.price-change {
-    font-weight: 500;
+.trading-table-container.active {
+  display: block;
 }
 
-.positive {
-    color: #28a745;
+.trading-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0;
 }
 
-.negative {
-    color: #dc3545;
+.trading-table th {
+  border-top: none;
+  color: #6c757d;
+  font-weight: 500;
+  padding: 16px;
 }
 
-.buy-button {
-    background-color: rgba(40, 167, 69, 0.1);
-    color: #28a745;
-    border: none;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 0.85em;
-    font-weight: 500;
+.trading-table td {
+  padding: 16px;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
 }
 
-.table th {
-    border-top: none;
-    color: #6c757d;
-    font-weight: 500;
-    padding: 16px;
+.trading-coin-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
-.table td {
-    padding: 16px;
-    vertical-align: middle;
+.trading-coin-name {
+  font-weight: 500;
 }
 
-.refresh-time {
-    text-align: center;
-    color: #6c757d;
-    font-size: 0.85em;
-    margin-top: 10px;
+.trading-coin-symbol {
+  color: #6c757d;
+  font-size: 0.85em;
 }
 
+.trading-price-change {
+  font-weight: 500;
+}
 
+.trading-positive {
+  color: #28a745;
+}
+
+.trading-negative {
+  color: #dc3545;
+}
+
+.trading-buy-button {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.85em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.trading-buy-button:hover {
+  background-color: rgba(40, 167, 69, 0.2);
+}
+
+.trading-refresh-time {
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.85em;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .trading-category {
+    flex: 100%;
+  }
+
+  .trading-table th,
+  .trading-table td {
+    padding: 12px;
+    font-size: 0.9em;
+  }
+
+  .trading-coin-name {
+    display: block;
+  }
+
+  .trading-coin-symbol {
+    font-size: 0.8em;
+  }
+
+  .trading-buy-button {
+    margin-top: 4px;
+  }
+}
 
 
 /*** Navbar ***/
@@ -520,3 +587,158 @@ body {
 /*** Navbar End ***/
 
 
+  /* Custom Trading Design */
+  .trading-button {
+  background-color: #F2A900;
+  color: white;
+  width: 600px !important;
+  height: 50px;
+  font-weight: bold;
+  border: none;
+  transition: 0.3s ease;
+}
+
+
+
+
+/*new css*/
+
+.form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-select, .form-control {
+  border: 2px solid #e9ecef;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-select:focus, .form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+
+.trading-button:hover {
+background-color: #d18e00;
+}
+
+.modal-header {
+background-color: #F2A900;
+color: white;
+border-bottom: none;
+}
+
+.info-box {
+background: #f9f9f9;
+border-radius: 8px;
+padding: 15px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-item {
+margin-bottom: 10px;
+font-size: 1rem;
+}
+
+.info-label {
+font-weight: bold;
+color: #333;
+}
+
+
+/*** Footer Start ***/
+.footer {
+  background: var(--bs-secondary);
+}
+
+.footer .footer-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer .footer-item a {
+  line-height: 35px;
+  color: var(--bs-body);
+  transition: 0.5s;
+}
+
+.footer .footer-item p {
+  line-height: 35px;
+}
+
+.footer .footer-item a:hover {
+  color: var(--bs-primary);
+}
+
+.footer .footer-item .footer-btn a,
+.footer .footer-item .footer-btn a i {
+  transition: 0.5s;
+}
+
+.footer .footer-item .footer-btn a:hover {
+  background: var(--bs-white);
+}
+
+.footer .footer-item .footer-btn a:hover i {
+  color: var(--bs-primary);
+}
+/*** Footer End ***/
+
+/*** copyright Start ***/
+.copyright {
+  background: var(--bs-dark);
+}
+/*** copyright end ***/
+
+
+
+
+
+
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #787878;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  margin-bottom: 24px !important;
+}
+
+
+.plats{
+  background-color:#F2A900 !important  ;
+}
+
+.name{
+  color:#F2A900;
+  font-family:'Courier New', Courier, monospace;
+  font-size: larger;
+}

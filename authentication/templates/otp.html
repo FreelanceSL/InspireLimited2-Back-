@@ -80,6 +80,26 @@
       window.addEventListener("load", () => inputs[0].focus());
       
       // Handle resend button click
+      
+      
+      // Countdown logic for the Resend OTP button
+      function startCountdown() {
+        let countdown = 10;
+        isCountdownActive = true;
+        resendButton.disabled = true;
+      
+        const countdownInterval = setInterval(() => {
+          if (countdown > 0) {
+            resendButton.textContent = `Resend OTP (${countdown}s)`;
+            countdown--;
+          } else {
+            clearInterval(countdownInterval);
+            resendButton.textContent = "Resend OTP";
+            resendButton.disabled = false;
+            isCountdownActive = false;
+          }
+        }, 1000);
+      }
       async function handleResendClick(event) {
         event.preventDefault();
         
@@ -101,31 +121,12 @@
             console.error('Error:', error);
           }
         }
-      }
-      
-      // Countdown logic for the Resend OTP button
-      function startCountdown() {
-        let countdown = 30;
-        isCountdownActive = true;
-        resendButton.disabled = true;
-      
-        const countdownInterval = setInterval(() => {
-          if (countdown > 0) {
-            resendButton.textContent = `Resend OTP (${countdown}s)`;
-            countdown--;
-          } else {
-            clearInterval(countdownInterval);
-            resendButton.textContent = "Resend OTP";
-            resendButton.disabled = false;
-            isCountdownActive = false;
-          }
-        }, 1000);
-      }
-      
+      } 
       // Start the countdown when the page loads
       document.addEventListener("DOMContentLoaded", () => {
         startCountdown();
       });
+
     </script>
   </body>
 </html>

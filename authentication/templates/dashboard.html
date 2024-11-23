@@ -15,134 +15,86 @@
     <link rel="stylesheet" href="{% static 'lib/animate/animate.min.css' %}" />
     <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet" />
     <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet" />
-    
+
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
     <!-- Template Stylesheet -->
-    <style>
-      .form-container {
-          max-width: 600px;
-          margin: 2rem auto;
-          padding: 2rem;
-          border-radius: 10px;
-          box-shadow: 0 0 15px rgba(0,0,0,0.1);
-          background-color: #fff;
-      }
-      
-      .form-label {
-          font-weight: 600;
-          color: #333;
-      }
-      
-      .form-select, .form-control {
-          border: 2px solid #e9ecef;
-          padding: 0.75rem;
-          margin-bottom: 1.5rem;
-      }
-      
-      .form-select:focus, .form-control:focus {
-          border-color: #80bdff;
-          box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-      }
-      
-      .btn-submit {
-          width: 100%;
-          padding: 0.75rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-      }
 
-       /* Custom Trading Design */
-    .trading-button {
-      background-color: #F2A900;
-      color: white;
-      font-weight: bold;
-      border: none;
-      transition: 0.3s ease;
-    }
-
-    .trading-button:hover {
-      background-color: #d18e00;
-    }
-
-    .modal-header {
-      background-color: #F2A900;
-      color: white;
-      border-bottom: none;
-    }
-
-    .info-box {
-      background: #f9f9f9;
-      border-radius: 8px;
-      padding: 15px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .info-item {
-      margin-bottom: 10px;
-      font-size: 1rem;
-    }
-
-    .info-label {
-      font-weight: bold;
-      color: #333;
-    }
-  </style>
   </head>
   <body>
-    <!-- Spinner Start -->
+<!-- Spinner Start -->
 
-    <!-- Spinner End -->
-    <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 ">
-      <a href="" class="navbar-brand p-0">
-          <img src="{% static 'img/logo.png'%}" alt="" srcset="">
-          <!-- <img src="img/logo.png" alt="Logo"> -->
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-          <span class="fa fa-bars"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-          <div class="navbar-nav ms-auto py-0">
-              <a href="{% url 'index' %}" class="nav-item nav-link ">Home</a>
-              <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-              <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
-              <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
-              
-              <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
-          </div>
-          {% if not user.is_authenticated %}
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+  <!-- Brand Logo -->
+  <a href="" class="navbar-brand p-0">
+      <!-- Logo Image -->
+      <img src="{% static 'img/logo.png' %}" alt="" srcset="">
+      <!-- Alternative logo (commented) -->
+      <!-- <img src="img/logo.png" alt="Logo"> -->
+  </a>
+  
+  <!-- Toggler Button for Small Screens -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="fa fa-bars"></span>
+  </button>
+  
+  <!-- Collapsible Navigation Menu -->
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="navbar-nav ms-auto py-0">
+          <!-- Navigation Links -->
+          <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
+          <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+          <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
+          <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
+          <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
+      </div>
+
+      <!-- Authentication Links -->
+      {% if not user.is_authenticated %}
+          <!-- Links for Unauthenticated Users -->
           <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Signup</a>
-          <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0 " style="margin-left: 20px; !important">Signin</a>
-          {% else %}
+          <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px;">Signin</a>
+      {% else %}
+          <!-- Dropdown for Authenticated Users -->
           <div class="dropdown">
               <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
+                  <!-- Profile Image -->
                   <img src="{% static 'img/profile.png' %}" alt="Profile" class="profile-img">
               </a>
-
+              <!-- Dropdown Menu -->
               <div class="dropdown-menu rounded">
-                  <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-                  <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
-                  
-                  <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
-                
+                  <a href="{% url 'dashboard' %}" class="dropdown-item">
+                      <i class="fas fa-user-alt me-2"></i> My Profile
+                  </a>
+                  <a href="#" class="dropdown-item">
+                      <i class="fas fa-cog me-2"></i> Account Settings
+                  </a>
+                  <a href="{% url 'logout' %}" class="dropdown-item">
+                      <i class="fas fa-power-off me-2"></i> Log Out
+                  </a>
               </div>
           </div>
-          {% endif%}
-          <a id="lng" href={% url 'dashboard_ar'%}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-world"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M11.5 3a17 17 0 0 0 0 18"></path><path d="M12.5 3a17 17 0 0 1 0 18"></path></svg>AR</a>
-          
-      </div>
-  </nav>
-    <!-- Navbar & Hero Start -->
-
-
-
-
-
-    <div>
+      {% endif %}
+      
+      <!-- Language Toggle -->
+      <a id="lng" href={{url_lang}}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-world">
+              <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+              <path d="M3.6 9h16.8"></path>
+              <path d="M3.6 15h16.8"></path>
+              <path d="M11.5 3a17 17 0 0 0 0 18"></path>
+              <path d="M12.5 3a17 17 0 0 1 0 18"></path>
+          </svg>
+          {{langue}}
+      </a>
+  </div>
+</nav>
+<!-- Navbar & Hero Start -->
+  <div>
       {% if token %}
-        <div class="container dashboard-container">
+        <div class="dashboard-container">
           <div class="row">
             <div class="col-lg-8 mx-auto">
               <!-- Welcome Image -->
@@ -151,7 +103,7 @@
               <div class="card mt-4">
                 <div class="card-body">
                   <div class="message-box">
-                    <h5>Welcome to Your Trading Account {{ first_name }} {{last_name}}!</h5>
+                    <h5>Welcome to Your Trading Account <b class="name">{{ first_name }} {{last_name}}!</b></h5>
                     <p>We are currently processing your request to create a trading account. Our team is reviewing the details, and we will get back to you within the next 2-3 business days.</p>
                     <p>Thank you for your patience!</p>
                   </div>
@@ -165,68 +117,158 @@
       {% endif %}
     </div>
     <div class="container">
-      <!-- Navigation Buttons -->
-
-      <!-- Bitcoin real time data -->
-      <div class="container">
-        <div class="crypto-table">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Coin</th>
-                <th>Price</th>
-                <th>1h</th>
-                <th>24h</th>
-                <th>7d</th>
-                <th>24h Volume</th>
-                <th>Market Cap</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for coin in crypto_data %}
-                <tr>
-                  <td>{{ coin.rank }}</td>
-                  <td>
-                    <img src="{{ coin.image }}" alt="{{ coin.name }}" class="coin-icon" />
-                    <span class="coin-name">{{ coin.name }}</span>
-                    <span class="coin-symbol">{{ coin.symbol }}</span>
-                    <button class="buy-button ms-2">Buy</button>
-                  </td>
-                  <td>${{ coin.price|floatformat:2 }}</td>
-                  <td class="{% if coin.price_1h > 0 %}
-                      positive
-                    {% else %}
-                      negative
-                    {% endif %}">{{ coin.price_1h|floatformat:1 }}%</td>
-                  <td class="{% if coin.price_24h > 0 %}
-                      positive
-                    {% else %}
-                      negative
-                    {% endif %}">{{ coin.price_24h|floatformat:1 }}%</td>
-                  <td class="{% if coin.price_7d > 0 %}
-                      positive
-                    {% else %}
-                      negative
-                    {% endif %}">{{ coin.price_7d|floatformat:1 }}%</td>
-                  <td>${{ coin.volume_24h|floatformat:0 }}</td>
-                  <td>${{ coin.market_cap|floatformat:0 }}</td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        <p class="refresh-time">
-          Last updated:{% now 'F j, Y, H:i:s' %}
-        </p>
+      <div class="trading-nav">
+        <div class="trading-category active" data-target="bitcoin-table">Bitcoin & Virtual Money</div>
+        <div class="trading-category" data-target="real-money-table">Real Money (Dollars, Euros)</div>
+        <div class="trading-category" data-target="gold-table">Gold & Commodities</div>
       </div>
-      <div class="platform-nav">
+  
+      <div id="bitcoin-table" class="trading-table-container active">
+        <table class="trading-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Coin</th>
+              <th>Price</th>
+              <th>1h</th>
+              <th>24h</th>
+              <th>7d</th>
+              <th>24h Volume</th>
+              <th>Market Cap</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for coin in crypto_data %}
+              <tr>
+                <td>{{ coin.rank }}</td>
+                <td>
+                  <img src="{{ coin.image }}" alt="{{ coin.name }}" class="trading-coin-icon" />
+                  <span class="trading-coin-name">{{ coin.name }}</span>
+                  <span class="trading-coin-symbol">{{ coin.symbol }}</span>
+                  <button class="trading-buy-button">Buy</button>
+                </td>
+                <td>${{ coin.price|floatformat:2 }}</td>
+                <td class="trading-price-change {% if coin.price_1h > 0 %}trading-positive{% else %}trading-negative{% endif %}">
+                  {{ coin.price_1h|floatformat:1 }}%
+                </td>
+                <td class="trading-price-change {% if coin.price_24h > 0 %}trading-positive{% else %}trading-negative{% endif %}">
+                  {{ coin.price_24h|floatformat:1 }}%
+                </td>
+                <td class="trading-price-change {% if coin.price_7d > 0 %}trading-positive{% else %}trading-negative{% endif %}">
+                  {{ coin.price_7d|floatformat:1 }}%
+                </td>
+                <td>${{ coin.volume_24h|floatformat:0 }}</td>
+                <td>${{ coin.market_cap|floatformat:0 }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="trading-refresh-time">Last updated: Just now</div>
+      </div>
+  
+      <div id="real-money-table" class="trading-table-container">
+        <table class="trading-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Currency</th>
+              <th>Exchange Rate (USD)</th>
+              <th>1h Change</th>
+              <th>24h Volume</th>
+              <th>Market Cap</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                <img src="/api/placeholder/24/24" alt="EUR" class="trading-coin-icon" />
+                <span class="trading-coin-name">Euro</span>
+                <span class="trading-coin-symbol">(EUR)</span>
+                <button class="trading-buy-button">Buy</button>
+              </td>
+              <td>$1.09</td>
+              <td class="trading-price-change trading-positive">+0.2%</td>
+              <td>$98,500,000,000</td>
+              <td>$12,800,000,000,000</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <img src="/api/placeholder/24/24" alt="GBP" class="trading-coin-icon" />
+                <span class="trading-coin-name">British Pound</span>
+                <span class="trading-coin-symbol">(GBP)</span>
+                <button class="trading-buy-button">Buy</button>
+              </td>
+              <td>$1.27</td>
+              <td class="trading-price-change trading-negative">-0.1%</td>
+              <td>$65,300,000,000</td>
+              <td>$3,200,000,000,000</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                <img src="/api/placeholder/24/24" alt="JPY" class="trading-coin-icon" />
+                <span class="trading-coin-name">Japanese Yen</span>
+                <span class="trading-coin-symbol">(JPY)</span>
+                <button class="trading-buy-button">Buy</button>
+              </td>
+              <td>$0.0067</td>
+              <td class="trading-price-change trading-positive">+0.3%</td>
+              <td>$43,200,000,000</td>
+              <td>$5,400,000,000,000</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="trading-refresh-time">Last updated: Just now</div>
+      </div>
+  
+      <div id="gold-table" class="trading-table-container">
+        <table class="trading-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Commodity</th>
+              <th>Price</th>
+              <th>1h Change</th>
+              <th>Market Volume</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                <img src="/api/placeholder/24/24" alt="Gold" class="trading-coin-icon" />
+                <span class="trading-coin-name">Gold</span>
+                <button class="trading-buy-button">Buy</button>
+              </td>
+              <td>$1,800.50</td>
+              <td class="trading-price-change trading-positive">+0.3%</td>
+              <td>$500,000,000</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <img src="/api/placeholder/24/24" alt="Silver" class="trading-coin-icon" />
+                <span class="trading-coin-name">Silver</span>
+                <button class="trading-buy-button">Buy</button>
+              </td>
+              <td>$25.30</td>
+              <td class="trading-price-change trading-negative">-0.1%</td>
+              <td>$300,000,000</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="trading-refresh-time">Last updated: Just now</div>
+      </div>
+    </div>
+        <div class="platform-nav">
         <button class="platform-btn windows-btn active" onclick="showPlatform('windows')">Windows</button>
         <button class="platform-btn android-btn" onclick="showPlatform('android')">Android</button>
         <button class="platform-btn ios-btn" onclick="showPlatform('ios')">iOS</button>
       </div>
       <!-- Platform Content -->
-      <div class="platforms-container">
+      <div class="platforms-container plats">
         <!-- Windows Content -->
         <div id="windows" class="platform-content active">
           <div class="row">
@@ -242,7 +284,7 @@
             </div>
             <div class="col-md-6">
               <div class="platform-image">
-                <img src="{% static 'img/MT4.jpg' %}" alt="MetaTrader Desktop" style="width: 300px; height: 200px;" />
+                <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader Desktop" style="width: 400px; height: 300px;" />
               </div>
             </div>
           </div>
@@ -267,7 +309,7 @@
             </div>
             <div class="col-md-6">
               <div class="platform-image">
-                <img src="{% static 'img/MT4.jpg' %}" alt="MetaTrader Mobile" />
+                <img src="{% static 'img/dash.jpeg' %}" alt="MetaTrader Mobile" />
               </div>
             </div>
           </div>
@@ -291,7 +333,7 @@
             </div>
             <div class="col-md-6">
               <div class="platform-image">
-                <img src="{% static 'img/MT4.jpg' %}" alt="MetaTrader iOS" />
+                <img src="{% static 'img/dash.jpeg' %}" alt="MetaTrader iOS" />
               </div>
             </div>
           </div>
@@ -301,7 +343,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="">
       <div class="form-container">
           <h2 class="text-center mb-4">Trading Form</h2>
           <form method="post" action="{% url 'profiling' %}">
@@ -310,10 +352,10 @@
                   <label for="cryptoSelect" class="form-label">Select your asset</label>
                   <select class="form-select" id="cryptoSelect" name="cryptoSelect" required>
                       <option value="" selected disabled>Select an asset</option>
-                      <option value="bitcoin">Bitcoin</option>
+<option value="bitcoin">Bitcoin</option>
                       <option value="ethereum">Ethereum</option>
                       <option value="tether">Tether</option>
-                      <option value="solana">Solana</option>
+                                            <option value="solana">Solana</option>
                       <option value="bnb">BNB</option>
                       <option value="gold">Or</option>
                       <option value="silver">Argent</option>
@@ -340,9 +382,8 @@
               <button type="submit" class="btn btn-primary btn-submit">Submit</button>
           </form>
       </div>
+
       
-
-
       <div class="container my-5">
   
         <div class="text-center">
@@ -385,8 +426,101 @@
           </div>
         </div>
       </div>
-    
 
+
+        <!-- Footer Start -->
+        <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+          <div class="container py-5 border-start-0 border-end-0"
+              style="border: 1px solid; border-color: rgb(255, 255, 255, 0.08);">
+              <div class="row g-5">
+                  <div class="col-md-6 col-lg-6 col-xl-4">
+                      <div class="footer-item">
+                          <a href="index.html" class="p-0">
+                              <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
+                              <p>Your partner for secure trading.</p>
+                              <!-- <img src="img/logo.png" alt="Logo"> -->
+                          </a>
+                          <div class="d-flex gap-2 mt-3">
+                              <a href="https://www.metatrader4.com/fr" class="btn btn-primary  px-4 py-2">MT4</a>
+                              <a href="https://www.metatrader5.com/fr" class="btn btn-secondary  px-4 py-2">MT5</a>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div class="col-md-6 col-lg-6 col-xl-2">
+                      <div class="footer-item">
+                          <h4 class="text-white mb-4">Quick Links</h4>
+                          <a href="{% url 'about' %}"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                          <a href="{% url 'services' %}"><i class="fas fa-angle-right me-2"></i> Services</a>
+                          <a href="{% url 'blogs' %}"><i class="fas fa-angle-right me-2"></i> Blogs</a>
+  
+                          <a href="{% url 'contact' %}"><i class="fas fa-angle-right me-2"></i> Contact us</a>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-6 col-xl-3">
+                      <div class="footer-item">
+                          <h4 class="text-white mb-4">Markets</h4>
+                          <a href="#"><i class="fas fa-angle-right me-2"></i> ForexCFD</a>
+                          
+                          <a href="#"><i class="fas fa-angle-right me-2"></i> Stocks CFD</a>
+                          <a href="#"><i class="fas fa-angle-right me-2"></i> Indices CFD</a>
+                          <a href="#"><i class="fas fa-angle-right me-2"></i> Crypto CFD</a>
+  
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-6 col-xl-3">
+                      <div class="footer-item">
+                          <h4 class="text-white mb-4">Contact Info</h4>
+  
+                          <div class="d-flex align-items-center">
+                              <i class="fas fa-envelope text-primary me-3"></i>
+                              <p class="text-white mb-0">contact@inspire-trade.com</p>
+                          </div>
+                          <div class="d-flex align-items-center">
+                              <i class="fa fa-phone-alt text-primary me-3"></i>
+                              <p class="text-white mb-0"> +852 8171 3179</p>
+                          </div>
+                          <div class="d-flex align-items-center mb-4">
+                              <i class="fab fa-firefox-browser text-primary me-3"></i>
+                              <p class="text-white mb-0">inspire-Trade.com</p>
+                          </div>
+                          <div class="d-flex">
+                              <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                      class="fab fa-facebook-f text-white"></i></a>
+                              <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                      class="fab fa-twitter text-white"></i></a>
+                              <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                      class="fab fa-instagram text-white"></i></a>
+                              <a class="btn btn-primary btn-sm-square rounded-circle me-0" href="#"><i
+                                      class="fab fa-linkedin-in text-white"></i></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Footer End -->
+  
+      <!-- Copyright Start -->
+      <div class="container-fluid copyright py-4">
+          <div class="container">
+            <div class="row g-4 align-items-center">
+              <div class="col-md-6 text-center text-md-start mb-md-0">
+                <span class="text-body"
+                  ><a href="#" class="border-bottom text-white"
+                    ><i class="fas fa-copyright text-light me-2"></i
+                    >InspireTrade</a
+                  >, All right reserved.</span
+                >
+              </div>
+              <div class="col-md-6 text-center text-md-end text-body">  
+                Designed By
+                <a class="border-bottom text-white" href="#">Leamon</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- Copyright End -->
     <script>
       // Refresh the page every 60 seconds
       setTimeout(function () {
@@ -413,10 +547,26 @@
         document.querySelector(`.${platform}-btn`).classList.add('active')
       }
     </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const categories = document.querySelectorAll('.trading-category');
+    const tables = document.querySelectorAll('.trading-table-container');
+
+    categories.forEach(category => {
+      category.addEventListener('click', () => {
+        categories.forEach(cat => cat.classList.remove('active'));
+        tables.forEach(table => table.classList.remove('active'));
+
+        category.classList.add('active');
+        const targetTable = document.getElementById(category.dataset.target);
+        targetTable.classList.add('active');
+      });
+    });
+  });
+</script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     <script src="{% static 'lib/wow/wow.min.js' %}"></script>
     <script src="{% static 'lib/easing/easing.min.js' %}"></script>
     <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
@@ -426,5 +576,6 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
+    
   </body>
 </html>
