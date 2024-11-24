@@ -62,11 +62,11 @@
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="fa fa-bars"></span></button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
+                <div class="navbar-nav ms-auto py-0" dir="rtl">
                     <a href="{% url 'index_ar' %}" class="nav-item nav-link">الرئيسية</a>
                     <a href="{% url 'about_ar' %}" class="nav-item nav-link">من نحن</a>
-                    <a href="{% url 'services_ar' %}" class="nav-item nav-link">الخدمات</a>
-                    <a href="{% url 'blogs_ar' %}" class="nav-item nav-link active"> المدوّنات</a>
+                    <a href="{% url 'services_ar' %}" class="nav-item nav-link">خدماتنا</a>
+                    <a href="{% url 'blogs_ar' %}" class="nav-item nav-link active"> المدوّنة</a>
                     <a href="{% url 'contact_ar' %}" class="nav-item nav-link">تواصل معنا</a>
                 </div>
                 {% if not user.is_authenticated %}
@@ -78,9 +78,9 @@
                         <img src="{% static 'img/profile.png' %}" alt="الملف الشخصي" class="profile-img">
                     </a>
                     <div class="dropdown-menu rounded">
-                        <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> ملفي الشخصي</a>
+                        <a href="{% url 'dashboard_ar' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> ملفي الشخصي</a>
                         <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> إعدادات الحساب</a>
-                        <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+                        <a href="{% url 'logout_ar' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
                     </div>
                 </div>
                 {% endif %}
@@ -92,7 +92,7 @@
         <!-- Header Start -->
         <div class="container-fluid bg-breadcrumb">
             <div class="container text-center py-5" style="max-width: 900px;">
-                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">المدوّنات</h4>
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">المدوّنة</h4>
                 <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
                     <li class="breadcrumb-item">
                         <a href="{% url 'index_ar' %}">الرئيسية</a>
@@ -100,7 +100,7 @@
                     <li class="breadcrumb-item">
                         <a href="#">الصفحات</a>
                     </li>
-                    <li class="breadcrumb-item active text-primary">المدوّنات</li>
+                    <li class="breadcrumb-item active text-primary">المدوّنة</li>
                 </ol>
             </div>
         </div>
@@ -177,7 +177,7 @@
             <h1 class="display-5 mb-4">مقالات للمتداولين المحترفين</h1>
         </div>
         <div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay="0.2s">
-            <!-- عنصر المدونة 1: شراء السندات من السلسلة I -->
+            <!-- عنصر المدوّنة 1: شراء السندات من السلسلة I -->
             <div class="blog-item p-4">
                 <div class="blog-img mb-4">
                     <img src="/static/img/Buying-Series-I-Bonds.png" class="img-fluid w-100 rounded" alt="شراء السندات من السلسلة I">
@@ -205,7 +205,7 @@
                     </div>
                 </div>
             </div>
-            <!-- عنصر المدونة 2 -->
+            <!-- عنصر المدوّنة 2 -->
             <div class="blog-item p-4">
                 <div class="blog-img mb-4">
                     <img src="/static/img/call-put-options.jpg" class="img-fluid w-100 rounded" alt="خيارات الشراء والبيع">
@@ -233,7 +233,7 @@
                     </div>
                 </div>
             </div>
-            <!-- عنصر المدونة 3 -->
+            <!-- عنصر المدوّنة 3 -->
             <div class="blog-item p-4">
                 <div class="blog-img mb-4">
                     <img src="/static/img/Dividend-Aristocrat-List.png" class="img-fluid w-100 rounded" alt="قائمة توزيعات الأرباح الأرستقراطية">
@@ -261,7 +261,7 @@
                     </div>
                 </div>
             </div>
-            <!-- عنصر المدونة 4 -->
+            <!-- عنصر المدوّنة 4 -->
             <div class="blog-item p-4">
                 <div class="blog-img mb-4">
                     <img src="/static/img/AI-Stock-Trading-Definition.png" class="img-fluid w-100 rounded" alt="تحليل سوق الأسهم">
@@ -315,7 +315,7 @@
                 <div class="footer-item">
                     <h4 class="text-white mb-4">الأسواق</h4>
                     <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
-                    <a href="{% url 'services_ar' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
+                    <a href="{% url 'services_ar' %}"> خدماتنا <i class="fas fa-angle-left me-2"></i> </a>
                     <a href="{% url 'blogs_ar' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'contact_ar' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
                 </div>
@@ -325,7 +325,7 @@
                 <div class="footer-item">
                     <h4 class="text-white mb-4"> روابط سريعة </h4>
                     <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
-                    <a href="{% url 'services_ar' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
+                    <a href="{% url 'services_ar' %}"> خدماتنا <i class="fas fa-angle-left me-2"></i> </a>
                     <a href="{% url 'blogs_ar' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'contact_ar' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
                 </div>

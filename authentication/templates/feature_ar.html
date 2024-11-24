@@ -44,7 +44,7 @@
     </div>
     <!-- Spinner End -->
      <!-- Topbar Start -->
-<div class="container-fluid topbar bg-light px-5 d-none d-lg-block" dir="rtl">
+<div class="container-fluid topbar bg-light px-5 d-none d-lg-block" >
     <div class="row gx-0 align-items-center">
         <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
             <div class="d-flex flex-wrap">
@@ -88,8 +88,8 @@
 <!-- Topbar End -->
 
 <!-- Navbar & Hero Start -->
-<div class="container-fluid position-relative p-0" dir="rtl">
-    <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+<div class="container-fluid position-relative p-0" >
+    <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0" dir="ltr">
         <a href="" class="navbar-brand p-0">
             <img src="{% static 'img/logo.png'%}" alt="" srcset="">
             <!-- <img src="/static/img/logo.png" alt="Logo"> -->
@@ -101,8 +101,8 @@
             <div class="navbar-nav ms-auto py-0">
                 <a href="{% url 'index_ar' %}" class="nav-item nav-link active">الرئيسية</a>
                 <a href="{% url 'about_ar' %}" class="nav-item nav-link">يخصّنا</a>
-                <a href="{% url 'services_ar' %}" class="nav-item nav-link">الخدمات</a>
-                <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدونة</a>
+                <a href="{% url 'services_ar' %}" class="nav-item nav-link">خدماتنا</a>
+                <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدوّنة</a>
                 <a href="{% url 'contact_ar' %}" class="nav-item nav-link">تواصل معنا</a>
             </div>
             <a href="{% url 'signup_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">ابدأ الآن</a>
@@ -238,7 +238,7 @@
                 <div class="footer-item">
                     <h4 class="text-white mb-4"> روابط سريعة </h4>
                     <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
-                    <a href="{% url 'services_ar' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
+                    <a href="{% url 'services_ar' %}"> خدماتنا <i class="fas fa-angle-left me-2"></i> </a>
                     <a href="{% url 'blogs_ar' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'contact_ar' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
                 </div>
