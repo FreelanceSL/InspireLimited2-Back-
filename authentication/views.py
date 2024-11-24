@@ -307,23 +307,23 @@ def index(request):
     return render(request, 'index.html' ,{'langue':'AR','url_lang': reverse('index_ar')})
 
 def about(request):
-    return render(request, 'about.html',{'langue':'AR','url_lang': reverse('index_ar')})
+    return render(request, 'about.html',{'langue':'AR','url_lang': reverse('about_ar')})
 
 def services(request):
-    return render(request, 'service.html',{'langue':'AR','url_lang': reverse('index_ar')})
+    return render(request, 'service.html',{'langue':'AR','url_lang': reverse('services_ar')})
 
 def blogs(request):
-    return render(request, 'blog.html',{'langue':'AR','url_lang': reverse('index_ar')})
+    return render(request, 'blog.html',{'langue':'AR','url_lang': reverse('blog_ar')})
 
 
 def page_404(request):
     return render(request, '404.html')
 
 def contact(request):
-    return render(request, 'contact.html',{'langue':'AR','url_lang': reverse('index_ar')})
+    return render(request, 'contact.html',{'langue':'AR','url_lang': reverse('contact_ar')})
 
 def qstart(request):
-    return render(request, 'qstart.html',{'langue':'AR','url_lang': reverse('index_ar')})
+    return render(request, 'qstart.html',{'langue':'AR','url_lang': reverse('qstart_ar')})
 
 def signup(request):
     return render(request, 'register.html')
@@ -338,16 +338,16 @@ def index_ar(request):
     return render(request, 'index_ar.html',{'langue':'ENG','url_lang': reverse('index')})
 
 def about_ar(request):
-    return render(request, 'about_ar.html',{'langue':'ENG','url_lang': reverse('index')})
+    return render(request, 'about_ar.html',{'langue':'ENG','url_lang': reverse('about')})
 
 def services_ar(request):
-    return render(request, 'service_ar.html',{'langue':'ENG','url_lang': reverse('index')})
+    return render(request, 'service_ar.html',{'langue':'ENG','url_lang': reverse('services')})
 
 def contact_ar(request):
-    return render(request, 'contact_ar.html',{'langue':'ENG','url_lang': reverse('index')})
+    return render(request, 'contact_ar.html',{'langue':'ENG','url_lang': reverse('contact')})
 
 def blogs_ar(request):
-    return render(request, 'blog_ar.html',{'langue':'ENG','url_lang': reverse('index')})
+    return render(request, 'blog_ar.html',{'langue':'ENG','url_lang': reverse('blogs')})
 def login_ar(request):
     return render(request, 'login_ar.html')
 def signup_ar(request):
@@ -477,7 +477,7 @@ def dashboard(request):
     crypto_data = get_crypto_data()
     # metal_data= get_precious_metals_data()
 
-    return render(request, 'dashboard.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data})
+    return render(request, 'dashboard.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data , 'langue':'AR','url_lang': reverse('dashboard_ar')})
 
 @api_view(['GET'])
 @login_required(login_url='/api/login/')
@@ -491,7 +491,7 @@ def dashboard_ar(request):
     crypto_data = get_crypto_data()
     # metal_data= get_precious_metals_data()
 
-    return render(request, 'dashboard_ar.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data})
+    return render(request, 'dashboard_ar.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data ,'langue':'ENG','url_lang': reverse('dashboard')}  )
 
 
 @api_view(['GET'])

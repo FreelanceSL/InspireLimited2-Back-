@@ -132,11 +132,11 @@
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="fa fa-bars"></span></button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
+                <div class="navbar-nav ms-auto py-0" dir="rtl">
                     <a href="{% url 'index_ar' %}" class="nav-item nav-link">الرئيسية</a>
                     <a href="{% url 'about_ar' %}" class="nav-item nav-link">من نحن</a>
                     <a href="{% url 'services_ar' %}" class="nav-item nav-link">خدماتنا</a>
-                    <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدونة</a>
+                    <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدوّنة</a>
                     <a href="{% url 'contact_ar' %}" class="nav-item nav-link active">تواصل معنا</a>
                 </div>
                 {% if not user.is_authenticated %}
@@ -148,9 +148,9 @@
                         <img src="{% static 'img/profile.png' %}" alt="الملف الشخصي" class="profile-img">
                     </a>
                     <div class="dropdown-menu rounded">
-                        <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> ملفي الشخصي</a>
+                        <a href="{% url 'dashboard_ar' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> ملفي الشخصي</a>
                         <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> إعدادات الحساب</a>
-                        <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+                        <a href="{% url 'logout_ar' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
                     </div>
                 </div>
                 {% endif %}
@@ -249,7 +249,7 @@
                 <div class="footer-item">
                     <h4 class="text-white mb-4">الأسواق</h4>
                     <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
-                    <a href="{% url 'services_ar' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
+                    <a href="{% url 'services_ar' %}"> خدماتنا <i class="fas fa-angle-left me-2"></i> </a>
                     <a href="{% url 'blogs_ar' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'contact' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
                 </div>
@@ -259,7 +259,7 @@
                 <div class="footer-item">
                     <h4 class="text-white mb-4"> روابط سريعة </h4>
                     <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
-                    <a href="{% url 'services_ar' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
+                    <a href="{% url 'services_ar' %}"> خدماتنا <i class="fas fa-angle-left me-2"></i> </a>
                     <a href="{% url 'blogs_ar' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'contact' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
                 </div>
