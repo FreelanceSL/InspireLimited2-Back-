@@ -1024,33 +1024,26 @@
   }
 
 
-
-
-
-
-
-
-
   .ticker-wrapper {
     background-color: #1a1a1a;
     padding: 1rem 0;
     overflow: hidden;
     position: relative;
     width: 100%;
-  }
+}
   
-  .ticker {
+.ticker {
     display: flex;
     position: relative;
     width: max-content;
     animation: ticker 30s linear infinite;
-  }
+}
   
-  .ticker:hover {
+.ticker:hover {
     animation-play-state: paused;
-  }
+}
   
-  .ticker-item {
+.ticker-item {
     display: inline-flex;
     align-items: center;
     padding: 0 2rem;
@@ -1059,34 +1052,43 @@
     white-space: nowrap;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+    position: relative;
+}
 
-  .ticker-item:hover {
+.ticker-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 80%;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.ticker-item:hover {
     background-color: rgba(255, 255, 255, 0.1);
-  }
+}
   
-  .price-up {
+.price-up {
     color: #28a745;
-  }
+}
   
-  .price-down {
+.price-down {
     color: #dc3545;
-  }
+}
 
-  @keyframes ticker {
+@keyframes ticker {
     0% {
-      transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
     100% {
-      transform: translate3d(-50%, 0, 0);
+        transform: translate3d(-50%, 0, 0);
     }
-  }
+}
   
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .ticker-item {
-      padding: 0 1rem;
-      font-size: 0.9rem;
+        padding: 0 1rem;
+        font-size: 0.9rem;
     }
-  }
-
-
+}
