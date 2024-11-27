@@ -183,7 +183,6 @@
 }
 
 .platform-content {
-  padding: 3rem;
   border-radius: 10px;
   min-height: 600px;
   display: none;
@@ -235,7 +234,7 @@
 
 .download-section {
   text-align: center;
-  margin-top: 2rem;
+
 }
 
 .download-btn {

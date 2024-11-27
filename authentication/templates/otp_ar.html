@@ -30,6 +30,28 @@
         <button id="resend-btn" onclick="handleResendClick(event)" disabled>إبعث الرمز من جديد(30s)</button>
       </div>
     </div>
+    <!-- Toast for error message -->
+    <div id="toast" class="toast">
+      الرمز خاطئ  
+      <div class="progress-bar" id="progress-bar"></div>
+  </div>
+
+  <script>
+      {% if messages %}
+          const toast = document.getElementById('toast');
+          const progressBar = document.getElementById('progress-bar');
+
+          toast.classList.add('show');
+
+          setTimeout(function() {
+              progressBar.style.width = '0%'; 
+          }, 100);
+
+          setTimeout(function() {
+              toast.classList.remove('show');
+          }, 5000);
+      {% endif %}
+  </script>
     
     <script>
       // Select input fields and buttons

@@ -180,7 +180,9 @@ class Verification(APIView):
                 if form_origin=="otp_arabe" :
                     return redirect(reverse('login_ar'))
                 return redirect(reverse('login'))
-            return Response({"message":"otp invalid"},status=status.HTTP_403_FORBIDDEN)
+            else :
+                messages.error(request, "Incorrect otp code !")
+                return render(request, 'otp.html')
         
        
         
@@ -361,6 +363,8 @@ def otp_ar(request):
 def reset_ar(request):
     return render(request, 'reset-password_ar.html')  
 
+def forex(request):
+    return render (request,'forex.html',{'langue':'AR','url_lang': reverse('forex')})
 
 def update(request, uidb64, token):
     try:

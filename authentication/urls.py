@@ -51,6 +51,7 @@ urlpatterns = [
     path('dashboard_ar/', views.dashboard_ar, name='dashboard_ar'),
     path('otp_ar/', views.otp_ar, name='otp_ar'),
     path('profiling/', views.profiling, name='profiling'),
+    path('forex/',views.forex, name='forex')
     
     
     
