@@ -39,7 +39,7 @@ def send_reset_password_ar(request,user):
     domain="localhost:8000"
     langue="arabic"
     token= default_token_generator.make_token(user)
-    message=f'Your reset password link : http://{domain}/api/reset/{id}/{token}/{langue}/'
+    message=f'link : http://{domain}/api/reset/{id}/{token}/{langue}/'
     print(message)
     email_from= settings.DEFAULT_FROM_EMAIL
     
