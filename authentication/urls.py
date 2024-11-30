@@ -51,7 +51,10 @@ urlpatterns = [
     path('dashboard_ar/', views.dashboard_ar, name='dashboard_ar'),
     path('otp_ar/', views.otp_ar, name='otp_ar'),
     path('profiling/', views.profiling, name='profiling'),
-    path('forex/',views.forex, name='forex')
+    path('forex/',views.forex, name='forex'),
+    path('forex_ar/',views.forex_ar, name='forex_ar'),
+    path('crypto/',views.crypto, name='crypto'),
+    path('crypto_ar/',views.crypto_ar, name='crypto_ar')
     
     
     

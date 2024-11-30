@@ -315,7 +315,7 @@ def services(request):
     return render(request, 'service.html',{'langue':'AR','url_lang': reverse('services_ar')})
 
 def blogs(request):
-    return render(request, 'blog.html',{'langue':'AR','url_lang': reverse('blog_ar')})
+    return render(request, 'blog.html',{'langue':'AR','url_lang': reverse('blogs_ar')})
 
 
 def page_404(request):
@@ -364,7 +364,19 @@ def reset_ar(request):
     return render(request, 'reset-password_ar.html')  
 
 def forex(request):
-    return render (request,'forex.html',{'langue':'AR','url_lang': reverse('forex')})
+    return render (request,'forex.html',{'langue':'AR','url_lang': reverse('forex_ar')})
+
+
+def forex_ar(request):
+    return render (request,'forex_ar.html',{'langue':'ENG','url_lang': reverse('forex')})
+
+
+def crypto(request):
+    return render (request,'crypto.html',{'langue':'AR','url_lang': reverse('crypto_ar')})
+
+
+def crypto_ar(request):
+    return render (request,'crypto_ar.html',{'langue':'ENG','url_lang': reverse('crypto')})
 
 def update(request, uidb64, token):
     try:

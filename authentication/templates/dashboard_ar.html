@@ -144,9 +144,9 @@
               <div class="card mt-4">
                 <div class="card-body">
                   <div class="message-box">
-                    <h5>مرحباً بك في حساب التداول الخاص بك <b class="name"> {{ first_name }} {{ last_name }} </b> ! </h5>
+                    <h5>مرحباً بك   <b class="name"> {{ first_name }} {{ last_name }} </b> ! </h5>
                     <p>نقوم حالياً بمعالجة طلبك لإنشاء حساب تداول. فريقنا يراجع التفاصيل وسنعاود التواصل معك خلال 2-3 أيام عمل.</p>
-                    <p>شكراً لصبرك!</p>
+                    <p>شكراً لصبركم!</p>
                   </div>
                 </div>
               </div>
@@ -157,9 +157,9 @@
     </div>
     <div class="container">
       <div class="trading-nav">
-        <div class="trading-category active" data-target="bitcoin-table">بيتكوين والعملات الافتراضية</div>
-        <div class="trading-category" data-target="real-money-table">العملات الحقيقية (الدولار واليورو)</div>
-        <div class="trading-category" data-target="gold-table">الذهب والسلع</div>
+        <div class="trading-category active" data-target="bitcoin-table"> العملات الرقمية (crypto)</div>
+        <div class="trading-category" data-target="real-money-table">العملات (forex)</div>
+        <div class="trading-category" data-target="gold-table"> المعادن و السلع</div>
       </div>
     
       <div id="bitcoin-table" class="trading-table-container active">
@@ -351,7 +351,7 @@
               </div>
               <div class="col-md-6">
                   <div class="platform-image">
-                      <img src="{% static 'img/dash.jpeg' %}" alt="MetaTrader Mobile" />
+                      <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader Mobile"  style="width: 400px; height: 300px;"/>
                   </div>
               </div>
           </div>
@@ -375,7 +375,7 @@
               </div>
               <div class="col-md-6">
                   <div class="platform-image">
-                      <img src="{% static 'img/dash.jpeg' %}" alt="MetaTrader iOS" />
+                      <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader iOS"  style="width: 400px; height: 300px;"/>
                   </div>
               </div>
           </div>
@@ -386,32 +386,21 @@
   </div>
   <div class="">
       <div class="form-container">
-          <h2 class="text-center mb-3">نموذج التداول</h2>
+          <h2 class="text-center mb-3"></h2>
           <form method="post" action="{% url 'profiling' %}">
               {% csrf_token %}
               <div class="custom-select">
                   <div class="custom-select-trigger">اختر الأصول</div>
                   <div class="custom-options">
+                    
                       <div class="custom-option" data-value="bitcoin">
-                          <img src="/static/img/Bitcoin.png" alt="Bitcoin" style="margin-left:10px">  بيتكوين
-                      </div>
-                      <div class="custom-option" data-value="ethereum">
-                          <img src="/static/img/Ethereum-icon-purple.png" alt="Ethereum" style="margin-left:10px"> إيثريوم
-                      </div>
-                      <div class="custom-option" data-value="tether">
-                          <img src="/static/img/tether usdt.png" alt="Tether" style="margin-left:10px"> تيثر
-                      </div>
-                      <div class="custom-option" data-value="solana">
-                          <img src="/static/img/Solana_logo.png" alt="Solana" style="margin-left:10px"> سولانا
-                      </div>
-                      <div class="custom-option" data-value="bnb">
-                          <img src="/static/img/bnb-bnb-logo.png" alt="BNB" style="margin-left:10px"> بينانس (BNB)
+                          <img src="/static/img/Bitcoin.png" alt="Bitcoin"> العملات الرقمية (crypto)
                       </div>
                       <div class="custom-option" data-value="gold">
-                          <img src="/static/img/gld.png" alt="Gold" style="margin-left:10px"> ذهب
+                          <img src="/static/img/gld.png" alt="Gold"> المعادن و السلع
                       </div>
                       <div class="custom-option" data-value="silver">
-                          <img src="/static/img/silver.png" alt="Silver" style="margin-left:10px"> فضة
+                          <img src="/static/img/dollar.png" alt="Sixlver"> العملات (forex)
                       </div>
                   </div>
               </div>
@@ -517,10 +506,9 @@
           <div class="col-md-6 col-lg-6 col-xl-3">
               <div class="footer-item">
                   <h4 class="text-white mb-4">الأسواق</h4>
-                  <a href="#"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
-                  <a href="#">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
-                  <a href="#">السلع <i class="fas fa-angle-left me-2"></i> </a>
-                  <a href="#"> المؤشرات <i class="fas fa-angle-left me-2"></i></a>
+                  <a href="{% url 'crypto_ar' %}"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
+                  <a href="{% url 'forex_ar' %}">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
+    
               </div>
           </div>
 

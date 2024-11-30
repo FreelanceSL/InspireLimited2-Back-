@@ -154,7 +154,7 @@
               <div class="card mt-4">
                 <div class="card-body">
                   <div class="message-box">
-                    <h5>Welcome to Your Trading Account <b class="name">{{ first_name }} {{last_name}}!</b></h5>
+                    <h5>Welcome   <b class="name">{{ first_name }} {{last_name}}!</b></h5>
                     <p>We are currently processing your request to create a trading account. Our team is reviewing the details, and we will get back to you within the next 2-3 business days.</p>
                     <p>Thank you for your patience!</p>
                   </div>
@@ -168,9 +168,9 @@
     </div>
     <div class="container">
       <div class="trading-nav">
-        <div class="trading-category active" data-target="bitcoin-table">Bitcoin & Virtual Money</div>
-        <div class="trading-category" data-target="real-money-table">Real Money (Dollars, Euros)</div>
-        <div class="trading-category" data-target="gold-table">Gold & Commodities</div>
+        <div class="trading-category active" data-target="bitcoin-table">Crypto</div>
+        <div class="trading-category" data-target="real-money-table">Forex </div>
+        <div class="trading-category" data-target="gold-table">Metals</div>
       </div>
   
       <div id="bitcoin-table" class="trading-table-container active">
@@ -343,8 +343,8 @@
             </div>
           </div>
           <div class="download-section">
-            <a href="https://download.mql5.com/cdn/web/teletrade.d.j/mt4/teletrade4setup.exe" class="download-btn">Téléchargement MT4</a>
-            <a href="https://download.mql5.com/cdn/web/teletrade.d.j/mt5/tt5setup.exe" class="download-btn">Téléchargement MT5</a>
+            <a href="https://download.mql5.com/cdn/web/teletrade.d.j/mt4/teletrade4setup.exe" class="download-btn">Download MT4</a>
+            <a href="https://download.mql5.com/cdn/web/teletrade.d.j/mt5/tt5setup.exe" class="download-btn">Download MT5</a>
           </div>
         </div>
 
@@ -364,12 +364,12 @@
             </div>
             <div class="col-md-6">
               <div class="platform-image">
-                <img src="{% static 'img/dash.jpeg' %}" alt="MetaTrader Mobile" />
+                <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader Mobile"  style="width: 400px; height: 300px;" />
               </div>
             </div>
           </div>
           <div class="download-section">
-            <a href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4&hl=fr&referrer=ref_id%3d20a366d5%26hl%3dfr%26utm_campaign%3dfrom_teletrade_site" class="download-btn">Téléchargement MT4</a>
+            <a href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4&hl=fr&referrer=ref_id%3d20a366d5%26hl%3dfr%26utm_campaign%3dfrom_teletrade_site" class="download-btn">Download MT4</a>
           </div>
         </div>
 
@@ -389,19 +389,19 @@
             </div>
             <div class="col-md-6">
               <div class="platform-image">
-                <img src="{% static 'img/dash.jpeg' %}" alt="MetaTrader iOS" />
+                <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader iOS"   style="width: 400px; height: 300px;"/>
               </div>
             </div>
           </div>
           <div class="download-section">
-            <a href="https://itunes.apple.com/fr/app/metatrader-4/id496212596?utm_campaign=from_teletrade_site" class="download-btn">Téléchargement MT4</a>
+            <a href="https://itunes.apple.com/fr/app/metatrader-4/id496212596?utm_campaign=from_teletrade_site" class="download-btn">Download MT4</a>
           </div>
         </div>
       </div>
     </div>
     <div class="">
       <div class="form-container">
-          <h2 class="text-center mb-3">Trading Form</h2>
+          <h2 class="text-center mb-3"></h2>
           <form method="post" action="{% url 'profiling' %}">
             {% csrf_token %}
             <div class="custom-select">
@@ -530,11 +530,10 @@
                   <div class="col-md-6 col-lg-6 col-xl-3">
                       <div class="footer-item">
                           <h4 class="text-white mb-4">Markets</h4>
-                          <a href="#"><i class="fas fa-angle-right me-2"></i> ForexCFD</a>
+                          <a href="{% url 'forex' %}"><i class="fas fa-angle-right me-2"></i> ForexCFD</a>
                           
-                          <a href="#"><i class="fas fa-angle-right me-2"></i> Stocks CFD</a>
-                          <a href="#"><i class="fas fa-angle-right me-2"></i> Indices CFD</a>
-                          <a href="#"><i class="fas fa-angle-right me-2"></i> Crypto CFD</a>
+
+                          <a href="{% url 'crypto' %}"><i class="fas fa-angle-right me-2"></i> Crypto CFD</a>
   
                       </div>
                   </div>
