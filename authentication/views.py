@@ -523,7 +523,7 @@ def admin(request):
 @api_view(['POST'])
 @login_required(login_url='/api/login/')
 def profiling(request):
-    asset=request.data.get("cryptoSelect")
+    asset=request.POST.get("selectedAssets")
     platform=request.data.get("platformSelect")
     ammount=request.data.get("amount")
     email=request.session.get('email', None)

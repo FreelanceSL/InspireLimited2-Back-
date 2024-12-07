@@ -24,7 +24,7 @@ urlpatterns = [
     # path('upload/', views.FileUploadView.as_view(), name='upload_file'),
     
     
-    path('home/',views.index, name='index'),
+    path('',views.index, name='index'),
     path('about/', views.about, name='about'),
     path('services/', views.services, name='services'),
     path('blogs/', views.blogs, name='blogs'),
