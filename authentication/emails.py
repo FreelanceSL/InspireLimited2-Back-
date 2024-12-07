@@ -10,16 +10,39 @@ from .models import User
 from django.core.mail import EmailMessage
 from django.conf import settings
 
-def send_otp_via_email(request,user):
-    subject =f'Welcome to InspireTrade {user.first_name} !'
-    otp=str(random.randint(1000, 9999))
-    user.otp=otp
-    user.save()
-    message=f'Your account verification code is :{otp} '
-    email_from= settings.DEFAULT_FROM_EMAIL
+def send_otp_via_email(request, user):
+    import random
+    from django.core.mail import send_mail
+    from django.conf import settings
     
-    send_mail(subject,message,email_from,[user.email])
-    user_obj=User.objects.get(email=user.email)
+    subject = 'Verify Your Account - Inspire Trade'
+    otp = str(random.randint(1000, 9999))
+    user.otp = otp
+    user.save()
+    
+    message = f"""
+    Dear {user.first_name} {user.last_name},
+
+    Thank you for registering with Inspire Trade!
+
+    To complete your registration, please use the One-Time Password (OTP) below to verify your account: 
+
+    Your account verification code is: {otp}
+
+    This code is valid for the next 15 minutes. If you did not initiate this request, please ignore this email or contact our support team immediately.
+
+    For assistance, feel free to reach us at support@inspiretrade.com.
+
+    Welcome aboard!
+
+    The Inspire Trade Team
+
+    Disclaimer: This is an automated email. Please do not reply directly to this message.
+    """
+    
+    email_from = settings.DEFAULT_FROM_EMAIL
+    send_mail(subject, message, email_from, [user.email])
+
 
 def send_reset_password(request,user):
     subject =f'Hello {user.last_name} {user.first_name}  !'
