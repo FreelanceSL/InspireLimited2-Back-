@@ -47,9 +47,9 @@ def send_otp_via_email(request, user):
 def send_reset_password(request,user):
     subject =f'Hello {user.last_name} {user.first_name}  !'
     id=urlsafe_base64_encode(force_bytes(user.pk))
-    domain="localhost:8000"
+    domain="www.inspire-trade.com"
     token= default_token_generator.make_token(user)
-    message=f'Your reset password link : http://{domain}/api/reset/{id}/{token}/'
+    message=f'Your reset password link : https://{domain}/api/reset/{id}/{token}/'
     email_from= settings.DEFAULT_FROM_EMAIL
     
     send_mail(subject,message,email_from,[user.email])
@@ -59,10 +59,10 @@ def send_reset_password(request,user):
 def send_reset_password_ar(request,user):
     subject =f'Hello {user.last_name} {user.first_name} !'
     id=urlsafe_base64_encode(force_bytes(user.pk))
-    domain="localhost:8000"
+    domain="www.inspire-trade.com"
     langue="arabic"
     token= default_token_generator.make_token(user)
-    message=f'link : http://{domain}/api/reset/{id}/{token}/{langue}/'
+    message=f'link : https://{domain}/api/reset/{id}/{token}/{langue}/'
     print(message)
     email_from= settings.DEFAULT_FROM_EMAIL
     
@@ -82,7 +82,7 @@ def send_infos(request, user):
     """
     
     email_from = settings.DEFAULT_FROM_EMAIL
-    recipient_list = ["haddarskander50@gmail.com"]
+    recipient_list = ["contact@inspire-limited.com"]
 
     email = EmailMessage(subject, message, email_from, recipient_list)
 
@@ -111,7 +111,7 @@ def send_infos_trade(request, user,asset,platform,ammount):
     """
     
     email_from = settings.DEFAULT_FROM_EMAIL
-    recipient_list = ["inspiretrade@yopmail.com"]
+    recipient_list = ["contact@inspire-trade.com"]
 
     email = EmailMessage(subject, message, email_from, recipient_list)
     email.send()
