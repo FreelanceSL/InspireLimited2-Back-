@@ -378,6 +378,13 @@ def crypto(request):
 def crypto_ar(request):
     return render (request,'crypto_ar.html',{'langue':'ENG','url_lang': reverse('crypto')})
 
+def metals(request):
+    return render (request,'metals.html',{'langue':'AR','url_lang': reverse('metals_ar')})
+
+
+def metals_ar(request):
+    return render (request,'metals_ar.html',{'langue':'ENG','url_lang': reverse('metals')})
+
 def update(request, uidb64, token):
     try:
         # Decode the uidb64 to get the user ID

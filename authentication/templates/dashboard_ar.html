@@ -145,7 +145,7 @@
                 <div class="card-body">
                   <div class="message-box">
                     <h5>مرحباً بك   <b class="name"> {{ first_name }} {{ last_name }} </b> ! </h5>
-                    <p>نقوم حالياً بمعالجة طلبك لإنشاء حساب تداول. فريقنا يراجع التفاصيل وسنعاود التواصل معك خلال 2-3 أيام عمل.</p>
+                    <p>نقوم حالياً بمعالجة طلبك لإنشاء حساب تداول. فريقنا يراجع التفاصيل وسنعاود التواصل معك خلال 1-2 أيام عمل.</p>
                     <p>شكراً لصبركم!</p>
                   </div>
                 </div>
@@ -394,13 +394,13 @@
                   <div class="custom-options">
                     
                       <div class="custom-option" data-value="bitcoin">
-                          <img src="/static/img/Bitcoin.png" alt="Bitcoin"> العملات الرقمية (crypto)
+                          <img src="/static/img/Bitcoin.png" alt="Crypto"> العملات الرقمية (crypto)
                       </div>
-                      <div class="custom-option" data-value="gold">
-                          <img src="/static/img/gld.png" alt="Gold"> المعادن و السلع
-                      </div>
-                      <div class="custom-option" data-value="silver">
+                      <div class="custom-option" data-value="Forex">
                           <img src="/static/img/dollar.png" alt="Sixlver"> العملات (forex)
+                      </div>
+                      <div class="custom-option" data-value="Metals">
+                          <img src="/static/img/gld.png" alt="Gold"> المعادن و السلع
                       </div>
                   </div>
               </div>
@@ -459,7 +459,7 @@
     <div class="text-center">
       <!-- زر لفتح النافذة -->
       <button type="button" class="btn trading-button" data-bs-toggle="modal" data-bs-target="#tradingInfoModal">
-        عرض تفاصيل الدفع
+        قم يتمويل حسابك
       </button>
     </div>
   </div>
@@ -477,16 +477,23 @@
   
           <div class="info-box">
             <div class="info-item">
-              <span class="info-label">رقم حساب RIB:</span> 1234 5678 9012 3456
+              <span class="info-label">إسم الحساب:</span> INSPIRE LIMITED
             </div>
             <div class="info-item">
-              <span class="info-label">اسم البنك:</span> بنك التداول العالمي
+              <span class="info-label">رقم الحساب:</span> 7950194558
+            </div>
+
+            <div class="info-item">
+              <span class="info-label">رمز البنك:</span> 016
             </div>
             <div class="info-item">
-              <span class="info-label">رمز الفرع:</span> GTB12345
+              <span class="info-label">رمز سويفت:</span> DHBKHKHH
             </div>
             <div class="info-item">
-              <span class="info-label">رمز السويفت:</span> SWIFT123ABC
+              <span class="info-label">موقع الحساب:</span> هونغ كونغ
+            </div>
+            <div class="info-item">
+              <span class="info-label">إسم البنك: </span> DBS Bank (Hong Kong) Limited
             </div>
           </div>
         </div>
@@ -496,6 +503,50 @@
       </div>
     </div>
   </div>
+
+  
+      <!--After Payement Modal-->
+      <div class="modal fade" id="tradingInfoModal1" tabindex="-1" aria-labelledby="tradingInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="tradingInfoModalLabel">Account Information</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>We receive your application to trade with the entred ammount, this is the informations to fund your account</p>
+    
+              <div class="info-box">
+                <div class="info-item">
+                  <span class="info-label">Account name: </span>  INSPIRE LIMITED
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Account number:</span> 7950194558
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Bank code:</span> 016
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Branch Code:</span> 478
+
+                </div>
+                <div class="info-item">
+                  <span class="info-label">SWIFT Code:</span> DHBKHKHH
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Account location: </span> Hong Kong SAR
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Bank name:</span> DBS Bank (Hong Kong) Limited
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
   
 <!-- الفوتر بداية -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" dir="ltr">
@@ -520,7 +571,13 @@
                   <h4 class="text-white mb-4">الأسواق</h4>
                   <a href="{% url 'crypto_ar' %}"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
                   <a href="{% url 'forex_ar' %}">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
-    
+                                  <div class="footer-item">
+                    <h4 class="text-white mb-4">الأسواق</h4>
+                    <a href="{% url 'crypto_ar' %}"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'forex_ar' %}">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
+		     <a href="{% url 'metals_ar' %}">  الأسواق  <i class="fas fa-angle-left me-2">  </i></a>
+
+                </div>    
               </div>
           </div>
 
@@ -629,10 +686,10 @@
 <script>
   document.getElementById('profilingForm').addEventListener('submit', async function(event) {
       event.preventDefault();
-
+  
       const form = event.target;
       const formData = new FormData(form);
-
+  
       try {
           const response = await fetch(form.action, {
               method: 'POST',
@@ -641,14 +698,13 @@
                   'X-CSRFToken': formData.get('csrfmiddlewaretoken')
               }
           });
-
+  
           if (response.ok) {
-              // Show success toast
-              const toastElement = document.getElementById('formToast');
-              const toast = new bootstrap.Toast(toastElement);
-              toast.show();
-
-              // Optionally, clear the form or redirect
+              // Show trading info modal instead of toast
+              const tradingInfoModal = new bootstrap.Modal(document.getElementById('tradingInfoModal1'));
+              tradingInfoModal.show();
+  
+              // Optionally, clear the form
               form.reset();
           } else {
               // Handle errors

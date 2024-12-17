@@ -170,9 +170,9 @@ CORS_ORIGIN_WHITELIST = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_BACKEND='django_mailjet.backends.MailjetBackend'
-MAILJET_API_KEY="0b3565714112a621b2db4771bda2f74e"
-MAILJET_API_SECRET="3e161da10e37fe85873080484a0036de"
-DEFAULT_FROM_EMAIL='amriaymen221@gmail.com'
+MAILJET_API_KEY="f71c4ba3e9b1031a549b1034f11dd425"
+MAILJET_API_SECRET="0e7d9b5716ae2936d2eb93b7c64229c7"
+DEFAULT_FROM_EMAIL='contact@inspire-trade.com'
 
 AUTH_USER_MODEL = "authentication.User" 
 

@@ -34,7 +34,7 @@ urlpatterns = [
     path('signup/',views.signup,name="signup"),
     path('admin_dashboard/',views.admin,name="admin"),
     path('otp/',views.otp,name="otp"),
-    path('users/', views.user_list, name='user_list'),
+    path('admin_dashboard/users/', views.user_list, name='user_list'),
     path('reset/',views.reset,name='reset'),
     path('reset_ar/',views.reset_ar,name='reset_ar'),
     path('qstart/',views.qstart,name='qstart'),
@@ -54,7 +54,9 @@ urlpatterns = [
     path('forex/',views.forex, name='forex'),
     path('forex_ar/',views.forex_ar, name='forex_ar'),
     path('crypto/',views.crypto, name='crypto'),
-    path('crypto_ar/',views.crypto_ar, name='crypto_ar')
+    path('crypto_ar/',views.crypto_ar, name='crypto_ar'),
+    path('metals/',views.metals, name='metals'),
+    path('metals_ar/',views.metals_ar, name='metals_ar')
     
     
     

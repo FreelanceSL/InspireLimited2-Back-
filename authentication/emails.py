@@ -31,7 +31,7 @@ def send_otp_via_email(request, user):
 
     This code is valid for the next 15 minutes. If you did not initiate this request, please ignore this email or contact our support team immediately.
 
-    For assistance, feel free to reach us at support@inspiretrade.com.
+    For assistance, feel free to reach us at contact@inspiretrade.com.
 
     Welcome aboard!
 
@@ -82,7 +82,7 @@ def send_infos(request, user):
     """
     
     email_from = settings.DEFAULT_FROM_EMAIL
-    recipient_list = ["contact@inspire-limited.com"]
+    recipient_list = ["support@inspire-trade.com"]
 
     email = EmailMessage(subject, message, email_from, recipient_list)
 
@@ -111,7 +111,7 @@ def send_infos_trade(request, user,asset,platform,ammount):
     """
     
     email_from = settings.DEFAULT_FROM_EMAIL
-    recipient_list = ["contact@inspire-trade.com"]
+    recipient_list = ["support@inspire-trade.com"]
 
     email = EmailMessage(subject, message, email_from, recipient_list)
     email.send()
