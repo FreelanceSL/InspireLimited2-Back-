@@ -79,8 +79,8 @@
                     <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
                 </div>
                 {% if not user.is_authenticated %}
-                <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Sign up</a>
-                <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0 " style="margin-left: 20px; !important">Sign in</a>
+                <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Register</a>
+                <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0 " style="margin-left: 20px; !important">Login</a>
                 {% else %}
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
@@ -533,7 +533,7 @@
                             </h2>
                             <div id="flush-collapseOne" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushSection">
-                                <div class="accordion-body">To create an account, click on the “Sign Up” button at the top of the page and follow the registration instructions. After verifying your account, you can deposit funds and begin trading on our platform.</div>
+                                <div class="accordion-body">To create an account, click on the “Register” button at the top of the page and follow the registration instructions. After verifying your account, you can deposit funds and begin trading on our platform.</div>
                             </div>
                         </div>
                         <div class="accordion-item">
@@ -656,7 +656,8 @@
                         <a href="{% url 'forex' %}"><i class="fas fa-angle-right me-2"></i> ForexCFD</a>
                         
                         
-                        <a href="{% url 'crypto' %}"><i class="fas fa-angle-right me-2"></i> Crypto CFD</a>
+                        <a href="{% url 'crypto' %}"><i class="fas fa-angle-right me-2"></i> Crypto CFD</a> 
+			<a href="{% url 'metals' %}"><i class="fas fa-angle-right me-2"></i> Metals</a>
 
                     </div>
                 </div>

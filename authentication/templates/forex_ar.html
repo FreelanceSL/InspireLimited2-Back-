@@ -29,38 +29,24 @@
   </head>
 
   <body>
-    <!-- Topbar Start -->
-    <div class="container-fluid topbar bg-light px-5 d-none d-lg-block">
-      <div class="row gx-0 align-items-center">
-        <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
-          <div class="d-flex flex-wrap">
-            <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0">
-              <i class="fas fa-envelope text-primary me-2"></i>contact@inspire-trade.com
-            </a>
+       <!-- Topbar Start -->
+       <div class="container-fluid topbar bg-light px-5 d-none d-lg-block">
+        <div class="row gx-0 align-items-center">
+          <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-flex flex-wrap">
+              <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0">
+                <i class="fas fa-envelope text-primary me-2"></i>contact@inspire-trade.com
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Topbar End -->
-    <div class="container-fluid position-relative p-0">
-      <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-        <a href="" class="navbar-brand p-0">
-          <img src="{% static 'img/logo.png'%}" alt="" />
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-          <span class="fa fa-bars"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <div class="navbar-nav ms-auto py-0">
-            <a href="{% url 'index' %}" class="nav-item nav-link">الرئيسية</a>
-            <a href="{% url 'about' %}" class="nav-item nav-link">من نحن</a>
-            <a href="{% url 'services' %}" class="nav-item nav-link">الخدمات</a>
-            <a href="{% url 'blogs' %}" class="nav-item nav-link">المدونات</a>
-            <a href="{% url 'contact' %}" class="nav-item nav-link">اتصل بنا</a>
-          </div>
+      <!-- Topbar End -->
+      <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
           {% if not user.is_authenticated %}
-          <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">إنشاء حساب</a>
-          <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px !important;">تسجيل الدخول</a>
+          <a href="{% url 'signup_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">إنشاء حساب</a>
+          <a href="{% url 'login_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px !important;">تسجيل الدخول</a>
           {% else %}
           <div class="dropdown">
             <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
@@ -73,7 +59,7 @@
               <a href="#" class="dropdown-item">
                 <i class="fas fa-cog me-2"></i> إعدادات الحساب
               </a>
-              <a href="{% url 'logout' %}" class="dropdown-item">
+              <a href="{% url 'logout_ar' %}" class="dropdown-item">
                 <i class="fas fa-power-off me-2"></i> تسجيل الخروج
               </a>
             </div>
@@ -88,9 +74,25 @@
               <path d="M12.5 3a17 17 0 0 1 0 18"></path>
             </svg>{{langue}}
           </a>
-        </div>
-      </nav>
-    </div>
+  
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="fa fa-bars"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+              <a href="{% url 'index_ar' %}" class="nav-item nav-link">الرئيسية</a>
+              <a href="{% url 'about_ar' %}" class="nav-item nav-link">من نحن</a>
+              <a href="{% url 'services_ar' %}" class="nav-item nav-link">خدماتنا</a>
+              <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدوّنة</a>
+              <a href="{% url 'contact_ar' %}" class="nav-item nav-link">تواصل معنا</a>
+            </div>
+          </div>
+          <a href="" class="navbar-brand p-0">
+            <img src="{% static 'img/logo.png'%}" alt="" />
+          </a>
+  
+        </nav>
+      </div>
 
     <div class="full-bg-image"></div>
     <div class="containerff mt-4 mb-lg-4">
@@ -167,7 +169,13 @@
                     <h4 class="text-white mb-4">الأسواق</h4>
                     <a href="{% url 'crypto_ar' %}"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'forex_ar' %}">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
+		                     <div class="footer-item">
+                    <h4 class="text-white mb-4">الأسواق</h4>
+                    <a href="{% url 'crypto_ar' %}"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'forex_ar' %}">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
+		     <a href="{% url 'metals_ar' %}">  الأسواق  <i class="fas fa-angle-left me-2">  </i></a>
 
+                </div>
                 </div>
             </div>
 

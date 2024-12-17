@@ -183,9 +183,8 @@
 }
 
 .platform-content {
-
   border-radius: 10px;
-  min-height: 600px;
+  min-height: 567px;
   display: none;
 }
 
@@ -200,7 +199,7 @@
 }
 
 .feature-list {
-  margin-top: 70px;
+  margin-top: 20px;
   list-style: none;
   padding: 0;
   margin-bottom: 2rem;
@@ -223,8 +222,10 @@
 }
 
 .platform-image {
-  text-align: center;
-  margin: 2rem 0;
+
+    text-align: center;
+    margin: 8rem 0;
+
 }
 
 .platform-image img {
@@ -235,8 +236,9 @@
 }
 
 .download-section {
-  text-align: center;
-  margin-top: 2rem;
+    text-align: center;
+    margin-top: -4rem;
+
 }
 
 .download-btn {
@@ -760,6 +762,7 @@ color: #333;
 
 .plats{
   background-color:#F2A900 !important  ;
+  height: auto;
 }
 
 .name{

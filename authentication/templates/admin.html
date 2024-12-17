@@ -216,7 +216,7 @@
 
   async function fetchUserData(query = '') {
     try {
-      const response = await fetch(`/api/users/?email=${query}&page=${currentPage}&per_page=${itemsPerPage}`);
+      const response = await fetch(`users/?email=${query}&page=${currentPage}&per_page=${itemsPerPage}`);
       if (!response.ok) throw new Error('Failed to fetch data');
       const data = await response.json();
       currentData = data.results;
