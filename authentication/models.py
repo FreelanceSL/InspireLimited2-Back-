@@ -52,9 +52,12 @@ class User(AbstractUser):
     country = models.CharField(max_length=40, blank=False)
     phone = models.CharField(max_length=30, blank=True)
     otp = models.CharField(max_length=4)
+    trading_ammount=models.FloatField()
+    sum_trading_ammount=models.FloatField()
     is_verified = models.BooleanField(default=False)
     image = models.ImageField(upload_to='profile_images/', blank=True, null=True)  # New image field
-
+    
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = UserManager()

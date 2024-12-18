@@ -163,7 +163,14 @@
                     <a href="{% url 'about' %}"><i class="fas fa-angle-right me-2"></i> About Us</a>
                     <a href="{% url 'services' %}"><i class="fas fa-angle-right me-2"></i> Services</a>
                     <a href="{% url 'blogs' %}"><i class="fas fa-angle-right me-2"></i> Blogs</a>
-
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Market</a>
+                        <div class="dropdown-menu rounded">
+                            <a href="{% url 'crypto' %}" class="dropdown-item">Crypto</a>
+                            <a href="{% url 'forex' %}" class="dropdown-item">Forex</a>
+                            <a href="{% url 'metals' %}" class="dropdown-item">Metals</a>
+                        </div>
+                    </div>
                     <a href="{% url 'contact' %}"><i class="fas fa-angle-right me-2"></i> Contact us</a>
                 </div>
             </div>

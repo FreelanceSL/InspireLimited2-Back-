@@ -28,6 +28,14 @@
                 <a href="{% url 'about_ar' %}">من نحن</a>
                 <a href="{% url 'services_ar' %}">خدماتنا</a>
                 <a href="{% url 'blogs_ar' %}">المدوّنة</a>
+                <div class="nav-item dropdown" dir="rtl">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">السوق</a>
+              <div class="dropdown-menu rounded" style="text-align: right;">
+                  <a href="{% url 'crypto' %}" class="dropdown-item" >العملات الرقمية</a>
+                  <a href="{% url 'forex' %}" class="dropdown-item">الفوركس</a>
+                  <a href="{% url 'metals' %}" class="dropdown-item">المعادن و السلع</a>
+              </div>
+          </div>
                 <a href="{% url 'contact_ar' %}">اتصل بنا</a>
             </div>
         </div>
@@ -78,6 +86,7 @@
                     <li>ابدأ رحلتك في التداول مع فريق الدعم المميز الخاص بنا في خدمتك</li>
                 </ul>
             </div>
+            <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-right: 40%;">ابدأ التداول </a>
         </div>
     </div>
     <!-- نهاية محتوى الدليل -->

@@ -99,6 +99,14 @@
           <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
           <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
           <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Market</a>
+            <div class="dropdown-menu rounded">
+                <a href="{% url 'crypto' %}" class="dropdown-item">Crypto</a>
+                <a href="{% url 'forex' %}" class="dropdown-item">Forex</a>
+                <a href="{% url 'metals' %}" class="dropdown-item">Metals</a>
+            </div>
+        </div>
           <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
       </div>
 
@@ -528,7 +536,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>We receive your application to trade with the entred ammount, this is the informations to fund your account</p>
+              <p>We have received your request. You can now fund your account with the specified amount, and you will receive a response after the account review and approval process is completed.  </p>
     
               <div class="info-box">
                 <div class="info-item">
