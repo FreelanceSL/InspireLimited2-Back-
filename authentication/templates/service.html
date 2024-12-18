@@ -65,7 +65,14 @@
             <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
             <a href="{% url 'services' %}" class="nav-item nav-link active">Services</a>
             <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
-
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Market</a>
+              <div class="dropdown-menu rounded">
+                  <a href="{% url 'crypto' %}" class="dropdown-item">Crypto</a>
+                  <a href="{% url 'forex' %}" class="dropdown-item">Forex</a>
+                  <a href="{% url 'metals' %}" class="dropdown-item">Metals</a>
+              </div>
+          </div>
             <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
           </div>
           {% if not user.is_authenticated %}

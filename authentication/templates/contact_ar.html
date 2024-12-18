@@ -137,6 +137,14 @@
                     <a href="{% url 'about_ar' %}" class="nav-item nav-link">من نحن</a>
                     <a href="{% url 'services_ar' %}" class="nav-item nav-link">خدماتنا</a>
                     <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدوّنة</a>
+                    <div class="nav-item dropdown" dir="rtl">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">السوق</a>
+              <div class="dropdown-menu rounded" style="text-align: right;">
+                  <a href="{% url 'crypto' %}" class="dropdown-item" >العملات الرقمية</a>
+                  <a href="{% url 'forex' %}" class="dropdown-item">الفوركس</a>
+                  <a href="{% url 'metals' %}" class="dropdown-item">المعادن و السلع</a>
+              </div>
+          </div>
                     <a href="{% url 'contact_ar' %}" class="nav-item nav-link active">تواصل معنا</a>
                 </div>
                 {% if not user.is_authenticated %}
@@ -228,12 +236,12 @@
         </div>
     </div>
 <!-- الفوتر بداية -->
-<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" >
     <div class="container py-5 border-start-0 border-end-0"
         style="border: 1px solid; border-color: rgb(255, 255, 255, 0.08);">
-        <div class="row g-5">
+        <div class="row g-5" dir="ltr">
             <div class="col-md-6 col-lg-6 col-xl-4">
-                <div class="footer-item" dir="ltr">
+                <div class="footer-item">
                     <a href="index.html" class="p-0">
                         <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
                         <p>شريكك للتداول الآمن.</p>
@@ -247,31 +255,26 @@
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item">
-                    <h4 class="text-white mb-4">الأسواق</h4>
+                    <h4 class="text-white mb-4">السوق</h4>
                     <a href="{% url 'crypto_ar' %}"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'forex_ar' %}">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
-		                     <div class="footer-item">
-                    <h4 class="text-white mb-4">الأسواق</h4>
-                    <a href="{% url 'crypto_ar' %}"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
-                    <a href="{% url 'forex_ar' %}">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
-		     <a href="{% url 'metals_ar' %}">  الأسواق  <i class="fas fa-angle-left me-2">  </i></a>
-
-                </div>
+         <a href="{% url 'metals_ar' %}">  المعادن و السلع  <i class="fas fa-angle-left me-2">  </i></a>
+  
                 </div>
             </div>
-
+  
             <div class="col-md-6 col-lg-6 col-xl-2">
                 <div class="footer-item">
                     <h4 class="text-white mb-4"> روابط سريعة </h4>
                     <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
-                    <a href="{% url 'services_ar' %}"> خدماتنا <i class="fas fa-angle-left me-2"></i> </a>
-                    <a href="{% url 'blogs_ar' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'services' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
+                    <a href="{% url 'blogs' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
                     <a href="{% url 'contact' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-6 col-xl-3 text-start" >
-                <div class="footer-item" >
-                    <h4 class="text-white mb-4" >معلومات الاتصال</h4>
+            <div class="col-md-6 col-lg-6 col-xl-3 text-start">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4">معلومات الاتصال</h4>
                     <div class="d-flex align-items-center">
                         <i class="fas fa-envelope text-primary me-3"></i>
                         <p class="text-white mb-0">contact@inspire-trade.com</p>
@@ -298,9 +301,9 @@
             </div>
         </div>
     </div>
-</div>
-<!-- الفوتر نهاية -->
-
+  </div>
+  <!-- الفوتر نهاية -->
+  
 <!-- حقوق الطبع والنشر بداية -->
 <div class="container-fluid copyright py-4">
     <div class="container">

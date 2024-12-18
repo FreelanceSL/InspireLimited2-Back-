@@ -94,6 +94,14 @@
               <a href="{% url 'about_ar' %}" class="nav-item nav-link">من نحن</a>
               <a href="{% url 'services_ar' %}" class="nav-item nav-link">خدماتنا</a>
               <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدوّنة</a>
+              <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">السوق</a>
+                <div class="dropdown-menu rounded">
+                    <a href="{% url 'crypto' %}" class="dropdown-item">العملات الرقمية</a>
+                    <a href="{% url 'forex' %}" class="dropdown-item">الفوركس</a>
+                    <a href="{% url 'metals' %}" class="dropdown-item">المعادن و السلع</a>
+                </div>
+            </div>
               <a href="{% url 'contact_ar' %}" class="nav-item nav-link">اتصل بنا</a>
           </div>
   
@@ -514,30 +522,27 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>We receive your application to trade with the entred ammount, this is the informations to fund your account</p>
+              <p>لقد تلقينا طلبك يمكنك الان تمويل حسابك بنفس المبلغ المذكور و سيتم الرد عليك بعد انتهاء مراجعة الحساب و المصادقة عليه..</p>
     
               <div class="info-box">
                 <div class="info-item">
-                  <span class="info-label">Account name: </span>  INSPIRE LIMITED
+                  <span class="info-label">إسم الحساب:</span> INSPIRE LIMITED
                 </div>
                 <div class="info-item">
-                  <span class="info-label">Account number:</span> 7950194558
+                  <span class="info-label">رقم الحساب:</span> 7950194558
+                </div>
+    
+                <div class="info-item">
+                  <span class="info-label">رمز البنك:</span> 016
                 </div>
                 <div class="info-item">
-                  <span class="info-label">Bank code:</span> 016
+                  <span class="info-label">رمز سويفت:</span> DHBKHKHH
                 </div>
                 <div class="info-item">
-                  <span class="info-label">Branch Code:</span> 478
-
+                  <span class="info-label">موقع الحساب:</span> هونغ كونغ
                 </div>
                 <div class="info-item">
-                  <span class="info-label">SWIFT Code:</span> DHBKHKHH
-                </div>
-                <div class="info-item">
-                  <span class="info-label">Account location: </span> Hong Kong SAR
-                </div>
-                <div class="info-item">
-                  <span class="info-label">Bank name:</span> DBS Bank (Hong Kong) Limited
+                  <span class="info-label">إسم البنك: </span> DBS Bank (Hong Kong) Limited
                 </div>
               </div>
             </div>
@@ -549,13 +554,13 @@
       </div>
   
 <!-- الفوتر بداية -->
-<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" dir="ltr">
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" >
   <div class="container py-5 border-start-0 border-end-0"
       style="border: 1px solid; border-color: rgb(255, 255, 255, 0.08);">
-      <div class="row g-5">
+      <div class="row g-5" dir="ltr">
           <div class="col-md-6 col-lg-6 col-xl-4">
               <div class="footer-item">
-                  <a href="index_ar.html" class="p-0">
+                  <a href="index.html" class="p-0">
                       <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
                       <p>شريكك للتداول الآمن.</p>
                       <!-- <img src="/static/img/logo.png" alt="الشعار"> -->
@@ -568,16 +573,11 @@
           </div>
           <div class="col-md-6 col-lg-6 col-xl-3">
               <div class="footer-item">
-                  <h4 class="text-white mb-4">الأسواق</h4>
+                  <h4 class="text-white mb-4">السوق</h4>
                   <a href="{% url 'crypto_ar' %}"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
                   <a href="{% url 'forex_ar' %}">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
-                                  <div class="footer-item">
-                    <h4 class="text-white mb-4">الأسواق</h4>
-                    <a href="{% url 'crypto_ar' %}"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
-                    <a href="{% url 'forex_ar' %}">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
-		     <a href="{% url 'metals_ar' %}">  الأسواق  <i class="fas fa-angle-left me-2">  </i></a>
+       <a href="{% url 'metals_ar' %}">  المعادن و السلع  <i class="fas fa-angle-left me-2">  </i></a>
 
-                </div>    
               </div>
           </div>
 
@@ -585,9 +585,9 @@
               <div class="footer-item">
                   <h4 class="text-white mb-4"> روابط سريعة </h4>
                   <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
-                  <a href="{% url 'services_ar' %}"> خدماتنا <i class="fas fa-angle-left me-2"></i> </a>
-                  <a href="{% url 'blogs_ar' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
-                  <a href="{% url 'contact_ar' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
+                  <a href="{% url 'services' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
+                  <a href="{% url 'blogs' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
+                  <a href="{% url 'contact' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
               </div>
           </div>
           <div class="col-md-6 col-lg-6 col-xl-3 text-start">
@@ -599,7 +599,7 @@
                   </div>
                   <div class="d-flex align-items-center">
                       <i class="fa fa-phone-alt text-primary me-3"></i>
-                      <p class="text-white mb-0"> 852 8171 3179 +</p>
+                      <p class="text-white mb-0"> +852 8171 3179</p>
                   </div>
                   <div class="d-flex align-items-center mb-4">
                       <i class="fab fa-firefox-browser text-primary me-3"></i>
@@ -612,7 +612,7 @@
                               class="fab fa-twitter text-white"></i></a>
                       <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
                               class="fab fa-instagram text-white"></i></a>
-                      <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                      <a class="btn btn-primary btn-sm-square rounded-circle me-0" href="#"><i
                               class="fab fa-linkedin-in text-white"></i></a>
                   </div>
               </div>
@@ -621,6 +621,7 @@
   </div>
 </div>
 <!-- الفوتر نهاية -->
+
 <!-- حقوق الطبع والنشر بداية -->
 <div class="container-fluid copyright py-4">
   <div class="container">

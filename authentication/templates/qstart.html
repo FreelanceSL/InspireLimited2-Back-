@@ -25,6 +25,14 @@
                 <a href="{% url 'about' %}">About</a>
                 <a href="{% url 'services' %}">Services</a>
                 <a href="{% url 'blogs' %}">Blogs</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Market</a>
+                    <div class="dropdown-menu rounded">
+                        <a href="{% url 'crypto' %}" class="dropdown-item">Crypto</a>
+                        <a href="{% url 'forex' %}" class="dropdown-item">Forex</a>
+                        <a href="{% url 'metals' %}" class="dropdown-item">Metals</a>
+                    </div>
+                </div>
                 <a href="{% url 'contact' %}">Contact Us</a>
                 
             </div>
@@ -77,6 +85,7 @@
                     <li>Begin your trading journey with our exceptional support team at your service</li>
                 </ul>
             </div>
+            <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 40%;">Start trading!</a>
         </div>
     </div>
     <!-- Guide Content End -->

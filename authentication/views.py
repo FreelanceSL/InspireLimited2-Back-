@@ -535,6 +535,9 @@ def profiling(request):
     ammount=request.data.get("amount")
     email=request.session.get('email', None)
     user = User.objects.get(email=email)
+    user.trading_ammount=float(ammount)
+    user.sum_trading_ammount=user.sum_trading_ammount+float(ammount)
+    user.save()
     send_infos_trade(request,user,asset,platform,ammount)
     return redirect(reverse('dashboard'))
 
