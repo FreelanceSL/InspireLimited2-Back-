@@ -103,6 +103,8 @@ class Register(APIView):
                 "password": data.get("password"),
                 "country": data.get("country"),
                 "phone": f"{data.get('countryCode')}{data.get('phone')}",
+                "trading_ammount":0,
+                "sum_trading_ammount":0
             })
             try:
 
@@ -124,7 +126,7 @@ class Register(APIView):
                     return redirect(reverse('otp'))  
 
                 else:
-                    
+                    print("Serializer errors:", serializer.errors)
                     messages.error(request, 'An account with this email already exists.')
                     if(form_origin=="register_arabe"):
                         return render(request,'register_ar.html')
