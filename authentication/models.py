@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser,BaseUserManager
 from django.conf import settings
+from datetime import date
 # Create your models here.
 
 class UserManager(BaseUserManager):
@@ -53,6 +54,10 @@ class User(AbstractUser):
     phone = models.CharField(max_length=30, blank=True)
     otp = models.CharField(max_length=4)
     trading_ammount=models.FloatField()
+    date_form=models.DateField(default=date.today)
+    trading_plateform=models.CharField(max_length=30,blank=True)
+    trading_type=models.CharField(max_length=30,blank=True)
+    leverage=models.CharField(max_length=30,blank=True)
     sum_trading_ammount=models.FloatField()
     is_verified = models.BooleanField(default=False)
     image = models.ImageField(upload_to='profile_images/', blank=True, null=True)  # New image field

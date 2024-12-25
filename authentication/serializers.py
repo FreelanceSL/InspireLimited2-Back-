@@ -4,7 +4,7 @@ class UserSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False, allow_null=True)
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'id', 'email', 'password', 'country', 'phone', 'image','is_verified','trading_ammount','sum_trading_ammount']
+        fields = ['first_name', 'last_name', 'id', 'email', 'password', 'country', 'phone', 'image','is_verified','trading_ammount','sum_trading_ammount',"date_form","trading_plateform","trading_type","leverage"]
         extra_kwargs = {
             'password': {'write_only': True},
             'first_name': {'required': True},
