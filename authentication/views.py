@@ -6,7 +6,7 @@ from .serializers import UserSerializer,VerificationSerializer,AdminSerializer
 from rest_framework.response import Response
 from .models import User
 from rest_framework.exceptions import AuthenticationFailed
-from .emails import send_otp_via_email, send_reset_password,send_infos,send_infos_trade,send_reset_password_ar
+from .emails import send_otp_via_email, send_reset_password,send_infos,send_infos_trade,send_reset_password_ar,send_otp
 from rest_framework import status
 from django.contrib.auth.tokens import default_token_generator
 from rest_framework.permissions import IsAuthenticated
@@ -23,6 +23,7 @@ from django.contrib.auth.decorators import login_required
 from .permissions import IsAdminUserRole,IsVerified
 from rest_framework import pagination
 from django.core.paginator import Paginator
+from datetime import date
 # Create your views here.
 
 
@@ -118,8 +119,9 @@ class Register(APIView):
                     if image:
                         user.image = image
                         user.save()
-
-                    send_otp_via_email(request, user)
+                    
+                    # print("OTP phone",user.phone)
+                    send_otp_via_email(request,user )
                     send_infos(request,user)
                     if(form_origin=="register_arabe"):
                         return redirect(reverse('otp_ar'))
@@ -532,16 +534,26 @@ def admin(request):
 @api_view(['POST'])
 @login_required(login_url='/api/login/')
 def profiling(request):
+    form_origin = request.data.get('form_origin')
     asset=request.POST.get("selectedAssets")
     platform=request.data.get("platformSelect")
     ammount=request.data.get("amount")
     email=request.session.get('email', None)
+    leverage=request.data.get("leverageSelect")
     user = User.objects.get(email=email)
     user.trading_ammount=float(ammount)
     user.sum_trading_ammount=user.sum_trading_ammount+float(ammount)
+    user.leverage=leverage
+    user.trading_plateform=platform
+    user.trading_type=asset
+    user.date_form=date.today()
     user.save()
-    send_infos_trade(request,user,asset,platform,ammount)
-    return redirect(reverse('dashboard'))
+    send_infos_trade(request,user,asset,platform,ammount,leverage)
+    if form_origin == 'arabe_profile':
+        return redirect(reverse('dashboard_ar'))
+    else:
+        return redirect(reverse('dashboard_ar'))
+        
 
 
 # def get_bitcoin_price():

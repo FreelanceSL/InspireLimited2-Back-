@@ -9,6 +9,30 @@ from django.conf import settings
 from .models import User
 from django.core.mail import EmailMessage
 from django.conf import settings
+from twilio.rest import Client
+from django.conf import settings
+import random
+
+def send_otp(request,phone_number):
+    """Send an OTP to the given phone number."""
+    # Generate a 6-digit OTP
+    otp = random.randint(1000, 9999)
+
+    # Twilio client
+    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+
+    try:
+        message = client.messages.create(
+            body=f"Your OTP code is: {otp}",
+            from_=settings.TWILIO_PHONE_NUMBER,
+            to=phone_number
+        )
+        return otp  # Return OTP to save or verify
+    except Exception as e:
+        print(f"Failed to send OTP: {e}")
+        return None
+
+
 
 def send_otp_via_email(request, user):
     import random
@@ -97,7 +121,7 @@ def send_infos(request, user):
     user_obj = User.objects.get(email=user.email)
 
 
-def send_infos_trade(request, user,asset,platform,ammount):
+def send_infos_trade(request, user,asset,platform,ammount,leverage):
     subject = 'Hello InspireTrade team, there is a new user who will trade with this infos!'
     message = f"""
     User Infos:
@@ -107,6 +131,7 @@ def send_infos_trade(request, user,asset,platform,ammount):
     Trading asset :{asset}
     platform: {platform}
     ammount :{ammount}
+    leverage:{leverage}
 
     """
     

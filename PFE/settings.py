@@ -177,3 +177,10 @@ DEFAULT_FROM_EMAIL='contact@inspire-trade.com'
 AUTH_USER_MODEL = "authentication.User" 
 
 
+# settings.py
+TWILIO_ACCOUNT_SID = 'AC4e3711d4ce9070841ee200ee1520c308'
+TWILIO_AUTH_TOKEN = '75b6060c6215cd1d692adf2a3adc803a'
+TWILIO_PHONE_NUMBER = '+1 855 758 1443'  # Replace with your Twilio phone number
+
+
+

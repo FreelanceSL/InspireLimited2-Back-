@@ -412,6 +412,7 @@
           <h2 class="text-center mb-3"></h2>
           <form method="post" action="{% url 'profiling' %}" id="profilingForm">
             {% csrf_token %}
+            <input type="hidden" name="form_origin" value="eng_profile" />
             <div class="custom-select">
               <div class="custom-select-trigger">Select assets</div>
               <div class="custom-options">
@@ -439,6 +440,24 @@
                       <option value="mt5">MT5</option>
                   </select>
               </div>
+
+              <div class="mb-3">
+                <label for="leverageSelect" class="form-label">Max leverage</label>
+                <select class="form-select" id="leverageSelect" name="leverageSelect" required>
+                    <option value="" selected disabled>Select leverage</option>
+                    <option value="1:2">1:2</option>
+                    <option value="1:50">1:50</option>
+                    <option value="1:100">1:100</option>
+                    <option value="1:200">1:200</option>
+                    <option value="1:400">1:400</option>
+                    <option value="1:500">1:500</option>
+                    <option value="1:600">1:600</option>
+                    <option value="1:800">1:800</option>
+                    <option value="1:1000">1:1000</option>
+                    <option value="1:2000">1:2000</option>
+                    <option value="1:Unlimited">1:Unlimited</option>
+                </select>
+            </div>
 
               <div class="mb-3">
                 <label for="amount" class="form-label">Trading amount</label>

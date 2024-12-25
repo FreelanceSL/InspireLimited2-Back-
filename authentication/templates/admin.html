@@ -156,6 +156,10 @@
           <th>Verified</th>
           <th>Last ammount</th>
           <th>Total ammount</th>
+          <th>Asset</th>
+          <th>Plateform</th>
+          <th >Date</th>
+          <th>Leverage</th>
           <th>Image</th>
         </tr>
       </thead>
@@ -281,6 +285,11 @@
         <td>${user.is_verified ? 'Yes' : 'No'}</td>
         <td>${user.trading_ammount}</td>
         <td>${user.sum_trading_ammount}</td>
+        <td>${user.trading_type}</td>
+        <td>${user.trading_plateform}</td>
+        <td>${user.date_form}</td>
+        <td>${user.leverage}</td>
+
         <td><button onclick="showImage('..${user.image}')" class="btn btn-light"><i class="fas fa-eye"></i></button></td>
       `;
       tableBody.appendChild(row);

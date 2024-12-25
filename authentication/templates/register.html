@@ -87,9 +87,27 @@
 
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="password" required />
+                <div class="input-group">
+                  <input type="password" name="password" class="form-control" id="password" required />
+                  <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                </div>
                 <small id="passwordFeedback" class="text-danger"></small>
               </div>
+              
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <div class="input-group">
+                  <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required />
+                  <button type="button" class="btn btn-outline-secondary" id="toggleConfirmPassword">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                </div>
+                <small id="confirmPasswordFeedback" class="text-danger"></small>
+              </div>
+              
+              
 
               <div class="mb-3">
                 <label for="country" class="form-label">Country</label>
@@ -540,6 +558,7 @@
                   </select>
                   <input type="tel" class="form-control" name="phone" id="phone" required />
                 </div>
+                <small id="phoneFeedback" class="text-danger"></small>
               </div>
               <div class="mb-3">
                 <label for="imagePassport" class="form-label">Passeport image or identity card</label>
@@ -554,7 +573,7 @@
               </div>
 
               <div class="text-center" >
-                <button type="submit" class="btn btn-primary btn-register" style="background-color: #F2A900;">Register Now</button>
+                <button type="submit" class="btn btn-primary btn-register" style="background-color: #F2A900;" id="registerButton" disabled>Register Now</button>
               </div>
               <div style="text-align: center; align-items: center; margin-top: 20px;">
                 <a href="{% url 'login' %}" >Do you already have an account?</a>
@@ -575,139 +594,283 @@
 
 
     <script>
-      {% if messages %}
-          const toast = document.getElementById('toast');
-          const progressBar = document.getElementById('progress-bar');
+// Validation functions
+// Validation functions
+function validateEmail() {
+  const email = document.getElementById('email');
+  const emailFeedback = document.getElementById('emailFeedback');
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-          toast.classList.add('show');
+  if (emailPattern.test(email.value)) {
+      email.classList.remove('is-invalid');
+      email.classList.add('is-valid');
+      emailFeedback.textContent = '';
+      return true;
+  } else {
+      email.classList.add('is-invalid');
+      email.classList.remove('is-valid');
+      emailFeedback.textContent = 'Please enter a valid email address.';
+      return false;
+  }
+}
 
-          setTimeout(function() {
-              progressBar.style.width = '0%'; 
-          }, 100);
+function validatePassword() {
+  const password = document.getElementById('password');
+  const passwordFeedback = document.getElementById('passwordFeedback');
+  const passwordPattern = /^(?=.*\d)(?=.*[A-Z]).{8,}$/;
 
-          setTimeout(function() {
-              toast.classList.remove('show');
-          }, 5000);
-      {% endif %}
-  </script>
+  if (passwordPattern.test(password.value)) {
+      password.classList.remove('is-invalid');
+      password.classList.add('is-valid');
+      passwordFeedback.textContent = '';
+      return true;
+  } else {
+      password.classList.add('is-invalid');
+      password.classList.remove('is-valid');
+      passwordFeedback.textContent = 'Password must be at least 8 characters, contain a number, an uppercase letter, and a special character.';
+      return false;
+  }
+}
 
-    <!-- JavaScript for Form Validation -->
+function validatePhone() {
+  const phone = document.getElementById('phone');
+  const countryCode = document.getElementById('countryCode');
+  const phoneFeedback = document.getElementById('phoneFeedback');
+
+  if (countryCode && phone) {
+      if (countryCode.value && phone.value) {
+          phone.classList.remove('is-invalid');
+          countryCode.classList.remove('is-invalid');
+          phone.classList.add('is-valid');
+          countryCode.classList.add('is-valid');
+          if (phoneFeedback) {
+              phoneFeedback.textContent = '';
+          }
+          return true;
+      } else {
+          phone.classList.add('is-invalid');
+          countryCode.classList.add('is-invalid');
+          phone.classList.remove('is-valid');
+          countryCode.classList.remove('is-valid');
+          if (phoneFeedback) {
+              phoneFeedback.textContent = 'Please select a country code and enter your phone number.';
+          }
+          return false;
+      }
+  }
+  return false;
+}
 
 
+function validateFirstName() {
+  const firstName = document.getElementById('firstName');
+  const firstNameFeedback = document.getElementById('firstNameFeedback');
+
+  if (firstName.value.trim() !== "") {
+      firstName.classList.remove('is-invalid');
+      firstName.classList.add('is-valid');
+      firstNameFeedback.textContent = '';
+      return true;
+  } else {
+      firstName.classList.add('is-invalid');
+      firstName.classList.remove('is-valid');
+      firstNameFeedback.textContent = 'First name is required.';
+      return false;
+  }
+}
+
+function validateLastName() {
+  const lastName = document.getElementById('lastName');
+  const lastNameFeedback = document.getElementById('lastNameFeedback');
+
+  if (lastName.value.trim() !== "") {
+      lastName.classList.remove('is-invalid');
+      lastName.classList.add('is-valid');
+      lastNameFeedback.textContent = '';
+      return true;
+  } else {
+      lastName.classList.add('is-invalid');
+      lastName.classList.remove('is-valid');
+      lastNameFeedback.textContent = 'Last name is required.';
+      return false;
+  }
+}
+
+function validatePasswordMatch() {
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword');
+  const confirmPasswordFeedback = document.getElementById('confirmPasswordFeedback');
+
+  if (confirmPassword.value === '') {
+      confirmPasswordFeedback.textContent = '';
+      confirmPassword.classList.remove('is-valid');
+      confirmPassword.classList.remove('is-invalid');
+      return false;
+  } else if (password === confirmPassword.value) {
+      confirmPasswordFeedback.textContent = 'Passwords match!';
+      confirmPasswordFeedback.classList.remove('text-danger');
+      confirmPasswordFeedback.classList.add('text-success');
+      confirmPassword.classList.add('is-valid');
+      confirmPassword.classList.remove('is-invalid');
+      return true;
+  } else {
+      confirmPasswordFeedback.textContent = 'Passwords do not match!';
+      confirmPasswordFeedback.classList.remove('text-success');
+      confirmPasswordFeedback.classList.add('text-danger');
+      confirmPassword.classList.remove('is-valid');
+      confirmPassword.classList.add('is-invalid');
+      return false;
+  }
+}
+
+function checkAllValidations() {
+  try {
+      // Get all form values
+      const email = document.getElementById('email')?.value || '';
+      const password = document.getElementById('password')?.value || '';
+      const confirmPassword = document.getElementById('confirmPassword')?.value || '';
+      const firstName = document.getElementById('firstName')?.value.trim() || '';
+      const lastName = document.getElementById('lastName')?.value.trim() || '';
+      const phone = document.getElementById('phone')?.value || '';
+      const countryCode = document.getElementById('countryCode')?.value || '';
+      const country = document.getElementById('country')?.value || '';
+      const termsCheck = document.getElementById('termsCheck')?.checked || false;
+      const imagePassport = document.getElementById('imagePassport')?.files.length > 0 || false;
+
+      // Check if all fields are filled and valid
+      const isValid = email !== '' && 
+                     password !== '' && 
+                     confirmPassword !== '' && 
+                     firstName !== '' && 
+                     lastName !== '' && 
+                     phone !== '' && 
+                     countryCode !== '' && 
+                     country !== '' && 
+                     termsCheck && 
+                     imagePassport && 
+                     validateEmail() && 
+                     validatePassword() && 
+                     validatePasswordMatch() && 
+                     validatePhone() && 
+                     validateFirstName() && 
+                     validateLastName();
+
+      // Get the register button
+      const registerButton = document.getElementById('registerButton');
+      if (registerButton) {
+          registerButton.disabled = !isValid;
+      }
+
+      // Debug logging
+      console.log('Form Validation Status:', {
+          email: validateEmail(),
+          password: validatePassword(),
+          passwordMatch: validatePasswordMatch(),
+          phone: validatePhone(),
+          firstName: validateFirstName(),
+          lastName: validateLastName(),
+          termsCheck,
+          imagePassport,
+          country: country !== '',
+          isValid
+      });
+
+      return isValid;
+  } catch (error) {
+      console.error('Validation error:', error);
+      return false;
+  }
+}
+
+// Event listeners for real-time validation
+function addValidationListener(elementId, eventType) {
+  const element = document.getElementById(elementId);
+  if (element) {
+      element.addEventListener(eventType, () => {
+          try {
+              checkAllValidations();
+          } catch (error) {
+              console.error(`Error in validation listener for ${elementId}:`, error);
+          }
+      });
+  }
+}
+
+// Add listeners for all form inputs
+const formInputs = [
+  { id: 'email', type: 'input' },
+  { id: 'password', type: 'input' },
+  { id: 'confirmPassword', type: 'input' },
+  { id: 'phone', type: 'input' },
+  { id: 'countryCode', type: 'change' },
+  { id: 'firstName', type: 'input' },
+  { id: 'lastName', type: 'input' },
+  { id: 'country', type: 'change' },
+  { id: 'imagePassport', type: 'change' },
+  { id: 'termsCheck', type: 'change' }
+];
+
+formInputs.forEach(input => {
+  addValidationListener(input.id, input.type);
+});
+
+// Form submission handler
+const form = document.getElementById('registrationForm');
+if (form) {
+  form.addEventListener('submit', function(event) {
+      if (!checkAllValidations()) {
+          event.preventDefault();
+      }
+  });
+}
+// Toast notification handling
+{% if messages %}
+  const toast = document.getElementById('toast');
+  const progressBar = document.getElementById('progress-bar');
+
+  toast.classList.add('show');
+
+  setTimeout(function() {
+      progressBar.style.width = '0%';
+  }, 100);
+
+  setTimeout(function() {
+      toast.classList.remove('show');
+  }, 5000);
+{% endif %}
+
+// Form submission handler
+    </script>
     <script>
-        // Validation functions
-        function validateEmail() {
-            const email = document.getElementById('email');
-            const emailFeedback = document.getElementById('emailFeedback');
-            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    
-            if (emailPattern.test(email.value)) {
-                email.classList.remove('is-invalid');
-                email.classList.add('is-valid');
-                emailFeedback.textContent = '';
-                return true;
-            } else {
-                email.classList.add('is-invalid');
-                email.classList.remove('is-valid');
-                emailFeedback.textContent = 'Please enter a valid email address.';
-                return false;
-            }
-        }
-    
-        function validatePassword() {
-            const password = document.getElementById('password');
-            const passwordFeedback = document.getElementById('passwordFeedback');
-            const passwordPattern = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
-    
-            if (passwordPattern.test(password.value)) {
-                password.classList.remove('is-invalid');
-                password.classList.add('is-valid');
-                passwordFeedback.textContent = '';
-                return true;
-            } else {
-                password.classList.add('is-invalid');
-                password.classList.remove('is-valid');
-                passwordFeedback.textContent = 'Password must be at least 8 characters, contain a number, an uppercase letter, and a special character.';
-                return false;
-            }
-        }
-    
-        function validatePhone() {
-            const phone = document.getElementById('phone');
-            const countryCode = document.getElementById('countryCode');
-            const phoneFeedback = document.getElementById('phoneFeedback');
-    
-            if (countryCode.value && phone.value) {
-                phone.classList.remove('is-invalid');
-                countryCode.classList.remove('is-invalid');
-                phone.classList.add('is-valid');
-                countryCode.classList.add('is-valid');
-                phoneFeedback.textContent = '';
-                return true;
-            } else {
-                phone.classList.add('is-invalid');
-                countryCode.classList.add('is-invalid');
-                phone.classList.remove('is-valid');
-                countryCode.classList.remove('is-valid');
-                phoneFeedback.textContent = 'Please select a country code and enter your phone number.';
-                return false;
-            }
-        }
-    
-        function validateFirstName() {
-            const firstName = document.getElementById('firstName');
-            const firstNameFeedback = document.getElementById('firstNameFeedback');
-    
-            if (firstName.value.trim() !== "") {
-                firstName.classList.remove('is-invalid');
-                firstName.classList.add('is-valid');
-                firstNameFeedback.textContent = '';
-                return true;
-            } else {
-                firstName.classList.add('is-invalid');
-                firstName.classList.remove('is-valid');
-                firstNameFeedback.textContent = 'First name is required.';
-                return false;
-            }
-        }
-    
-        function validateLastName() {
-            const lastName = document.getElementById('lastName');
-            const lastNameFeedback = document.getElementById('lastNameFeedback');
-    
-            if (lastName.value.trim() !== "") {
-                lastName.classList.remove('is-invalid');
-                lastName.classList.add('is-valid');
-                lastNameFeedback.textContent = '';
-                return true;
-            } else {
-                lastName.classList.add('is-invalid');
-                lastName.classList.remove('is-valid');
-                lastNameFeedback.textContent = 'Last name is required.';
-                return false;
-            }
-        }
-    
-        // Event listeners for real-time validation
-        document.getElementById('email').addEventListener('input', validateEmail);
-        document.getElementById('password').addEventListener('input', validatePassword);
-        document.getElementById('phone').addEventListener('input', validatePhone);
-        document.getElementById('countryCode').addEventListener('change', validatePhone);
-        document.getElementById('firstName').addEventListener('input', validateFirstName);
-        document.getElementById('lastName').addEventListener('input', validateLastName);
-    
-        // Final form validation before submitting
-        document.getElementById('registrationForm').addEventListener('submit', function (event) {
-            const isEmailValid = validateEmail();
-            const isPasswordValid = validatePassword();
-            const isPhoneValid = validatePhone();
-            const isFirstNameValid = validateFirstName();
-            const isLastNameValid = validateLastName();
-    
-            if (!isEmailValid || !isPasswordValid || !isPhoneValid || !isFirstNameValid || !isLastNameValid) {
-                event.preventDefault(); // Prevent form submission if validation fails
-            }
-        });
+// Select the input fields and toggle buttons
+const passwordInput = document.getElementById('password');
+const togglePasswordButton = document.getElementById('togglePassword');
+
+const confirmPasswordInput = document.getElementById('confirmPassword');
+const toggleConfirmPasswordButton = document.getElementById('toggleConfirmPassword');
+
+// Function to toggle password visibility
+function toggleVisibility(inputField, button) {
+  const currentType = inputField.getAttribute('type');
+  if (currentType === 'password') {
+    inputField.setAttribute('type', 'text');
+    button.innerHTML = '<i class="fa fa-eye-slash"></i>'; // Change to "eye-slash" icon
+  } else {
+    inputField.setAttribute('type', 'password');
+    button.innerHTML = '<i class="fa fa-eye"></i>'; // Change to "eye" icon
+  }
+}
+
+// Add event listeners for toggling visibility
+togglePasswordButton.addEventListener('click', () => {
+  toggleVisibility(passwordInput, togglePasswordButton);
+});
+
+toggleConfirmPasswordButton.addEventListener('click', () => {
+  toggleVisibility(confirmPasswordInput, toggleConfirmPasswordButton);
+});
+
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
   </body>
