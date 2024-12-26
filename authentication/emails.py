@@ -73,7 +73,7 @@ def send_reset_password(request,user):
     id=urlsafe_base64_encode(force_bytes(user.pk))
     domain="www.inspire-trade.com"
     token= default_token_generator.make_token(user)
-    message=f'Your reset password link : https://{domain}/api/reset/{id}/{token}/'
+    message=f'Your reset password link : https://{domain}/reset/{id}/{token}/'
     email_from= settings.DEFAULT_FROM_EMAIL
     
     send_mail(subject,message,email_from,[user.email])
@@ -86,7 +86,7 @@ def send_reset_password_ar(request,user):
     domain="www.inspire-trade.com"
     langue="arabic"
     token= default_token_generator.make_token(user)
-    message=f'link : https://{domain}/api/reset/{id}/{token}/{langue}/'
+    message=f'link : https://{domain}/reset/{id}/{token}/{langue}/'
     print(message)
     email_from= settings.DEFAULT_FROM_EMAIL
     
