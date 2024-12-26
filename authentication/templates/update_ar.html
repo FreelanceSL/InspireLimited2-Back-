@@ -37,7 +37,7 @@
             const langue= "{{ langue }}";
 
             // قم بإجراء استدعاء API
-            const response = await fetch(`http://localhost:8000/api/modify/${uidb64}/${token}/${langue}/`, {
+            const response = await fetch(`https://www.inspire-trade.com/modify/${uidb64}/${token}/${langue}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

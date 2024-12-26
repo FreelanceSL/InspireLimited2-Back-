@@ -53,12 +53,12 @@ class User(AbstractUser):
     country = models.CharField(max_length=40, blank=False)
     phone = models.CharField(max_length=30, blank=True)
     otp = models.CharField(max_length=4)
-    trading_ammount=models.FloatField()
+    trading_ammount=models.FloatField(default=0,blank=True)
     date_form=models.DateField(default=date.today)
     trading_plateform=models.CharField(max_length=30,blank=True)
     trading_type=models.CharField(max_length=30,blank=True)
     leverage=models.CharField(max_length=30,blank=True)
-    sum_trading_ammount=models.FloatField()
+    sum_trading_ammount=models.FloatField(default=0,blank=True)
     is_verified = models.BooleanField(default=False)
     image = models.ImageField(upload_to='profile_images/', blank=True, null=True)  # New image field
     
