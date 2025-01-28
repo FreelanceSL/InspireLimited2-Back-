@@ -52,8 +52,8 @@
           <!-- Right Side: Home link -->
           <div class="col-12 col-lg-4 text-center text-lg-end">
             <div class="d-inline-flex align-items-center" style="height: 45px">
-              <a href="{% url 'index' %}" class="small me-3 text-dark">
-                <i class="fa fa-home text-primary me-2"></i>Home
+              <a href="{% url 'index_ar' %}" class="small me-3 text-dark">
+                <i class="fa fa-home text-primary me-2"></i>الصفحة الرئيسية
               </a>
             </div>
           </div>
@@ -563,8 +563,117 @@
 <div id="toast" class="toast">
     المستخدم موجود بالفعل!
     <div class="progress-bar" id="progress-bar"></div>
+</div>
+
+<div class="modal" tabindex="-1" id="termsModal" dir="rtl">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">الشروط والأحكام و سياسة الخصوصية</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeTermsModal()" style="position: absolute; right: 12cm;"></button>
+          </div>
+          <div class="modal-body">
+              <p>
+                  عند التسجيل، فإنك توافق على <strong>الشروط والأحكام</strong> و <strong>سياسة الخصوصية</strong> الخاصة بنا.
+              </p>
+
+              <!-- Terms and Conditions Section -->
+              <h6>الشروط والأحكام</h6>
+              <p>آخر تحديث: يناير 2025</p>
+              <p>
+                  مرحبًا بكم في Inspire Trade! بالتسجيل أو باستخدامكم لموقعنا والخدمات المقدمة من خلال المنصة أو عبر inspire-trade.com، فإنك توافق على الالتزام بالشروط والأحكام التالية. يرجى قراءة هذه الشروط بعناية قبل استخدام الموقع. إذا كنت لا توافق على أي من هذه الشروط، يرجى التوقف عن استخدام الموقع.
+              </p>
+              <p>
+                  1. التعريفات<br>
+                  1.1. Inspire Trade: تشير إلى الشركة والمنصة المقدمة لخدمات الوساطة في التداول.<br>
+                  1.2. المستخدم: أي شخص يقوم بإنشاء حساب أو استخدام خدمات Inspire Trade.<br>
+                  1.3. الخدمات: تشمل خدمات التداول في العملات، العملات الرقمية، والمعادن.
+              </p>
+              <p>
+                  2. التسجيل والحساب<br>
+                  2.1. يجب على المستخدم تقديم معلومات دقيقة وكاملة عند التسجيل.<br>
+                  2.2. يتحمل المستخدم المسؤولية الكاملة عن الحفاظ على سرية بيانات حسابه وكلمة المرور الخاصة به.<br>
+                  2.3. يجب ألا يقل عمر المستخدم عن 18 عامًا.<br>
+                  2.4. إجراءات التوثيق:<br>
+                  • تقديم نسخة من الهوية الشخصية أو جواز السفر أو رخصة القيادة.<br>
+                  • إثبات العنوان إذا طُلب ذلك.<br>
+                  • قد يتم تعليق بعض الميزات إذا لم يتم استكمال التوثيق.
+              </p>
+              <p>
+                  3. استخدام المنصة<br>
+                  3.1. يمنع استخدام المنصة لأي غرض غير قانوني أو احتيالي.<br>
+                  3.2. تحتفظ المنصة بحق تعليق أو إنهاء الحساب في حال ثبوت أي مخالفة.<br>
+                  3.3. الحد الأدنى للتداول: 500 دولار أمريكي.
+              </p>
+              <p>
+                  4. الرسوم والعمولات<br>
+                  لا يتم فرض أي رسوم على مستخدمي Inspire Trade.
+              </p>
+              <p>
+                  5. سياسة الخصوصية<br>
+                  5.1. يتم جمع بيانات المستخدمين وفقًا لسياسة الخصوصية الخاصة بـ Inspire Trade.<br>
+                  5.2. لن تتم مشاركة البيانات مع طرف ثالث إلا بموافقة المستخدم أو عند الضرورة القانونية.<br>
+                  5.3. نلتزم بحماية خصوصيتكم.
+              </p>
+              <p>
+                  6. إخلاء المسؤولية<br>
+                  6.1. لا تتحمل Inspire Trade مسؤولية الخسائر المالية الناتجة عن تقلبات الأسواق.<br>
+                  6.2. التداول محفوف بالمخاطر وقد يؤدي إلى خسارة رأس المال بالكامل.
+              </p>
+              <p>
+                  7. تعديل الشروط<br>
+                  7.1. تحتفظ Inspire Trade بحق تعديل الشروط في أي وقت.<br>
+                  7.2. سيتم إبلاغ المستخدمين بالتعديلات قبل تفعيلها.
+              </p>
+              <p>
+                  8. القانون المطبق<br>
+                  8.1. تخضع هذه الشروط لقوانين الدولة التي تعمل Inspire Trade ضمن إطارها.<br>
+                  8.2. يتم حل النزاعات بالوسائل القانونية المتاحة.
+              </p>
+
+              <hr>
+
+              <!-- Privacy Policy Section -->
+              <h6>سياسة الخصوصية</h6>
+              <p>
+                  آخر تحديث: يناير 2025
+              </p>
+              <p>
+                  نحن ملتزمون بحماية خصوصيتكم. تتناول سياسة الخصوصية كيفية جمع واستخدام بياناتكم عند استخدام خدماتنا. 
+              </p>
+              <p>
+                  باستخدام موقعنا، فإنكم توافقون على سياسة الخصوصية الخاصة بنا.
+              </p>
+              <p>
+                  • يتم التوثيق الشخصي لحماية الحسابات ولضمان تجربة آمنة.<br>
+                  • يُشترط إيداع 500 دولار أمريكي كحد أدنى لبدء التداول.
+              </p>
+              <p style="font-weight: bold;">
+                  إخلاء مسؤولية: "التداول محفوف بالمخاطر، وقد يؤدي إلى خسارة رأس المال بالكامل. يُرجى التأكد من فهم المخاطر المرتبطة قبل البدء."
+              </p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary ms-auto" data-bs-dismiss="modal" onclick="closeTermsModal()">موافق</button>
+          </div>
+      </div>
   </div>
+</div>
+
   <script>
+      // Show the Terms and Conditions modal when the checkbox is clicked
+      const termsCheck = document.getElementById('termsCheck');
+  const termsModal = document.getElementById('termsModal');
+  const agreeBtn = document.getElementById('agreeBtn');
+
+
+  termsCheck.addEventListener('change', function() {
+    if (termsCheck.checked) {
+      new bootstrap.Modal(termsModal).show();
+    } else {
+      agreeBtn.disabled = true;
+    }
+  });
+
     {% if messages %}
         const toast = document.getElementById('toast');
         const progressBar = document.getElementById('progress-bar');

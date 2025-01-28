@@ -1,0 +1,784 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Inspire Trade</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="{% static 'lib/animate/animate.min.css'%}" />
+    <link href="{% static 'lib/lightbox/css/lightbox.min.css'%}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css'%}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Topbar Start -->
+    <div class="container-fluid topbar bg-light px-5 d-none d-lg-block">
+        <div class="row gx-0 align-items-center">
+            <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+                <div class="d-flex flex-wrap">
+
+
+                    <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0"><i
+                            class="fas fa-envelope text-primary me-2"></i>contact@inspire-trade.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="" class="navbar-brand p-0">
+                <img src="{% static 'img/logo.png'%}" alt="" srcset="">
+                <!-- <img src="img/logo.png" alt="Logo"> -->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+                    <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                    <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
+                    <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Market</a>
+                        <div class="dropdown-menu rounded">
+                            <a href="{% url 'crypto' %}" class="dropdown-item">Crypto</a>
+                            <a href="{% url 'forex' %}" class="dropdown-item">Forex</a>
+                            <a href="{% url 'metals' %}" class="dropdown-item">Metals</a>
+                        </div>
+                    </div>
+                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
+                </div>
+                {% if not user.is_authenticated %}
+                <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Register</a>
+                <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0 " style="margin-left: 20px; !important">Login</a>
+                {% else %}
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
+                        <img src="{% static 'img/profile.png' %}" alt="Profile" class="profile-img">
+                    </a>
+
+                    <div class="dropdown-menu rounded">
+                        {% if user.role == "user" %}
+                        <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
+                        <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
+                        <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
+                        {% else %}
+                        <a href="{% url 'admin' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
+                        <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
+                        <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif%}
+                <a id="lng" href={{url_lang}}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-world"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M11.5 3a17 17 0 0 0 0 18"></path><path d="M12.5 3a17 17 0 0 1 0 18"></path></svg>{{langue}}</a>
+                
+            </div>
+        </nav>
+
+        <!-- Carousel Start -->
+        <div class="header-carousel owl-carousel">
+            <div class="header-carousel-item">
+                <img src="{% static 'img/carousel-1.jpg' %}" class="img-fluid w-100" alt="Image">
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row gy-0 gx-5">
+                            <div class="col-lg-0 col-xl-5"></div>
+                            <div class="col-xl-7 animated fadeInLeft">
+                                <div class="text-sm-center text-md-end">
+                                    <h4 class="text-primary text-uppercase fw-bold mb-4">Welcome To Inspire Trade</h4>
+                                    <h1 class="display-4 text-uppercase text-white mb-4">Invest your money with higher return</h1>
+                                    <p class="mb-5 fs-5">Maximize your wealth by investing with us for higher returns! Our expert
+                                        team is dedicated to helping you grow your assets safely and efficiently. Join us and
+                                        take the next step toward a brighter financial future.
+                                    </p>
+                                    <a href="{% url 'qstart' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-bottom: 20px; width: 150px;">Quick Start</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-carousel-item">
+                <img src="{% static 'img/carousel-2.jpg' %}" class="img-fluid w-100" alt="Image">
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row g-5">
+                            <div class="col-12 animated fadeInUp">
+                                <div class="text-center">
+                                    <h4 class="text-primary text-uppercase fw-bold mb-4">Welcome To Inspire Trade</h4>
+                                    <h1 class="display-4 text-uppercase text-white mb-4">Invest your money with higher return</h1>
+                                    <p class="mb-5 fs-5">Unlock the potential of your money with investment options that yield
+                                        higher returns. Our tailored strategies are designed to boost your financial growth,
+                                        giving you more value and security in every step of your journey with us.
+                                    </p>
+                                    <a href="{% url 'qstart' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-bottom: 20px;">Quick Start</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Carousel End -->
+    <div class="ticker-wrapper">
+        <div class="ticker">
+          <!-- First set -->
+          <div class="ticker-item">
+            <i class="bi bi-currency-bitcoin me-2"></i>
+            BTC: <span class="ms-2 price-data" data-symbol="BTC">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            ETH: <span class="ms-2 price-data" data-symbol="ETH">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            EUR: <span class="ms-2 price-data" data-symbol="EUR">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-warning"></i>
+            GOLD: <span class="ms-2 price-data" data-symbol="GOLD">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-secondary"></i>
+            SILVER: <span class="ms-2 price-data" data-symbol="SILVER">$0</span>
+          </div>
+          <!-- Second set -->
+          <div class="ticker-item">
+            <i class="bi bi-currency-bitcoin me-2"></i>
+            BTC: <span class="ms-2 price-data" data-symbol="BTC">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            ETH: <span class="ms-2 price-data" data-symbol="ETH">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            EUR: <span class="ms-2 price-data" data-symbol="EUR">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-warning"></i>
+            GOLD: <span class="ms-2 price-data" data-symbol="GOLD">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-secondary"></i>
+            SILVER: <span class="ms-2 price-data" data-symbol="SILVER">$0</span>
+          </div>
+          <!-- Third set for extra safety -->
+          <div class="ticker-item">
+            <i class="bi bi-currency-bitcoin me-2"></i>
+            BTC: <span class="ms-2 price-data" data-symbol="BTC">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            ETH: <span class="ms-2 price-data" data-symbol="ETH">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-currency-euro me-2"></i>
+            EUR: <span class="ms-2 price-data" data-symbol="EUR">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-warning"></i>
+            GOLD: <span class="ms-2 price-data" data-symbol="GOLD">$0</span>
+          </div>
+          <div class="ticker-item">
+            <i class="bi bi-circle-fill me-2 text-secondary"></i>
+            SILVER: <span class="ms-2 price-data" data-symbol="SILVER">$0</span>
+          </div>
+        </div>
+      </div>
+    
+   <!-- Abvout Start -->
+<div class="container-fluid about py-5">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-xl-7 wow fadeInLeft" data-wow-delay="0.2s">
+                <div>
+                    <h4 class="text-primary">About Us</h4>
+                    <h1 class="display-5 mb-4">With Inspire Trade, you trade with Confidence and Precision</h1>
+                    <p class="mb-4">Inspire Trade: Enabling confident trading with advanced tools, and seamless user experience.</p>
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <div class="d-flex">
+                                <div><i class="fas fa-dollar-sign fa-3x text-primary"></i></div>
+                                <div class="ms-4">
+                                    <h4>Competitive Pricing</h4>
+                                    <p>Enjoy low fees and transparent pricing designed to maximize your trading potential.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <div class="d-flex">
+                                <div><i class="fas fa-clock fa-3x text-primary"></i></div>
+                                <div class="ms-4">
+                                    <h4>Instant Trade Execution</h4>
+                                    <p>Experience fast and reliable trade execution, ensuring you never miss an opportunity.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <div class="d-flex">
+                                <div><i class="fas fa-headset fa-3x text-primary"></i></div>
+                                <div class="ms-4">
+                                    <h4>Available 24/7</h4>
+                                    <p>Our support team is here around the clock to help you at any time.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="d-flex">
+                                <i class="fas fa-phone-alt fa-2x text-primary me-4"></i>
+                                <div>
+                                    <h4>Call Us</h4>
+                                    <p class="mb-0 fs-5" style="letter-spacing: 1px;">+852 8171 3179</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="{% url 'register' %}" class="btn btn-primary rounded-pill py-3 px-5 flex-shrink-0">Discover Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5 wow fadeInRight" data-wow-delay="0.2s">
+                <div class="bg-primary rounded position-relative overflow-hidden">
+                    <img src="/static/img/happy_man.png" class="img-fluid rounded w-100" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- About End -->
+
+    <!-- Services Start -->
+    <div class="container-fluid service pb-5">
+        <div class="container pb-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">WHY INSPIRE TRADE ?</h4>
+                <h1 class="display-5 mb-4">We Provide the Best Services</h1>
+                <p class="mb-0"></p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="service-item d-flex flex-column h-100">
+                        <div class="service-img">
+                            <img src="{% static 'img/taktak.jpg' %}" class="img-fluid rounded-top w-100" alt="Image">
+                        </div>
+                        <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
+                            <a href="#" class="h4 d-inline-block mb-4" id="ex">Fast Execution Speeds</a>
+                            <p class="mb-4">Experience lightning-fast trade execution to capture the best prices and reduce risks in volatile markets. Our platform is optimized for speed to enhance your trading performance.</p>
+                            <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'signup' %}">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="service-item d-flex flex-column h-100">
+                        <div class="service-img">
+                            <img src="{% static 'img/carditem2.jpeg' %}" class="img-fluid rounded-top w-100" alt="Image">
+                        </div>
+                        <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
+                            <a href="#" class="h4 d-inline-block mb-4">Competitive Pricing & Low Fees</a>
+                            <p class="mb-4">Trade with confidence knowing you’re getting the most competitive prices and low fees. Our transparent pricing structure helps you maximize profits with no hidden charges.</p>
+                            <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'signup' %}">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="service-item d-flex flex-column h-100">
+                        <div class="service-img">
+                            <img src="{% static 'img/techtrade.jpg' %}" class="img-fluid rounded-top w-100" alt="Image">
+                        </div>
+                        <div class="rounded-bottom p-4 flex-grow-1 d-flex flex-column">
+                            <a href="#" class="h4 d-inline-block mb-4">Cutting-Edge Trading Technology</a>
+                            <p class="mb-4">Our platform leverages advanced technology to deliver a seamless and efficient trading experience. Enjoy powerful tools, and robust infrastructure designed for performance and reliability.</p>
+                            <a class="btn btn-primary rounded-pill py-2 px-4 mt-auto" href="{% url 'signup' %}">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Services End -->
+
+    <!-- Features Start -->
+    <div class="container-fluid feature pb-5">
+        <div class="container pb-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">Our Features</h4>
+                <h1 class="display-5 mb-4">Connecting businesses, ideas, and people for greater impact.</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="feature-item p-4 equal-height">
+                        <div class="feature-icon p-2 mb-4">
+                            <i class="fas fa-dollar-sign fa-4x text-primary"></i>
+                        </div>
+                        <h4>Low & Transparent Costs</h4>
+                        <p class="mb-4">Choose better-than-market conditions to lower your trading costs.</p>
+                                                    <a <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup' %}">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="feature-item p-4 equal-height">
+                        <div class="feature-icon p-4 mb-4">
+                            <i class="fas fa-chart-line fa-4x text-primary"></i>
+                        </div>
+                        <h4>Tight & Stable Pricing</h4>
+                        <p class="mb-4">Take advantage of tight pricing, even in volatile times.</p>
+                                                    <a <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup' %}">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="feature-item p-4 equal-height">
+                        <div class="feature-icon p-4 mb-4">
+                            <i class="fas fa-clock fa-4x text-primary"></i>
+                        </div>
+                        <h4>Fast Execution</h4>
+                        <p class="mb-4">Trade as fast as you can click, with orders executed in milliseconds.</p>
+                                                    <a <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup' %}">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
+                    <div class="feature-item p-4 equal-height">
+                        <div class="feature-icon p-4 mb-4">
+                            <i class="fas fa-shield-alt fa-4x text-primary"></i>
+                        </div>
+                        <h4>Safe & Secure Transactions</h4>
+                        <p class="mb-4">Know your funds are safe with tier-1 bank partnerships and segregated accounts.</p>
+                                                    <a <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'signup' %}">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Features End -->
+
+
+   
+    <div class="container-fluid blog pb-5">
+        <div class="container pb-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">Our Blog & News</h4>
+                <h1 class="display-5 mb-4">Articles For Pro Traders</h1>
+            </div>
+            <div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay="0.2s">
+                <!-- Blog Item 1: Buying Series I Bonds -->
+                <div class="blog-item p-4">
+                    <div class="blog-img mb-4">
+                        <img src="{% static 'img/Buying-Series-I-Bonds.png' %}" class="img-fluid w-100 rounded" alt="Buying Series I Bonds">
+                        <div class="blog-title">
+                            <a href="https://www.investing.com/academy/trading/buying-series-i-bonds/" class="btn" target="_blank">
+                                Buying Series I Bonds: The Ultimate Guide
+                            </a>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <a href="https://www.investing.com/academy/trading/buying-series-i-bonds/" class="h4 d-inline-block mb-3" target="_blank">Buying Series I Bonds</a>
+                        <p class="mb-4">Learn everything you need to know about Series I bonds, including how to buy them and their benefits.</p>
+                        <div class="d-flex align-items-center">
+                            <img src="/static/img/Matthew-Stokes.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Author">
+                            <div class="ms-3">
+                                <h5>Author: Matthew Stokes</h5>
+                                <p class="mb-0">Published: November 1, 2024</p>
+                                <p class="mb-0">Currently: SEO Content Operations Specialist at Webify.io & MadCrypto.com</p>
+                                <p class="mb-0">Education: BSc in Environmental Science</p>
+                                <a href="https://www.linkedin.com/in/matthew-stokes" target="_blank">
+                                    <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo">
+                                    See Full Bio
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Item 2 -->
+                <div class="blog-item p-4">
+                    <div class="blog-img mb-4">
+                        <img src="/static/img/call-put-options.jpg" class="img-fluid w-100 rounded" alt="Call And Put Options">
+                        <div class="blog-title">
+                            <a href="https://www.investing.com/academy/trading/call-put-options/" class="btn" target="_blank">
+                                Call And Put Options – A Buying And Selling Guide
+                            </a>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <a href="https://www.investing.com/academy/trading/call-put-options/" class="h4 d-inline-block mb-3" target="_blank">Call And Put Options</a>
+                        <p class="mb-4">Explore the basics of call and put options and learn how to buy and sell them effectively.</p>
+                        <div class="d-flex align-items-center">
+                            <img src="/static/img/Harris-Anwar-Author.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Haris Anwar">
+                            <div class="ms-3">
+                                <h5>Author: Haris Anwar</h5>
+                                <p class="mb-0">Published: November 1, 2024</p>
+                                <p class="mb-0">Expertise: Financial writer, focusing on equity markets to help readers find long-term investment opportunities</p>
+                                <p class="mb-0">Currently: Columnist at Investing.com, providing analysis on large-cap and dividend stocks</p>
+                                <a href="https://www.linkedin.com/in/harisanwar" target="_blank">
+                                    <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo">
+                                    See Full Bio
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Item 3 -->
+                <div class="blog-item p-4">
+                    <div class="blog-img mb-4">
+                        <img src="/static/img/Dividend-Aristocrat-List.png" class="img-fluid w-100 rounded" alt="Dividend Aristocrats List and Definition">
+                        <div class="blog-title">
+                            <a href="https://www.investing.com/academy/trading/dividend-aristocrats/" class="btn" target="_blank">
+                                Dividend Aristocrats List and Definition
+                            </a>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <a href="https://www.investing.com/academy/trading/dividend-aristocrats/" class="h4 d-inline-block mb-3" target="_blank">Dividend Aristocrats: A Comprehensive Overview</a>
+                        <p class="mb-4">Explore the list of Dividend Aristocrats and understand what makes them a valuable investment choice.</p>
+                        <div class="d-flex align-items-center">
+                            <img src="/static/img/Hannah-Wilson-.png" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Author">
+                            <div class="ms-3">
+                                <h5>Author: Hannah Wilson</h5>
+                                <p class="mb-0">Published: November 1, 2024</p>
+                                <p class="mb-0">Currently: English Markets Specialist at Investing.com (SEO)</p>
+                                <p class="mb-0">Education: BA (Hons) Business (1st) from University of Coventry, England</p>
+                                <a href="https://www.linkedin.com/in/hannah-wilson" target="_blank">
+                                    <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo">
+                                    See Full Bio
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Item 4 -->
+                <div class="blog-item p-4">
+                    <div class="blog-img mb-4">
+                        <img src="/static/img/AI-Stock-Trading-Definition.png" class="img-fluid w-100 rounded" alt="Stock Market Analysis">
+                        <div class="blog-title">
+                            <a href="https://www.investing.com/academy/trading/ai-stock-trading-guide/" class="btn" target="_blank">
+                                AI Stock Trading: How Artificial Intelligence Can Revolutionize Your Stock Picking
+                            </a>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <a href="https://seekingalpha.com/article/stock-market-analysis" class="h4 d-inline-block mb-3" target="_blank">AI Stock Trading</a>
+                        <p class="mb-4">An in-depth analysis of the current stock market trends and what they mean for investors.</p>
+                        <div class="d-flex align-items-center">
+                            <img src="/static/img/Sara-Jayne.png" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Author">
+                            <div class="ms-3">
+                                <h5>Author: Sara-Jayne Slack</h5>
+                                <p class="mb-0">Published: October 1, 2024</p>
+                                <p class="mb-0">Expertise: Wealth Management, Personal Finance</p>
+                                <p class="mb-0">Currently: SEO Specialist (UK Market) at Investing.com</p>
+                                <p class="mb-0">Education: Financial Markets and Investment Analysis, Cambridge University</p>
+                                <a href="https://www.linkedin.com/in/sara-jayne-slack" target="_blank">
+                                    <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="LinkedIn Logo">See Full Bio</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- FAQs Start -->
+    <div class="container-fluid faq-section pb-5">
+        <div class="container pb-5 overflow-hidden">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">FAQs</h4>
+                <h1 class="display-5 mb-4">Frequently Asked Questions</h1>
+                
+            </div>
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="accordion accordion-flush bg-light rounded p-5" id="accordionFlushSection">
+                        <div class="accordion-item rounded-top">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed rounded-top" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                    How do I create an account and start trading?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushSection">
+                                <div class="accordion-body">To create an account, click on the “Register” button at the top of the page and follow the registration instructions. After verifying your account, you can deposit funds and begin trading on our platform.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                    aria-controls="flush-collapseTwo">
+                                    What are the dangerous impacts of trade?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushSection">
+                                <div class="accordion-body">Trade can drive growth but also risks environmental harm, job losses, and economic inequality. Sustainable practices and fair regulations are crucial to managing these impacts.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                    aria-controls="flush-collapseThree">
+                                    Is my money and data secure on this platform?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushSection">
+                                <div class="accordion-body">Yes, we use advanced encryption, secure servers, and multi-factor authentication to protect both your funds and personal data. Security is a top priority, and we continuously update our protocols to ensure maximum protection.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                    aria-controls="flush-collapseFour">
+                                    What payment methods are available for deposits and withdrawals?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFour" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushSection">
+                                <div class="accordion-body">We accept various payment methods, including bank transfers, credit/debit cards, and some e-wallets. Please check the "Deposit & Withdrawal" section for specific options available in your country.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                    aria-controls="flush-collapseFive">
+                                    Can I practice trading before using real money?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFive" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushSection">
+                                <div class="accordion-body">Yes, we offer a demo account where you can practice trading with virtual funds. The demo account provides real-time market data, allowing you to learn and refine your trading strategies without risking real money.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item rounded-bottom">
+                            <h2 class="accordion-header" id="flush-headingSix">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseSix" aria-expanded="false"
+                                    aria-controls="flush-collapseSix">
+                                    How do I contact customer support if I need help?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseSix" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushSection">
+                                <div class="accordion-body">Our customer support team is available 24/7. You can reach us via live chat, email, or phone. Visit our “Contact Us” page for more details and response times.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                    <div class="bg-primary rounded">
+                        <img src="/static/img/faq.jpg" class="img-fluid w-100" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FAQs End -->
+
+    <!-- NEWS-->
+    <div class="alert alert-warning d-flex align-items-center w-100 full-width-alert" role="alert">
+        <span class="warning-icon">&#9888;</span> <!-- Unicode for warning icon -->
+        Trading in the financial markets involves high risks and may result in loss of capital. It is recommended to trade with caution and with full knowledge of the potential risks.
+    </div>
+    <!--News end-->
+  
+
+    <!-- Footer Start -->
+    <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+        <div class="container py-5 border-start-0 border-end-0"
+            style="border: 1px solid; border-color: rgb(255, 255, 255, 0.08);">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-6 col-xl-4">
+                    <div class="footer-item">
+                        <a href="index.html" class="p-0">
+                            <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
+                            <p>Your partner for secure trading.</p>
+                            <!-- <img src="img/logo.png" alt="Logo"> -->
+                        </a>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="https://www.metatrader4.com/fr" class="btn btn-primary  px-4 py-2">MT4</a>
+                            <a href="https://www.metatrader5.com/fr" class="btn btn-secondary  px-4 py-2">MT5</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-6 col-xl-2">
+                    <div class="footer-item">
+                        <h4 class="text-white mb-4">Quick Links</h4>
+                        <a href="{% url 'about' %}"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                        <a href="{% url 'services' %}"><i class="fas fa-angle-right me-2"></i> Services</a>
+                        <a href="{% url 'blogs' %}"><i class="fas fa-angle-right me-2"></i> Blogs</a>
+
+                        <a href="{% url 'contact' %}"><i class="fas fa-angle-right me-2"></i> Contact us</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item">
+                        <h4 class="text-white mb-4">Markets</h4>
+                        <a href="{% url 'forex' %}"><i class="fas fa-angle-right me-2"></i> ForexCFD</a>
+                        
+                        
+                        <a href="{% url 'crypto' %}"><i class="fas fa-angle-right me-2"></i> Crypto CFD</a> 
+			<a href="{% url 'metals' %}"><i class="fas fa-angle-right me-2"></i> Metals</a>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item">
+                        <h4 class="text-white mb-4">Contact Info</h4>
+
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-envelope text-primary me-3"></i>
+                            <p class="text-white mb-0">contact@inspire-trade.com</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fa fa-phone-alt text-primary me-3"></i>
+                            <p class="text-white mb-0"> +852 8171 3179</p>
+                        </div>
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="fab fa-firefox-browser text-primary me-3"></i>
+                            <p class="text-white mb-0">inspire-Trade.com</p>
+                        </div>
+                        <div class="d-flex">
+                            <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                    class="fab fa-facebook-f text-white"></i></a>
+                            <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                    class="fab fa-twitter text-white"></i></a>
+                            <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                    class="fab fa-instagram text-white"></i></a>
+                            <a class="btn btn-primary btn-sm-square rounded-circle me-0" href="#"><i
+                                    class="fab fa-linkedin-in text-white"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+          <div class="row g-4 align-items-center">
+            <div class="col-md-6 text-center text-md-start mb-md-0">
+              <span class="text-body"
+                ><a href="#" class="border-bottom text-white"
+                  ><i class="fas fa-copyright text-light me-2"></i
+                  >InspireTrade</a
+                >, All right reserved.</span
+              >
+            </div>
+            <div class="col-md-6 text-center text-md-end text-body">  
+              Designed By
+              <a class="border-bottom text-white" href="#">Leamon</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Copyright End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script>
+        const prices = {
+            BTC: 65000,
+            ETH: 3500,
+            EUR: 1.08,
+            GOLD: 2100,
+            SILVER: 25
+          };
+      
+          function updatePrices() {
+            document.querySelectorAll('.price-data').forEach(element => {
+              const symbol = element.dataset.symbol;
+              const currentPrice = prices[symbol];
+              const change = (Math.random() - 0.5) * 0.01;
+              prices[symbol] = currentPrice * (1 + change);
+              
+              element.textContent = formatPrice(prices[symbol]);
+              element.classList.remove('price-up', 'price-down');
+              element.classList.add(change > 0 ? 'price-up' : 'price-down');
+            });
+          }
+      
+          function formatPrice(price) {
+            return price < 100 
+              ? `$${price.toFixed(2)}` 
+              : `$${price.toFixed(0)}`;
+          }
+      
+          setInterval(updatePrices, 2000);
+          updatePrices();
+      
+          // Reset animation when it completes
+          const ticker = document.querySelector('.ticker');
+          ticker.addEventListener('animationend', () => {
+            ticker.style.animation = 'none';
+            ticker.offsetHeight; // Trigger reflow
+            ticker.style.animation = 'ticker 30s linear infinite';
+          });
+      </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js'%}"></script>
+    <script src="{% static 'lib/easing/easing.min.js'%}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js'%}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js'%}"></script>
+    <script src="{% static 'lib/lightbox/js/lightbox.min.js'%}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js'%}"></script>
+
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js'%}"></script>
+</body>
+
+</html>

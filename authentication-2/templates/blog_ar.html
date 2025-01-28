@@ -1,0 +1,424 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>من نحن</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+      <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <!-- Spinner End -->
+
+<!-- بداية الشريط العلوي -->
+<div class="container-fluid topbar bg-light px-5 d-none d-lg-block">
+    <div class="row gx-0 align-items-center">
+      <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+        <div class="d-flex flex-wrap">
+          <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0">
+            <i class="fas fa-envelope text-primary me-2"></i>
+            contact@inspire-trade.com
+          </a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <!-- نهاية الشريط العلوي -->
+  
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="" class="navbar-brand p-0">
+                <img src="{% static 'img/logo.png'%}" alt="" srcset="" />
+                <!-- <img src="/static/img/logo.png" alt="Logo"> -->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="fa fa-bars"></span></button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0" dir="rtl">
+                    <a href="{% url 'index_ar' %}" class="nav-item nav-link">الرئيسية</a>
+                    <a href="{% url 'about_ar' %}" class="nav-item nav-link">من نحن</a>
+                    <a href="{% url 'services_ar' %}" class="nav-item nav-link">خدماتنا</a>
+                    <a href="{% url 'blogs_ar' %}" class="nav-item nav-link active"> المدوّنة</a>
+                    <div class="nav-item dropdown" dir="rtl">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">السوق</a>
+              <div class="dropdown-menu rounded" style="text-align: right;">
+                  <a href="{% url 'crypto' %}" class="dropdown-item" >العملات الرقمية</a>
+                  <a href="{% url 'forex' %}" class="dropdown-item">الفوركس</a>
+                  <a href="{% url 'metals' %}" class="dropdown-item">المعادن و السلع</a>
+              </div>
+          </div>
+                    <a href="{% url 'contact_ar' %}" class="nav-item nav-link">تواصل معنا</a>
+                </div>
+                {% if not user.is_authenticated %}
+                <a href="{% url 'signup_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">التسجيل</a>
+                <a href="{% url 'login_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px !important;">تسجيل الدخول</a>
+                {% else %}
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
+                        <img src="{% static 'img/profile.png' %}" alt="الملف الشخصي" class="profile-img">
+                    </a>
+                    <div class="dropdown-menu rounded">
+                        <a href="{% url 'dashboard_ar' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> ملفي الشخصي</a>
+                        <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> إعدادات الحساب</a>
+                        <a href="{% url 'logout_ar' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+                    </div>
+                </div>
+                {% endif %}
+                <a id="lng" href={{url_lang}}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-world"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M11.5 3a17 17 0 0 0 0 18"></path><path d="M12.5 3a17 17 0 0 1 0 18"></path></svg>{{langue}}</a>
+            </div>
+    
+        </nav>
+    
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">المدوّنة</h4>
+                <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'index_ar' %}">الرئيسية</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">الصفحات</a>
+                    </li>
+                    <li class="breadcrumb-item active text-primary">المدوّنة</li>
+                </ol>
+            </div>
+        </div>
+        <!-- Header End -->
+    </div>
+    <!-- Navbar & Hero End -->
+    
+<!-- عن الشركة بداية -->
+<div class="container-fluid about py-5">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-xl-5 wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="bg-primary rounded position-relative overflow-hidden">
+                    <img src="/static/img/happy_man.png" class="img-fluid rounded w-100" alt="">
+                </div>
+            </div>
+            <div class="col-xl-7 wow fadeInRight" data-wow-delay="0.2s">
+                <div>
+                    <h4 class="text-primary" style="text-align: right;">من نحن</h4>
+                    <h1 class="display-5 mb-4" dir="rtl">معنا تداول بأفق واسعة و قرارات ذكية</h1>
+                    <p class="mb-4" dir="rtl">هنا حيث الأمان... تداول بثقة بأدوات متقدّمة و تجربة سلسة.</p>
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <div class="d-flex" dir ="rtl">
+                                <div><i class="fas fa-dollar-sign fa-3x text-primary" ></i></div>
+                                <div class="ms-4">
+                                    <h4 class=" me-2">أسعار تنافسية</h4>
+                                    <p>استمتع برسوم منخفضة وتسعير شفاف مصمم لتعظيم إمكانيات التداول الخاصة بك.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <div class="d-flex">
+                                <div class="ms-4" dir="rtl">
+                                    <h4 class=" me-2" >تنفيذ فوري للتداول</h4>
+                                    <p dir ="rtl">اختبر تنفيذ التداولات بسرعة وموثوقية، مما يضمن عدم تفويت أي فرصة.</p>
+                                </div>
+                                <div ><i class="fas fa-clock fa-3x text-primary" dir ="rtl"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <div class="d-flex" dir="rtl">
+                                <div><i class="fas fa-headset fa-3x text-primary"></i></div>
+                                <div class="ms-4">
+                                    <h4 class=" me-2">متوفر 24/7</h4>
+                                    <p>فريق الدعم لدينا متاح على مدار الساعة لمساعدتك في أي وقت.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex" dir ="rtl">
+                                <i class="fas fa-phone-alt fa-2x text-primary me-2"></i>      
+                                    <div class="ms-4" dir="rtl">
+                                    <h4 class=" me-2" >اتصل بنا</h4>
+                                    <p class="mb-0 fs-5" style="letter-spacing: 1px;" dir ="rtl">+852 8171 3179</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" dir ="rtl">
+                            <a href="{% url 'signup_ar' %}" class="btn btn-primary rounded-pill py-3 px-5 flex-shrink-0">اكتشف الآن</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- عن الشركة نهاية -->
+<div class="container-fluid blog pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">مدونتنا & الأخبار</h4>
+            <h1 class="display-5 mb-4">مقالات للمتداولين المحترفين</h1>
+        </div>
+        <div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay="0.2s">
+            <!-- عنصر المدوّنة 1: شراء السندات من السلسلة I -->
+            <div class="blog-item p-4">
+                <div class="blog-img mb-4">
+                    <img src="/static/img/Buying-Series-I-Bonds.png" class="img-fluid w-100 rounded" alt="شراء السندات من السلسلة I">
+                    <div class="blog-title">
+                        <a href="https://www.investing.com/academy/trading/buying-series-i-bonds/" class="btn" target="_blank">
+                            شراء السندات من السلسلة I: الدليل النهائي
+                        </a>
+                    </div>
+                </div>
+                <div class="blog-content">
+                    <a href="https://www.investing.com/academy/trading/buying-series-i-bonds/" class="h4 d-inline-block mb-3" target="_blank">شراء السندات من السلسلة I</a>
+                    <p class="mb-4">تعلم كل ما تحتاج لمعرفته حول السندات من السلسلة I، بما في ذلك كيفية شرائها وفوائدها.</p>
+                    <div class="d-flex align-items-center">
+                        <img src="/static/img/Matthew-Stokes.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="الكاتب">
+                        <div class="ms-3">
+                            <h5>الكاتب: ماثيو ستوكس</h5>
+                            <p class="mb-0">تاريخ النشر: 1 نوفمبر 2024</p>
+                            <p class="mb-0">حالياً: متخصص في عمليات المحتوى SEO في Webify.io & MadCrypto.com</p>
+                            <p class="mb-0">التعليم: بكالوريوس علوم بيئية</p>
+                            <a href="https://www.linkedin.com/in/matthew-stokes" target="_blank">
+                                <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="شعار LinkedIn">
+                                عرض السيرة الكاملة
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- عنصر المدوّنة 2 -->
+            <div class="blog-item p-4">
+                <div class="blog-img mb-4">
+                    <img src="/static/img/call-put-options.jpg" class="img-fluid w-100 rounded" alt="خيارات الشراء والبيع">
+                    <div class="blog-title">
+                        <a href="https://www.investing.com/academy/trading/call-put-options/" class="btn" target="_blank">
+                            خيارات الشراء والبيع - دليل الشراء والبيع
+                        </a>
+                    </div>
+                </div>
+                <div class="blog-content">
+                    <a href="https://www.investing.com/academy/trading/call-put-options/" class="h4 d-inline-block mb-3" target="_blank">خيارات الشراء والبيع</a>
+                    <p class="mb-4">اكتشف أساسيات خيارات الشراء والبيع وتعلم كيفية شرائها وبيعها بفعالية.</p>
+                    <div class="d-flex align-items-center">
+                        <img src="/static/img/Harris-Anwar-Author.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="حارس أنور">
+                        <div class="ms-3">
+                            <h5>الكاتب: حارس أنور</h5>
+                            <p class="mb-0">تاريخ النشر: 1 نوفمبر 2024</p>
+                            <p class="mb-0">الخبرة: كاتب مالي يركز على أسواق الأسهم لمساعدة القراء في العثور على فرص استثمار طويلة الأجل</p>
+                            <p class="mb-0">حالياً: كاتب في Investing.com، يقدم تحليلات حول الأسهم الكبيرة وأسهم الأرباح</p>
+                            <a href="https://www.linkedin.com/in/harisanwar" target="_blank">
+                                <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="شعار LinkedIn">
+                                عرض السيرة الكاملة
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- عنصر المدوّنة 3 -->
+            <div class="blog-item p-4">
+                <div class="blog-img mb-4">
+                    <img src="/static/img/Dividend-Aristocrat-List.png" class="img-fluid w-100 rounded" alt="قائمة توزيعات الأرباح الأرستقراطية">
+                    <div class="blog-title">
+                        <a href="https://www.investing.com/academy/trading/dividend-aristocrats/" class="btn" target="_blank">
+                            قائمة توزيعات الأرباح الأرستقراطية وتعريفها
+                        </a>
+                    </div>
+                </div>
+                <div class="blog-content">
+                    <a href="https://www.investing.com/academy/trading/dividend-aristocrats/" class="h4 d-inline-block mb-3" target="_blank">توزيعات الأرباح الأرستقراطية: نظرة شاملة</a>
+                    <p class="mb-4">استكشاف قائمة توزيعات الأرباح الأرستقراطية وفهم ما يجعلها خيارًا استثماريًا ذا قيمة.</p>
+                    <div class="d-flex align-items-center">
+                        <img src="/static/img/Hannah-Wilson-.png" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="الكاتب">
+                        <div class="ms-3">
+                            <h5>الكاتب: هانا ويلسون</h5>
+                            <p class="mb-0">تاريخ النشر: 1 نوفمبر 2024</p>
+                            <p class="mb-0">حالياً: متخصص في الأسواق الإنجليزية في Investing.com (SEO)</p>
+                            <p class="mb-0">التعليم: بكالوريوس (مرتبة الشرف) في إدارة الأعمال من جامعة كوفنتري، إنجلترا</p>
+                            <a href="https://www.linkedin.com/in/hannah-wilson" target="_blank">
+                                <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="شعار LinkedIn">
+                                عرض السيرة الكاملة
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- عنصر المدوّنة 4 -->
+            <div class="blog-item p-4">
+                <div class="blog-img mb-4">
+                    <img src="/static/img/AI-Stock-Trading-Definition.png" class="img-fluid w-100 rounded" alt="تحليل سوق الأسهم">
+                    <div class="blog-title">
+                        <a href="https://www.investing.com/academy/trading/ai-stock-trading-guide/" class="btn" target="_blank">
+                            تداول الأسهم باستخدام الذكاء الاصطناعي: كيف يمكن للذكاء الاصطناعي أن يغير اختيار الأسهم الخاص بك
+                        </a>
+                    </div>
+                </div>
+                <div class="blog-content">
+                    <a href="https://seekingalpha.com/article/stock-market-analysis" class="h4 d-inline-block mb-3" target="_blank">تداول الأسهم باستخدام الذكاء الاصطناعي</a>
+                    <p class="mb-4">تحليل عميق لاتجاهات سوق الأسهم الحالية وما تعنيه للمستثمرين.</p>
+                    <div class="d-flex align-items-center">
+                        <img src="/static/img/Sara-Jayne.png" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="الكاتب">
+                        <div class="ms-3">
+                            <h5>الكاتب: سارة جين سلاك</h5>
+                            <p class="mb-0">تاريخ النشر: 1 أكتوبر 2024</p>
+                            <p class="mb-0">الخبرة: إدارة الثروات، التمويل الشخصي</p>
+                            <p class="mb-0">حالياً: متخصص SEO (السوق البريطاني) في Investing.com</p>
+                            <p class="mb-0">التعليم: الأسواق المالية وتحليل الاستثمار، جامعة كامبريدج</p>
+                            <a href="https://www.linkedin.com/in/sara-jayne-slack" target="_blank">
+                                <img src="/static/img/linkedin logo.jpg" style="width: 20px; height: 20px; vertical-align: middle;" alt="شعار LinkedIn">
+                                عرض السيرة الكاملة
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- الفوتر بداية -->
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" >
+    <div class="container py-5 border-start-0 border-end-0"
+        style="border: 1px solid; border-color: rgb(255, 255, 255, 0.08);">
+        <div class="row g-5" dir="ltr">
+            <div class="col-md-6 col-lg-6 col-xl-4">
+                <div class="footer-item">
+                    <a href="index.html" class="p-0">
+                        <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
+                        <p>شريكك للتداول الآمن.</p>
+                        <!-- <img src="/static/img/logo.png" alt="الشعار"> -->
+                    </a>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="https://www.metatrader4.com/fr" class="btn btn-primary  px-4 py-2">MT4</a>
+                        <a href="https://www.metatrader5.com/fr" class="btn btn-secondary  px-4 py-2">MT5</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4">السوق</h4>
+                    <a href="{% url 'crypto_ar' %}"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'forex_ar' %}">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
+         <a href="{% url 'metals_ar' %}">  المعادن و السلع  <i class="fas fa-angle-left me-2">  </i></a>
+  
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-lg-6 col-xl-2">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4"> روابط سريعة </h4>
+                    <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'services' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
+                    <a href="{% url 'blogs' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
+                    <a href="{% url 'contact' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 text-start">
+                <div class="footer-item">
+                    <h4 class="text-white mb-4">معلومات الاتصال</h4>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-envelope text-primary me-3"></i>
+                        <p class="text-white mb-0">contact@inspire-trade.com</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-phone-alt text-primary me-3"></i>
+                        <p class="text-white mb-0"> +852 8171 3179</p>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fab fa-firefox-browser text-primary me-3"></i>
+                        <p class="text-white mb-0">inspire-Trade.com</p>
+                    </div>
+                    <div class="d-flex">
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                class="fab fa-facebook-f text-white"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                class="fab fa-twitter text-white"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                class="fab fa-instagram text-white"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-0" href="#"><i
+                                class="fab fa-linkedin-in text-white"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- الفوتر نهاية -->
+  
+
+<!-- حقوق الطبع والنشر بداية -->
+<div class="container-fluid copyright py-4">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-md-0" dir="rtl">
+          <span class="text-body"
+            ><a href="#" class="border-bottom text-white"
+              ><i class="fas fa-copyright text-light me-2"></i
+              >Inspire Trade</a
+            >، جميع الحقوق محفوظة.</span
+          >
+        </div>
+        <div class="col-md-6 text-center text-md-end text-body" dir="rtl">
+          تم التصميم بواسطة
+          <a class="border-bottom text-white" href="#">Leamon</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- حقوق الطبع والنشر نهاية -->
+
+
+<!-- العودة للأعلى -->
+<a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+<!-- مكتبات JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const staticPrefix = "{% static '' %}";
+      document.querySelectorAll('img').forEach(img => {
+        // التأكد من أن src هو مسار نسبي ولم يتم تهيئته مسبقًا
+        if (img.getAttribute('src').startsWith('img/')) {
+          img.src = staticPrefix + img.getAttribute('src');
+        }
+      });
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'lib/wow/wow.min.js'%}"></script>
+<script src="{% static 'lib/easing/easing.min.js'%}"></script>
+<script src="{% static 'lib/waypoints/waypoints.min.js'%}"></script>
+<script src="{% static 'lib/counterup/counterup.min.js'%}"></script>
+<script src="{% static 'lib/lightbox/js/lightbox.min.js'%}"></script>
+<script src="{% static 'lib/owlcarousel/owl.carousel.min.js'%}"></script>
+
+<!-- جافا سكربت القالب -->
+<script src="{% static 'js/main.js'%}"></script>
+</body>
+
+</html>

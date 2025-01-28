@@ -1,0 +1,264 @@
+{% load static %}
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <title>مدونة إنسباير تريد</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="/static/css/forex.css" rel="stylesheet" />
+  </head>
+
+  <body>
+       <!-- Topbar Start -->
+       <div class="container-fluid topbar bg-light px-5 d-none d-lg-block">
+        <div class="row gx-0 align-items-center">
+          <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-flex flex-wrap">
+              <a href="mailto:contact@inspire-trade.com" class="text-muted small me-0">
+                <i class="fas fa-envelope text-primary me-2"></i>contact@inspire-trade.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Topbar End -->
+      <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+          {% if not user.is_authenticated %}
+          <a href="{% url 'signup_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">إنشاء حساب</a>
+          <a href="{% url 'login_ar' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px !important;">تسجيل الدخول</a>
+          {% else %}
+          <a id="lng" href={{url_lang}}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-world">
+              <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+              <path d="M3.6 9h16.8"></path>
+              <path d="M3.6 15h16.8"></path>
+              <path d="M11.5 3a17 17 0 0 0 0 18"></path>
+              <path d="M12.5 3a17 17 0 0 1 0 18"></path>
+            </svg>{{langue}}
+          </a>
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
+              <img src="{% static 'img/profile.png' %}" alt="Profile" class="profile-img">
+            </a>
+            <div class="dropdown-menu rounded">
+              <a href="{% url 'dashboard_ar' %}" class="dropdown-item">
+                <i class="fas fa-user-alt me-2"></i> ملفي الشخصي
+              </a>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-cog me-2"></i> إعدادات الحساب
+              </a>
+              <a href="{% url 'logout_ar' %}" class="dropdown-item">
+                <i class="fas fa-power-off me-2"></i> تسجيل الخروج
+              </a>
+            </div>
+          </div>
+          {% endif %}
+
+  
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="fa fa-bars"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+              <a href="{% url 'index_ar' %}" class="nav-item nav-link">الرئيسية</a>
+              <a href="{% url 'about_ar' %}" class="nav-item nav-link">من نحن</a>
+              <a href="{% url 'services_ar' %}" class="nav-item nav-link">خدماتنا</a>
+              <a href="{% url 'blogs_ar' %}" class="nav-item nav-link">المدوّنة</a>
+              <div class="nav-item dropdown" dir="rtl">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">السوق</a>
+              <div class="dropdown-menu rounded" style="text-align: right;">
+                  <a href="{% url 'crypto' %}" class="dropdown-item" >العملات الرقمية</a>
+                  <a href="{% url 'forex' %}" class="dropdown-item">الفوركس</a>
+                  <a href="{% url 'metals' %}" class="dropdown-item">المعادن و السلع</a>
+              </div>
+          </div>
+              <a href="{% url 'contact_ar' %}" class="nav-item nav-link">تواصل معنا</a>
+            </div>
+          </div>
+          <a href="" class="navbar-brand p-0">
+            <img src="{% static 'img/logo.png'%}" alt="" />
+          </a>
+  
+        </nav>
+      </div>
+
+    <div class="full-bg-image"></div>
+    <div class="containerff mt-4 mb-lg-4">
+        <h1>ما هو الفوركس؟</h1>
+        <p>كلمة "فوركس" مشتقة من اختصار المصطلحات الإنجليزية Foreign Exchange. وهو سوق لتبادل العملات حيث يتم تداول العملات القابلة للتحويل مقابل بعضها البعض بأسعار صرف تتغير باستمرار.  
+            هذا السوق العالمي هو الثاني من حيث الحجم الإجمالي بعد سوق أسعار الفائدة. ومع ذلك، فإنه يعتبر الأكثر تركيزًا ويحتل المرتبة الأولى من حيث السيولة للمنتجات الأكثر تداولاً، مثل زوج اليورو/الدولار الأمريكي.
+        </p>
+        <h2>مزايا الفوركس</h2>
+        <h5>عائدات مرتفعة</h5>
+        <p>وفقًا لأحدث تقرير من BIS لعام 2011، زادت التداولات في سوق الفوركس بنسبة 20% منذ عام 2007، لتصل إلى 3.981 تريليون دولار. تسيطر المملكة المتحدة والولايات المتحدة على السوق، حيث تستحوذ لندن على أكثر من 36.7% والولايات المتحدة على 17.9% من إجمالي التداولات. أما فرنسا فتأتي متأخرة بنسبة 3% فقط من التداولات العالمية، وهو انخفاض كبير منذ عام 1995.</p>
+        <h5>الربح بغض النظر عن تحركات السوق</h5>
+        <p>الغالبية العظمى من معاملات الفوركس هي معاملات مضاربية (تستمر أقل من سبعة أيام) بدلاً من معاملات تجارية.  
+            منذ العقد الأول من القرن الحادي والعشرين، ومع تنفيذ توجيه MiFID، أصبح بإمكان جميع المستثمرين - الأفراد والمؤسسات - التداول في سوق الفوركس بمبالغ صغيرة عبر الوسطاء.</p>
+        <h5>إمكانية الربح يوميًا</h5>
+        <p>سوق الفوركس مفتوح 24 ساعة يوميًا. تتناوب بورصات العالم الرئيسية (لندن، نيويورك، سيدني، طوكيو) لضمان عدم وجود انقطاع للمتداولين باستثناء عطلات نهاية الأسبوع.</p>
+        <h5>لا موقع جغرافي محدد</h5>
+        <p>تداول الفوركس لا يتم في سوق مركزي بل من خلال سوق ما بين البنوك.</p>
+        <h5>عملية تداول جذابة</h5>
+        <p>من الخصائص الرئيسية لتداول الفوركس هو التأثير الكبير للرافعة المالية التي يقدمها الوسطاء. تتيح الرافعة المالية للمتداولين التحكم في مبلغ يصل إلى 100 ضعف رأس المال الفعلي لديهم.</p>
+        <h2>المشاركون في سوق الفوركس</h2>
+        <i class="icon-piggy-bank icon-default icon-2x"></i>
+        <h5>البنوك المركزية للدول الكبرى</h5>
+        <p>البنك المركزي لدولة (أو عدة دول مثل منطقة اليورو) هو مؤسسة مكلفة من قبل الدولة (أو مجموعة من الدول) بتحديد وتنفيذ السياسة النقدية.</p>
+        <h5>البنوك التجارية</h5>
+        <p>البنك هو مؤسسة تتعامل في الأموال. يمكنها خدمة العملاء بطرق مختلفة: تلقي الأموال والاحتفاظ بها، تقديم خيارات استثمارية (الادخار)، توفير وسائل الدفع والتبادل (الشيكات، البطاقات الائتمانية، إلخ)، إقراض الأموال، وتقديم جميع الخدمات المالية بشكل عام. كما تتداول البنوك وتعمل في الأسواق المالية نيابة عن نفسها أو لصالح عملائها.</p>
+        <h5>المستوردون والمصدرون</h5>
+        <p>عدد كبير من معاملات الأسواق المالية تتم بواسطة الشركات التي تعمل في استيراد أو تصدير منتجات متنوعة. تحتاج هذه الشركات إلى شراء عملات البلدان المختلفة حيث يتواجد شركاؤها الدوليون.</p>
+        <h5>صناديق الاستثمار والمعاشات</h5>
+        <p>الهدف الرئيسي للصناديق المختلفة (الاستثمار، المعاشات، التأمين، صناديق التحوط) هو تحقيق الأرباح. تدير هذه الصناديق كميات كبيرة من رأس المال، مما يجعل عملياتها في الفوركس كبيرة ويمكن أن تؤثر على قيمة العملات.</p>
+        <h5>شركات الإدارة التي تعمل في الفوركس</h5>
+        <p>هي مؤسسات غير بنكية تقدم للعملاء فرصة التداول في الأسواق المالية بمبالغ صغيرة من رأس مالهم الخاص. بالإضافة إلى التداول في الفوركس، قد تسهل هذه الشركات التداول في أسواق العقود مقابل الفروقات (CFD).  
+            يتم التداول من خلال مراكز التداول عادة باستخدام برامج تداول مثل MetaTrader من TeleTrade-TBI تونس.</p>
+        <h2>كم يمكنك أن تكسب من الفوركس؟</h2>
+        <p>باستخدام استراتيجية تداول جيدة وقواعد إدارة رأس المال المناسبة، يمكن للمتداولين تحقيق عائدات متوسطة تتراوح بين 2-5% وصولًا إلى 80-100% شهريًا. يعتمد هذا التباين على نظام المتداول وظروف السوق.</p>
+        <h2>العوامل المؤثرة على الربحية</h2>
+        <h5>ظروف السوق</h5>
+        <p>يمكن أن تحدث تحركات قوية وقابلة للتنبؤ للعملات بانتظام متفاوت. يشمل ذلك:  
+            <ul>
+                <li>تكرار الحالات المربحة: أحيانًا تظهر العديد من الفرص المربحة في يوم واحد. وفي أوقات أخرى، قد يضطر المتداولون إلى الانتظار أسبوعًا لتنفيذ صفقة واحدة أو اثنتين.</li>
+                <li>حجم وسرعة تغير الأسعار: على سبيل المثال، يمكن أن تحقق الصفقة التي يتم تنفيذها في الوقت المناسب وفقًا لجميع قواعد التداول أرباحًا تتراوح بين 500 دولار و2000 دولار في ظل ظروف السوق المواتية.</li>
+            </ul>
+        </p>
+        <h5>حجم الحساب</h5>
+        <p>تتعلق الربحية بشكل قوي بحجم إيداع المتداول. الحسابات الصغيرة تتطلب تكتيكات تداول حذرة، مما قد يفوت على المتداولين العديد من الفرص المربحة. الحسابات الكبيرة تتيح تنفيذ صفقات أكثر موثوقية ذات أرباح محتملة أكبر.</p>
+        <h5>مستوى المخاطرة في استراتيجية التداول</h5>
+        <p>تعتمد الربحية على مستوى المخاطرة التي يكون المتداول مستعدًا لقبولها. غالبًا ما تُفرض قيود بناءً على حجم الحساب والوضع المالي الشخصي للمتداول. بالنسبة لحسابات المستثمرين، يتم تحديد القيود عادة من قبل المستثمر.</p>
+    </div>
+    
+    
+    
+    
+    
+    
+<!-- الفوتر بداية -->
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" >
+  <div class="container py-5 border-start-0 border-end-0"
+      style="border: 1px solid; border-color: rgb(255, 255, 255, 0.08);">
+      <div class="row g-5" dir="ltr">
+          <div class="col-md-6 col-lg-6 col-xl-4">
+              <div class="footer-item">
+                  <a href="index.html" class="p-0">
+                      <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
+                      <p>شريكك للتداول الآمن.</p>
+                      <!-- <img src="/static/img/logo.png" alt="الشعار"> -->
+                  </a>
+                  <div class="d-flex gap-2 mt-3">
+                      <a href="https://www.metatrader4.com/fr" class="btn btn-primary  px-4 py-2">MT4</a>
+                      <a href="https://www.metatrader5.com/fr" class="btn btn-secondary  px-4 py-2">MT5</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-3">
+              <div class="footer-item">
+                  <h4 class="text-white mb-4">السوق</h4>
+                  <a href="{% url 'crypto_ar' %}"> العملات الرقمية <i class="fas fa-angle-left me-2"></i></a>
+                  <a href="{% url 'forex_ar' %}">  الفوركس  <i class="fas fa-angle-left me-2">  </i></a>
+       <a href="{% url 'metals_ar' %}">  المعادن و السلع  <i class="fas fa-angle-left me-2">  </i></a>
+
+              </div>
+          </div>
+
+          <div class="col-md-6 col-lg-6 col-xl-2">
+              <div class="footer-item">
+                  <h4 class="text-white mb-4"> روابط سريعة </h4>
+                  <a href="{% url 'about_ar' %}">  من نحن <i class="fas fa-angle-left me-2"></i></a>
+                  <a href="{% url 'services' %}"> الخدمات <i class="fas fa-angle-left me-2"></i> </a>
+                  <a href="{% url 'blogs' %}"> المدوّنة <i class="fas fa-angle-left me-2"></i></a>
+                  <a href="{% url 'contact' %}"> اتصل بنا <i class="fas fa-angle-left me-2"></i></a>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-3 text-start">
+              <div class="footer-item">
+                  <h4 class="text-white mb-4">معلومات الاتصال</h4>
+                  <div class="d-flex align-items-center">
+                      <i class="fas fa-envelope text-primary me-3"></i>
+                      <p class="text-white mb-0">contact@inspire-trade.com</p>
+                  </div>
+                  <div class="d-flex align-items-center">
+                      <i class="fa fa-phone-alt text-primary me-3"></i>
+                      <p class="text-white mb-0"> +852 8171 3179</p>
+                  </div>
+                  <div class="d-flex align-items-center mb-4">
+                      <i class="fab fa-firefox-browser text-primary me-3"></i>
+                      <p class="text-white mb-0">inspire-Trade.com</p>
+                  </div>
+                  <div class="d-flex">
+                      <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                              class="fab fa-facebook-f text-white"></i></a>
+                      <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                              class="fab fa-twitter text-white"></i></a>
+                      <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                              class="fab fa-instagram text-white"></i></a>
+                      <a class="btn btn-primary btn-sm-square rounded-circle me-0" href="#"><i
+                              class="fab fa-linkedin-in text-white"></i></a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- الفوتر نهاية -->
+
+
+           <div class="container-fluid copyright py-4">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-md-0" dir="rtl">
+          <span class="text-body"
+            ><a href="#" class="border-bottom text-white"
+              ><i class="fas fa-copyright text-light me-2"></i
+              >Inspire Trade</a
+            >، جميع الحقوق محفوظة.</span
+          >
+        </div>
+        <div class="col-md-6 text-center text-md-end text-body" dir="rtl">
+          تم التصميم بواسطة
+          <a class="border-bottom text-white" href="#">Leamon</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- حقوق الطبع والنشر نهاية -->
+
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'lib/wow/wow.min.js'%}"></script>
+<script src="{% static 'lib/easing/easing.min.js'%}"></script>
+<script src="{% static 'lib/waypoints/waypoints.min.js'%}"></script>
+<script src="{% static 'lib/counterup/counterup.min.js'%}"></script>
+<script src="{% static 'lib/lightbox/js/lightbox.min.js'%}"></script>
+<script src="{% static 'lib/owlcarousel/owl.carousel.min.js'%}"></script>
+</body>
+</html>

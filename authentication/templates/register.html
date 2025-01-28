@@ -584,17 +584,127 @@
         </div>
       </div>
     </div>
-
-
-
     <div id="toast" class="toast">
       User already exists !
       <div class="progress-bar" id="progress-bar"></div>
     </div>
-
+    <div class="modal" tabindex="-1" id="termsModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Terms and Conditions and Privacy Policy</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeTermsModal()"></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              By registering, you agree to our <strong>Terms and Conditions</strong> and <strong>Privacy Policy</strong>.
+            </p>
+            
+            <!-- Terms and Conditions Section -->
+            <h6>Terms and Conditions</h6>
+            <p>
+              Last updated: January 2025
+            </p>
+            <p>
+              Welcome to Inspire Trade! By registering or using our website and the services provided through the platform or via inspire-trade.com, you agree to comply with the following terms and conditions. Please read these terms carefully before using the website.
+            </p>
+            <p>
+              If you do not agree with any of these terms, please discontinue using the site.
+            </p>
+            
+            <h6>1. Definitions</h6>
+            <ul>
+              <li>1.1. <strong>Inspire Trade:</strong> Refers to the company and the platform offering brokerage services for trading.</li>
+              <li>1.2. <strong>User:</strong> Any individual who creates an account or uses Inspire Trade services.</li>
+              <li>1.3. <strong>Services:</strong> Includes trading services in currencies, cryptocurrencies, and metals.</li>
+            </ul>
+            
+            <h6>2. Registration and Account</h6>
+            <ul>
+              <li>2.1. Users must provide accurate and complete information during registration.</li>
+              <li>2.2. Users are fully responsible for maintaining the confidentiality of their account and password.</li>
+              <li>2.3. Users must be at least 18 years old.</li>
+              <li>2.4. Verification procedures:
+                <ul>
+                  <li>Users must complete verification, including submitting an ID, passport, or driver’s license.</li>
+                  <li>Proof of address may be required in certain cases.</li>
+                  <li>Account features may be restricted until verification is complete.</li>
+                </ul>
+              </li>
+            </ul>
+    
+            <h6>3. Platform Use</h6>
+            <ul>
+              <li>3.1. The platform may not be used for any unlawful or fraudulent purposes.</li>
+              <li>3.2. Inspire Trade reserves the right to suspend or terminate accounts for any violation of these terms.</li>
+              <li>3.3. The minimum trade amount is $500 USD.</li>
+            </ul>
+    
+            <h6>4. Fees and Commissions</h6>
+            <p>No fees will be charged to Inspire Trade users.</p>
+    
+            <h6>5. Privacy Policy</h6>
+            <ul>
+              <li>5.1. User data is collected in accordance with Inspire Trade’s Privacy Policy.</li>
+              <li>5.2. User data will not be shared with third parties without user consent, except as required by law.</li>
+              <li>5.3. Inspire Trade is committed to protecting your privacy.</li>
+            </ul>
+    
+            <h6>6. Disclaimer</h6>
+            <ul>
+              <li>6.1. Inspire Trade is not responsible for any financial losses resulting from market volatility.</li>
+              <li>6.2. Trading in financial markets involves high risks and may result in a total loss of capital.</li>
+            </ul>
+    
+            <h6>7. Amendments</h6>
+            <ul>
+              <li>7.1. Inspire Trade reserves the right to modify these terms at any time.</li>
+              <li>7.2. Users will be notified of any changes before they take effect.</li>
+            </ul>
+    
+            <h6>8. Governing Law</h6>
+            <ul>
+              <li>8.1. These terms are governed by the laws of the jurisdiction in which Inspire Trade operates.</li>
+              <li>8.2. Any disputes will be resolved through applicable legal channels.</li>
+            </ul>
+    
+            <hr>
+        
+            <!-- Privacy Policy Section -->
+            <h6>Privacy Policy</h6>
+            <p>
+              Last updated: January 2025
+            </p>
+            <p>
+              At Inspire Trade, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose your personal information when you visit our website or use our services.
+            </p>
+            <p>
+              By using our website, you consent to the practices described in this Privacy Policy.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeTermsModal()">ACCEPT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
 
     <script>
-// Validation functions
+      // Show the Terms and Conditions modal when the checkbox is clicked
+      const termsCheck = document.getElementById('termsCheck');
+  const termsModal = document.getElementById('termsModal');
+  const agreeBtn = document.getElementById('agreeBtn');
+
+
+  termsCheck.addEventListener('change', function() {
+    if (termsCheck.checked) {
+      new bootstrap.Modal(termsModal).show();
+    } else {
+      agreeBtn.disabled = true;
+    }
+  });
+
 // Validation functions
 function validateEmail() {
   const email = document.getElementById('email');
