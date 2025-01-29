@@ -70,9 +70,9 @@
                     <div class="nav-item dropdown" dir="rtl">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">السوق</a>
               <div class="dropdown-menu rounded" style="text-align: right;">
-                  <a href="{% url 'crypto' %}" class="dropdown-item" >العملات الرقمية</a>
-                  <a href="{% url 'forex' %}" class="dropdown-item">الفوركس</a>
-                  <a href="{% url 'metals' %}" class="dropdown-item">المعادن و السلع</a>
+                  <a href="{% url 'crypto_ar' %}" class="dropdown-item" >العملات الرقمية</a>
+                  <a href="{% url 'forex_ar' %}" class="dropdown-item">الفوركس</a>
+                  <a href="{% url 'metals_ar' %}" class="dropdown-item">المعادن و السلع</a>
               </div>
           </div>
                     <a href="{% url 'contact_ar' %}" class="nav-item nav-link">تواصل معنا</a>
@@ -308,7 +308,7 @@
         <div class="row g-5" dir="ltr">
             <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="footer-item">
-                    <a href="index.html" class="p-0">
+                    <a href="{% url 'index' %}" class="p-0">
                         <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
                         <p>شريكك للتداول الآمن.</p>
                         <!-- <img src="/static/img/logo.png" alt="الشعار"> -->

@@ -434,11 +434,6 @@
                     <option value="1:200">1:200</option>
                     <option value="1:400">1:400</option>
                     <option value="1:500">1:500</option>
-                    <option value="1:600">1:600</option>
-                    <option value="1:800">1:800</option>
-                    <option value="1:1000">1:1000</option>
-                    <option value="1:2000">1:2000</option>
-                    <option value="1:Unlimited">1:Unlimited</option>
                 </select>
             </div>
 
@@ -485,11 +480,63 @@
   <div class="container my-5">
     <div class="text-center">
       <!-- زر لفتح النافذة -->
-      <button type="button" class="btn trading-button" data-bs-toggle="modal" data-bs-target="#tradingInfoModal">
-        قم يتمويل حسابك
+      <button type="button" class="btn trading-button mb-4" data-bs-toggle="modal" data-bs-target="#tradingInfoModal">
+        قم يتمويل حسابك (تحويل بنكي )
       </button>
+      <button 
+      type="button" 
+      class="btn trading-button mb-4" 
+      onclick="window.open('https://pay.airwallex.com/hkh41f165r7d', '_blank')">
+      قم بتمويل حسابك (بطاقة الائتمان)
+    </button>
+    <button type="button" class="btn trading-button mb-4" data-bs-toggle="modal" data-bs-target="#withdrawModal">
+      سحب المال
+    </button>
     </div>
   </div>
+
+
+        <!--Withdraw Modal-->
+            <!-- Modal -->
+            <div class="modal fade" id="withdrawModal" tabindex="-1" aria-labelledby="withdrawModalInfo" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="withdrawModalInfo">سحب المال</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>اكتب المبلغ المراد سحبه</p>
+                    <input type="text" placeholder="المبلغ" class="form-control" required id="ammount">
+                    <small id="errorMessage" class="text-danger d-none">المبلغ يتجاوز الحد المسموح به.</small>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="withdrawButton">سحب</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Toast Notification -->
+            <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+              <div id="toastSuccess" class="toast align-items-center text-bg-success border-0 d-none" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                  <div class="toast-body">
+                    تم السحب بنجاح!
+                  </div>
+                  <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+              </div>
+              <div id="toastError" class="toast align-items-center text-bg-danger border-0 d-none" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                  <div class="toast-body">
+                    حدث خطأ ما!
+                  </div>
+                  <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+              </div>
+            </div>
   
   <!-- النافذة -->
   <div class="modal fade" id="tradingInfoModal" tabindex="-1" aria-labelledby="tradingInfoModalLabel" aria-hidden="true">
@@ -579,7 +626,7 @@
       <div class="row g-5" dir="ltr">
           <div class="col-md-6 col-lg-6 col-xl-4">
               <div class="footer-item">
-                  <a href="index.html" class="p-0">
+                  <a href="{% url 'index' %}" class="p-0">
                       <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
                       <p>شريكك للتداول الآمن.</p>
                       <!-- <img src="/static/img/logo.png" alt="الشعار"> -->
@@ -661,6 +708,89 @@
   </div>
 </div>
 <!-- حقوق الطبع والنشر نهاية -->
+
+
+<script>
+  document.getElementById('withdrawButton').addEventListener('click', function () {
+    const amount = parseFloat(document.getElementById('ammount').value);
+
+    // Validate the input
+    if (isNaN(amount) || amount <= 0) {
+      document.getElementById('errorMessage').classList.remove('d-none');
+      return;
+    }
+    document.getElementById('errorMessage').classList.add('d-none');
+
+    // Send the POST request to the withdraw view
+    fetch('withdraw_ar/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCSRFToken(), // Replace with your CSRF token retrieval function
+      },
+      body: JSON.stringify({ ammount: amount }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Withdrawal failed');
+        }
+      })
+      .then((data) => {
+        // Close the modal
+        const modalElement = document.getElementById('withdrawModal');
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
+
+        // Show success toast
+        const toastSuccess = document.getElementById('toastSuccess');
+        toastSuccess.classList.remove('d-none');
+        const toastInstance = new bootstrap.Toast(toastSuccess);
+        toastInstance.show();
+
+        // Update UI with remaining balance if needed
+        console.log(data.remaining_balance);
+      })
+      .catch((error) => {
+        // Show error toast
+        const toastError = document.getElementById('toastError');
+        toastError.classList.remove('d-none');
+        const toastInstance = new bootstrap.Toast(toastError);
+        toastInstance.show();
+        console.error(error);
+      });
+  });
+
+  // Utility to get CSRF token
+  function getCSRFToken() {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+    return csrfToken ? csrfToken.value : '';
+  }
+</script>
+
+
+
+<script>
+  // Set the maximum allowable amount
+  const maxAmount = {{ammount}}; // Replace with your variable amount
+  const inputField = document.getElementById('ammount');
+  const errorMessage = document.getElementById('errorMessage');
+  const withdrawButton = document.getElementById('withdrawButton');
+
+  // Add an event listener to validate input
+  inputField.addEventListener('input', () => {
+    const value = parseFloat(inputField.value);
+    if (isNaN(value) || value > maxAmount) {
+      errorMessage.classList.remove('d-none'); // Show error message
+      withdrawButton.disabled = true; // Disable the withdraw button
+    } else {
+      errorMessage.classList.add('d-none'); // Hide error message
+      withdrawButton.disabled = false; // Enable the withdraw button
+    }
+  });
+</script>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
       const options = document.querySelectorAll('.custom-option');

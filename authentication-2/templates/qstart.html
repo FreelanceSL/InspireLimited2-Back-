@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/qstart.css' %}">
+</head>
+<body>
+
+    <!-- Navbar Start -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="{% url 'index' %}" class="navbar-brand">
+                <img src="{% static 'img/logo.png' %}" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" onclick="toggleMenu()">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="{% url 'index' %}" >Home</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'services' %}">Services</a>
+                <a href="{% url 'blogs' %}">Blogs</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Market</a>
+                    <div class="dropdown-menu rounded">
+                        <a href="{% url 'crypto' %}" class="dropdown-item">Crypto</a>
+                        <a href="{% url 'forex' %}" class="dropdown-item">Forex</a>
+                        <a href="{% url 'metals' %}" class="dropdown-item">Metals</a>
+                    </div>
+                </div>
+                <a href="{% url 'contact' %}">Contact Us</a>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Guide Content Start -->
+    <div class="guide-container">
+        <div class="guide-card">
+            <h1 class="guide-title">Account Guide</h1>
+            
+            <div class="guide-step">
+                <h2>1. Opening an Inspire Trade Account:</h2>
+                <ul>
+                    <li>Visit our website and click on "Open New Account" option</li>
+                    <li>Fill in the registration form with your personal information including name, email, and phone number</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>2. Download MT4/MT5 Platform:</h2>
+                <ul>
+                    <li>After registration, you'll receive a download link for the MT4/MT5 platform for your computer or phone</li>
+                    <li>Install the program easily following the simple setup process</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>3. Account Activation:</h2>
+                <ul>
+                    <li>We may require verification documents such as ID or utility bill to confirm your identity</li>
+                    <li>We ensure quick account activation once your documents are verified</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>4. Deposit Funds:</h2>
+                <ul>
+                    <li>Choose your preferred deposit method from our range of secure payment options</li>
+                    <li>Follow the simple steps to fund your trading account</li>
+                </ul>
+            </div>
+
+            <div class="guide-step">
+                <h2>5. Start Trading:</h2>
+                <ul>
+                    <li>Log in to the MT4/MT5 platform using your provided account credentials</li>
+                    <li>Begin your trading journey with our exceptional support team at your service</li>
+                </ul>
+            </div>
+            <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 40%;">Start trading!</a>
+        </div>
+    </div>
+    <!-- Guide Content End -->
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navbarMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Sticky navbar
+        window.onscroll = function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.pageYOffset > 0) {
+                navbar.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

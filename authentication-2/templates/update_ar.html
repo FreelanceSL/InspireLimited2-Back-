@@ -1,0 +1,73 @@
+{% load static %}
+<html lang="ar">
+<head>
+    <title>إعادة تعيين كلمة المرور</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link href="{% static 'css/update.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+</head>
+<body>
+
+    <form method="POST" id="password-reset-form">
+        {% csrf_token %}
+        <input type="hidden" name="form_origin" value="update_arabe" />
+        <label for="password">كلمة المرور الجديدة</label>
+        <input type="password" id="password" name="password" required placeholder="أدخل كلمة مرور جديدة">
+        
+        <button type="submit">إعادة تعيين كلمة المرور</button>
+    </form>
+
+    <!-- Show the response message -->
+    <div id="response-message"></div>
+
+    <script>
+        const form = document.getElementById('password-reset-form');
+        form.onsubmit = async (e) => {
+            e.preventDefault();  // يمنع الإرسال التقليدي للطلب
+
+            const password = document.getElementById('password').value;
+
+            // احصل على قيم uidb64 و token من Django
+            const uidb64 = "{{ uidb64 }}"; // استبدل بالقيمة الديناميكية من Django
+            const token = "{{ token }}"; // استبدل بالقيمة الديناميكية من Django
+            const langue= "{{ langue }}";
+
+            // قم بإجراء استدعاء API
+            const response = await fetch(`https://www.inspire-trade.com/modify/${uidb64}/${token}/${langue}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password })
+            });
+
+            const result = await response.json();
+
+            // إنشاء toast جديد مع رسالة الرد
+            const toast = document.createElement('div');
+            toast.className = 'toast show'; // إضافة الفئة 'show' لعرضه
+            toast.innerText = result.message;
+
+            // تحدد لون الـ toast بناءً على الرد
+            toast.style.backgroundColor = response.ok ? "green" : "red"; // أخضر للنجاح، أحمر للخطأ
+
+            // عرض الـ toast
+            document.body.appendChild(toast);
+
+            // إخفاء الـ toast بعد 3 ثوانٍ
+            setTimeout(() => {
+                toast.classList.remove('show');  // إخفاء الـ toast بعد 3 ثوانٍ
+                document.body.removeChild(toast);  // إزالة الـ toast من DOM
+            }, 3000);
+
+            // إعادة تعيين النموذج بعد الإرسال
+            form.reset();  // هذا يعيد تعيين جميع حقول النموذج إلى حالتها الأولية
+        }
+    </script>
+
+</body>
+</html>

@@ -140,3 +140,22 @@ def send_infos_trade(request, user,asset,platform,ammount,leverage):
 
     email = EmailMessage(subject, message, email_from, recipient_list)
     email.send()
+
+
+def send_infos_withdraw(request, user,ammount):
+    subject = 'Hello InspireTrade team, there is a user who want to withdraw money'
+    message = f"""
+    User Infos:
+    First Name: {user.first_name}
+    Last Name: {user.last_name}
+    Email: {user.email}
+    Account balance :{user.sum_trading_ammount}
+    ammount to withdraw :{ammount}
+
+    """
+    
+    email_from = settings.DEFAULT_FROM_EMAIL
+    recipient_list = ["support@inspire-trade.com"]
+
+    email = EmailMessage(subject, message, email_from, recipient_list)
+    email.send()

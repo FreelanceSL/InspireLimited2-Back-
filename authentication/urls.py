@@ -56,7 +56,11 @@ urlpatterns = [
     path('crypto/',views.crypto, name='crypto'),
     path('crypto_ar/',views.crypto_ar, name='crypto_ar'),
     path('metals/',views.metals, name='metals'),
-    path('metals_ar/',views.metals_ar, name='metals_ar')
+    path('metals_ar/',views.metals_ar, name='metals_ar'),
+    path('dashboard/withdraw/',views.withdraw, name='withdraw'),
+    path('dashboard_ar/withdraw_ar/',views.withdraw_ar, name='withdraw_ar')
+    
+    
     
     
     

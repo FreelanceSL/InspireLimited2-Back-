@@ -6,7 +6,7 @@ from .serializers import UserSerializer,VerificationSerializer,AdminSerializer
 from rest_framework.response import Response
 from .models import User
 from rest_framework.exceptions import AuthenticationFailed
-from .emails import send_otp_via_email, send_reset_password,send_infos,send_infos_trade,send_reset_password_ar,send_otp
+from .emails import send_otp_via_email, send_reset_password,send_infos,send_infos_trade,send_reset_password_ar,send_otp,send_infos_withdraw
 from rest_framework import status
 from django.contrib.auth.tokens import default_token_generator
 from rest_framework.permissions import IsAuthenticated
@@ -504,7 +504,7 @@ def dashboard(request):
     crypto_data = get_crypto_data()
     # metal_data= get_precious_metals_data()
 
-    return render(request, 'dashboard.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data , 'langue':'AR','url_lang': reverse('dashboard_ar')})
+    return render(request, 'dashboard.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data , 'langue':'AR','url_lang': reverse('dashboard_ar'),'ammount':request.user.sum_trading_ammount})
 
 @api_view(['GET'])
 @login_required(login_url='/api/login/')
@@ -518,7 +518,7 @@ def dashboard_ar(request):
     crypto_data = get_crypto_data()
     # metal_data= get_precious_metals_data()
 
-    return render(request, 'dashboard_ar.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data ,'langue':'ENG','url_lang': reverse('dashboard')}  )
+    return render(request, 'dashboard_ar.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data ,'langue':'ENG','url_lang': reverse('dashboard'),'ammount':request.user.sum_trading_ammount}  )
 
 
 @api_view(['GET'])
@@ -554,26 +554,37 @@ def profiling(request):
     else:
         return redirect(reverse('dashboard_ar'))
         
+@api_view(['POST'])
+@login_required(login_url='/api/login/')
+def withdraw(request):
+    ammount=request.data.get("ammount")
+    if request.user.is_authenticated :
+        user=request.user
+        if user.sum_trading_ammount>ammount:
+            user.sum_trading_ammount=request.user.sum_trading_ammount-ammount
+            user.save()
+            send_infos_withdraw(request,user,ammount)
+            return Response({"message": "Withdrawal successful.", "remaining_balance": user.sum_trading_ammount})
+        else :
+            return Response({"message": "Not enough money.", "remaining_balance": user.sum_trading_ammount})
+    return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-# def get_bitcoin_price():
-#     # Fetching Bitcoin price from CoinGecko
-#     url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
-#     response = requests.get(url)
-#     data = response.json()
-#     print(data)
-#     return data.get('bitcoin', {}).get('usd', 'N/A')
-
-
-# def real_time_prices(request):
-#     bitcoin_price = get_bitcoin_price()
-
+@api_view(['POST'])
+@login_required(login_url='/api/login/')
+def withdraw_ar(request):
+    ammount=request.data.get("ammount")
+    if request.user.is_authenticated :
+        user=request.user
+        if user.sum_trading_ammount>ammount:
+            user.sum_trading_ammount=request.user.sum_trading_ammount-ammount
+            user.save()
+            return Response({"message": "تم السحب بنجاح.", "remaining_balance": user.sum_trading_ammount})
+        else :
+            return Response({"message": "لا يوجد ما يكفي من المال.", "remaining_balance": user.sum_trading_ammount})
+    return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-#     return JsonResponse({
-#         'bitcoin_price': bitcoin_price,
-       
-#     })
-
+    
 
 
 

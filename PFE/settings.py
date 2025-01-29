@@ -90,9 +90,9 @@ WSGI_APPLICATION = "PFE.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'inspire-project',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
+        'NAME': 'inspire-trade',
+        'USER': 'user-inspire',
+        'PASSWORD': 'adminpostgresql',
         'HOST': '162.19.246.215',  # Or the IP address of your PostgreSQL server
         'PORT': '5432',       # Default PostgreSQL port
     }

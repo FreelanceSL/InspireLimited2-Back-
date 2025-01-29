@@ -1,0 +1,869 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="{% static 'lib/animate/animate.min.css' %}" />
+    <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+    <!-- Template Stylesheet -->
+    <style>
+      .custom-select {
+          position: relative;
+          width: 530px;
+      }
+
+      .custom-select-trigger {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border: 1px solid #ccc;
+          padding: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+      .custom-options {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background: #fff;
+          max-height: 200px;
+          overflow-y: auto;
+          display: none;
+          z-index: 10;
+      }
+
+      .custom-options.active {
+          display: block;
+      }
+
+      .custom-option {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          cursor: pointer;
+      }
+
+      .custom-option:hover {
+          background: #f0f0f0;
+      }
+
+      .custom-option img {
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+      }
+  </style>
+
+  </head>
+  <body>
+<!-- Spinner Start -->
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+  <!-- Brand Logo -->
+  <a href="" class="navbar-brand p-0">
+      <!-- Logo Image -->
+      <img src="{% static 'img/logo.png' %}" alt="" srcset="">
+      <!-- Alternative logo (commented) -->
+      <!-- <img src="img/logo.png" alt="Logo"> -->
+  </a>
+  
+  <!-- Toggler Button for Small Screens -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="fa fa-bars"></span>
+  </button>
+  
+  <!-- Collapsible Navigation Menu -->
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="navbar-nav ms-auto py-0">
+          <!-- Navigation Links -->
+          <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
+          <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+          <a href="{% url 'services' %}" class="nav-item nav-link">Services</a>
+          <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color: black;">Market</a>
+            <div class="dropdown-menu rounded">
+                <a href="{% url 'crypto' %}" class="dropdown-item">Crypto</a>
+                <a href="{% url 'forex' %}" class="dropdown-item">Forex</a>
+                <a href="{% url 'metals' %}" class="dropdown-item">Metals</a>
+            </div>
+        </div>
+          <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
+      </div>
+
+      <!-- Authentication Links -->
+      {% if not user.is_authenticated %}
+          <!-- Links for Unauthenticated Users -->
+          <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Register</a>
+          <a href="{% url 'login' %}" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" style="margin-left: 20px;">Login</a>
+      {% else %}
+          <!-- Dropdown for Authenticated Users -->
+          <div class="dropdown">
+              <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
+                  <!-- Profile Image -->
+                  <img src="{% static 'img/profile.png' %}" alt="Profile" class="profile-img">
+              </a>
+              <!-- Dropdown Menu -->
+              <div class="dropdown-menu rounded">
+                  <a href="{% url 'dashboard' %}" class="dropdown-item">
+                      <i class="fas fa-user-alt me-2"></i> My Profile
+                  </a>
+                  <a href="#" class="dropdown-item">
+                      <i class="fas fa-cog me-2"></i> Account Settings
+                  </a>
+                  <a href="{% url 'logout' %}" class="dropdown-item">
+                      <i class="fas fa-power-off me-2"></i> Log Out
+                  </a>
+              </div>
+          </div>
+      {% endif %}
+      
+      <!-- Language Toggle -->
+      <a id="lng" href={{url_lang}}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-world">
+              <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+              <path d="M3.6 9h16.8"></path>
+              <path d="M3.6 15h16.8"></path>
+              <path d="M11.5 3a17 17 0 0 0 0 18"></path>
+              <path d="M12.5 3a17 17 0 0 1 0 18"></path>
+          </svg>
+          {{langue}}
+      </a>
+  </div>
+</nav>
+<!-- Navbar & Hero Start -->
+  <div>
+      {% if token %}
+        <div class="dashboard-container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <!-- Welcome Image -->
+
+              <!-- Message Box -->
+              <div class="card mt-4">
+                <div class="card-body">
+                  <div class="message-box">
+                    <h5>Welcome   <b class="name">{{ first_name }} {{last_name}}!</b></h5>
+                    <p>We are currently processing your request to create a trading account. Our team is reviewing the details, and we will get back to you within the next 1-2 business days.</p>
+                    <p>Thank you for your patience!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      {% endif %}
+    </div>
+    <div class="container">
+      <div class="trading-nav">
+        <div class="trading-category active" data-target="bitcoin-table">Crypto</div>
+        <div class="trading-category" data-target="real-money-table">Forex </div>
+        <div class="trading-category" data-target="gold-table">Metals</div>
+      </div>
+  
+      <div id="bitcoin-table" class="trading-table-container active">
+        <table class="trading-table">
+          <thead>
+            <tr>
+              <th>Coin</th>
+              <th>Price</th>
+              <th>1h</th>
+              <th>24h</th>
+              <th>7d</th>
+              <th>24h Volume</th>
+              <th>Market Cap</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for coin in crypto_data %}
+              <tr>
+                <td>
+                  <img src="{{ coin.image }}" alt="{{ coin.name }}" class="trading-coin-icon" />
+                  <span class="trading-coin-name">{{ coin.name }}</span>
+                  <span class="trading-coin-symbol">{{ coin.symbol }}</span>
+                  <button class="trading-buy-button">Buy</button>
+                </td>
+                <td>${{ coin.price|floatformat:2 }}</td>
+                <td class="trading-price-change {% if coin.price_1h > 0 %}trading-positive{% else %}trading-negative{% endif %}">
+                  {{ coin.price_1h|floatformat:1 }}%
+                </td>
+                <td class="trading-price-change {% if coin.price_24h > 0 %}trading-positive{% else %}trading-negative{% endif %}">
+                  {{ coin.price_24h|floatformat:1 }}%
+                </td>
+                <td class="trading-price-change {% if coin.price_7d > 0 %}trading-positive{% else %}trading-negative{% endif %}">
+                  {{ coin.price_7d|floatformat:1 }}%
+                </td>
+                <td>${{ coin.volume_24h|floatformat:0 }}</td>
+                <td>${{ coin.market_cap|floatformat:0 }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="trading-refresh-time">Last updated: Just now</div>
+      </div>
+      <div id="real-money-table" class="trading-table-container">
+        <table class="trading-table">
+          <thead>
+            <tr>
+              <th>Coin</th>
+              <th>Price</th>
+              <th>1h</th>
+              <th>24h</th>
+              <th>7d</th>
+              <th>24h Volume</th>
+              <th>Market Cap</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img src="/static/img/euro.png" alt="EUR" class="trading-coin-icon" />
+                <span class="trading-coin-name">Euro</span>
+                <span class="trading-coin-symbol">(EUR)</span>
+              </td>
+              <td>$1.09</td>
+              <td class="trading-price-change trading-positive">+0.2%</td>
+              <td class="trading-price-change trading-positive">+0.5%</td>
+              <td class="trading-price-change trading-negative">-0.3%</td>
+              <td>$98,500,000,000</td>
+              <td>$12,800,000,000,000</td>
+            </tr>
+            <tr>
+              <td>
+                <img src="/static/img/pound.png" alt="GBP" class="trading-coin-icon" />
+                <span class="trading-coin-name">British Pound</span>
+                <span class="trading-coin-symbol">(GBP)</span>
+              </td>
+              <td>$1.27</td>
+              <td class="trading-price-change trading-negative">-0.1%</td>
+              <td class="trading-price-change trading-positive">+0.3%</td>
+              <td class="trading-price-change trading-positive">+0.2%</td>
+              <td>$65,300,000,000</td>
+              <td>$3,200,000,000,000</td>
+            </tr>
+            <tr>
+              <td>
+                <img src="/static/img/japanese-yen.png" alt="JPY" class="trading-coin-icon" />
+                <span class="trading-coin-name">Japanese Yen</span>
+                <span class="trading-coin-symbol">(JPY)</span>
+              </td>
+              <td>$0.0067</td>
+              <td class="trading-price-change trading-positive">+0.3%</td>
+              <td class="trading-price-change trading-positive">+0.1%</td>
+              <td class="trading-price-change trading-negative">-0.2%</td>
+              <td>$43,200,000,000</td>
+              <td>$5,400,000,000,000</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="trading-refresh-time">Last updated: Just now</div>
+      </div>
+      
+  <!-- Gold & Commodities Table -->
+  <div id="gold-table" class="trading-table-container">
+    <table class="trading-table">
+      <thead>
+        <tr>
+          <th>Coin</th>
+          <th>Price</th>
+          <th>1h</th>
+          <th>24h</th>
+          <th>7d</th>
+          <th>24h Volume</th>
+          <th>Market Cap</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <img src="/static/img/gld.png" alt="Gold" class="trading-coin-icon" />
+            <span class="trading-coin-name">Gold</span>
+          </td>
+          <td>$1,800.50</td>
+          <td class="trading-price-change trading-positive">+0.3%</td>
+          <td class="trading-price-change trading-positive">+0.5%</td>
+          <td class="trading-price-change trading-positive">+1.2%</td>
+          <td>$500,000,000</td>
+          <td>$11,000,000,000</td>
+        </tr>
+        <tr>
+          <td>
+            <img src="/static/img/silver.png" alt="Silver" class="trading-coin-icon" />
+            <span class="trading-coin-name">Silver</span>
+          </td>
+          <td>$25.30</td>
+          <td class="trading-price-change trading-negative">-0.1%</td>
+          <td class="trading-price-change trading-positive">+0.2%</td>
+          <td class="trading-price-change trading-positive">+0.4%</td>
+          <td>$300,000,000</td>
+          <td>$1,400,000,000</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="trading-refresh-time">Last updated: Just now</div>
+  </div>
+</div>
+<div class="platform-nav">
+        <button class="platform-btn windows-btn active" onclick="showPlatform('windows')">Windows</button>
+        <button class="platform-btn android-btn" onclick="showPlatform('android')">Android</button>
+        <button class="platform-btn ios-btn" onclick="showPlatform('ios')">iOS</button>
+</div>
+      <!-- Platform Content -->
+      <div class="platforms-container plats">
+        <!-- Windows Content -->
+        <div id="windows" class="platform-content active">
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="feature-list">
+                <li>Trade with a virtual account</li>
+<li>Real-time quotes for financial instruments</li>
+<li>Real-time order execution</li>
+<li>Trade using real-time charts</li>
+<li>Support for all types of order execution</li>
+<li>Comprehensive order history</li>
+
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <div class="platform-image">
+                <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader Desktop" style="width: 400px; height: 300px;" />
+              </div>
+            </div>
+          </div>
+          <div class="download-section">
+            <a href="https://download.mql5.com/cdn/web/teletrade.d.j/mt4/teletrade4setup.exe" class="download-btn">Download MT4</a>
+            <a href="https://download.mql5.com/cdn/web/teletrade.d.j/mt5/tt5setup.exe" class="download-btn">Download MT5</a>
+          </div>
+        </div>
+
+        <!-- Android Content -->
+        <div id="android" class="platform-content">
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="feature-list">
+                <li>Trade with a virtual account</li>
+                <li>Real-time quotes for financial instruments</li>
+                <li>Real-time order execution</li>
+                <li>Trade using real-time charts</li>
+                <li>Support for all types of order execution</li>
+                <li>Comprehensive order history</li>
+
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <div class="platform-image">
+                <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader Mobile"  style="width: 400px; height: 300px;" />
+              </div>
+            </div>
+          </div>
+          <div class="download-section">
+            <a href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4&hl=fr&referrer=ref_id%3d20a366d5%26hl%3dfr%26utm_campaign%3dfrom_teletrade_site" class="download-btn">Download MT4</a>
+          </div>
+        </div>
+
+        <!-- iOS Content -->
+        <div id="ios" class="platform-content">
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="feature-list">
+                <li>Trade with a virtual account</li>
+<li>Real-time quotes for financial instruments</li>
+<li>Real-time order execution</li>
+<li>Trade using real-time charts</li>
+<li>Support for all types of order execution</li>
+<li>Comprehensive order history</li>
+
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <div class="platform-image">
+                <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader iOS"   style="width: 400px; height: 300px;"/>
+              </div>
+            </div>
+          </div>
+          <div class="download-section">
+            <a href="https://itunes.apple.com/fr/app/metatrader-4/id496212596?utm_campaign=from_teletrade_site" class="download-btn">Download MT4</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <div class="form-container">
+          <h2 class="text-center mb-3"></h2>
+          <form method="post" action="{% url 'profiling' %}" id="profilingForm">
+            {% csrf_token %}
+            <input type="hidden" name="form_origin" value="eng_profile" />
+            <div class="custom-select">
+              <div class="custom-select-trigger">Select assets</div>
+              <div class="custom-options">
+                  <div class="custom-option" data-value="bitcoin">
+                      <img src="/static/img/Bitcoin.png" alt="Crypto"> Crypto
+                  </div>
+                  <div class="custom-option" data-value="Forex">
+                      <img src="/static/img/dollar.png" alt="Sixlver"> Forex
+                  </div>
+                  <div class="custom-option" data-value="Metals">
+                      <img src="/static/img/gld.png" alt="Gold"> Metals
+                  </div>
+              </div>
+          </div>
+          <div id="selected-assets" class="selected-assets"></div>
+          <input type="hidden" name="selectedAssets" id="selectedAssets" />
+          
+                  
+                  
+              <div class="mb-3">
+                  <label for="platformSelect" class="form-label">Trading Platform</label>
+                  <select class="form-select" id="platformSelect" name="platformSelect" required>
+                      <option value="" selected disabled>Select a platform</option>
+                      <option value="mt4">MT4</option>
+                      <option value="mt5">MT5</option>
+                  </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="leverageSelect" class="form-label">Max leverage</label>
+                <select class="form-select" id="leverageSelect" name="leverageSelect" required>
+                    <option value="" selected disabled>Select leverage</option>
+                    <option value="1:2">1:2</option>
+                    <option value="1:50">1:50</option>
+                    <option value="1:100">1:100</option>
+                    <option value="1:200">1:200</option>
+                    <option value="1:400">1:400</option>
+                    <option value="1:500">1:500</option>
+                    <option value="1:600">1:600</option>
+                    <option value="1:800">1:800</option>
+                    <option value="1:1000">1:1000</option>
+                    <option value="1:2000">1:2000</option>
+                    <option value="1:Unlimited">1:Unlimited</option>
+                </select>
+            </div>
+
+              <div class="mb-3">
+                <label for="amount" class="form-label">Trading amount</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input 
+                        type="number" 
+                        class="form-control" 
+                        id="amount" 
+                        placeholder="Enter the amount" 
+                        name="amount" 
+                        required 
+                        min="500" 
+                        oninput="validateAmount(this)">
+                </div>
+                <small id="amountError" class="text-danger" style="display:none;">Amount must be at least $500.</small>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+          </form>
+      </div>
+      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="formToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Inspire Trade</strong>
+                <small>Just now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              We have received your request. You can now fund your account with the same amount mentioned, and we will respond to you after completing the account review
+            </div>
+        </div>
+    </div>
+      
+      <div class="container my-5">
+  
+        <div class="text-center">
+          <!-- Button to trigger modal -->
+          <button type="button" class="btn trading-button" data-bs-toggle="modal" data-bs-target="#tradingInfoModal">
+            Fund your account
+          </button>
+        </div>
+      </div>
+    
+      <!-- Modal -->
+      <div class="modal fade" id="tradingInfoModal" tabindex="-1" aria-labelledby="tradingInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="tradingInfoModalLabel">Account Information</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Please use the following details to send money to your trading account:</p>
+    
+              <div class="info-box">
+                <div class="info-item">
+                  <span class="info-label">Account name: </span>  INSPIRE LIMITED
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Account number:</span> 7950194558
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Bank code:</span> 016
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Branch Code:</span> 478
+
+                </div>
+                <div class="info-item">
+                  <span class="info-label">SWIFT Code:</span> DHBKHKHH
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Account location: </span> Hong Kong SAR
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Bank name:</span> DBS Bank (Hong Kong) Limited
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--After Payement Modal-->
+      <div class="modal fade" id="tradingInfoModal1" tabindex="-1" aria-labelledby="tradingInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="tradingInfoModalLabel">Account Information</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>We have received your request. You can now fund your account with the specified amount, and you will receive a response after the account review and approval process is completed.  </p>
+    
+              <div class="info-box">
+                <div class="info-item">
+                  <span class="info-label">Account name: </span>  INSPIRE LIMITED
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Account number:</span> 7950194558
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Bank code:</span> 016
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Branch Code:</span> 478
+
+                </div>
+                <div class="info-item">
+                  <span class="info-label">SWIFT Code:</span> DHBKHKHH
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Account location: </span> Hong Kong SAR
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Bank name:</span> DBS Bank (Hong Kong) Limited
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+          <div class="container py-5 border-start-0 border-end-0"
+              style="border: 1px solid; border-color: rgb(255, 255, 255, 0.08);">
+              <div class="row g-5">
+                  <div class="col-md-6 col-lg-6 col-xl-4">
+                      <div class="footer-item">
+                          <a href="index.html" class="p-0">
+                              <h4 class="text-white"><i class="fas fa-search-dollar me-3"></i>Inspire Trade</h4>
+                              <p>Your partner for secure trading.</p>
+                              <!-- <img src="img/logo.png" alt="Logo"> -->
+                          </a>
+                          <div class="d-flex gap-2 mt-3">
+                              <a href="https://www.metatrader4.com/fr" class="btn btn-primary  px-4 py-2">MT4</a>
+                              <a href="https://www.metatrader5.com/fr" class="btn btn-secondary  px-4 py-2">MT5</a>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div class="col-md-6 col-lg-6 col-xl-2">
+                      <div class="footer-item">
+                          <h4 class="text-white mb-4">Quick Links</h4>
+                          <a href="{% url 'about' %}"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                          <a href="{% url 'services' %}"><i class="fas fa-angle-right me-2"></i> Services</a>
+                          <a href="{% url 'blogs' %}"><i class="fas fa-angle-right me-2"></i> Blogs</a>
+  
+                          <a href="{% url 'contact' %}"><i class="fas fa-angle-right me-2"></i> Contact us</a>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-6 col-xl-3">
+                      <div class="footer-item">
+                          <h4 class="text-white mb-4">Markets</h4>
+                          <a href="{% url 'forex' %}"><i class="fas fa-angle-right me-2"></i> ForexCFD</a>
+                          
+
+                          <a href="{% url 'crypto' %}"><i class="fas fa-angle-right me-2"></i> Crypto CFD</a>
+                          <a href="{% url 'metals' %}"><i class="fas fa-angle-right me-2"></i> Metals</a>
+  
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-6 col-xl-3">
+                      <div class="footer-item">
+                          <h4 class="text-white mb-4">Contact Info</h4>
+  
+                          <div class="d-flex align-items-center">
+                              <i class="fas fa-envelope text-primary me-3"></i>
+                              <p class="text-white mb-0">contact@inspire-trade.com</p>
+                          </div>
+                          <div class="d-flex align-items-center">
+                              <i class="fa fa-phone-alt text-primary me-3"></i>
+                              <p class="text-white mb-0"> +852 8171 3179</p>
+                          </div>
+                          <div class="d-flex align-items-center mb-4">
+                              <i class="fab fa-firefox-browser text-primary me-3"></i>
+                              <p class="text-white mb-0">inspire-Trade.com</p>
+                          </div>
+                          <div class="d-flex">
+                              <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                      class="fab fa-facebook-f text-white"></i></a>
+                              <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                      class="fab fa-twitter text-white"></i></a>
+                              <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i
+                                      class="fab fa-instagram text-white"></i></a>
+                              <a class="btn btn-primary btn-sm-square rounded-circle me-0" href="#"><i
+                                      class="fab fa-linkedin-in text-white"></i></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Footer End -->
+  
+      <!-- Copyright Start -->
+      <div class="container-fluid copyright py-4">
+          <div class="container">
+            <div class="row g-4 align-items-center">
+              <div class="col-md-6 text-center text-md-start mb-md-0">
+                <span class="text-body"
+                  ><a href="#" class="border-bottom text-white"
+                    ><i class="fas fa-copyright text-light me-2"></i
+                    >InspireTrade</a
+                  >, All right reserved.</span
+                >
+              </div>
+              <div class="col-md-6 text-center text-md-end text-body">  
+                Designed By
+                <a class="border-bottom text-white" href="#">Leamon</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- Copyright End -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const options = document.querySelectorAll('.custom-option');
+            const selectedAssetsInput = document.getElementById('selectedAssets');
+    
+            options.forEach(option => {
+                option.addEventListener('click', function () {
+                    // Update the hidden input with the selected value
+                    selectedAssetsInput.value = option.getAttribute('data-value');
+    
+                    // Highlight the selected option (optional)
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                });
+            });
+        });
+    </script>
+    <script>
+      // Refresh the page every 60 seconds
+      setTimeout(function () {
+        location.reload()
+      }, 60000)
+    </script>
+    <script>
+      function showPlatform(platform) {
+        // Hide all platform contents
+        document.querySelectorAll('.platform-content').forEach((content) => {
+          content.classList.remove('active')
+        })
+      
+        // Remove active class from all buttons
+        document.querySelectorAll('.platform-btn').forEach((btn) => {
+          btn.classList.remove('active')
+        })
+      
+        // Show selected platform content
+        document.getElementById(platform).classList.add('active')
+      
+        // Add active class to clicked button
+        document.querySelector(`.${platform}-btn`).classList.add('active')
+      }
+    </script>
+    <script>
+      document.getElementById('profilingForm').addEventListener('submit', async function(event) {
+          event.preventDefault();
+      
+          const form = event.target;
+          const formData = new FormData(form);
+      
+          try {
+              const response = await fetch(form.action, {
+                  method: 'POST',
+                  body: formData,
+                  headers: {
+                      'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                  }
+              });
+      
+              if (response.ok) {
+                  // Show trading info modal instead of toast
+                  const tradingInfoModal = new bootstrap.Modal(document.getElementById('tradingInfoModal1'));
+                  tradingInfoModal.show();
+      
+                  // Optionally, clear the form
+                  form.reset();
+              } else {
+                  // Handle errors
+                  const errorData = await response.json();
+                  alert(`Error: ${errorData.message || 'Something went wrong!'}`);
+              }
+          } catch (error) {
+              console.error('Submission failed:', error);
+          }
+      });
+    </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const categories = document.querySelectorAll('.trading-category');
+    const tables = document.querySelectorAll('.trading-table-container');
+
+    categories.forEach(category => {
+      category.addEventListener('click', () => {
+        categories.forEach(cat => cat.classList.remove('active'));
+        tables.forEach(table => table.classList.remove('active'));
+
+        category.classList.add('active');
+        const targetTable = document.getElementById(category.dataset.target);
+        targetTable.classList.add('active');
+      });
+    });
+  });
+</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script>// Get references to the dropdown and selected assets container
+      const cryptoSelect = document.getElementById("cryptoSelect");
+      const selectedAssets = document.getElementById("selectedAssets");
+      
+      // Event listener to update selected assets on change
+      cryptoSelect.addEventListener("change", function () {
+        selectedAssets.innerHTML = ""; // Clear previous selections
+      
+        // Loop through selected options
+        Array.from(this.selectedOptions).forEach((option) => {
+          const symbol = option.value;
+          const name = option.textContent.trim();
+          const image = option.getAttribute("data-image");
+      
+          // Create a container for the selected asset
+          const assetContainer = document.createElement("div");
+          assetContainer.style.display = "flex";
+          assetContainer.style.alignItems = "center";
+          assetContainer.style.marginRight = "10px";
+      
+          // Add the asset image
+          const assetImage = document.createElement("img");
+          assetImage.src = image;
+          assetImage.alt = name;
+          assetImage.style.width = "24px";
+          assetImage.style.height = "24px";
+          assetImage.style.marginRight = "10px";
+      
+          // Add the asset name
+          const assetName = document.createElement("span");
+          assetName.textContent = name;
+      
+          // Append image and name to the container
+          assetContainer.appendChild(assetImage);
+          assetContainer.appendChild(assetName);
+      
+          // Add the container to the selected assets display area
+          selectedAssets.appendChild(assetContainer);
+        });
+      });
+      </script>
+      <script>
+        function validateAmount(input) {
+            const errorElement = document.getElementById('amountError');
+            if (input.value < 500) {
+                errorElement.style.display = 'block';
+            } else {
+                errorElement.style.display = 'none';
+            }
+        }
+        </script>
+        
+                <script>
+                  const selectTrigger = document.querySelector('.custom-select-trigger');
+                  const optionsContainer = document.querySelector('.custom-options');
+                  const options = document.querySelectorAll('.custom-option');
+              
+                  selectTrigger.addEventListener('click', () => {
+                      optionsContainer.classList.toggle('active');
+                  });
+              
+                  options.forEach(option => {
+                      option.addEventListener('click', () => {
+                          const value = option.getAttribute('data-value');
+                          selectTrigger.textContent = option.textContent.trim();
+                          optionsContainer.classList.remove('active');
+                          console.log('Selected value:', value); // Handle selection
+                      });
+                  });
+              
+                  document.addEventListener('click', (e) => {
+                      if (!e.target.closest('.custom-select')) {
+                          optionsContainer.classList.remove('active');
+                      }
+                  });
+              </script>
+              
+      
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    
+    
+  </body>
+</html>
