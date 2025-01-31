@@ -58,7 +58,11 @@ urlpatterns = [
     path('metals/',views.metals, name='metals'),
     path('metals_ar/',views.metals_ar, name='metals_ar'),
     path('dashboard/withdraw/',views.withdraw, name='withdraw'),
-    path('dashboard_ar/withdraw_ar/',views.withdraw_ar, name='withdraw_ar')
+    path('dashboard_ar/withdraw_ar/',views.withdraw_ar, name='withdraw_ar'),
+    path('trading_history/', views.trading_history, name='trading_history'),
+    path('trading_history_ar/', views.trading_history_ar, name='trading_history_ar'),
+    path('admin_trading_history/',views.admin_trading_history, name='admin_trading_history'),
+    
     
     
     

@@ -62,16 +62,16 @@
             <img src="{% static 'img/profile.png' %}" alt="Profile" class="profile-img">
           </a>
           <div class="dropdown-menu rounded">
-            <a href="{% url 'dashboard_ar' %}" class="dropdown-item">
-              <i class="fas fa-user-alt me-2"></i> ملفي الشخصي
-            </a>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-cog me-2"></i> إعدادات الحساب
-            </a>
-            <a href="{% url 'logout_ar' %}" class="dropdown-item">
-              <i class="fas fa-power-off me-2"></i> تسجيل الخروج
-            </a>
-          </div>
+            {% if user.role == "user" %}
+                <a href="{% url 'dashboard_ar' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> حسابي</a>
+                <a href="{% url 'trading_history_ar' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> تاريخ الحساب</a>
+                <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+                {% else %}
+                <a href="{% url 'admin' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> حسابي</a>
+                <a href="{% url 'admin_trading_history' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> تاريخ الحساب</a>
+                <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+                {% endif %}
+        </div>
         </div>
         {% endif %}
         
@@ -88,9 +88,9 @@
             <div class="nav-item dropdown" dir="rtl">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">السوق</a>
               <div class="dropdown-menu rounded" style="text-align: right;">
-                  <a href="{% url 'crypto' %}" class="dropdown-item" >العملات الرقمية</a>
-                  <a href="{% url 'forex' %}" class="dropdown-item">الفوركس</a>
-                  <a href="{% url 'metals' %}" class="dropdown-item">المعادن و السلع</a>
+                  <a href="{% url 'crypto_ar' %}" class="dropdown-item" >العملات الرقمية</a>
+                  <a href="{% url 'forex_ar' %}" class="dropdown-item">الفوركس</a>
+                  <a href="{% url 'metals_ar' %}" class="dropdown-item">المعادن و السلع</a>
               </div>
           </div>
             <a href="{% url 'contact_ar' %}" class="nav-item nav-link">تواصل معنا</a>

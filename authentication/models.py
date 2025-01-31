@@ -75,14 +75,12 @@ class User(AbstractUser):
 
 
 
-class ImageUpload(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  
-    image = models.ImageField(upload_to='images/')  
-    uploaded_at = models.DateTimeField(auto_now_add=True)  
-
-    def __str__(self):
-        return f"{self.user.username} - {self.image.name}"
-    
-    
-    
-    
+class TradingHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    operation=models.CharField(max_length=30,blank=True)  
+    trading_ammount=models.FloatField(default=0,blank=True)
+    solde=models.FloatField(default=0,blank=True)
+    date_form=models.DateField(default=date.today)
+    trading_plateform=models.CharField(max_length=30,blank=True)
+    trading_type=models.CharField(max_length=30,blank=True)
+    leverage=models.CharField(max_length=30,blank=True)
