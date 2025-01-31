@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User,TradingHistory
 class UserSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False, allow_null=True)
     class Meta:
@@ -59,3 +59,22 @@ class AdminSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         return instance
 
+class HistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TradingHistory
+        fields = ['id','operation', 'trading_ammount','solde', 'date_form', 
+                 'trading_plateform', 'trading_type', 'leverage']
+        read_only_fields = ['id']
+
+    def create(self, validated_data):
+        # Get the user from the context
+        user = self.context.get('user')
+        if not user:
+            raise serializers.ValidationError("User is required")
+        
+        # Create trading history with user
+        trading_history = TradingHistory.objects.create(
+            user=user,
+            **validated_data
+        )
+        return trading_history

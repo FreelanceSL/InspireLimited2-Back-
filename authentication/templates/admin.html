@@ -107,11 +107,11 @@
             <div class="dropdown-menu rounded">
               {% if user.role == "user" %}
               <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-              <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
+              <a href="{% url '' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account History</a>
               <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
               {% else %}
               <a href="{% url 'admin' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-              <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
+              <a href="{% url 'admin_trading_history'%}" class="dropdown-item"><i class="fas fa-cog me-2"></i> Users History</a>
               <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
               {% endif %}
           </div>

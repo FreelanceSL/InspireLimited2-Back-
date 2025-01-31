@@ -2,18 +2,18 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.http import JsonResponse
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.views import APIView
-from .serializers import UserSerializer,VerificationSerializer,AdminSerializer
+from .serializers import UserSerializer,VerificationSerializer,AdminSerializer,HistorySerializer
 from rest_framework.response import Response
-from .models import User
+from .models import User,TradingHistory
 from rest_framework.exceptions import AuthenticationFailed
 from .emails import send_otp_via_email, send_reset_password,send_infos,send_infos_trade,send_reset_password_ar,send_otp,send_infos_withdraw
 from rest_framework import status
 from django.contrib.auth.tokens import default_token_generator
 from rest_framework.permissions import IsAuthenticated
-from .models import ImageUpload
 import base64
 from django.urls import reverse 
 import json
+from django.db.models import Q
 import requests
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -389,6 +389,11 @@ def metals(request):
 def metals_ar(request):
     return render (request,'metals_ar.html',{'langue':'ENG','url_lang': reverse('metals')})
 
+def history(request):
+    return render (request,'history.html',{'langue':'AR','url_lang': reverse('history_ar')})
+def history_ar(request):
+    return render (request,'history_ar.html',{'langue':'ENG','url_lang': reverse('history')})
+
 def update(request, uidb64, token):
     try:
         # Decode the uidb64 to get the user ID
@@ -493,7 +498,7 @@ def get_precious_metals_data():
     
         
 @api_view(['GET'])
-@login_required(login_url='/api/login/')
+@login_required(login_url=' login/')
 @permission_classes([IsVerified])
 def dashboard(request):
     if not request.user.is_authenticated or not request.user.is_verified:
@@ -507,7 +512,7 @@ def dashboard(request):
     return render(request, 'dashboard.html', {'token': token, 'first_name':first_name, 'last_name':last_name,'crypto_data': crypto_data , 'langue':'AR','url_lang': reverse('dashboard_ar'),'ammount':request.user.sum_trading_ammount})
 
 @api_view(['GET'])
-@login_required(login_url='/api/login/')
+@login_required(login_url='login/')
 @permission_classes([IsVerified])
 def dashboard_ar(request):
     if not request.user.is_authenticated or not request.user.is_verified:
@@ -523,7 +528,7 @@ def dashboard_ar(request):
 
 @api_view(['GET'])
 @permission_classes([IsAdminUserRole])
-@login_required(login_url='/api/login/')
+@login_required(login_url='login/')
 def admin(request):
     token = request.session.get('access_token', None)
 
@@ -532,7 +537,7 @@ def admin(request):
 
 
 @api_view(['POST'])
-@login_required(login_url='/api/login/')
+@login_required(login_url='login/')
 def profiling(request):
     form_origin = request.data.get('form_origin')
     asset=request.POST.get("selectedAssets")
@@ -549,13 +554,30 @@ def profiling(request):
     user.date_form=date.today()
     user.save()
     send_infos_trade(request,user,asset,platform,ammount,leverage)
+    data = request.data
+    print("USERID",user.id)
+    serializer = HistorySerializer(data={
+                "operation": "Trade",
+                "trading_ammount": ammount,
+                "solde": user.sum_trading_ammount,
+                "date_form": date.today(),
+                "trading_plateform": platform,
+                "trading_type": asset,
+                "leverage":leverage,
+                
+            },
+            context={'user': user} )
+    if serializer.is_valid():
+            # Save will automatically use the user ID we added above
+            print("ANI LENAAAA")
+            trading_history = serializer.save()
     if form_origin == 'arabe_profile':
         return redirect(reverse('dashboard_ar'))
     else:
         return redirect(reverse('dashboard_ar'))
         
 @api_view(['POST'])
-@login_required(login_url='/api/login/')
+@login_required(login_url='login/')
 def withdraw(request):
     ammount=request.data.get("ammount")
     if request.user.is_authenticated :
@@ -564,6 +586,19 @@ def withdraw(request):
             user.sum_trading_ammount=request.user.sum_trading_ammount-ammount
             user.save()
             send_infos_withdraw(request,user,ammount)
+            serializer = HistorySerializer(data={
+                "operation": "Withdraw",
+                "trading_ammount": ammount,
+                "solde": user.sum_trading_ammount,
+                "date_form": date.today(),
+                "trading_plateform": "",
+                "trading_type": "",
+                "leverage":"",
+                
+            },
+            context={'user': user} )
+            if serializer.is_valid():
+                    trading_history = serializer.save()
             return Response({"message": "Withdrawal successful.", "remaining_balance": user.sum_trading_ammount})
         else :
             return Response({"message": "Not enough money.", "remaining_balance": user.sum_trading_ammount})
@@ -571,7 +606,7 @@ def withdraw(request):
 
 
 @api_view(['POST'])
-@login_required(login_url='/api/login/')
+@login_required(login_url='/login/')
 def withdraw_ar(request):
     ammount=request.data.get("ammount")
     if request.user.is_authenticated :
@@ -579,12 +614,94 @@ def withdraw_ar(request):
         if user.sum_trading_ammount>ammount:
             user.sum_trading_ammount=request.user.sum_trading_ammount-ammount
             user.save()
+            send_infos_withdraw(request,user,ammount)
+            serializer = HistorySerializer(data={
+                "operation": "Withdraw",
+                "trading_ammount": ammount,
+                "solde": user.sum_trading_ammount,
+                "date_form": date.today(),
+                "trading_plateform": "",
+                "trading_type": "",
+                "leverage":"",
+                
+            },
+            context={'user': user} )
+            if serializer.is_valid():
+                    trading_history = serializer.save()
             return Response({"message": "تم السحب بنجاح.", "remaining_balance": user.sum_trading_ammount})
         else :
             return Response({"message": "لا يوجد ما يكفي من المال.", "remaining_balance": user.sum_trading_ammount})
     return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
+@api_view(['GET'])
+@login_required(login_url='/login/')   
+def trading_history(request):
+    # Get trading history for the logged-in user
+    history_list = TradingHistory.objects.filter(user_id=request.user.id).order_by('-date_form')
+    
+    # Set up pagination (10 items per page)
+    paginator = Paginator(history_list, 10)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'history.html', {
+        'page_obj': page_obj,
+        'langue':'AR','url_lang': reverse('trading_history_ar')
+    })
+    
+    
+@api_view(['GET'])
+@login_required(login_url='/login/')    
+def trading_history_ar(request):
+    # Get trading history for the logged-in user
+    history_list = TradingHistory.objects.filter(user_id=request.user.id).order_by('-date_form')
+    
+    # Set up pagination (10 items per page)
+    paginator = Paginator(history_list, 10)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'history_ar.html', {
+        'page_obj': page_obj,
+        'langue':'ENG','url_lang': reverse('trading_history')
+    })
+    
     
 
-
+@permission_classes([IsAdminUserRole])
+@login_required(login_url='login/')
+def admin_trading_history(request):
+    # Get search query
+    search_query = request.GET.get('search', '').strip()
+    
+    # Initialize queryset with all trading history
+    history_list = TradingHistory.objects.all().order_by('-date_form')
+    
+    # Apply search filter if query exists
+    if search_query:
+        # Split the search query into first_name and last_name
+        name_parts = search_query.split()
+        if len(name_parts) >= 2:
+            first_name = name_parts[0]
+            last_name = ' '.join(name_parts[1:])  # Join remaining parts as last name
+            history_list = history_list.filter(
+                Q(user__first_name__icontains=first_name) &
+                Q(user__last_name__icontains=last_name)
+            )
+        else:
+            # If only one word provided, search in both first and last name
+            history_list = history_list.filter(
+                Q(user__first_name__icontains=search_query) |
+                Q(user__last_name__icontains=search_query)
+            )
+    
+    # Set up pagination
+    paginator = Paginator(history_list, 10)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'users_history.html', {
+        'page_obj': page_obj,
+        'search_query': search_query,
+    })
 

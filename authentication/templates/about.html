@@ -84,12 +84,16 @@
                     </a>
 
                     <div class="dropdown-menu rounded">
-                        <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-                        <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
-                        
-                        <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
-                      
-                    </div>
+                      {% if user.role == "user" %}
+                      <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
+                      <a href="{% url 'trading_history' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account History</a>
+                      <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
+                      {% else %}
+                      <a href="{% url 'admin' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
+                      <a href="{% url 'admin_trading_history' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account History</a>
+                      <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
+                      {% endif %}
+                  </div>
                 </div>
                 {% endif%}
                 <a id="lng" href={{url_lang}}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-world"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M11.5 3a17 17 0 0 0 0 18"></path><path d="M12.5 3a17 17 0 0 1 0 18"></path></svg>{{langue}}</a>
