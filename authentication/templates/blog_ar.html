@@ -69,16 +69,10 @@
                     <a href="{% url 'blogs_ar' %}" class="nav-item nav-link active"> المدوّنة</a>
                     <div class="nav-item dropdown" dir="rtl">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">السوق</a>
-              <div class="dropdown-menu rounded">
-                {% if user.role == "user" %}
-                    <a href="{% url 'dashboard_ar' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> حسابي</a>
-                    <a href="{% url 'trading_history_ar' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> تاريخ الحساب</a>
-                    <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
-                    {% else %}
-                    <a href="{% url 'admin' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> حسابي</a>
-                    <a href="{% url 'admin_trading_history' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> تاريخ الحساب</a>
-                    <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
-                    {% endif %}
+              <div class="dropdown-menu rounded" style="text-align: right;">
+                <a href="{% url 'crypto_ar' %}" class="dropdown-item" >العملات الرقمية</a>
+                <a href="{% url 'forex_ar' %}" class="dropdown-item">الفوركس</a>
+                <a href="{% url 'metals_ar' %}" class="dropdown-item">المعادن و السلع</a>
             </div>
           </div>
                     <a href="{% url 'contact_ar' %}" class="nav-item nav-link">تواصل معنا</a>
@@ -92,9 +86,15 @@
                         <img src="{% static 'img/profile.png' %}" alt="الملف الشخصي" class="profile-img">
                     </a>
                     <div class="dropdown-menu rounded">
-                        <a href="{% url 'dashboard_ar' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> ملفي الشخصي</a>
-                        <a href="{% url 'trading_history_ar' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> تاريخ الحساب</a>
-                        <a href="{% url 'logout_ar' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+                        {% if user.role == "user" %}
+                            <a href="{% url 'dashboard_ar' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> حسابي</a>
+                            <a href="{% url 'trading_history_ar' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> تاريخ الحساب</a>
+                            <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+                            {% else %}
+                            <a href="{% url 'admin' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> حسابي</a>
+                            <a href="{% url 'admin_trading_history' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> تاريخ الحساب</a>
+                            <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
+                            {% endif %}
                     </div>
                 </div>
                 {% endif %}
@@ -169,7 +169,7 @@
                                 <i class="fas fa-phone-alt fa-2x text-primary me-2"></i>      
                                     <div class="ms-4" dir="rtl">
                                     <h4 class=" me-2" >اتصل بنا</h4>
-                                    <p class="mb-0 fs-5" style="letter-spacing: 1px;" dir ="rtl">+852 8171 3179</p>
+                                    <p class="mb-0 fs-5" style="letter-spacing: 1px;" dir ="rtl">8008501042</p>
                                 </div>
                             </div>
                         </div>
@@ -353,7 +353,7 @@
                     </div>
                     <div class="d-flex align-items-center">
                         <i class="fa fa-phone-alt text-primary me-3"></i>
-                        <p class="text-white mb-0"> +852 8171 3179</p>
+                        <p class="text-white mb-0"> 8008501042</p>
                     </div>
                     <div class="d-flex align-items-center mb-4">
                         <i class="fab fa-firefox-browser text-primary me-3"></i>
