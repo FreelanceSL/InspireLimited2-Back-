@@ -541,7 +541,6 @@ def admin(request):
 def profiling(request):
     form_origin = request.data.get('form_origin')
     asset=request.POST.get("selectedAssets")
-    platform=request.data.get("platformSelect")
     ammount=request.data.get("amount")
     email=request.session.get('email', None)
     leverage=request.data.get("leverageSelect")
@@ -549,11 +548,11 @@ def profiling(request):
     user.trading_ammount=float(ammount)
     user.sum_trading_ammount=user.sum_trading_ammount+float(ammount)
     user.leverage=leverage
-    user.trading_plateform=platform
-    user.trading_type=asset
+    user.trading_plateform="InspireTrade"
+    user.trading_type=asset 
     user.date_form=date.today()
     user.save()
-    send_infos_trade(request,user,asset,platform,ammount,leverage)
+    send_infos_trade(request,user,asset,"inspireTrade",ammount,leverage)
     data = request.data
     print("USERID",user.id)
     serializer = HistorySerializer(data={
@@ -561,7 +560,7 @@ def profiling(request):
                 "trading_ammount": ammount,
                 "solde": user.sum_trading_ammount,
                 "date_form": date.today(),
-                "trading_plateform": platform,
+                "trading_plateform": "InspireTrade",
                 "trading_type": asset,
                 "leverage":leverage,
                 

@@ -132,15 +132,9 @@
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color: black;">Market</a>
             <div class="dropdown-menu rounded">
-                {% if user.role == "user" %}
-                <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-                <a href="{% url 'trading_history' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account History</a>
-                <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
-                {% else %}
-                <a href="{% url 'admin' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-                <a href="{% url 'admin_trading_history' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account History</a>
-                <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
-                {% endif %}
+                <a href="{% url 'crypto' %}" class="dropdown-item">Crypto</a>
+                <a href="{% url 'forex' %}" class="dropdown-item">Forex</a>
+                <a href="{% url 'metals' %}" class="dropdown-item">Metals</a>
             </div>
         </div>
           <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
@@ -160,16 +154,16 @@
               </a>
               <!-- Dropdown Menu -->
               <div class="dropdown-menu rounded">
-                  <a href="{% url 'dashboard' %}" class="dropdown-item">
-                      <i class="fas fa-user-alt me-2"></i> My Profile
-                  </a>
-                  <a href="{% url 'trading_history'%}" class="dropdown-item">
-                      <i class="fas fa-cog me-2"></i> Account History
-                  </a>
-                  <a href="{% url 'logout' %}" class="dropdown-item">
-                      <i class="fas fa-power-off me-2"></i> Log Out
-                  </a>
-              </div>
+                {% if role == "user"%}
+                <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
+                <a href="{% url 'trading_history' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account History</a>
+                <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
+                {% else %}
+                <a href="{% url 'admin' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
+                <a href="{% url 'admin_trading_history' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> users history</a>
+                <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
+                {% endif %}
+            </div>
           </div>
       {% endif %}
       

@@ -20,58 +20,65 @@
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
     <!-- Template Stylesheet -->
-    <style>
+     <style>
       .custom-select {
-          position: relative;
-          width: 530px;
+        position: relative;
+        display: block;
+        width: 100%;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 8px 12px; /* Update padding to match other fields */
+        font-size: 16px; /* Update font size to match other fields */
       }
-
+      
       .custom-select-trigger {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          border: 1px solid #ccc;
-          padding: 10px;
-          border-radius: 5px;
-          cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #333;
       }
-
+      
       .custom-options {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          width: 100%;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          background: #fff;
-          max-height: 200px;
-          overflow-y: auto;
-          display: none;
-          z-index: 10;
+        position: absolute;
+        width: 100%;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: none;
+        z-index: 10;
       }
-
-      .custom-options.active {
-          display: block;
+      
+      .custom-options.open {
+        display: block;
       }
-
+      
       .custom-option {
-          display: flex;
-          align-items: center;
-          padding: 10px;
-          cursor: pointer;
+        padding: 8px 12px; /* Update padding to match other fields */
+        cursor: pointer;
+        transition: background 0.3s;
       }
-
+      
       .custom-option:hover {
-          background: #f0f0f0;
+        background: #f0f0f0;
       }
-
-      .custom-option img {
-          width: 20px;
-          height: 20px;
-          margin-right: 10px;
+      
+      .selected-asset {
+        background: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 3px;
+        display: inline-block;
+        cursor: pointer;
       }
-  </style>
-
+      
+      .selected-asset:hover {
+        background: #0056b3;
+      }
+    
+     </style>
+    
   </head>
   <body>
 <!-- Spinner Start -->
@@ -350,10 +357,7 @@
               </div>
             </div>
           </div>
-          <div class="download-section">
-            <a href="https://download.mql5.com/cdn/web/teletrade.d.j/mt4/teletrade4setup.exe" class="download-btn">Download MT4</a>
-            <a href="https://download.mql5.com/cdn/web/teletrade.d.j/mt5/tt5setup.exe" class="download-btn">Download MT5</a>
-          </div>
+          
         </div>
 
         <!-- Android Content -->
@@ -376,9 +380,7 @@
               </div>
             </div>
           </div>
-          <div class="download-section">
-            <a href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4&hl=fr&referrer=ref_id%3d20a366d5%26hl%3dfr%26utm_campaign%3dfrom_teletrade_site" class="download-btn">Download MT4</a>
-          </div>
+          
         </div>
 
         <!-- iOS Content -->
@@ -401,9 +403,7 @@
               </div>
             </div>
           </div>
-          <div class="download-section">
-            <a href="https://itunes.apple.com/fr/app/metatrader-4/id496212596?utm_campaign=from_teletrade_site" class="download-btn">Download MT4</a>
-          </div>
+          
         </div>
       </div>
     </div>
@@ -413,33 +413,22 @@
           <form method="post" action="{% url 'profiling' %}" id="profilingForm">
             {% csrf_token %}
             <input type="hidden" name="form_origin" value="eng_profile" />
-            <div class="custom-select">
-              <div class="custom-select-trigger">Select assets</div>
-              <div class="custom-options">
-                  <div class="custom-option" data-value="bitcoin">
-                      <img src="/static/img/Bitcoin.png" alt="Crypto"> Crypto
-                  </div>
-                  <div class="custom-option" data-value="Forex">
-                      <img src="/static/img/dollar.png" alt="Sixlver"> Forex
-                  </div>
-                  <div class="custom-option" data-value="Metals">
-                      <img src="/static/img/gld.png" alt="Gold"> Metals
-                  </div>
-              </div>
-          </div>
-          <div id="selected-assets" class="selected-assets"></div>
-          <input type="hidden" name="selectedAssets" id="selectedAssets" />
-          
-                  
-                  
+
+              
               <div class="mb-3">
-                  <label for="platformSelect" class="form-label">Trading Platform</label>
-                  <select class="form-select" id="platformSelect" name="platformSelect" required>
-                      <option value="" selected disabled>Select a platform</option>
-                      <option value="mt4">MT4</option>
-                      <option value="mt5">MT5</option>
-                  </select>
-              </div>
+                <label for="assetSelect" class="form-label">Select Assets</label>
+                <div class="custom-select-wrapper ">
+                    <div class="custom-select custom-select-multiple">
+                        <div class="custom-select-trigger">Select assets</div>
+                        <div class="custom-options" id="selectedAssetsList"></div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="selectedAssets" id="selectedAssetsField" />
+
+                  
+                  
+
 
               <div class="mb-3">
                 <label for="leverageSelect" class="form-label">Max leverage</label>
@@ -451,6 +440,11 @@
                     <option value="1:200">1:200</option>
                     <option value="1:400">1:400</option>
                     <option value="1:500">1:500</option>
+                    <option value="1:500">1:600</option>
+                    <option value="1:500">1:700</option>
+                    <option value="1:500">1:800</option>
+                    <option value="1:500">1:900</option>
+                    <option value="1:500">1:1000</option>
                 </select>
             </div>
 
@@ -687,7 +681,7 @@
                           </div>
                           <div class="d-flex align-items-center">
                               <i class="fa fa-phone-alt text-primary me-3"></i>
-                              <p class="text-white mb-0"> +852 8171 3179</p>
+                              <p class="text-white mb-0"> 8008501042</p>
                           </div>
                           <div class="d-flex align-items-center mb-4">
                               <i class="fab fa-firefox-browser text-primary me-3"></i>
@@ -731,7 +725,51 @@
         </div>
       <!-- Copyright End -->
 
-
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var selectTrigger = document.querySelector('.custom-select-trigger');
+            var optionsContainer = document.getElementById('selectedAssetsList');
+            var hiddenInput = document.getElementById('selectedAssetsField');
+    
+            var assets = [
+                { value: 'bitcoin', label: 'Crypto' },
+                { value: 'forex', label: 'Forex' },
+                { value: 'metals', label: 'Metals' }
+            ];
+    
+            selectTrigger.addEventListener('click', function () {
+                optionsContainer.classList.toggle('open');
+                optionsContainer.innerHTML = ''; 
+                assets.forEach(asset => {
+                    var option = document.createElement('div');
+                    option.classList.add('custom-option');
+                    option.dataset.value = asset.value;
+                    option.textContent = asset.label;
+                    option.addEventListener('click', function () {
+                        toggleSelection(asset);
+                    });
+                    optionsContainer.appendChild(option);
+                });
+            });
+    
+            function toggleSelection(asset) {
+                var selectedValues = hiddenInput.value ? hiddenInput.value.split(',') : [];
+                if (selectedValues.includes(asset.value)) {
+                    selectedValues = selectedValues.filter(val => val !== asset.value);
+                } else {
+                    selectedValues.push(asset.value);
+                }
+                hiddenInput.value = selectedValues.join(',');
+                updateTriggerText(selectedValues);
+            }
+    
+            function updateTriggerText(selectedValues) {
+                var selectedLabels = assets.filter(asset => selectedValues.includes(asset.value)).map(a => a.label);
+                selectTrigger.textContent = selectedLabels.length ? selectedLabels.join(', ') : 'Select assets';
+            }
+        });
+    </script>
+      
       <script>
         document.getElementById('withdrawButton').addEventListener('click', function () {
           const amount = parseFloat(document.getElementById('ammount').value);
@@ -814,23 +852,6 @@
       </script>
 
 
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const options = document.querySelectorAll('.custom-option');
-            const selectedAssetsInput = document.getElementById('selectedAssets');
-    
-            options.forEach(option => {
-                option.addEventListener('click', function () {
-                    // Update the hidden input with the selected value
-                    selectedAssetsInput.value = option.getAttribute('data-value');
-    
-                    // Highlight the selected option (optional)
-                    options.forEach(opt => opt.classList.remove('selected'));
-                    option.classList.add('selected');
-                });
-            });
-        });
-    </script>
     <script>
       // Refresh the page every 60 seconds
       setTimeout(function () {
@@ -914,47 +935,7 @@
     <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
     <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
     <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
-    <script>// Get references to the dropdown and selected assets container
-      const cryptoSelect = document.getElementById("cryptoSelect");
-      const selectedAssets = document.getElementById("selectedAssets");
-      
-      // Event listener to update selected assets on change
-      cryptoSelect.addEventListener("change", function () {
-        selectedAssets.innerHTML = ""; // Clear previous selections
-      
-        // Loop through selected options
-        Array.from(this.selectedOptions).forEach((option) => {
-          const symbol = option.value;
-          const name = option.textContent.trim();
-          const image = option.getAttribute("data-image");
-      
-          // Create a container for the selected asset
-          const assetContainer = document.createElement("div");
-          assetContainer.style.display = "flex";
-          assetContainer.style.alignItems = "center";
-          assetContainer.style.marginRight = "10px";
-      
-          // Add the asset image
-          const assetImage = document.createElement("img");
-          assetImage.src = image;
-          assetImage.alt = name;
-          assetImage.style.width = "24px";
-          assetImage.style.height = "24px";
-          assetImage.style.marginRight = "10px";
-      
-          // Add the asset name
-          const assetName = document.createElement("span");
-          assetName.textContent = name;
-      
-          // Append image and name to the container
-          assetContainer.appendChild(assetImage);
-          assetContainer.appendChild(assetName);
-      
-          // Add the container to the selected assets display area
-          selectedAssets.appendChild(assetContainer);
-        });
-      });
-      </script>
+    
       <script>
         function validateAmount(input) {
             const errorElement = document.getElementById('amountError');
