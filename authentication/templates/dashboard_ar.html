@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="icon" href="{% static 'img/circle_logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Libraries Stylesheet -->
     <link rel="stylesheet" href="{% static 'lib/animate/animate.min.css' %}" />
     <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet" />
@@ -81,7 +83,11 @@
       <a href="" class="navbar-brand p-0">
           <img src="{% static 'img/logo.png' %}" alt="الشعار">
       </a>
-  
+      {% if user.is_authenticated %}
+        <div class="solde-display ms-2 bg-primary text-white rounded-pill px-3 py-1">
+            ${{ ammount }}
+        </div>
+    {% endif %}
       <!-- Toggler for small screens -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
           <span class="fa fa-bars"></span>
@@ -115,9 +121,9 @@
                   <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown">
                       <img src="{% static 'img/profile.png' %}" alt="الملف الشخصي" class="profile-img">
                   </a>
-                  <div class="dropdown-menu rounded">
+                  <div class="dropdown-menu rounded" >
                     {% if user.role == "user" %}
-                        <a href="{% url 'dashboard_ar' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> حسابي</a>
+                        <a href="{% url 'dashboard_ar' %}" class="dropdown-item"><i class="fas fa-user-alt me-2" ></i> حسابي</a>
                         <a href="{% url 'trading_history_ar' %}" class="dropdown-item"><i class="fas fa-cog me-2"></i> تاريخ الحساب</a>
                         <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-power-off me-2"></i> تسجيل الخروج</a>
                         {% else %}
@@ -312,86 +318,14 @@
         <div class="trading-refresh-time">آخر تحديث: الآن</div>
       </div>
     </div>
-    <div class="platform-nav">
-      <button class="platform-btn windows-btn active" onclick="showPlatform('windows')">ويندوز</button>
-      <button class="platform-btn android-btn" onclick="showPlatform('android')">أندرويد</button>
-      <button class="platform-btn ios-btn" onclick="showPlatform('ios')">iOS</button>
-  </div>
-  <!-- محتوى المنصة -->
-  <div class="platforms-container plats" >
-      <!-- محتوى ويندوز -->
-      <div id="windows" class="platform-content active">
-          <div class="row" >
-              <div class="col-md-6" >
-                  <ul class="feature-list"  >
-                      <li>التداول باستخدام حساب افتراضي</li>
-                      <li>عرض أسعار الأدوات المالية في الوقت الفعلي</li>
-                      <li>تنفيذ الطلبات في الوقت الفعلي</li>
-                      <li>التداول باستخدام الرسوم البيانية في الوقت الفعلي</li>
-                      <li>دعم جميع أنواع تنفيذ الطلبات</li>
-                      <li>تاريخ كامل للطلبات</li>
-                  </ul>
-              </div>
-              <div class="col-md-6">
-                  <div class="platform-image">
-                      <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader Desktop" style="width: 400px; height: 300px;" />
-                  </div>
-              </div>
-          </div>
-          
-      </div>
-  
-      <!-- محتوى أندرويد -->
-      <div id="android" class="platform-content">
-          <div class="row">
-              <div class="col-md-6">
-                  <ul class="feature-list">
-                      <li>التداول باستخدام حساب افتراضي</li>
-                      <li>عرض أسعار الأدوات المالية في الوقت الفعلي</li>
-                      <li>تنفيذ الطلبات في الوقت الفعلي</li>
-                      <li>التداول باستخدام الرسوم البيانية في الوقت الفعلي</li>
-                      <li>دعم جميع أنواع تنفيذ الطلبات</li>
-                      <li>تاريخ كامل للطلبات</li>
-                  </ul>
-              </div>
-              <div class="col-md-6">
-                  <div class="platform-image">
-                      <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader Mobile"  style="width: 400px; height: 300px;"/>
-                  </div>
-              </div>
-          </div>
-          
-      </div>
-  
-      <!-- محتوى iOS -->
-      <div id="ios" class="platform-content">
-          <div class="row">
-              <div class="col-md-6">
-                  <ul class="feature-list">
-                      <li>التداول باستخدام حساب افتراضي</li>
-                      <li>عرض أسعار الأدوات المالية في الوقت الفعلي</li>
-                      <li>تنفيذ الطلبات في الوقت الفعلي</li>
-                      <li>التداول باستخدام الرسوم البيانية في الوقت الفعلي</li>
-                      <li>دعم جميع أنواع تنفيذ الطلبات</li>
-                      <li>تاريخ كامل للطلبات</li>
-                  </ul>
-              </div>
-              <div class="col-md-6">
-                  <div class="platform-image">
-                      <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader iOS"  style="width: 400px; height: 300px;"/>
-                  </div>
-              </div>
-          </div>
-          
-      </div>
-  </div>
+    
   <div class="">
       <div class="form-container">
           <h2 class="text-center mb-3"></h2>
           <form method="post" action="{% url 'profiling' %}" id="profilingForm" >
               {% csrf_token %}
               <input type="hidden" name="form_origin" value="arabe_profile" />
-              <div class="container mb-3">
+
               
                 <div class="mb-3">
                   <label for="assetSelect" class="form-label">اختر الأصول</label>
@@ -401,7 +335,7 @@
                           <div class="custom-options" id="selectedAssetsList"></div>
                       </div>
                   </div>
-              </div>
+
               <input type="hidden" name="selectedAssets" id="selectedAssetsField" />
               </div>
   
@@ -475,20 +409,92 @@
     <div class="text-center">
       <!-- زر لفتح النافذة -->
       <button type="button" class="btn trading-button mb-4" data-bs-toggle="modal" data-bs-target="#tradingInfoModal">
-        قم يتمويل حسابك (تحويل بنكي )
+        قم يتمويل حسابك (تحويل بنكي ) &nbsp; <i class="fa fa-bank"></i>
       </button>
       <button 
       type="button" 
       class="btn trading-button mb-4" 
       onclick="window.open('https://pay.airwallex.com/hkh41f165r7d', '_blank')">
-      قم بتمويل حسابك (بطاقة الائتمان)
+      قم بتمويل حسابك (بطاقة الائتمان) &nbsp;<i class="fa fa-cc-visa"></i>
     </button>
     <button type="button" class="btn trading-button mb-4" data-bs-toggle="modal" data-bs-target="#withdrawModal">
       سحب المال
     </button>
     </div>
   </div>
+  <div class="platform-nav">
+    <button class="platform-btn windows-btn active" onclick="showPlatform('windows')">ويندوز</button>
+    <button class="platform-btn android-btn" onclick="showPlatform('android')">أندرويد</button>
+    <button class="platform-btn ios-btn" onclick="showPlatform('ios')">iOS</button>
+</div>
+<!-- محتوى المنصة -->
+<div class="platforms-container plats" >
+    <!-- محتوى ويندوز -->
+    <div id="windows" class="platform-content active">
+        <div class="row" >
+            <div class="col-md-6" >
+                <ul class="feature-list"  >
+                    <li>التداول باستخدام حساب افتراضي</li>
+                    <li>عرض أسعار الأدوات المالية في الوقت الفعلي</li>
+                    <li>تنفيذ الطلبات في الوقت الفعلي</li>
+                    <li>التداول باستخدام الرسوم البيانية في الوقت الفعلي</li>
+                    <li>دعم جميع أنواع تنفيذ الطلبات</li>
+                    <li>تاريخ كامل للطلبات</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div class="platform-image">
+                    <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader Desktop" style="width: 400px; height: 300px;" />
+                </div>
+            </div>
+        </div>
+        
+    </div>
 
+    <!-- محتوى أندرويد -->
+    <div id="android" class="platform-content">
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="feature-list">
+                    <li>التداول باستخدام حساب افتراضي</li>
+                    <li>عرض أسعار الأدوات المالية في الوقت الفعلي</li>
+                    <li>تنفيذ الطلبات في الوقت الفعلي</li>
+                    <li>التداول باستخدام الرسوم البيانية في الوقت الفعلي</li>
+                    <li>دعم جميع أنواع تنفيذ الطلبات</li>
+                    <li>تاريخ كامل للطلبات</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div class="platform-image">
+                    <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader Mobile"  style="width: 400px; height: 300px;"/>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- محتوى iOS -->
+    <div id="ios" class="platform-content">
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="feature-list">
+                    <li>التداول باستخدام حساب افتراضي</li>
+                    <li>عرض أسعار الأدوات المالية في الوقت الفعلي</li>
+                    <li>تنفيذ الطلبات في الوقت الفعلي</li>
+                    <li>التداول باستخدام الرسوم البيانية في الوقت الفعلي</li>
+                    <li>دعم جميع أنواع تنفيذ الطلبات</li>
+                    <li>تاريخ كامل للطلبات</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div class="platform-image">
+                    <img src="{% static 'img/MT4.jpeg' %}" alt="MetaTrader iOS"  style="width: 400px; height: 300px;"/>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
 
         <!--Withdraw Modal-->
             <!-- Modal -->
